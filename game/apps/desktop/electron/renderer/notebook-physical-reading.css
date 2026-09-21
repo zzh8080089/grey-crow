@@ -1,0 +1,355 @@
+/* Live paper pieces on the filmed book. Containers carry no rectangular paint:
+   alpha-cut paper casts its own contact shadow; ink and hit targets stay live. */
+body[data-game-ui-layout="story-notebook-v1"] {
+  --physical-paper: #ede3d0;
+  --physical-paper-edge: #a8967a;
+  --physical-paper-light: #fff5e3;
+  --physical-shadow: #32251e33;
+  --physical-deep-shadow: #20161040;
+  --physical-world: #d8c4a0;
+  --physical-world-tint: #d8c4a0d6;
+  --physical-state: #ded6c4;
+  --physical-state-tint: #ded6c4cc;
+  --physical-host: #e3dfd3;
+  --physical-host-tint: #e3dfd3b8;
+  --physical-writing: #f2eadb;
+  --physical-writing-tint: #f2eadbd9;
+  --physical-sheet-tint: #ede3d0df;
+  --physical-tape: #c1a97c99;
+  --physical-fibre-light: #fff4db30;
+  --physical-fibre-shade: #5b44281c;
+  --physical-paper-wash: #fff5e619;
+  --physical-fold: #9d8c7040;
+  --physical-inkdrop-top: #8a755329;
+  --physical-inkdrop-mid: #a995700d;
+  --physical-inkdrop-bottom: #6c563526;
+  --physical-inkdrop-rim: #77634778;
+  --physical-inkdrop-contact: #42382a14;
+  --physical-cut-note: url("assets/story-notebook-v1/hud-current-story-paper-night-v1.png");
+  --physical-cut-sticky: url("assets/story-notebook-v1/hud-player-sticky-note-night-v1.png");
+  --physical-cut-slip: url("assets/story-notebook-v1/hud-host-paper-slip-night-v2.png");
+}
+body[data-game-ui-layout="story-notebook-v1"][data-paper-theme="dark"] {
+  --physical-paper: #3a3b3e;
+  --physical-paper-edge: #202125;
+  --physical-paper-light: #807b72;
+  --physical-shadow: #14111460;
+  --physical-deep-shadow: #100e127a;
+  --physical-world: #494038;
+  --physical-world-tint: #494038cf;
+  --physical-state: #444447;
+  --physical-state-tint: #444447c9;
+  --physical-host: #454549;
+  --physical-host-tint: #454549e8;
+  --physical-writing: #393a3d;
+  --physical-writing-tint: #393a3dd9;
+  --physical-sheet-tint: #3a3b3ee5;
+  --physical-tape: #9883655c;
+  --physical-fibre-light: #e9dcc21c;
+  --physical-fibre-shade: #08080c30;
+  --physical-paper-wash: #e6dacc08;
+  --physical-fold: #c6b59827;
+  --physical-inkdrop-top: #c5b79d29;
+  --physical-inkdrop-mid: #ac9b7d12;
+  --physical-inkdrop-bottom: #11101424;
+  --physical-inkdrop-rim: #c8b69780;
+  --physical-inkdrop-contact: #08070a30;
+}
+body[data-game-ui-layout="story-notebook-v1"][data-book-presentation="active"].book-reading-ready #gameView {
+  --nb-header: 94px;
+  --nb-gap: 26px;
+  --physical-input-line: calc(var(--nb-input) + 6px);
+  /* Two writing lines plus independent 26 px speech controls above/below. */
+  --physical-input-height: calc(74px + var(--physical-input-line) + var(--physical-input-line));
+  --nb-footer: calc(24px + var(--physical-input-height));
+  --physical-key-height: calc((var(--physical-input-height) - 12px) / 2);
+
+  /* Fully reset older notebook/prototype shells, including their inherited
+     border images, inset shadows, outlines and subordinate status boxes. */
+  & :is(.state-panel,.notebook-status-strip,.story-notebook-world-card,.state-card,.context-side-card,.host-status,.state-grid) {
+    border: 0; border-image: none; border-radius: 0; outline: none;
+    background: none; box-shadow: none; filter: none;
+  }
+  & :is(.notebook-status-strip,.host-status,.state-grid)::before,
+  & :is(.notebook-status-strip,.host-status,.state-grid)::after {
+    content: none; border: 0; border-image: none; background: none; box-shadow: none; filter: none;
+  }
+  & .notebook-status-strip { gap: 20px; grid-template-columns: 260px minmax(0, 1fr) 340px; }
+  & :is(.story-notebook-world-card,.state-card,.context-side-card) {
+    --physical-note: var(--physical-world); --physical-note-tint: var(--physical-world-tint); --physical-cut: var(--physical-cut-note);
+    isolation: isolate; overflow: visible;
+    filter: drop-shadow(.7px 2px 1.2px var(--physical-shadow));
+  }
+  & .state-card { --physical-note: var(--physical-state); --physical-note-tint: var(--physical-state-tint); --physical-cut: var(--physical-cut-sticky); }
+  & .context-side-card { --physical-note: var(--physical-host); --physical-note-tint: var(--physical-host-tint); --physical-cut: var(--physical-cut-slip); }
+  & :is(.story-notebook-world-card,.state-card,.context-side-card)::before {
+    content: ""; display: block; position: absolute; z-index: -1;
+    inset: -3px -5px; width: auto; height: auto; pointer-events: none;
+    border: 0; border-image: none; border-radius: 0; outline: none; box-shadow: none; filter: none;
+    background: linear-gradient(176deg,var(--physical-paper-wash),transparent 25%,transparent 78%,var(--physical-fibre-shade)),
+      linear-gradient(var(--physical-note-tint),var(--physical-note-tint)),
+      var(--physical-cut) center / 100% 100% no-repeat,var(--physical-note);
+    background-blend-mode: normal,normal,luminosity,normal;
+    mask: var(--physical-cut) center / 100% 100% no-repeat;
+    transform: rotate(-.3deg);
+  }
+  & .state-card::before { transform: rotate(.18deg); }
+  & .context-side-card::before { transform: rotate(-.25deg); }
+  & :is(.story-notebook-world-card,.state-card,.context-side-card)::after {
+    content: none; border: 0; border-image: none; background: none; box-shadow: none; filter: none;
+  }
+  & .story-notebook-world-card::after {
+    content: ""; position: absolute; top: -10px; left: 23px; width: 55px; height: 14px;
+    background: linear-gradient(92deg,#fff1,transparent 20%,#59462712 52%,#fff2),var(--physical-tape);
+    clip-path: polygon(1% 7%,13% 4%,26% 8%,40% 2%,56% 5%,75% 0,98% 5%,100% 90%,84% 96%,66% 92%,47% 99%,30% 94%,3% 100%);
+    transform: rotate(-5deg); pointer-events: none;
+  }
+  & :is(.story-notebook-world-card,.state-card) { padding-top: 6px; padding-bottom: 6px; }
+  & .story-notebook-world-card:not([hidden]) { grid-template-rows: 24px minmax(0,1fr); gap: 2px; }
+  & .host-status { padding-top: 6px; padding-bottom: 6px; grid-template-columns: minmax(0,1fr); grid-template-rows: 24px minmax(0,1fr); gap: 2px; }
+  & .host-status :is(.meter-label,.turn-status) { grid-column: 1; min-width: 0; width: auto; }
+  & .host-status .turn-status { line-height: 1.35; }
+  & .host-status[data-turn-failure="true"] .meter-label { visibility: hidden; }
+  & .turn-failure-details {
+    grid-column: 1; grid-row: 1; justify-self: start; align-self: center;
+    min-width: 0; max-width: 100%; padding: 0; margin: 0;
+    background: none; border: 0; border-image: none; box-shadow: none;
+    color: var(--study-accent); font: inherit; font-size: 15px; line-height: 24px;
+    text-decoration: underline; text-underline-offset: .2em; cursor: pointer;
+  }
+  & .turn-failure-details[hidden] { display: none; }
+  /* In a real wait, the feather follows the host title and leaves the status
+     line at full paper width below it. JS contributes only tiny continuous
+     motion offsets through the custom properties. */
+  & .host-status:is([data-host-phase="busy"],[data-host-phase="finale"]) {
+    grid-template-columns: max-content 52px minmax(0,1fr);
+    grid-template-rows: 36px minmax(0,1fr);
+    gap: 0 5px;
+    padding-left: 20px;
+  }
+  & .host-status:is([data-host-phase="busy"],[data-host-phase="finale"]) .writing-quill {
+    display: block; position: relative; left: auto; top: -10px;
+    grid-column: 2; grid-row: 1; align-self: start; justify-self: start;
+    /* Keep the atlas at its native sampling grid; scale only its footprint. */
+    transform: rotate(calc(25deg + var(--quill-motion-angle, 0deg))) translate(var(--quill-motion-x, 0px), var(--quill-motion-y, 0px)) scale(.8); transform-origin: 32px 34px;
+  }
+  & .host-status:is([data-host-phase="busy"],[data-host-phase="finale"]) .meter-label { grid-column: 1; grid-row: 1; align-self: start; }
+  & .host-status:is([data-host-phase="busy"],[data-host-phase="finale"]) .turn-status { grid-column: 1 / -1; grid-row: 2; max-height: none; }
+  & :is(.story-notebook-world-card small,.state-grid > [data-state-role="label"],.host-status .meter-label) { line-height: 24px; }
+  & .state-grid { grid-template-columns: minmax(0,1.4fr) minmax(0,1.3fr) minmax(64px,max-content) minmax(96px,max-content); grid-template-rows: 24px minmax(0,1fr); gap: 2px 0; }
+  & .state-grid > [data-state-key] { padding-right: 10px; padding-left: 10px; border: 0; background: none; box-shadow: none; }
+  & .state-grid > [data-state-role="value"] { font-weight: 500; }
+  /* Keep the activity dot and its label as one centered unit under the ink
+     drop. The drop is 44 px wide, inset 14 px from the 340 px host slip. */
+  & .story-notebook-live {
+    top: calc(var(--nb-top) + 70px); right: auto; left: calc(100% - var(--nb-right) - 36px);
+    width: max-content; min-width: 0; justify-content: center; transform: translateX(-50%);
+  }
+  & .story-notebook-live > span { background: var(--study-accent); box-shadow: none; }
+  & .narration-panel { width: calc(100% + var(--nb-right) - var(--nb-paper-right) - 22px); }
+  & .narration-scroll { padding-right: 20px; border: 0; border-image: none; background: none; box-shadow: none; }
+  /* Fill the readable paper instead of retaining the old 40em / 66ch cap.
+     Forty-four pixels remain outside every paragraph for its independent
+     read-aloud control, so the button stays on the sheet at every locale. */
+  & .narration-line,
+  & .narration-line.player {
+    width: calc(100% - 44px); max-width: none;
+  }
+  /* A translucent ink stain keeps the paper visible beneath the reading. The
+     hit target and SVG share one box instead of inheriting two legacy sizes. */
+  & .context-side-card .context-meter { top: 10px; right: 14px; width: 44px; height: 52px; }
+  & .context-side-card .context-meter-drop { width: 44px; height: 52px; filter: none; }
+  & .context-side-card .context-meter-drop-svg { width: 44px; height: 52px; }
+  & .context-meter .context-meter-drop-svg,
+  & .context-meter:is(:hover,:focus-visible) .context-meter-drop-svg {
+    filter: drop-shadow(0 .6px .4px var(--physical-inkdrop-contact));
+  }
+  & .context-meter-glass-stop-top { stop-color: var(--physical-inkdrop-top); }
+  & .context-meter-glass-stop-mid { stop-color: var(--physical-inkdrop-mid); }
+  & .context-meter-glass-stop-bottom { stop-color: var(--physical-inkdrop-bottom); }
+  & .context-meter-drop-shadow { fill: var(--physical-inkdrop-contact); transform: translateY(.4px); }
+  & .context-meter-drop-gloss { fill: #ffebd205; }
+  & .context-meter-blood-reflect { fill: #ffc4af0f; }
+  & .context-meter-drop-rim { stroke: var(--physical-inkdrop-rim); stroke-width: 1.1; }
+  & .context-meter:is(:hover,:focus-visible) .context-meter-drop-rim { stroke: var(--study-accent); }
+  & .context-side-card .context-meter-percent { color: var(--study-ink); text-shadow: none; transform: translateY(4px); font-size: 13px; line-height: 16px; font-variant-numeric: tabular-nums; }
+
+  /* Input and action notes use the same paper, but remain separate layers. */
+  & .turn-form { border: 0; border-image: none; background: none; box-shadow: none; padding-top: 18px; grid-template-rows: repeat(2,var(--physical-key-height)); }
+  & .turn-input-scroll, & .turn-input-scroll:focus-within {
+    position: relative; inset: auto; isolation: isolate; overflow: visible;
+    min-width: 0; height: 100%; padding: 8px 22px 8px 24px; gap: 3px;
+    grid-template-rows: 26px minmax(0,1fr) 26px;
+    border: 0; border-image: none; border-radius: 0; outline: none; background: none; box-shadow: none;
+    filter: drop-shadow(.8px 2.6px 1.8px var(--physical-shadow));
+  }
+  & .turn-input-scroll::before {
+    content: ""; position: absolute; z-index: -1; inset: -1px -3px; pointer-events: none;
+    border: 0; outline: none; box-shadow: none; filter: none;
+    background: linear-gradient(173deg,var(--physical-fibre-light),transparent 26%,transparent 91%,var(--physical-fibre-shade)),
+      linear-gradient(var(--physical-writing-tint),var(--physical-writing-tint)),
+      var(--physical-cut-note) center / 100% 100% no-repeat,var(--physical-writing);
+    background-blend-mode: normal,normal,luminosity,normal;
+    mask: var(--physical-cut-note) center / 100% 100% no-repeat;
+    transform: rotate(-.18deg);
+  }
+  & .turn-input-scroll::after {
+    content: ""; position: absolute; z-index: 1; inset: 12px auto 12px 13px; width: 2px;
+    border: 0; box-shadow: none; background: var(--physical-fold); pointer-events: none;
+    transition: background-color 160ms ease;
+  }
+  & .turn-input-scroll:focus-within::after { background: var(--study-focus); }
+  & .speech-input-heading { min-width: 0; min-height: 26px; align-items: center; line-height: 20px; gap: 16px; }
+  & .speech-input-heading button { line-height: 20px; text-underline-offset: 3px; }
+  & #turnInput, & #turnInput:focus { min-width: 0; padding: 0; margin: 0; line-height: var(--physical-input-line); scrollbar-gutter: stable; border: 0; outline: none; background: none; box-shadow: none; }
+  & .story-input-kicker { line-height: 20px; transition: color 160ms ease; }
+  & .turn-input-scroll:focus-within .story-input-kicker { color: var(--study-focus); }
+  & :is(.story-input-hint,.speech-input-bar) { justify-self: start; align-self: center; min-width: 0; margin: 0; padding: 0; line-height: 18px; text-align: start; border: 0; background: none; box-shadow: none; }
+  & :is(.speech-input-button,.speech-input-bar button) { min-height: 26px; padding: 2px 10px; color: var(--study-ink); border: 1px solid var(--study-line); background: var(--study-tint); }
+  & :is(.speech-input-button,.speech-input-bar button):hover { background: var(--physical-fold); }
+  & #speechInputButton { min-height: 30px; padding: 0; color: var(--speech-active-ink,var(--study-muted)); border: 0; border-image: none; background: none; box-shadow: none; }
+  & #speechInputButton:hover:not(:disabled) { color: var(--speech-active-ink,var(--study-ink)); background: none; }
+  & #speechInputButton:focus-visible { outline: none; }
+  & .command-button.icon-command {
+    --physical-note: var(--physical-world); --physical-note-tint: var(--physical-world-tint);
+    position: relative; isolation: isolate; border: 0; border-image: none; border-radius: 0; background: none;
+    display: grid; grid-template-rows: 42px 24px; justify-items: center; align-content: center;
+    height: var(--physical-input-height); min-height: var(--physical-input-height); padding: 14px 4px; gap: 7px;
+    box-shadow: none; filter: drop-shadow(.7px 2px 1.4px var(--physical-shadow));
+    transition: transform 180ms ease;
+  }
+  & .command-button.icon-command::before {
+    content: ""; position: absolute; z-index: -1; inset: 0; pointer-events: none;
+    border: 0; border-image: none; outline: none; box-shadow: none; filter: none;
+    background: linear-gradient(175deg,var(--physical-fibre-light),transparent 19%,transparent 84%,var(--physical-fibre-shade)),
+      linear-gradient(var(--physical-note-tint),var(--physical-note-tint)),
+      var(--physical-cut-sticky) center / 100% 100% no-repeat,var(--physical-note);
+    background-blend-mode: normal,normal,luminosity,normal;
+    mask: var(--physical-cut-sticky) center / 100% 100% no-repeat;
+    transform: rotate(-.7deg);
+  }
+  & #mapCommandButton { --physical-note: var(--physical-state); --physical-note-tint: var(--physical-state-tint); }
+  & #backpackCommandButton { --physical-note: var(--physical-host); --physical-note-tint: var(--physical-host-tint); }
+  & #mapCommandButton::before { transform: rotate(.6deg); }
+  & #backpackCommandButton::before { transform: rotate(-.35deg); }
+  & .command-button.icon-command:is(:hover,:focus-visible):not(:disabled) { background: none; transform: translateY(-1px); box-shadow: none; }
+  & .command-button.icon-command:active:not(:disabled) { transform: translateY(0); }
+  & :is(.story-action-key,.send-button) {
+    --physical-note: var(--physical-state); --physical-note-tint: var(--physical-state-tint); --physical-cut: var(--physical-cut-slip);
+    position: relative; inset: auto; isolation: isolate; border: 0; border-image: none; border-radius: 0;
+    background: none; color: var(--study-ink); box-shadow: none;
+    filter: drop-shadow(.7px 2px 1.2px var(--physical-shadow)); transition: transform 180ms ease;
+  }
+  & :is(.story-action-key,.send-button)::before {
+    content: ""; position: absolute; z-index: -1; inset: -1px -2px; pointer-events: none;
+    border: 0; outline: none; box-shadow: none; filter: none;
+    background: linear-gradient(176deg,var(--physical-fibre-light),transparent 21%,transparent 86%,var(--physical-fibre-shade)),
+      linear-gradient(var(--physical-note-tint),var(--physical-note-tint)),
+      var(--physical-cut) center / 100% 100% no-repeat,var(--physical-note);
+    background-blend-mode: normal,normal,luminosity,normal;
+    mask: var(--physical-cut) center / 100% 100% no-repeat;
+  }
+  & .send-button { --physical-note: var(--physical-world); --physical-note-tint: var(--physical-world-tint); --physical-cut: var(--physical-cut-note); }
+  & .send-button { height: var(--physical-key-height); min-height: var(--physical-key-height); }
+  & .operation-tts-status { height: var(--physical-key-height); bottom: calc(var(--nb-bottom) + var(--nb-footer) - 18px - var(--physical-key-height)); }
+  /* This narrow action note keeps its own type hierarchy when story and
+     reference text are enlarged; the two captions must stay on the paper. */
+  & .tts-action-label { font-size: min(var(--nb-ui),18px); line-height: 22px; white-space: nowrap; }
+  & .tts-action-copy strong { font-size: 14px; line-height: 20px; }
+  & :is(.story-action-key,.send-button):is(:hover,:focus-visible):not(:disabled) { background: none; color: var(--study-ink); transform: translateY(-1px); box-shadow: none; }
+
+  /* One inset sheet, not a window with nested cards. Its opaque paper masks
+     the story below; a folded binding edge and small tape hold it in the book. */
+  & .story-notebook-drawer {
+    top: 144px; right: 180px; bottom: 45px; width: 598px; isolation: isolate; overflow: visible;
+    border: 0; border-image: none; border-radius: 0; outline: none; background: none; box-shadow: none;
+    filter: drop-shadow(2px 4px 3px var(--physical-deep-shadow)); clip-path: none;
+    transform: perspective(1600px) translateX(19px) rotateY(-2deg); transform-origin: 100% 50%;
+    transition: transform 340ms cubic-bezier(.18,.7,.15,1),opacity 220ms ease,visibility 340ms;
+  }
+  & .story-notebook-drawer.is-open {
+    transform: perspective(1600px) translateX(0) rotateY(0); clip-path: none;
+    transition: transform 340ms cubic-bezier(.18,.7,.15,1),opacity 220ms ease;
+  }
+  & .story-notebook-drawer::before {
+    content: ""; position: absolute; z-index: -1; inset: 0; width: auto; height: auto;
+    pointer-events: none; border: 0; border-image: none; border-radius: 0; outline: none; box-shadow: none; filter: none;
+    background: linear-gradient(93deg,var(--physical-fibre-shade),transparent 28px,transparent 92%,var(--physical-fibre-light)),
+      linear-gradient(179deg,var(--physical-paper-wash),transparent 31%,transparent 88%,var(--physical-fibre-shade)),
+      linear-gradient(var(--physical-sheet-tint),var(--physical-sheet-tint)),
+      url("assets/story-notebook-v1/archive-paper-night-v1.png") center / 132% 107% no-repeat,var(--physical-paper);
+    background-blend-mode: normal,normal,normal,luminosity,normal;
+    opacity: 1;
+    clip-path: polygon(.3% .4%,9% 0,24% .3%,39% .1%,58% .35%,73% 0,91% .3%,99.6% .15%,100% 21%,99.7% 39%,100% 61%,99.7% 84%,98.9% 98.8%,89% 99.5%,66% 99.8%,48% 99.4%,24% 99.8%,.2% 99.4%,.5% 77%,0 59%,.3% 39%,0 18%);
+  }
+  & .story-notebook-drawer::after {
+    content: ""; position: absolute; z-index: 0; inset: 3px auto 4px 0; width: 21px; height: auto;
+    border: 0; border-image: none; border-radius: 0; outline: none; box-shadow: none; pointer-events: none;
+    background: linear-gradient(90deg,var(--physical-paper-edge),var(--physical-paper-light) 8%,var(--physical-paper) 16%,var(--physical-fibre-shade) 47%,transparent 97%);
+    clip-path: polygon(8% .1%,83% 0,76% 16%,100% 39%,75% 62%,90% 79%,64% 100%,5% 99.7%,0 74%,5% 39%);
+    opacity: .55;
+  }
+  & :is(.story-notebook-drawer-header,.story-notebook-drawer-body,.story-notebook-drawer-footnote) {
+    background: none; border: 0; border-image: none; box-shadow: none; filter: none;
+  }
+  & .story-notebook-drawer-header { min-height: 112px; padding: 24px 26px 16px 39px; gap: 12px; }
+  & .story-notebook-drawer-header::after {
+    content: ""; position: absolute; top: -7px; left: 42px; width: 77px; height: 18px;
+    background: linear-gradient(93deg,#ffffff12,transparent 27%,#382d1319 50%,#ffffff1a),var(--physical-tape);
+    border: 0; box-shadow: none; transform: rotate(-3deg); pointer-events: none;
+    clip-path: polygon(2% 6%,18% 2%,34% 5%,56% 0,78% 4%,98% 0,100% 92%,78% 95%,62% 100%,40% 95%,19% 99%,0 94%);
+  }
+  & .story-notebook-drawer-heading h2 { margin: 5px 0 7px; font-size: 27px; }
+  & .story-notebook-drawer-heading p { margin: 0; line-height: 1.5; }
+  & .story-notebook-drawer-actions { flex-direction: row; gap: 5px; padding-top: 4px; }
+  & :is(.story-notebook-drawer-back,.story-notebook-drawer-refresh,.story-notebook-drawer-close) {
+    position: relative; width: 34px; height: 34px; min-width: 34px; min-height: 34px;
+    border: 0; border-image: none; border-radius: 0; background: none; color: var(--study-muted); box-shadow: none; filter: none;
+    transition: color 150ms ease,transform 150ms ease;
+  }
+  & :is(.story-notebook-drawer-back,.story-notebook-drawer-refresh,.story-notebook-drawer-close):is(:hover,:focus-visible) { background: none; color: var(--study-ink); box-shadow: none; transform: translateY(-1px); }
+  & .story-notebook-drawer-body { padding: 9px 25px 18px 39px; overflow-x: hidden; overflow-y: auto; }
+  & .story-notebook-drawer-footnote { margin: 0 26px 0 39px; padding: 13px 0 16px; line-height: 1.55; }
+  & .story-notebook-drawer-footnote > span { background: var(--study-accent); box-shadow: none; }
+  & .story-notebook-panel-record {
+    margin-bottom: 23px; padding: 4px 0 20px; background: none; border: 0; border-image: none;
+    border-radius: 0; box-shadow: none; color: var(--study-ink);
+  }
+  & .story-notebook-panel-record + .story-notebook-panel-record { border-top: 1px solid var(--study-line); padding-top: 19px; }
+  & .story-notebook-panel-record:last-child { margin-bottom: 0; }
+  & .story-notebook-panel-record h3 { font-size: 22px; line-height: 1.4; }
+  & .story-notebook-panel-record small { font-weight: 400; }
+  & .story-notebook-panel-record p { line-height: 1.8; }
+  & :is(.story-notebook-panel-record button,.story-notebook-drawer-body .menu-button) { background: none; border: 0; border-image: none; border-radius: 0; box-shadow: none; color: var(--study-accent); text-decoration: underline; text-underline-offset: .22em; }
+  & .story-notebook-panel-list { gap: 0; }
+  & .story-notebook-panel-list button {
+    min-height: 58px; padding: 8px 29px 8px 2px; gap: 1px;
+    border: 0; border-image: none; border-radius: 0; background: none; box-shadow: none;
+  }
+  & .story-notebook-panel-list button > span { font: 600 20px/1.3 var(--font-story); }
+  & .story-notebook-panel-list button > small { font-size: 15px; line-height: 1.4; }
+  & .story-notebook-panel-list button::after { top: 17px; right: 6px; font-size: 23px; }
+  & .story-notebook-panel-list button:hover { background: none; border: 0; box-shadow: none; }
+  & .story-notebook-panel-list button:is(:hover,:focus-visible) > span { color: var(--study-accent); text-decoration: underline; text-underline-offset: .2em; }
+  & .settings-section select { background: var(--physical-writing); color: var(--study-ink); border: 1px solid var(--study-line); }
+
+  /* Keyboard focus is still unmistakable. The input gets a margin mark;
+     paper buttons keep an ink-coloured dashed cue rather than a solid frame. */
+  & :is(button,[tabindex="0"]):focus-visible { outline: 2px dashed var(--study-focus); outline-offset: 3px; }
+  & :is(.story-notebook-drawer-back,.story-notebook-drawer-refresh,.story-notebook-drawer-close):focus-visible { outline: 0; text-decoration: underline; text-underline-offset: .16em; }
+  & .story-notebook-panel-list button:focus-visible { outline-offset: -2px; }
+}
+body[data-game-ui-layout="story-notebook-v1"][data-lab-reduced-motion="true"] #gameView :is(.command-button.icon-command,.story-action-key,.send-button) { transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  body[data-game-ui-layout="story-notebook-v1"] #gameView :is(.command-button.icon-command,.story-action-key,.send-button) { transform: none; }
+}
+
+/* Formal module and directory rows carry their existing controls and data. */
+body[data-game-ui-layout="story-notebook-v1"][data-book-presentation="active"].book-reading-ready #gameView .story-notebook-module-card { color: var(--study-ink); background: transparent; border: 0; border-bottom: 1px solid var(--study-line); border-radius: 0; box-shadow: none; }
+body[data-game-ui-layout="story-notebook-v1"][data-book-presentation="active"].book-reading-ready #gameView .story-notebook-module-card strong { color: var(--study-ink); }
+body[data-game-ui-layout="story-notebook-v1"][data-book-presentation="active"].book-reading-ready #gameView .story-notebook-module-card:hover { background: var(--study-tint); }
+/* Larger player text retains the former accessible HUD height. The normal
+   setting keeps the compact 94 px notes. */
+:root[data-side-panel-text-size="large"] body[data-game-ui-layout="story-notebook-v1"][data-book-presentation="active"].book-reading-ready #gameView { --nb-header: 120px; }
+/* The compact feather keeps the full localized waiting copy in the 120 px note. */
+body[data-game-ui-layout="story-notebook-v1"][data-book-presentation="active"].book-reading-ready #gameView:has(.host-status:is([data-host-phase="busy"],[data-host-phase="finale"])) { --nb-header: 120px; }

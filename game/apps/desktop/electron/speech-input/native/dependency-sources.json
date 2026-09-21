@@ -1,0 +1,82 @@
+[
+  {
+    "name": "eigen",
+    "sourceUrls": [
+      "https://gitlab.com/libeigen/eigen/-/archive/5.0.1/eigen-5.0.1.tar.gz"
+    ],
+    "archiveSha256": "e9c326dc8c05cd1e044c71f30f1b2e34a6161a3b6ecf445d56b53ff1669e3dec"
+  },
+  {
+    "name": "json",
+    "sourceUrls": [
+      "https://github.com/nlohmann/json/archive/refs/tags/v3.12.0.tar.gz",
+      "https://hf-mirror.com/csukuangfj/sherpa-onnx-cmake-deps/resolve/main/json-3.12.0.tar.gz"
+    ],
+    "archiveSha256": "4b92eb0c06d10683f7447ce9406cb97cd4b453be18d7279320f7b2f025c10187"
+  },
+  {
+    "name": "kaldi_decoder",
+    "sourceUrls": [
+      "https://github.com/k2-fsa/kaldi-decoder/archive/refs/tags/v0.3.0.tar.gz"
+    ],
+    "archiveSha256": "b9f34cfb4fd3b1344100eead79ef4d37aa15962274b9e3056de345021f76a1b0"
+  },
+  {
+    "name": "kaldi_native_fbank",
+    "sourceUrls": [
+      "https://github.com/csukuangfj/kaldi-native-fbank/archive/refs/tags/v1.22.3.tar.gz",
+      "https://hf-mirror.com/csukuangfj/sherpa-ncnn-cmake-deps/resolve/main/kaldi-native-fbank-1.22.3.tar.gz"
+    ],
+    "archiveSha256": "9176cc66fc7ce1edf85cf355b06e320c57db6297df74277f575183468893cf61"
+  },
+  {
+    "name": "kaldifst",
+    "sourceUrls": [
+      "https://github.com/k2-fsa/kaldifst/archive/refs/tags/v1.8.0.tar.gz"
+    ],
+    "archiveSha256": "3f247b7e5a2409071202f5e2bc6200060f66728c0a3443c03923ad2723e040b3"
+  },
+  {
+    "name": "kissfft",
+    "sourceUrls": [
+      "https://github.com/mborgerding/kissfft/archive/febd4caeed32e33ad8b2e0bb5ea77542c40f18ec.zip"
+    ],
+    "archiveSha256": "497103e664168ebe39580b757adbe616f6cf85a16572af581ca7bc42d0ab13fd"
+  },
+  {
+    "name": "openfst",
+    "sourceUrls": [
+      "https://github.com/csukuangfj/openfst/archive/refs/tags/v1.8.5-2026-07-09.tar.gz"
+    ],
+    "archiveSha256": "2ff712a32952fcb01d351121a6bc8ccf4fdc6b2aa06ce8df2b3095dedd518c0e"
+  },
+  {
+    "name": "simple-sentencepiece",
+    "sourceUrls": [
+      "https://github.com/pkufool/simple-sentencepiece/archive/refs/tags/v0.7.tar.gz",
+      "https://hf-mirror.com/csukuangfj/sherpa-onnx-cmake-deps/resolve/main/simple-sentencepiece-0.7.tar.gz"
+    ],
+    "archiveSha256": "1748a822060a35baa9f6609f84efc8eb54dc0e74b9ece3d82367b7119fdc75af"
+  },
+  {
+    "name": "onnxruntime",
+    "sourceUrls": [
+      "https://github.com/csukuangfj/onnxruntime-libs/releases/download/v1.28.2/onnxruntime-osx-arm64-static_lib-1.28.2.zip"
+    ],
+    "archiveSha256": "bf6e35dc9440d2899c3d21f52b1045fb99176a6ae822281b7245c5418cc338ab"
+  },
+  {
+    "name": "onnxruntime",
+    "sourceUrls": [
+      "https://github.com/csukuangfj/onnxruntime-libs/releases/download/v1.28.2/onnxruntime-osx-x86_64-static_lib-1.28.2.zip"
+    ],
+    "archiveSha256": "cf879fe1fae47078d84fea4d8d4f8d5e38da813c9c3890dd5cc2ff28524c71c8"
+  },
+  {
+    "name": "onnxruntime",
+    "sourceUrls": [
+      "https://github.com/csukuangfj/onnxruntime-libs/releases/download/v1.28.2/onnxruntime-win-x64-static_lib-MT-Release-1.28.2.tar.bz2"
+    ],
+    "archiveSha256": "77c6cc2a419828f450a570851d7d6d2385523c411dbe858f841a4c7338a78881"
+  }
+]

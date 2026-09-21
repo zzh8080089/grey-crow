@@ -1,0 +1,241 @@
+{
+  "schemaVersion": "grey-crow-artwork-provenance-v1",
+  "recordedAt": "2026-09-22",
+  "pathBase": "game/apps/desktop/electron",
+  "scope": "25 retained early project images and the application-icon source master; independently documented fonts and photographic derivatives have their own notices.",
+  "licenseEffect": "This inventory grants no additional license and does not establish authorship, ownership, or distribution rights. Existing asset-specific licenses and notices remain unchanged.",
+  "assets": [
+    {
+      "file": "renderer/assets/branding/grey-crow-ai-logo-en-US.png",
+      "sha256": "ab1cfbf9cc032be9c789d108e99121a927457bc99f08da140c5302f112f94db2",
+      "provenanceStatus": "maintainer-reported-generation",
+      "maintainerStatement": "maintainer-image-generation-2026-09-22"
+    },
+    {
+      "file": "renderer/assets/branding/grey-crow-ai-logo-ja-JP.png",
+      "sha256": "e16d6fd98910e2ad928d11e113623f86ba25d5239bc91ed5580a3911941fa8ea",
+      "provenanceStatus": "maintainer-reported-generation",
+      "maintainerStatement": "maintainer-image-generation-2026-09-22"
+    },
+    {
+      "file": "renderer/assets/branding/grey-crow-ai-logo-zh-CN.png",
+      "sha256": "c18a991501cbdb9736137cea0eeccdd330056f27a0e0dbe4347dfa4ac7689152",
+      "provenanceStatus": "maintainer-reported-generation",
+      "maintainerStatement": "maintainer-image-generation-2026-09-22"
+    },
+    {
+      "file": "renderer/assets/branding/grey-crow-ai-main-menu-bg.png",
+      "sha256": "d6b0bf88d7c41ce1685ef6f6a15b41f13f6313ecb6a3c036a6ef59c2fb330a23",
+      "provenanceStatus": "embedded-generator-claim",
+      "embeddedClaim": {
+        "softwareAgent": "gpt-image",
+        "version": "2.0",
+        "service": "OpenAI Media Service API",
+        "evidenceFormat": "C2PA",
+        "signatureValidation": "not-run"
+      },
+      "limitations": "Embedded metadata is a source claim, not independent signature validation or proof of rights in reference inputs."
+    },
+    {
+      "file": "renderer/assets/story-notebook-v1/archive-paper-night-v1.png",
+      "sha256": "41030bcb11044ed67d4fa446422fc8a12bf8e31b6d8fe8b25200e2ae803b3f2a",
+      "provenanceStatus": "maintainer-reported-generation",
+      "maintainerStatement": "maintainer-image-generation-2026-09-22"
+    },
+    {
+      "file": "renderer/assets/story-notebook-v1/hud-current-story-paper-night-v1.png",
+      "sha256": "4c3f8b3758509834232931a9add21cad368a6fd83b1479f99821de44b397580b",
+      "provenanceStatus": "maintainer-reported-generation",
+      "maintainerStatement": "maintainer-image-generation-2026-09-22"
+    },
+    {
+      "file": "renderer/assets/story-notebook-v1/hud-host-paper-slip-night-v2.png",
+      "sha256": "92a1f49b64f5dadbb2251fc2dbf1a4a64d7512423c4b11287d5bfbd0ca1590ef",
+      "provenanceStatus": "maintainer-reported-generation",
+      "maintainerStatement": "maintainer-image-generation-2026-09-22"
+    },
+    {
+      "file": "renderer/assets/story-notebook-v1/hud-player-sticky-note-night-v1.png",
+      "sha256": "a941b67047f7a23281ebc6baa3ad0a6c3e8c91a9fcedb8db91db569c7692d623",
+      "provenanceStatus": "maintainer-reported-generation",
+      "maintainerStatement": "maintainer-image-generation-2026-09-22"
+    },
+    {
+      "file": "renderer/assets/story-notebook-v1/icon-backpack-night-v1.png",
+      "sha256": "104ccd64d5388b8382cf159c0e99782103b90d99a6eff3f7497c2ac7f37fd541",
+      "provenanceStatus": "maintainer-reported-generation",
+      "maintainerStatement": "maintainer-image-generation-2026-09-22"
+    },
+    {
+      "file": "renderer/assets/story-notebook-v1/icon-chapter-night-v1.png",
+      "sha256": "3d9690a97f42f5435edcb316a677b206efeee7802b74cced98ac98238129c361",
+      "provenanceStatus": "maintainer-reported-generation",
+      "maintainerStatement": "maintainer-image-generation-2026-09-22"
+    },
+    {
+      "file": "renderer/assets/story-notebook-v1/icon-character-records-night-v1.png",
+      "sha256": "43be223f014f9267e946ff047dc2cdfbe0b56f37a75ac174481a0355ec665683",
+      "provenanceStatus": "historical-production-record",
+      "limitations": "This is a historical project production statement with a matching final-file hash, not independent rights verification. The reference icons now carry a maintainer-reported GPT Image 2 origin; original generation and reference-input records were not supplied. The original character-icon generation output and historical document are not distributed in this source snapshot.",
+      "productionRecord": {
+        "date": "2026-07-26",
+        "tool": "Codex built-in image_gen",
+        "evidence": {
+          "repository": "maintainer-retained original project archive; not included in this clean source history",
+          "commit": "bd452c7068aff7892b7f3a651e960c9fb4da241d",
+          "document": "dev-docs/reviews/p2-29-f5-character-records-tab-icon-2026-07-26.md",
+          "sourceStatementLines": "20-31",
+          "assetHashLine": 66,
+          "recordedHashMatchesCurrentFile": true
+        },
+        "styleReferenceFiles": [
+          "renderer/assets/story-notebook-v1/icon-observe-night-v1.png",
+          "renderer/assets/story-notebook-v1/icon-current-state-night-v1.png",
+          "renderer/assets/story-notebook-v1/icon-module-library-night-v1.png",
+          "renderer/assets/story-notebook-v1/icon-chapter-night-v1.png"
+        ],
+        "recordedProcess": "Generated using the existing project icons as material, palette, and silhouette-family references, then background-removed and resized. The production record states that no external stock images, trademarks, text, or third-party loose images were used."
+      }
+    },
+    {
+      "file": "renderer/assets/story-notebook-v1/icon-current-state-night-v1.png",
+      "sha256": "cf3bdfcba4fedc8234a8425f65c8e68df93b3f31e4700d52200e41b50ff028e2",
+      "provenanceStatus": "maintainer-reported-generation",
+      "maintainerStatement": "maintainer-image-generation-2026-09-22"
+    },
+    {
+      "file": "renderer/assets/story-notebook-v1/icon-host-feather-night-v1.png",
+      "sha256": "a12f6e10836de53617f9554cf8da78b5f67b3e7ddfc71c7bd2407a2e553fe5e4",
+      "provenanceStatus": "maintainer-reported-generation",
+      "maintainerStatement": "maintainer-image-generation-2026-09-22"
+    },
+    {
+      "file": "renderer/assets/story-notebook-v1/icon-location-action-night-v1.png",
+      "sha256": "532cb6a3e4ccdf69498e2f8b5faf107a9ee21f97a01875809d944e2e5a063e5b",
+      "provenanceStatus": "maintainer-reported-generation",
+      "maintainerStatement": "maintainer-image-generation-2026-09-22"
+    },
+    {
+      "file": "renderer/assets/story-notebook-v1/icon-module-library-night-v1.png",
+      "sha256": "eb4294f8b8e1f54b687f7e26dac50ab4628134d009dc291bc2360331f02011c7",
+      "provenanceStatus": "maintainer-reported-generation",
+      "maintainerStatement": "maintainer-image-generation-2026-09-22"
+    },
+    {
+      "file": "renderer/assets/story-notebook-v1/icon-observe-night-v1.png",
+      "sha256": "2f498fcf2c983d1030877eaecd9f1630de3c3d5549744022555f3573b196e468",
+      "provenanceStatus": "maintainer-reported-generation",
+      "maintainerStatement": "maintainer-image-generation-2026-09-22"
+    },
+    {
+      "file": "renderer/assets/story-notebook-v1/icon-settings-gear-night-v1.png",
+      "sha256": "397241cb3d8bb27a627018e8ddc6775d74ef69913164f58e13e982f6915b89d7",
+      "provenanceStatus": "maintainer-reported-generation",
+      "maintainerStatement": "maintainer-image-generation-2026-09-22"
+    },
+    {
+      "file": "renderer/assets/story-notebook-v1/notebook-page-night-v1.png",
+      "sha256": "fcfb4cab57648ec989b313b0588948fd1655d3e9bdef6efcc1dfad4f2183a822",
+      "provenanceStatus": "embedded-generator-claim",
+      "embeddedClaim": {
+        "softwareAgent": "gpt-image",
+        "version": "2.0",
+        "service": "OpenAI Media Service API",
+        "evidenceFormat": "C2PA",
+        "signatureValidation": "not-run"
+      },
+      "limitations": "Embedded metadata is a source claim, not independent signature validation or proof of rights in reference inputs."
+    },
+    {
+      "file": "renderer/assets/story-notebook-v1/pushpin-blue-steel-night-v1.png",
+      "sha256": "6153dee0d484ad220481f96001305aab254a195948de52cab677c51326a865e8",
+      "provenanceStatus": "maintainer-reported-generation",
+      "maintainerStatement": "maintainer-image-generation-2026-09-22"
+    },
+    {
+      "file": "renderer/assets/story-notebook-v1/scene-rain-night-v1.png",
+      "sha256": "1bcc70b56bb4640d4515a9c9f0768756d4380f0d60260a58461056989f35aa3b",
+      "provenanceStatus": "maintainer-reported-generation",
+      "maintainerStatement": "maintainer-image-generation-2026-09-22"
+    },
+    {
+      "file": "renderer/assets/story-notebook-v1/sticky-tab-system-night-v1.png",
+      "sha256": "7d56377a3391dba23ea1f3785fc18d5a1c076b1d661ed1763ac358c9babdd0a7",
+      "provenanceStatus": "maintainer-reported-generation",
+      "maintainerStatement": "maintainer-image-generation-2026-09-22"
+    },
+    {
+      "file": "renderer/assets/ui/icons/icon-send-arrow-01.png",
+      "sha256": "afe2c8595e3f3bbad5e0e1711142b2f12382b4fe4bae019d1237f6c66139a2cf",
+      "provenanceStatus": "maintainer-reported-generation",
+      "maintainerStatement": "maintainer-image-generation-2026-09-22"
+    },
+    {
+      "file": "renderer/assets/ui/input-bar-bg-aged-paper-wide-03.png",
+      "sha256": "4a37ba9bb1a77c27714c1adee46416921b6cd3586498debc58589723fc505ca2",
+      "provenanceStatus": "maintainer-reported-generation",
+      "maintainerStatement": "maintainer-image-generation-2026-09-22"
+    },
+    {
+      "file": "renderer/assets/ui/narration-panel-bg-aged-paper-square-01.png",
+      "sha256": "287b9da91dc6cef0484fecd439bc0acc451f5d2036a59949e2e2da95b91b0bfd",
+      "provenanceStatus": "embedded-generator-claim",
+      "embeddedClaim": {
+        "softwareAgent": "gpt-image",
+        "version": "2.0",
+        "service": "OpenAI Media Service API",
+        "evidenceFormat": "C2PA",
+        "signatureValidation": "not-run"
+      },
+      "limitations": "Embedded metadata is a source claim, not independent signature validation or proof of rights in reference inputs."
+    },
+    {
+      "file": "renderer/assets/ui/worn_paper.png",
+      "sha256": "9467e75d0b6999294f550bbcc0b1b0c71aa3206fcb3cd4caecb351de4631646c",
+      "provenanceStatus": "maintainer-reported-generation",
+      "maintainerStatement": "maintainer-image-generation-2026-09-22"
+    },
+    {
+      "file": "build/source-masters/grey-crow-ai-app-icon-master.png",
+      "sha256": "6cf2bde51e42f268625a9e34f6c062467640e42ef819737261cb8085be372fb8",
+      "provenanceStatus": "embedded-generator-claim",
+      "embeddedClaim": {
+        "softwareAgent": "gpt-image",
+        "version": "2.0",
+        "service": "OpenAI Media Service API",
+        "evidenceFormat": "C2PA",
+        "signatureValidation": "not-run"
+      },
+      "limitations": "Embedded metadata is a source claim, not independent signature validation or proof of rights in reference inputs."
+    }
+  ],
+  "applicationIconDerivation": {
+    "sourceMaster": "build/source-masters/grey-crow-ai-app-icon-master.png",
+    "outputs": [
+      {
+        "file": "build/icon.png",
+        "sha256": "903d94ff16c012ce97569a9264bd6092ca0f1c14e48979b64a4052b4d55aa4f9"
+      },
+      {
+        "file": "build/icon.ico",
+        "sha256": "9881197d3fc12c41537a97d46a5452ca254fec57efec2b43cb02f92e20110860"
+      },
+      {
+        "file": "build/icon.icns",
+        "sha256": "464e326df3e9677ff33a7be845d0521e19810dd50a2070c45e47ea2b24aa32bc"
+      }
+    ],
+    "evidence": "Relationship stated in build/README.md; reproducible derivation was not independently verified."
+  },
+  "maintainerStatements": [
+    {
+      "id": "maintainer-image-generation-2026-09-22",
+      "recordedAt": "2026-09-22",
+      "reportedBy": "zzh8080089",
+      "generator": "GPT Image 2",
+      "basis": "After being shown a numbered preview of these 21 images, the maintainer reported that they were made using GPT Image 2.",
+      "scope": "Only the 21 assets referencing this statement: three localized logos, 15 v1 notebook images, and three older UI images.",
+      "limitations": "The maintainer expressed this as recollection. Original generation logs and reference-input records were not supplied. This is a maintainer-reported origin, not independent verification of generation or reuse rights, and it does not replace separate third-party notices."
+    }
+  ]
+}

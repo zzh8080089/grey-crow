@@ -1,0 +1,301 @@
+{
+  "schemaVersion": "grey-crow-skill-index-v1",
+  "status": "draft-reserved",
+  "purpose": "Short Skill manifest for model and Harness discovery. Detailed Skill instructions are loaded on demand from Skill folders.",
+  "sourceReferences": [
+    "dev-docs/handbooks/skill-save-boundaries.md",
+    "dev-docs/framework/grey-crow-harness-runtime-correction.md"
+  ],
+  "globalRules": [
+    "Skill is a model operation template, not ordinary documentation.",
+    "The Skill index is only a short routing layer. Do not load every Skill or every detail template into each turn.",
+    "A Skill can point to deeper write templates by stable template IDs. The model should read only the template needed for the current situation.",
+    "Host/SOUL and Agent/Skill operation manuals stay separate.",
+    "Demo uses one save slot and one current saveRoot.",
+    "Base game package is read-only; player adventure data writes only to current saveRoot.",
+    "Current saveRoot is adventure data only; it is not a Skill source and cannot override registered Skills.",
+    "Grey Crow core remains extensible through explicit Host/SOUL, Skill, content, and rule packs.",
+    "Extension packs must use separate directories, manifests, versions, permissions, load order, and validation.",
+    "Extension packs may append Skills or override Host/SOUL only through Harness registration; they must not modify Base Engine or Base Content in place.",
+    "No generic shell, arbitrary file read/write, network scan, or saveRoot escape.",
+    "Commands are exposed through UI/menu actions, not by requiring players to type slash commands.",
+    "Ordinary model-invoked Skills must not delete or rewrite saveRoot/meta.json. Confirmed Delete Game is a system lifecycle operation and removes the complete current saveRoot, including slot metadata.",
+    "Writing files is not the goal; player-facing Grey Crow narration remains the primary outcome."
+  ],
+  "baseReadOnlyRoots": [
+    "content/host",
+    "content/skills",
+    "content/runtime",
+    "content/schema",
+    "content/presets",
+    "content/map"
+  ],
+  "saveWritableRoots": [
+    "saveRoot/modules",
+    "saveRoot/world",
+    "saveRoot/characters",
+    "saveRoot/memory",
+    "saveRoot/diary",
+    "saveRoot/meta/"
+  ],
+  "extensionPackRules": {
+    "status": "manifest-validation-ready",
+    "exampleRoot": "user-content/packs/<pack-id>",
+    "desktopEquivalent": "appData/user-content/packs/<pack-id>",
+    "manifest": "manifest.json",
+    "loadOrder": [
+      "base-engine",
+      "base-content",
+      "enabled-user-content-packs",
+      "current-saveRoot"
+    ],
+    "canProvide": [
+      "host_override",
+      "soul_override",
+      "skill",
+      "world_content",
+      "character_content",
+      "rule_fragment",
+      "preset"
+    ],
+    "mustDeclare": [
+      "schemaVersion",
+      "id",
+      "title",
+      "version",
+      "author",
+      "compatibleSchemaVersion",
+      "provides",
+      "permissions",
+      "loadOrder",
+      "conflicts",
+      "skillReadWriteScopes",
+      "dangerLevels",
+      "enabledByDefault"
+    ],
+    "forbidden": [
+      "modify_engine",
+      "modify_base_content_in_place",
+      "shell",
+      "arbitrary_file_read",
+      "arbitrary_file_write",
+      "network_scan",
+      "saveRoot_escape"
+    ],
+    "notes": [
+      "First packaged demo may keep user packs disabled by default.",
+      "User packs require explicit enablement and manifest validation before model visibility.",
+      "current-saveRoot in load order means current adventure data is applied last; it does not mean saveRoot Skill overlays are allowed.",
+      "Host/SOUL overrides change narration voice, not tool safety boundaries."
+    ]
+  },
+  "skills": [
+    {
+      "id": "new-game",
+      "title": "New Game",
+      "path": "content/skills/new-game/SKILL.md",
+      "kind": "lifecycle",
+      "activation": "ui_start_new_game",
+      "modelInvocation": "forced_by_runtime_lifecycle",
+      "userMenuCommand": true,
+      "description": "Starts a new adventure with Grey Crow narration. The model hosts the step-by-step creation flow; system owns saveRoot initialization and confirmations.",
+      "read": [
+        "base:content/skills/new-game",
+        "base:content/host",
+        "base:content/schema",
+        "base:content/presets"
+      ],
+      "write": [
+        "saveRoot/modules",
+        "saveRoot/memory",
+        "saveRoot/meta/"
+      ],
+      "danger": "medium",
+      "requiresConfirmation": true,
+      "confirmationPolicy": "multi_step_cancelable",
+      "notes": [
+        "New Game and Delete Game are separate functions.",
+        "New Game must not delete an existing saveRoot.",
+        "If a save exists, system must route to confirmation or Delete Game before overwriting."
+      ]
+    },
+    {
+      "id": "delete-game",
+      "title": "Delete Game",
+      "path": "content/skills/delete-game/SKILL.md",
+      "kind": "system-dangerous",
+      "activation": "ui_delete_game",
+      "modelInvocation": "never_direct_delete",
+      "userMenuCommand": true,
+      "description": "Deletes the current adventure after explicit confirmation. System performs deletion; model may only narrate or explain. Current Demo does not provide automatic backup or Restore. System Reset is separate and means system repair / baseline restoration.",
+      "read": [
+        "saveRoot"
+      ],
+      "write": [],
+      "delete": [
+        "saveRoot"
+      ],
+      "danger": "critical",
+      "requiresConfirmation": true,
+      "confirmationPolicy": "three_step_irreversible",
+      "notes": [
+        "Deletion is system-operated, not model-operated.",
+        "Never delete base content, skill templates, host files, schemas, presets, map base, engine code, or installer resources.",
+        "Current Demo does not create automatic backups or provide Restore for Delete Game.",
+        "Delete Game removes the complete current saveRoot, including desktop slot metadata, locked content snapshot, and every per-Adventure Skill state.",
+        "Validated player-created Pack sources live in the global content library and survive Adventure deletion."
+      ]
+    },
+    {
+      "id": "game-state",
+      "title": "游戏状态",
+      "path": "content/skills/game-state/SKILL.md",
+      "kind": "read-write",
+      "activation": "model_or_menu",
+      "modelInvocation": "model_can_invoke",
+      "userMenuCommand": true,
+      "description": "读取玩家状态、背包、当前位置、当前场景和轻量存档状态，并可请求受控的当前状态写入。",
+      "read": [
+        "saveRoot/modules/player",
+        "saveRoot/modules/inventory",
+        "saveRoot/modules/narrative",
+        "saveRoot/modules/quest",
+        "saveRoot/modules/hideout"
+      ],
+      "write": [
+        "saveRoot/modules/player",
+        "saveRoot/modules/inventory",
+        "saveRoot/modules/narrative",
+        "saveRoot/modules/quest",
+        "saveRoot/modules/hideout"
+      ],
+      "danger": "medium",
+      "requiresConfirmation": false,
+      "templateRefs": [
+        "template:player-status",
+        "template:inventory-item",
+        "template:scene-state"
+      ]
+    },
+    {
+      "id": "map",
+      "title": "地图",
+      "path": "content/skills/map/SKILL.md",
+      "kind": "read",
+      "activation": "model_or_menu",
+      "modelInvocation": "model_can_invoke",
+      "userMenuCommand": true,
+      "description": "需要回答当前地点、已知路线、附近地点或移动约束时，读取已存在的地图与地点记录；不自动移动玩家。",
+      "read": [
+        "saveRoot/modules/narrative",
+        "saveRoot/world/locations",
+        "saveRoot/world/world_index",
+        "base:content/map"
+      ],
+      "write": [],
+      "danger": "low",
+      "requiresConfirmation": false
+    },
+    {
+      "id": "entity-memory",
+      "title": "实体与世界记忆",
+      "path": "content/skills/entity-memory/SKILL.md",
+      "kind": "read-write",
+      "activation": "model_can_invoke_when_entity_or_world_fact_is_relevant",
+      "modelInvocation": "model_can_invoke",
+      "userMenuCommand": false,
+      "description": "当角色、地点、势力或重要物品需要跨回合保持时，检索或更新当前冒险中已确认的实体与世界记录。",
+      "read": [
+        "saveRoot/characters",
+        "saveRoot/world/locations",
+        "saveRoot/world/factions",
+        "saveRoot/world/items",
+        "saveRoot/world/world_index"
+      ],
+      "write": [
+        "saveRoot/characters",
+        "saveRoot/world/locations",
+        "saveRoot/world/factions",
+        "saveRoot/world/items",
+        "saveRoot/world/world_index",
+        "saveRoot/memory"
+      ],
+      "danger": "medium",
+      "requiresConfirmation": false,
+      "hardStatePolicy": "only narrow app/UI state changes require Runtime guard validation",
+      "templateRefs": [
+        "template:npc-profile",
+        "template:location-profile",
+        "template:faction-profile",
+        "template:item-profile"
+      ]
+    },
+    {
+      "id": "game-save",
+      "title": "Game Save / Auto Save",
+      "path": "content/skills/game-save/SKILL.md",
+      "kind": "save-lifecycle",
+      "activation": "runtime_or_menu",
+      "modelInvocation": "model_can_request",
+      "userMenuCommand": true,
+      "description": "Commits current save progress, timeline material, save metadata, and chapter / observation logs without writing base system files.",
+      "read": [
+        "saveRoot/modules",
+        "saveRoot/world",
+        "saveRoot/characters",
+        "saveRoot/memory"
+      ],
+      "write": [
+        "saveRoot/world/timeline",
+        "saveRoot/diary",
+        "saveRoot/meta/"
+      ],
+      "danger": "medium",
+      "requiresConfirmation": false,
+      "templateRefs": [
+        "template:timeline-entry",
+        "template:diary-entry",
+        "template:save-summary"
+      ]
+    },
+    {
+      "id": "summarize",
+      "title": "Summarize / Compaction",
+      "path": "content/skills/summarize/SKILL.md",
+      "kind": "memory-maintenance",
+      "activation": "runtime_threshold_or_menu",
+      "modelInvocation": "model_can_request",
+      "userMenuCommand": true,
+      "description": "Summarizes memory and diary material to keep context stable after compaction.",
+      "read": [
+        "saveRoot/memory",
+        "saveRoot/diary",
+        "saveRoot/world/timeline",
+        "saveRoot/modules"
+      ],
+      "write": [
+        "saveRoot/memory",
+        "saveRoot/diary",
+        "saveRoot/meta/"
+      ],
+      "danger": "medium",
+      "requiresConfirmation": false,
+      "templateRefs": [
+        "template:compact-summary",
+        "template:compact-prompt"
+      ]
+    }
+  ],
+  "deferred": [
+    "camp",
+    "memory-fragment"
+  ],
+  "excluded": [
+    "scene-visualizer",
+    "image-generation",
+    "openclaw-gateway",
+    "external-chat-channel",
+    "generic-shell",
+    "generic-file-write"
+  ]
+}

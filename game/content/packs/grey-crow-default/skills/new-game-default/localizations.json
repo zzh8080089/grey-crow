@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "grey-crow-skill-localization-bundle-v1",
+  "itemId": "new-game-default",
+  "sourceLocale": "zh-CN",
+  "locales": [
+    {
+      "locale": "en-US",
+      "title": "Grey Crow: Shanghai Outbreak Opening",
+      "description": "Uses a natural multi-turn conversation to confirm identity, the one remaining possession, and one of four starting-area types in Shanghai.",
+      "triggers": [
+        "ui_start_new_game"
+      ],
+      "playerGuide": null,
+      "skillPath": "skills/new-game-default/locales/en-US/SKILL.md",
+      "templates": [
+        {
+          "templateId": "template:opening-anchor-write",
+          "path": "skills/new-game-default/locales/en-US/templates/opening-anchor-write.md"
+        }
+      ],
+      "modulePresentationPath": null
+    },
+    {
+      "locale": "ja-JP",
+      "title": "灰鴉：上海終末の幕開け",
+      "description": "自然な複数ターンの会話で、人物像、唯一残ったもの、上海にある四種類の開始地点のいずれかを確認する。",
+      "triggers": [
+        "ui_start_new_game"
+      ],
+      "playerGuide": null,
+      "skillPath": "skills/new-game-default/locales/ja-JP/SKILL.md",
+      "templates": [
+        {
+          "templateId": "template:opening-anchor-write",
+          "path": "skills/new-game-default/locales/ja-JP/templates/opening-anchor-write.md"
+        }
+      ],
+      "modulePresentationPath": null
+    }
+  ]
+}

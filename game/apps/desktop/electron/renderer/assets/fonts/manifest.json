@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "grey-crow-font-bundle-v1",
+  "source": {
+    "repository": "https://github.com/google/fonts",
+    "commit": "7ff85c87f93ea6cca5f41c69f2e4edcb90240f26"
+  },
+  "fonts": [
+    {
+      "id": "inter-variable",
+      "locale": "en-US",
+      "role": "ui",
+      "cssFamily": "Grey Crow Inter",
+      "file": "inter/Inter-Variable.ttf",
+      "licenseFile": "inter/OFL.txt",
+      "bytes": 876576,
+      "sha256": "29160a80ff49ddcab2c97711247e08b1fab27a484a329ce8b813d820dc559031"
+    },
+    {
+      "id": "noto-sans-sc-variable",
+      "locale": "zh-CN",
+      "role": "ui",
+      "cssFamily": "Grey Crow Noto Sans SC",
+      "file": "noto-sans-sc/NotoSansSC-Variable.ttf",
+      "licenseFile": "noto-sans-sc/OFL.txt",
+      "bytes": 17772300,
+      "sha256": "a3041811a78c361b1de50f953c805e0244951c21c5bd412f7232ef0d899af0da"
+    },
+    {
+      "id": "noto-sans-jp-variable",
+      "locale": "ja-JP",
+      "role": "ui",
+      "cssFamily": "Grey Crow Noto Sans JP",
+      "file": "noto-sans-jp/NotoSansJP-Variable.ttf",
+      "licenseFile": "noto-sans-jp/OFL.txt",
+      "bytes": 9589900,
+      "sha256": "c2f3b4d463500a2ddcd3849cded1fceeb9fd6d1c32e6cbecd568453ba50fc68f"
+    },
+    {
+      "id": "noto-serif-variable",
+      "locale": "en-US",
+      "role": "story",
+      "cssFamily": "Grey Crow Noto Serif",
+      "file": "noto-serif/NotoSerif-Variable.ttf",
+      "licenseFile": "noto-serif/OFL.txt",
+      "bytes": 1887192,
+      "sha256": "4d8e6761424656867019081a1a01336f3cb086982682698714054fc33f782713"
+    },
+    {
+      "id": "noto-serif-sc-variable",
+      "locale": "zh-CN",
+      "role": "story",
+      "cssFamily": "Grey Crow Noto Serif SC",
+      "file": "noto-serif-sc/NotoSerifSC-Variable.ttf",
+      "licenseFile": "noto-serif-sc/OFL.txt",
+      "bytes": 25125512,
+      "sha256": "050080d9255a86808f2945bffac582b31ef32bc36411ce29563b4961670c66f9"
+    },
+    {
+      "id": "noto-serif-jp-variable",
+      "locale": "ja-JP",
+      "role": "story",
+      "cssFamily": "Grey Crow Noto Serif JP",
+      "file": "noto-serif-jp/NotoSerifJP-Variable.ttf",
+      "licenseFile": "noto-serif-jp/OFL.txt",
+      "bytes": 13574352,
+      "sha256": "2fd527ba12b6a44ec30d796d633360da0aeba6c5d4af1304ce12bb4dc15a7dfc"
+    }
+  ]
+}

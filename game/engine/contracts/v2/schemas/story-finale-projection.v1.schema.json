@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://greycrow.local/schemas/p2-25/story-finale-projection.v1.schema.json",
+  "title": "Grey Crow Story Finale safe presentation projection v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "revision",
+    "phase",
+    "mode",
+    "inputAllowed",
+    "candidate",
+    "closedFinale",
+    "engineNotice",
+    "actions"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "grey-crow-story-finale-projection-v1" },
+    "revision": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2147483647
+    },
+    "phase": {
+      "enum": ["idle", "candidate_pending", "finalizing", "recovery_required", "closed"]
+    },
+    "mode": { "enum": ["active", "pending", "finalizing", "recovery", "archive"] },
+    "inputAllowed": { "type": "boolean" },
+    "candidate": {
+      "anyOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["candidateId", "proposedTurn", "proposedAt", "closureReason", "finaleTone"],
+          "properties": {
+            "candidateId": {
+              "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/stableRef"
+            },
+            "proposedTurn": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "proposedAt": {
+              "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/timestamp"
+            },
+            "closureReason": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1200
+            },
+            "finaleTone": {
+              "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/shortText"
+            }
+          }
+        }
+      ]
+    },
+    "closedFinale": {
+      "anyOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["finaleId", "chapterId", "closedAt"],
+          "properties": {
+            "finaleId": {
+              "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/stableRef"
+            },
+            "chapterId": {
+              "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/stableRef"
+            },
+            "closedAt": {
+              "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/timestamp"
+            },
+            "finaleSource": { "enum": ["story", "easter"] },
+            "continuationPolicy": { "enum": ["allowed", "forbidden"] }
+          }
+        }
+      ]
+    },
+    "engineNotice": {
+      "anyOf": [
+        { "type": "null" },
+        { "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/shortText" }
+      ]
+    },
+    "actions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["exportStory", "continueAsChild"],
+      "properties": {
+        "exportStory": { "type": "boolean" },
+        "continueAsChild": { "type": "boolean" }
+      }
+    }
+  }
+}

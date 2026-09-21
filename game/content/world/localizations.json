@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "grey-crow-narrative-localization-bundle-v1",
+  "itemId": "shanghai-day10",
+  "itemType": "world",
+  "sourceLocale": "zh-CN",
+  "locales": [
+    {
+      "locale": "en-US",
+      "title": "Shanghai · Day Ten After the Outbreak",
+      "description": "Shanghai on day ten of the N7 rabies-variant outbreak: the city is failing, but it is not dead yet.",
+      "contentPath": "world/locales/en-US/WORLD.md"
+    },
+    {
+      "locale": "ja-JP",
+      "title": "上海・感染爆発から十日目",
+      "description": "N7 狂犬病変異株の発生から十日目の上海。都市は機能を失いつつあるが、まだ死んではいない。",
+      "contentPath": "world/locales/ja-JP/WORLD.md"
+    }
+  ]
+}

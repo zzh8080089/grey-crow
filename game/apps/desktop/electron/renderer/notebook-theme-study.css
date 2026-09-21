@@ -1,0 +1,97 @@
+/* Material study only. Paper texture is rendered; all variable UI ink is live. */
+body[data-game-ui-layout="story-notebook-v1"] {
+  --study-ink:#352e28; --study-muted:#70645a; --study-line:#65544633;
+  --study-accent:#785d3e; --study-panel:#ede3d0; --study-tint:#98784e0e;
+  --study-input:#fff4df25; --study-focus:#855a35; --study-player:#68513e;
+  --study-tab-ink:#3b332b; --study-badge:#70573d; --study-badge-ink:#fff3de;
+  --study-scene-exposure:1;
+  background:#292829; color:#ece5d8;
+}
+body[data-game-ui-layout="story-notebook-v1"][data-paper-theme="dark"] {
+  --study-ink:#ece5d8; --study-muted:#c2b8aa; --study-line:#d3c1a42b;
+  --study-accent:#c6b091; --study-panel:#3a3b3e; --study-tint:#d8bd900a;
+  --study-input:#f1e3cb0c; --study-focus:#d8bc92; --study-player:#f2e8d8;
+  --study-tab-ink:#302b27; --study-badge:#544a3d; --study-badge-ink:#f4e4c9;
+  --study-scene-exposure:.84;
+}
+body[data-game-ui-layout="story-notebook-v1"] #themeStudyImage {position:absolute;inset:0;width:1600px;height:900px;user-select:none;-webkit-user-drag:none;}
+/* Keep the filmed highlights beneath readable live ink. Cover, film and final
+   still share one exposure, so handoff never introduces a colour/exposure cut. */
+body[data-game-ui-layout="story-notebook-v1"] :is(#themeStudyImage,#themeOpeningVideo) {filter:brightness(var(--study-scene-exposure));}
+body[data-game-ui-layout="story-notebook-v1"] .lab-toolbar {background:#282728;border-color:#9f917944;}
+body[data-game-ui-layout="story-notebook-v1"] .lab-toolbar :is(select,button) {background:#383638;border-color:#9f917966;color:#ebe1d2;}
+body[data-game-ui-layout="story-notebook-v1"] .lab-workspace {background:radial-gradient(ellipse at 50% 15%,#393637,#1b1a1b 80%);}
+body[data-game-ui-layout="story-notebook-v1"] .lab-pan-hint {background:#282728;color:#cec3b2;}
+body[data-game-ui-layout="story-notebook-v1"] .lab-toast {background:#3d3833f2;border-color:#a9937480;}
+body[data-game-ui-layout="story-notebook-v1"] #bookStage {background:#333235;}
+body[data-game-ui-layout="story-notebook-v1"] #bookFoyer::before {background:linear-gradient(90deg,#211e1dcd,#29231ea3 24%,transparent 52%);}
+body[data-game-ui-layout="story-notebook-v1"] #bookFoyer h1 {color:#f1f0e8;white-space:pre-line;}
+body[data-game-ui-layout="story-notebook-v1"] #bookFoyer .book-foyer-note {color:#d0d1c6;white-space:pre-line;}
+body[data-game-ui-layout="story-notebook-v1"] #bookOpenButton {background:#71604b;border-color:#bca788;color:#fff3df;}
+body[data-game-ui-layout="story-notebook-v1"] .book-foyer-footer {color:#d0d1c6;}
+body[data-game-ui-layout="story-notebook-v1"] #bookStatus {color:#f1f0e8;}
+body[data-game-ui-layout="story-notebook-v1"] #labVariant {max-width:100px;}
+body[data-game-ui-layout="story-notebook-v1"][data-book-presentation="active"].book-reading-ready #gameView {
+  --nb-text:var(--study-ink);--nb-muted:var(--study-muted);--nb-faint:var(--study-muted);
+  --nb-line:var(--study-line);--nb-line-strong:var(--study-accent);--nb-player:var(--study-player);
+  --text:var(--study-ink);--muted:var(--study-muted);--dim:var(--study-muted);
+  & .narration-scroll {scrollbar-color:var(--study-muted) transparent;border-left-color:var(--study-line);}
+  & .narration-line.player {color:var(--study-player);border-left-color:var(--study-accent);background:linear-gradient(90deg,var(--study-tint),transparent);}
+  & .narration-line.warning {color:var(--study-ink);border-left-color:#a77363;}
+  & .turn-input-scroll, & .turn-input-scroll:focus-within {background:none;border:0;box-shadow:none;outline:none;}
+  & #turnInput {color:var(--study-ink);caret-color:var(--study-ink);}
+  & #turnInput::placeholder {color:var(--study-muted);}
+  & :is(.command-button.icon-command,.tts-line-button,.story-action-key) {color:var(--study-accent);border-color:var(--study-line);}
+  & :is(.command-button.icon-command,.tts-line-button,.story-action-key):hover {color:var(--study-ink);}
+  & .tts-line-button {background:var(--study-tint);}
+  & .tts-line-button:hover {background:var(--study-input);}
+  & .send-button, & .send-button:hover {color:var(--study-ink);background:none;border:0;}
+  & .tts-action-copy strong {color:var(--study-muted);}
+  & .tts-action-wave i {background:var(--study-accent);}
+  & .tts-playback-icon {color:var(--study-muted);}
+  & .settings-gear-button {background:transparent;color:var(--study-accent);border:0;box-shadow:none;}
+  & .settings-gear-button:is(:hover,:focus-visible) {background:transparent;color:var(--study-ink);border:0;}
+  & .story-notebook-drawer {color:var(--study-ink);}
+  & .story-notebook-drawer-body {scrollbar-color:var(--study-muted) transparent;}
+  & :is(.story-notebook-drawer-back,.story-notebook-drawer-refresh,.story-notebook-drawer-close,.lab-record,.lab-directory button,.lab-record button,.lab-settings select) {color:var(--study-ink);border-color:var(--study-line);}
+  & .lab-directory button::after {color:var(--study-accent);}
+  & .lab-record summary::marker {color:var(--study-accent);}
+  & .lab-settings input {accent-color:var(--study-accent);}
+  & :is(button,[tabindex="0"]):focus-visible {outline-color:var(--study-focus);}
+  & :is(.context-meter-tooltip,.story-notebook-live strong) {background:#343033;color:#eee3d2;border-color:#b5a184;}
+  /* Colour stays in the rendered paper; ink, object art and counts are live. */
+  & .story-notebook-rail-button {color:var(--study-tab-ink);}
+  & .story-notebook-rail-button:is(:hover,.is-active,:focus-visible):not(:disabled) {color:var(--study-tab-ink);}
+  & .story-notebook-rail-count {background:var(--study-badge);color:var(--study-badge-ink);border-color:#d9cbb5;}
+  & .story-notebook-rail-button::after {border:0;border-radius:0;}
+  & .story-notebook-rail-button:is(:hover,.is-active):not(:disabled)::after {background:transparent;border:0;}
+  & .story-notebook-rail-button:focus-visible:not(:disabled)::after {border:0;background:linear-gradient(var(--study-tab-ink),var(--study-tab-ink)) 50% calc(100% - 4px) / 30px 2px no-repeat;}
+}
+
+/* The camera comes to rest before live ink appears. The film remains behind
+   that ink until the matching high-resolution still has taken over. */
+body[data-game-ui-layout="story-notebook-v1"] #themeOpeningVideo {
+  position:absolute;inset:0;width:1600px;height:900px;object-fit:fill;
+  z-index:1;opacity:0;visibility:hidden;pointer-events:none;
+}
+body[data-game-ui-layout="story-notebook-v1"] #bookStage[data-video-visible="true"] #themeOpeningVideo {opacity:1;visibility:visible;}
+body[data-game-ui-layout="story-notebook-v1"][data-book-handoff="true"] #bookStage #themeOpeningVideo {opacity:0;transition:opacity 220ms ease;}
+body[data-game-ui-layout="story-notebook-v1"][data-book-phase="opening"][data-book-handoff="true"] #gameView {
+  opacity:1;visibility:visible;pointer-events:none;transition:opacity 480ms ease;
+}
+body[data-game-ui-layout="story-notebook-v1"] #bookArtPlaceholder {
+  position:absolute;z-index:13;left:50%;bottom:18px;transform:translateX(-50%);
+  max-width:1100px;margin:0;padding:7px 14px;border:1px solid #b8bca153;
+  border-radius:2px;background:#292c25da;color:#eeeee3;pointer-events:none;
+  font:13px/1.6 var(--font-ui);letter-spacing:.04em;
+}
+body[data-game-ui-layout="story-notebook-v1"] #bookArtPlaceholder[hidden] {display:none;}
+body[data-game-ui-layout="story-notebook-v1"] #labVariant {max-width:146px;}
+body[data-game-ui-layout="story-notebook-v1"] .lab-controls {row-gap:8px;}
+body[data-game-ui-layout="story-notebook-v1"] #labPaperTheme {max-width:148px;}
+@media(prefers-reduced-motion:reduce){
+  body[data-game-ui-layout="story-notebook-v1"] #themeOpeningVideo,
+  body[data-game-ui-layout="story-notebook-v1"] #gameView {transition:none!important;}
+}
+body[data-game-ui-layout="story-notebook-v1"][data-lab-reduced-motion="true"] #gameView {transition:none!important;}
+body[data-game-ui-layout="story-notebook-v1"][data-study-view="cover"][data-book-phase="closed"] #themeStudyImage {cursor:pointer;}

@@ -1,0 +1,135 @@
+{
+  "schemaVersion": "grey-crow-skill-module-presentation-overlay-v1",
+  "itemId": "memory-fragment",
+  "locale": "en-US",
+  "actions": [
+    {
+      "actionId": "record_fragment",
+      "description": "Record one unverified memory fragment when deliberate recall or a strong association naturally triggers it. Supply only emergence mode, dimension, trigger, and sensory content; Runtime validates and saves it."
+    },
+    {
+      "actionId": "resolve_fragment",
+      "description": "Only after thirty fragments unlock reconstruction and the player clearly chooses, record accepting the past, rejecting it, or deferring. Supply only choice."
+    }
+  ],
+  "fields": [
+    {
+      "fieldId": "fragments",
+      "label": "Memory Fragments",
+      "options": [],
+      "itemFields": [
+        {
+          "fieldId": "game_day",
+          "label": "Game Day",
+          "options": []
+        },
+        {
+          "fieldId": "discovery_mode",
+          "label": "Emergence Mode",
+          "options": [
+            {
+              "value": "active_recall",
+              "label": "Active Recall"
+            },
+            {
+              "value": "passive_association",
+              "label": "Passive Association"
+            }
+          ]
+        },
+        {
+          "fieldId": "dimension",
+          "label": "Dimension",
+          "options": [
+            {
+              "value": "body",
+              "label": "Body"
+            },
+            {
+              "value": "emotion",
+              "label": "Emotion"
+            },
+            {
+              "value": "skill",
+              "label": "Skill"
+            },
+            {
+              "value": "identity",
+              "label": "Identity"
+            }
+          ]
+        },
+        {
+          "fieldId": "trigger",
+          "label": "Trigger",
+          "options": []
+        },
+        {
+          "fieldId": "content",
+          "label": "Sensory Fragment",
+          "options": []
+        },
+        {
+          "fieldId": "certainty",
+          "label": "Certainty",
+          "options": [
+            {
+              "value": "uncertain",
+              "label": "Unverified"
+            }
+          ]
+        }
+      ],
+      "milestones": [
+        {
+          "minimum": 0,
+          "label": "Blank"
+        },
+        {
+          "minimum": 6,
+          "label": "Stirring"
+        },
+        {
+          "minimum": 13,
+          "label": "Emerging"
+        },
+        {
+          "minimum": 25,
+          "label": "Converging"
+        },
+        {
+          "minimum": 30,
+          "label": "Revelation"
+        }
+      ]
+    },
+    {
+      "fieldId": "revelation_status",
+      "label": "Reconstruction Choice",
+      "options": [
+        {
+          "value": "collecting",
+          "label": "Collecting"
+        },
+        {
+          "value": "available",
+          "label": "Ready to Reconstruct"
+        },
+        {
+          "value": "deferred",
+          "label": "Decision Deferred"
+        },
+        {
+          "value": "sealed",
+          "label": "Reject the Past · Choose a New Self"
+        },
+        {
+          "value": "accepted",
+          "label": "Accept the Past · Memory Restorer"
+        }
+      ],
+      "itemFields": [],
+      "milestones": []
+    }
+  ]
+}

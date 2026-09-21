@@ -1,0 +1,2434 @@
+{
+  "schemaVersion": "grey-crow-static-contract-samples-v2",
+  "cases": [
+    {
+      "name": "narrative-localization-bundle-valid-world",
+      "contractId": "narrative-localization-bundle-v1",
+      "variant": "valid",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-narrative-localization-bundle-v1",
+        "itemId": "story-world",
+        "itemType": "world",
+        "sourceLocale": "zh-CN",
+        "locales": [
+          { "locale": "en-US", "title": "Story World", "description": "Localized world fixture.", "contentPath": "world/locales/en-US/WORLD.md" }
+        ]
+      }
+    },
+    {
+      "name": "narrative-localization-bundle-invalid-empty",
+      "contractId": "narrative-localization-bundle-v1",
+      "variant": "invalid",
+      "expectValid": false,
+      "value": {
+        "schemaVersion": "grey-crow-narrative-localization-bundle-v1",
+        "itemId": "story-world",
+        "itemType": "world",
+        "sourceLocale": "zh-CN",
+        "locales": []
+      }
+    },
+    {
+      "name": "narrative-localization-bundle-boundary-host",
+      "contractId": "narrative-localization-bundle-v1",
+      "variant": "boundary",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-narrative-localization-bundle-v1",
+        "itemId": "story-host",
+        "itemType": "host",
+        "sourceLocale": "ja-JP",
+        "locales": [
+          { "locale": "zh-CN", "title": "故事主持人", "description": "本地化主持人边界样本。", "contentPath": "host/locales/zh-CN/HOST.md" }
+        ]
+      }
+    },
+    {
+      "name": "skill-io-companion-valid-adjustment",
+      "contractId": "skill-io-companion-v1",
+      "variant": "valid",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-skill-io-companion-v1",
+        "namespace": "skillio_weather_01",
+        "defaultView": "overview",
+        "readViews": [
+          { "id": "guide", "projection": "guide", "targetFieldIds": [], "query": false, "limit": 1 },
+          { "id": "overview", "projection": "summary", "targetFieldIds": ["danger"], "query": false, "limit": 1 }
+        ],
+        "actions": [
+          {
+            "id": "action_adjust_danger",
+            "toolName": "adjust_skill_number_1234567890",
+            "label": "调整危险度",
+            "archetype": "adjust_number",
+            "modelInput": {
+              "fields": [{ "name": "amount", "type": "integer", "description": "危险度", "minimum": -10, "maximum": 10 }],
+              "required": ["amount"]
+            },
+            "runtimeMapping": {
+              "targetFieldId": "danger",
+              "operation": "set",
+              "bindings": [{ "argument": "amount", "mode": "numeric_delta" }],
+              "policy": "none"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "skill-io-companion-invalid-guide-shape",
+      "contractId": "skill-io-companion-v1",
+      "variant": "invalid",
+      "expectValid": false,
+      "value": {
+        "schemaVersion": "grey-crow-skill-io-companion-v1",
+        "namespace": "skillio_invalid_01",
+        "defaultView": "guide",
+        "readViews": [
+          { "id": "guide", "projection": "summary", "targetFieldIds": ["danger"], "query": false, "limit": 1 }
+        ],
+        "actions": []
+      }
+    },
+    {
+      "name": "skill-io-companion-boundary-stateless-guide",
+      "contractId": "skill-io-companion-v1",
+      "variant": "boundary",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-skill-io-companion-v1",
+        "namespace": "skillio_guide_only",
+        "defaultView": "guide",
+        "readViews": [
+          { "id": "guide", "projection": "guide", "targetFieldIds": [], "query": false, "limit": 1 }
+        ],
+        "actions": []
+      }
+    },
+    {
+      "name": "adventure-valid-active",
+      "contractId": "adventure-save-v2",
+      "variant": "valid",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-adventure-v2",
+        "dataVersion": 2,
+        "adventureId": "adventure_demo",
+        "playerProfileId": "player_demo",
+        "creationState": "active",
+        "contentProfileRef": {
+          "profileId": "profile_demo",
+          "snapshotLockId": "snapshot_demo",
+          "overallHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "createdAt": "2026-07-13T00:00:00Z",
+        "updatedAt": "2026-07-13T00:00:00Z"
+      }
+    },
+    {
+      "name": "adventure-invalid-missing-id",
+      "contractId": "adventure-save-v2",
+      "variant": "invalid",
+      "expectValid": false,
+      "value": {
+        "schemaVersion": "grey-crow-adventure-v2",
+        "dataVersion": 2,
+        "playerProfileId": "player_demo",
+        "creationState": "creating",
+        "contentProfileRef": null,
+        "createdAt": "2026-07-13T00:00:00Z",
+        "updatedAt": "2026-07-13T00:00:00Z"
+      }
+    },
+    {
+      "name": "adventure-boundary-creating",
+      "contractId": "adventure-save-v2",
+      "variant": "boundary",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-adventure-v2",
+        "dataVersion": 2,
+        "adventureId": "adventure_new",
+        "playerProfileId": "player_demo",
+        "creationState": "creating",
+        "contentProfileRef": null,
+        "createdAt": "2026-07-13T00:00:00Z",
+        "updatedAt": "2026-07-13T00:00:00Z"
+      }
+    },
+    {
+      "name": "extension-pack-valid",
+      "contractId": "extension-pack-v2",
+      "variant": "valid",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-extension-pack-v2",
+        "id": "grey-crow-base",
+        "title": "Grey Crow Base",
+        "version": "2.0.0",
+        "author": "Grey Crow",
+        "engineCompatibility": ">=2",
+        "languages": [
+          "zh-CN"
+        ],
+        "provides": [
+          {
+            "type": "host",
+            "id": "grey-crow-host",
+            "title": "Grey Crow Host",
+            "path": "host/grey-crow-host.md",
+            "language": "zh-CN",
+            "description": "Default Grey Crow host.",
+            "danger": "low"
+          },
+          {
+            "type": "skill",
+            "skillClass": "new_game",
+            "id": "new-game-default",
+            "title": "Default New Game",
+            "path": "skills/new-game/SKILL.md",
+            "language": "zh-CN",
+            "description": "Runs the selected multi-turn setup after the UI starts a new adventure.",
+            "danger": "medium",
+            "triggers": [
+              "ui_start_new_game"
+            ],
+            "templates": [],
+            "readScopes": [
+              "state",
+              "world"
+            ],
+            "writeScopes": [
+              "state",
+              "memory",
+              "timeline"
+            ]
+          },
+          {
+            "type": "skill",
+            "id": "map-skill",
+            "title": "Map",
+            "path": "skills/map/SKILL.md",
+            "language": "zh-CN",
+            "description": "Reads known locations and routes.",
+            "danger": "low",
+            "triggers": [
+              "map"
+            ],
+            "templates": [],
+            "readScopes": [
+              "state",
+              "world"
+            ],
+            "writeScopes": [],
+            "skillClass": "ordinary"
+          }
+        ],
+        "permissions": [
+          "read_base_content",
+          "write_current_saveRoot_via_tools"
+        ],
+        "conflicts": []
+      }
+    },
+    {
+      "name": "extension-pack-invalid-permission-expansion",
+      "contractId": "extension-pack-v2",
+      "variant": "invalid",
+      "expectValid": false,
+      "value": {
+        "schemaVersion": "grey-crow-extension-pack-v2",
+        "id": "unsafe-pack",
+        "title": "Unsafe Pack",
+        "version": "2.0.0",
+        "author": "Unknown",
+        "engineCompatibility": ">=2",
+        "languages": [
+          "zh-CN"
+        ],
+        "provides": [
+          {
+            "type": "world",
+            "id": "unsafe-world",
+            "title": "Unsafe World",
+            "path": "world/world.md",
+            "language": "zh-CN",
+            "description": "Invalid permission sample.",
+            "danger": "critical"
+          }
+        ],
+        "permissions": [
+          "shell"
+        ],
+        "conflicts": []
+      }
+    },
+    {
+      "name": "extension-pack-boundary-preset",
+      "contractId": "extension-pack-v2",
+      "variant": "boundary",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-extension-pack-v2",
+        "id": "preset-pack",
+        "title": "Preset Pack",
+        "version": "2.0.0-alpha.1",
+        "author": "Creator",
+        "engineCompatibility": ">=2 <3",
+        "languages": [
+          "en-US"
+        ],
+        "provides": [
+          {
+            "type": "new_game_preset",
+            "id": "default-preset",
+            "title": "Default Preset",
+            "path": "presets/default.json",
+            "language": "en-US",
+            "description": "A selectable New Game preset.",
+            "danger": "low"
+          }
+        ],
+        "permissions": [],
+        "conflicts": []
+      }
+    },
+    {
+      "name": "content-profile-valid",
+      "contractId": "content-profile-v2",
+      "variant": "valid",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-content-profile-v2",
+        "profileId": "profile_demo",
+        "adventureId": "adventure_demo",
+        "language": "zh-CN",
+        "createdAt": "2026-07-13T00:00:00Z",
+        "features": [
+          "skill-panel-presentation-v1",
+          "skill-module-v1"
+        ],
+        "skillPanelPresentation": {
+          "relativePath": "skill-panels.lock.json",
+          "sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        },
+        "moduleReviewHash": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "host": {
+          "packId": "grey-crow-base",
+          "packVersion": "2.0.0",
+          "itemId": "grey-crow-host",
+          "itemType": "host",
+          "language": "zh-CN",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "world": {
+          "packId": "grey-crow-base",
+          "packVersion": "2.0.0",
+          "itemId": "grey-crow-world",
+          "itemType": "world",
+          "language": "zh-CN",
+          "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        },
+        "skills": [
+          {
+            "packId": "grey-crow-base",
+            "packVersion": "2.0.0",
+            "itemId": "map-skill",
+            "itemType": "skill",
+            "language": "zh-CN",
+            "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "skillClass": "ordinary",
+            "skillModule": {
+              "schemaVersion": "grey-crow-skill-module-lock-v1",
+              "moduleRef": "module_map_01",
+              "definitionHash": "1111111111111111111111111111111111111111111111111111111111111111",
+              "definitionSchemaVersion": "grey-crow-skill-module-definition-v1",
+              "stateVersion": 1,
+              "grant": {
+                "schemaVersion": "grey-crow-skill-module-grant-v1",
+                "moduleRef": "module_map_01",
+                "definitionHash": "1111111111111111111111111111111111111111111111111111111111111111",
+                "read": true,
+                "writableFields": [
+                  {
+                    "fieldId": "progress",
+                    "operations": [
+                      "set"
+                    ]
+                  }
+                ],
+                "limitsVersion": 1
+              }
+            }
+          }
+        ],
+        "replacements": [],
+        "snapshotLockId": "snapshot_demo",
+        "newGameSkill": {
+          "packId": "grey-crow-base",
+          "packVersion": "2.0.0",
+          "itemId": "new-game-default",
+          "itemType": "skill",
+          "skillClass": "new_game",
+          "language": "zh-CN",
+          "sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+        }
+      }
+    },
+    {
+      "name": "content-profile-invalid-duplicate-skill",
+      "contractId": "content-profile-v2",
+      "variant": "invalid",
+      "expectValid": false,
+      "value": {
+        "schemaVersion": "grey-crow-content-profile-v2",
+        "profileId": "profile_demo",
+        "adventureId": "adventure_demo",
+        "language": "zh-CN",
+        "createdAt": "2026-07-13T00:00:00Z",
+        "host": {
+          "packId": "grey-crow-base",
+          "packVersion": "2.0.0",
+          "itemId": "grey-crow-host",
+          "itemType": "host",
+          "language": "zh-CN",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "world": {
+          "packId": "grey-crow-base",
+          "packVersion": "2.0.0",
+          "itemId": "grey-crow-world",
+          "itemType": "world",
+          "language": "zh-CN",
+          "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        },
+        "skills": [
+          {
+            "packId": "grey-crow-base",
+            "packVersion": "2.0.0",
+            "itemId": "map-skill",
+            "itemType": "skill",
+            "language": "zh-CN",
+            "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "skillClass": "ordinary"
+          },
+          {
+            "packId": "other-pack",
+            "packVersion": "2.0.0",
+            "itemId": "map-skill",
+            "itemType": "skill",
+            "language": "zh-CN",
+            "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "skillClass": "ordinary"
+          }
+        ],
+        "replacements": [],
+        "snapshotLockId": "snapshot_demo",
+        "newGameSkill": {
+          "packId": "grey-crow-base",
+          "packVersion": "2.0.0",
+          "itemId": "new-game-default",
+          "itemType": "skill",
+          "skillClass": "new_game",
+          "language": "zh-CN",
+          "sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+        }
+      }
+    },
+    {
+      "name": "content-profile-boundary-no-optional-skill",
+      "contractId": "content-profile-v2",
+      "variant": "boundary",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-content-profile-v2",
+        "profileId": "profile_min",
+        "adventureId": "adventure_min",
+        "language": "ja-JP",
+        "createdAt": "2026-07-13T00:00:00Z",
+        "host": {
+          "packId": "base-pack",
+          "packVersion": "2.0.0",
+          "itemId": "host-item",
+          "itemType": "host",
+          "language": "ja-JP",
+          "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "world": {
+          "packId": "base-pack",
+          "packVersion": "2.0.0",
+          "itemId": "world-item",
+          "itemType": "world",
+          "language": "ja-JP",
+          "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        },
+        "skills": [],
+        "replacements": [],
+        "snapshotLockId": "snapshot_min",
+        "newGameSkill": {
+          "packId": "base-pack",
+          "packVersion": "2.0.0",
+          "itemId": "new-game-default",
+          "itemType": "skill",
+          "skillClass": "new_game",
+          "language": "ja-JP",
+          "sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+        }
+      }
+    },
+    {
+      "name": "snapshot-lock-valid",
+      "contractId": "snapshot-lock-v2",
+      "variant": "valid",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-snapshot-lock-v2",
+        "lockId": "snapshot_demo",
+        "profileId": "profile_demo",
+        "createdAt": "2026-07-13T00:00:00Z",
+        "overallHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "features": [
+          "skill-panel-presentation-v1",
+          "skill-module-v1"
+        ],
+        "skillPanelPresentation": {
+          "relativePath": "skill-panels.lock.json",
+          "sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        },
+        "moduleReviewHash": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "items": [
+          {
+            "packId": "base-pack",
+            "packVersion": "2.0.0",
+            "itemId": "host-item",
+            "itemType": "host",
+            "language": "zh-CN",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          {
+            "packId": "base-pack",
+            "packVersion": "2.0.0",
+            "itemId": "world-item",
+            "itemType": "world",
+            "language": "zh-CN",
+            "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          {
+            "packId": "base-pack",
+            "packVersion": "2.0.0",
+            "itemId": "new-game-default",
+            "itemType": "skill",
+            "skillClass": "new_game",
+            "language": "zh-CN",
+            "sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+          },
+          {
+            "packId": "base-pack",
+            "packVersion": "2.0.0",
+            "itemId": "map-skill",
+            "itemType": "skill",
+            "skillClass": "ordinary",
+            "language": "zh-CN",
+            "sha256": "9999999999999999999999999999999999999999999999999999999999999999",
+            "skillModule": {
+              "schemaVersion": "grey-crow-skill-module-lock-v1",
+              "moduleRef": "module_map_01",
+              "definitionHash": "1111111111111111111111111111111111111111111111111111111111111111",
+              "definitionSchemaVersion": "grey-crow-skill-module-definition-v1",
+              "stateVersion": 1,
+              "grant": {
+                "schemaVersion": "grey-crow-skill-module-grant-v1",
+                "moduleRef": "module_map_01",
+                "definitionHash": "1111111111111111111111111111111111111111111111111111111111111111",
+                "read": true,
+                "writableFields": [
+                  {
+                    "fieldId": "progress",
+                    "operations": [
+                      "set"
+                    ]
+                  }
+                ],
+                "limitsVersion": 1
+              }
+            }
+          }
+        ],
+        "files": [
+          {
+            "relativePath": "host/host.md",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "sizeBytes": 1200
+          },
+          {
+            "relativePath": "world/world.md",
+            "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "sizeBytes": 2400
+          },
+          {
+            "relativePath": "skills/new-game-default/SKILL.md",
+            "sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "sizeBytes": 800
+          },
+          {
+            "relativePath": "skills/map-skill/SKILL.md",
+            "sha256": "9999999999999999999999999999999999999999999999999999999999999999",
+            "sizeBytes": 600
+          },
+          {
+            "relativePath": "skills/map-skill/module.json",
+            "sha256": "7777777777777777777777777777777777777777777777777777777777777777",
+            "sizeBytes": 500
+          },
+          {
+            "relativePath": "skills/map-skill/module.grant.json",
+            "sha256": "8888888888888888888888888888888888888888888888888888888888888888",
+            "sizeBytes": 300
+          },
+          {
+            "relativePath": "skill-panels.lock.json",
+            "sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+            "sizeBytes": 700
+          }
+        ]
+      }
+    },
+    {
+      "name": "snapshot-lock-invalid-path-traversal",
+      "contractId": "snapshot-lock-v2",
+      "variant": "invalid",
+      "expectValid": false,
+      "value": {
+        "schemaVersion": "grey-crow-snapshot-lock-v2",
+        "lockId": "snapshot_demo",
+        "profileId": "profile_demo",
+        "createdAt": "2026-07-13T00:00:00Z",
+        "overallHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "items": [
+          {
+            "packId": "base-pack",
+            "packVersion": "2.0.0",
+            "itemId": "host-item",
+            "itemType": "host",
+            "language": "zh-CN",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          {
+            "packId": "base-pack",
+            "packVersion": "2.0.0",
+            "itemId": "world-item",
+            "itemType": "world",
+            "language": "zh-CN",
+            "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          {
+            "packId": "base-pack",
+            "packVersion": "2.0.0",
+            "itemId": "new-game-default",
+            "itemType": "skill",
+            "skillClass": "new_game",
+            "language": "zh-CN",
+            "sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+          }
+        ],
+        "files": [
+          {
+            "relativePath": "../engine/index.js",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "sizeBytes": 1
+          },
+          {
+            "relativePath": "skills/new-game-default/SKILL.md",
+            "sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "sizeBytes": 800
+          }
+        ]
+      }
+    },
+    {
+      "name": "snapshot-lock-boundary-empty-file",
+      "contractId": "snapshot-lock-v2",
+      "variant": "boundary",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-snapshot-lock-v2",
+        "lockId": "snapshot_min",
+        "profileId": "profile_min",
+        "createdAt": "2026-07-13T00:00:00Z",
+        "overallHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "items": [
+          {
+            "packId": "base-pack",
+            "packVersion": "2.0.0",
+            "itemId": "host-item",
+            "itemType": "host",
+            "language": "en-US",
+            "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          {
+            "packId": "base-pack",
+            "packVersion": "2.0.0",
+            "itemId": "world-item",
+            "itemType": "world",
+            "language": "en-US",
+            "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          },
+          {
+            "packId": "base-pack",
+            "packVersion": "2.0.0",
+            "itemId": "new-game-default",
+            "itemType": "skill",
+            "skillClass": "new_game",
+            "language": "en-US",
+            "sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+          }
+        ],
+        "files": [
+          {
+            "relativePath": "world/empty.md",
+            "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "sizeBytes": 0
+          },
+          {
+            "relativePath": "skills/new-game-default/SKILL.md",
+            "sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "sizeBytes": 800
+          }
+        ]
+      }
+    },
+    {
+      "name": "transcript-turn-valid",
+      "contractId": "transcript-turn-v2",
+      "variant": "valid",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-transcript-turn-v2",
+        "turnId": "turn_000001",
+        "sequence": 1,
+        "occurredAt": "2026-07-13T00:00:00Z",
+        "user": {
+          "text": "Open the door."
+        },
+        "assistant": {
+          "text": "The rusted hinge moves."
+        },
+        "sourceRange": {
+          "schemaVersion": "grey-crow-source-range-v2",
+          "startTurn": 1,
+          "endTurn": 1
+        }
+      }
+    },
+    {
+      "name": "transcript-turn-invalid-unknown-field",
+      "contractId": "transcript-turn-v2",
+      "variant": "invalid",
+      "expectValid": false,
+      "value": {
+        "schemaVersion": "grey-crow-transcript-turn-v2",
+        "turnId": "turn_000001",
+        "sequence": 1,
+        "occurredAt": "2026-07-13T00:00:00Z",
+        "user": {
+          "text": "Open the door."
+        },
+        "assistant": {
+          "text": "The rusted hinge moves."
+        },
+        "rawProviderBody": "must never be stored"
+      }
+    },
+    {
+      "name": "transcript-turn-boundary-minimum-text",
+      "contractId": "transcript-turn-v2",
+      "variant": "boundary",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-transcript-turn-v2",
+        "turnId": "turn_1",
+        "sequence": 1,
+        "occurredAt": "2026-07-13T00:00:00Z",
+        "user": {
+          "text": "?"
+        },
+        "assistant": {
+          "text": "."
+        }
+      }
+    },
+    {
+      "name": "memory-frontmatter-valid",
+      "contractId": "memory-frontmatter-v2",
+      "variant": "valid",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-memory-frontmatter-v2",
+        "memoryId": "memory_gatekeeper",
+        "kind": "character",
+        "title": "The gatekeeper",
+        "aliases": [
+          "Old guard"
+        ],
+        "status": "uncertain",
+        "authority": "model_summary",
+        "sourceRange": {
+          "schemaVersion": "grey-crow-source-range-v2",
+          "startTurn": 5,
+          "endTurn": 8
+        },
+        "updatedAt": "2026-07-13T00:00:00Z"
+      }
+    },
+    {
+      "name": "memory-frontmatter-invalid-self-supersede",
+      "contractId": "memory-frontmatter-v2",
+      "variant": "invalid",
+      "expectValid": false,
+      "value": {
+        "schemaVersion": "grey-crow-memory-frontmatter-v2",
+        "memoryId": "memory_old",
+        "kind": "event",
+        "title": "Old account",
+        "aliases": [],
+        "status": "superseded",
+        "authority": "model_summary",
+        "sourceRange": {
+          "schemaVersion": "grey-crow-source-range-v2",
+          "startTurn": 2,
+          "endTurn": 3
+        },
+        "updatedAt": "2026-07-13T00:00:00Z",
+        "supersededBy": "memory_old"
+      }
+    },
+    {
+      "name": "memory-frontmatter-boundary-player-claim",
+      "contractId": "memory-frontmatter-v2",
+      "variant": "boundary",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-memory-frontmatter-v2",
+        "memoryId": "memory_claim",
+        "kind": "thread",
+        "title": "Player claim",
+        "aliases": [],
+        "status": "player_claim",
+        "authority": "player_claim",
+        "sourceRange": {
+          "schemaVersion": "grey-crow-source-range-v2",
+          "startTurn": 1,
+          "endTurn": 1
+        },
+        "updatedAt": "2026-07-13T00:00:00Z"
+      }
+    },
+    {
+      "name": "source-range-valid",
+      "contractId": "source-range-v2",
+      "variant": "valid",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-source-range-v2",
+        "startTurn": 10,
+        "endTurn": 20
+      }
+    },
+    {
+      "name": "source-range-invalid-order",
+      "contractId": "source-range-v2",
+      "variant": "invalid",
+      "expectValid": false,
+      "value": {
+        "schemaVersion": "grey-crow-source-range-v2",
+        "startTurn": 20,
+        "endTurn": 10
+      }
+    },
+    {
+      "name": "source-range-boundary-single-turn",
+      "contractId": "source-range-v2",
+      "variant": "boundary",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-source-range-v2",
+        "startTurn": 1,
+        "endTurn": 1
+      }
+    },
+    {
+      "name": "player-profile-valid",
+      "contractId": "player-profile-v2",
+      "variant": "valid",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-player-profile-v2",
+        "playerProfileId": "player_demo",
+        "preferredLanguage": "zh-CN",
+        "displayName": "Player",
+        "pronouns": "",
+        "narrativePreferences": [
+          "Concise narration"
+        ],
+        "contentBoundaries": [
+          "No graphic torture"
+        ],
+        "notes": "",
+        "updatedAt": "2026-07-13T00:00:00Z"
+      }
+    },
+    {
+      "name": "player-profile-invalid-language",
+      "contractId": "player-profile-v2",
+      "variant": "invalid",
+      "expectValid": false,
+      "value": {
+        "schemaVersion": "grey-crow-player-profile-v2",
+        "playerProfileId": "player_demo",
+        "preferredLanguage": "zh_CN",
+        "displayName": "Player",
+        "pronouns": "",
+        "narrativePreferences": [],
+        "contentBoundaries": [],
+        "notes": "",
+        "updatedAt": "2026-07-13T00:00:00Z"
+      }
+    },
+    {
+      "name": "player-profile-boundary-empty-player-fields",
+      "contractId": "player-profile-v2",
+      "variant": "boundary",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-player-profile-v2",
+        "playerProfileId": "player_min",
+        "preferredLanguage": "en-US",
+        "displayName": "",
+        "pronouns": "",
+        "narrativePreferences": [],
+        "contentBoundaries": [],
+        "notes": "",
+        "updatedAt": "2026-07-13T00:00:00Z"
+      }
+    },
+    {
+      "name": "skill-module-definition-valid-memory-fragments",
+      "contractId": "skill-module-definition-v1",
+      "variant": "valid",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-skill-module-definition-v1",
+        "stateVersion": 1,
+        "visibility": "visible",
+        "summaryFields": ["fragments"],
+        "fields": [
+          {
+            "id": "fragments",
+            "label": "记忆碎片",
+            "type": "record_list",
+            "default": [],
+            "maxItems": 30,
+            "modelWritable": true,
+            "allowedOperations": ["append"],
+            "itemFields": [
+              {
+                "id": "dimension",
+                "label": "维度",
+                "type": "enum",
+                "options": [
+                  { "value": "body", "label": "身体" },
+                  { "value": "emotion", "label": "情感" },
+                  { "value": "skill", "label": "技能" },
+                  { "value": "identity", "label": "身份" }
+                ]
+              },
+              {
+                "id": "content",
+                "label": "片段",
+                "type": "text",
+                "maxLength": 500
+              }
+            ],
+            "display": {
+              "widget": "timeline",
+              "groupCountBy": "dimension",
+              "summary": {
+                "mode": "count_progress",
+                "target": 30,
+                "milestones": [
+                  { "minimum": 0, "label": "空白" },
+                  { "minimum": 6, "label": "萌芽" },
+                  { "minimum": 13, "label": "浮现" },
+                  { "minimum": 25, "label": "逼近" },
+                  { "minimum": 30, "label": "揭示" }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "skill-module-definition-invalid-record-operation",
+      "contractId": "skill-module-definition-v1",
+      "variant": "invalid",
+      "expectValid": false,
+      "value": {
+        "schemaVersion": "grey-crow-skill-module-definition-v1",
+        "stateVersion": 1,
+        "visibility": "visible",
+        "summaryFields": [],
+        "fields": [
+          {
+            "id": "entries",
+            "label": "Entries",
+            "type": "record_list",
+            "default": [],
+            "maxItems": 10,
+            "modelWritable": true,
+            "allowedOperations": ["set"],
+            "itemFields": [
+              { "id": "content", "label": "Content", "type": "text", "maxLength": 120 }
+            ],
+            "display": { "widget": "cards" }
+          }
+        ]
+      }
+    },
+    {
+      "name": "skill-module-definition-boundary-hidden-empty",
+      "contractId": "skill-module-definition-v1",
+      "variant": "boundary",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-skill-module-definition-v1",
+        "stateVersion": 1,
+        "visibility": "hidden_until_active",
+        "summaryFields": [],
+        "fields": []
+      }
+    },
+    {
+      "name": "skill-module-state-valid",
+      "contractId": "skill-module-state-v1",
+      "variant": "valid",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-skill-module-state-v1",
+        "moduleRef": "module_memory_01",
+        "lockedItem": { "packId": "grey-crow-default", "itemId": "memory-fragment" },
+        "definitionHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "stateVersion": 1,
+        "revision": 7,
+        "activated": true,
+        "values": {
+          "fragments": [
+            { "entry_id": "fragment_01", "dimension": "body", "content": "Cold rain on a metal railing." }
+          ]
+        },
+        "createdTurn": 0,
+        "updatedTurn": 18,
+        "createdAt": "2026-07-13T00:00:00Z",
+        "updatedAt": "2026-07-13T00:18:00Z"
+      }
+    },
+    {
+      "name": "skill-module-state-invalid-turn-order",
+      "contractId": "skill-module-state-v1",
+      "variant": "invalid",
+      "expectValid": false,
+      "value": {
+        "schemaVersion": "grey-crow-skill-module-state-v1",
+        "moduleRef": "module_memory_01",
+        "lockedItem": { "packId": "grey-crow-default", "itemId": "memory-fragment" },
+        "definitionHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "stateVersion": 1,
+        "revision": 1,
+        "activated": true,
+        "values": {},
+        "createdTurn": 20,
+        "updatedTurn": 19,
+        "createdAt": "2026-07-13T00:00:00Z",
+        "updatedAt": "2026-07-13T00:19:00Z"
+      }
+    },
+    {
+      "name": "skill-module-state-boundary-empty",
+      "contractId": "skill-module-state-v1",
+      "variant": "boundary",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-skill-module-state-v1",
+        "moduleRef": "module_hidden_01",
+        "lockedItem": { "packId": "grey-crow-default", "itemId": "crow-void" },
+        "definitionHash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "stateVersion": 1,
+        "revision": 0,
+        "activated": false,
+        "values": {},
+        "createdTurn": 0,
+        "updatedTurn": 0,
+        "createdAt": "2026-07-13T00:00:00Z",
+        "updatedAt": "2026-07-13T00:00:00Z"
+      }
+    },
+    {
+      "name": "skill-module-grant-valid-append-only",
+      "contractId": "skill-module-grant-v1",
+      "variant": "valid",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-skill-module-grant-v1",
+        "moduleRef": "module_memory_01",
+        "definitionHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "read": true,
+        "writableFields": [
+          { "fieldId": "fragments", "operations": ["append"] }
+        ],
+        "limitsVersion": 1
+      }
+    },
+    {
+      "name": "skill-module-grant-invalid-duplicate-field",
+      "contractId": "skill-module-grant-v1",
+      "variant": "invalid",
+      "expectValid": false,
+      "value": {
+        "schemaVersion": "grey-crow-skill-module-grant-v1",
+        "moduleRef": "module_memory_01",
+        "definitionHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "read": true,
+        "writableFields": [
+          { "fieldId": "fragments", "operations": ["append"] },
+          { "fieldId": "fragments", "operations": ["clear"] }
+        ],
+        "limitsVersion": 1
+      }
+    },
+    {
+      "name": "skill-module-grant-boundary-read-only",
+      "contractId": "skill-module-grant-v1",
+      "variant": "boundary",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-skill-module-grant-v1",
+        "moduleRef": "module_readonly_01",
+        "definitionHash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "read": true,
+        "writableFields": [],
+        "limitsVersion": 1
+      }
+    },
+    {
+      "name": "skill-module-capability-review-valid",
+      "contractId": "skill-module-capability-review-v1",
+      "variant": "valid",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-skill-module-capability-review-v1",
+        "modules": [
+          {
+            "moduleRef": "module_story_01",
+            "title": "Story State",
+            "required": true,
+            "enabled": true,
+            "writeSummary": "主持人可记录本局故事阶段。"
+          },
+          {
+            "moduleRef": "module_memory_01",
+            "title": "记忆碎片",
+            "required": false,
+            "enabled": false,
+            "writeSummary": "主持人可追加最多 30 条本局记忆碎片。"
+          }
+        ],
+        "limitsSummary": "仅当前故事；总计最多 2 MiB；不能写核心状态或本机文件。",
+        "risk": "local_module_state",
+        "reviewHash": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+      }
+    },
+    {
+      "name": "skill-module-capability-review-invalid-required-disabled",
+      "contractId": "skill-module-capability-review-v1",
+      "variant": "invalid",
+      "expectValid": false,
+      "value": {
+        "schemaVersion": "grey-crow-skill-module-capability-review-v1",
+        "modules": [
+          {
+            "moduleRef": "module_story_01",
+            "title": "Story State",
+            "required": true,
+            "enabled": false,
+            "writeSummary": "主持人可记录本局故事阶段。"
+          }
+        ],
+        "limitsSummary": "仅当前故事。",
+        "risk": "local_module_state",
+        "reviewHash": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+      }
+    },
+    {
+      "name": "skill-module-capability-review-boundary-one-module",
+      "contractId": "skill-module-capability-review-v1",
+      "variant": "boundary",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-skill-module-capability-review-v1",
+        "modules": [
+          {
+            "moduleRef": "module_memory_01",
+            "title": "记忆碎片",
+            "required": false,
+            "enabled": true,
+            "writeSummary": "主持人可追加本局记忆碎片。"
+          }
+        ],
+        "limitsSummary": "仅当前故事。",
+        "risk": "local_module_state",
+        "reviewHash": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+      }
+    },
+    {
+      "name": "skill-panel-presentation-valid",
+      "contractId": "skill-panel-presentation-v1",
+      "variant": "valid",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-skill-panel-presentation-v1",
+        "panels": [
+          {
+            "packId": "grey-crow-default",
+            "packTitle": "Grey Crow Base",
+            "packVersion": "2.1.0",
+            "itemId": "memory-fragment",
+            "title": "记忆碎片",
+            "language": "zh-CN",
+            "description": "在强关联场景中记录本局模糊记忆碎片。",
+            "triggers": ["主动回忆", "强关联场景"],
+            "playerGuide": "碎片代表未经证实的感官回响。",
+            "hasModule": true,
+            "moduleRef": "module_memory_01",
+            "visibility": "visible"
+          },
+          {
+            "packId": "grey-crow-default",
+            "packTitle": "Grey Crow Base",
+            "packVersion": "2.1.0",
+            "itemId": "map",
+            "title": "地图",
+            "language": "zh-CN",
+            "description": "在询问路线时读取已知地点。",
+            "triggers": ["询问路线"],
+            "playerGuide": null,
+            "hasModule": false,
+            "moduleRef": null,
+            "visibility": null
+          }
+        ]
+      }
+    },
+    {
+      "name": "skill-panel-presentation-invalid-module-identity",
+      "contractId": "skill-panel-presentation-v1",
+      "variant": "invalid",
+      "expectValid": false,
+      "value": {
+        "schemaVersion": "grey-crow-skill-panel-presentation-v1",
+        "panels": [
+          {
+            "packId": "grey-crow-default",
+            "packTitle": "Grey Crow Base",
+            "packVersion": "2.1.0",
+            "itemId": "memory-fragment",
+            "title": "记忆碎片",
+            "language": "zh-CN",
+            "description": "在强关联场景中记录本局模糊记忆碎片。",
+            "triggers": [],
+            "playerGuide": null,
+            "hasModule": true,
+            "moduleRef": null,
+            "visibility": null
+          }
+        ]
+      }
+    },
+    {
+      "name": "skill-panel-presentation-boundary-empty",
+      "contractId": "skill-panel-presentation-v1",
+      "variant": "boundary",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-skill-panel-presentation-v1",
+        "panels": []
+      }
+    },
+    {
+      "name": "skill-module-projection-valid",
+      "contractId": "skill-module-projection-v1",
+      "variant": "valid",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-skill-module-projection-v1",
+        "packTitle": "Grey Crow Base",
+        "title": "记忆碎片",
+        "description": "在强关联场景中记录本局模糊记忆碎片。",
+        "triggers": ["主动回忆"],
+        "playerGuide": "碎片代表未经证实的感官回响。",
+        "hasModule": true,
+        "moduleRef": "module_memory_01",
+        "visibility": "visible",
+        "activated": true,
+        "stateVersion": 1,
+        "revision": 7,
+        "summary": [
+          { "fieldId": "fragments", "text": "8/30 · 萌芽" }
+        ],
+        "fields": [
+          {
+            "id": "fragments",
+            "label": "记忆碎片",
+            "type": "record_list",
+          "widget": "timeline",
+          "minimum": null,
+          "maximum": null,
+          "options": [],
+          "itemFields": [
+            {
+              "id": "dimension",
+              "label": "维度",
+              "type": "enum",
+              "options": [
+                { "value": "body", "label": "身体" },
+                { "value": "emotion", "label": "情感" }
+              ]
+            },
+            {
+              "id": "content",
+              "label": "内容",
+              "type": "text",
+              "options": []
+            }
+          ],
+          "value": [
+              { "entry_id": "fragment_01", "dimension": "body", "content": "Cold rain." }
+            ],
+            "derivedSummary": {
+              "count": 8,
+              "target": 30,
+              "milestoneLabel": "萌芽",
+              "groupCounts": [
+                { "value": "body", "label": "身体", "count": 3 },
+                { "value": "emotion", "label": "情感", "count": 5 }
+              ]
+            }
+          }
+        ],
+        "pagination": {
+          "fieldId": "fragments",
+          "nextCursor": null,
+          "hasMore": false,
+          "returnedItems": 1,
+          "totalItems": 1
+        }
+      }
+    },
+    {
+      "name": "skill-module-projection-invalid-stateless-fields",
+      "contractId": "skill-module-projection-v1",
+      "variant": "invalid",
+      "expectValid": false,
+      "value": {
+        "schemaVersion": "grey-crow-skill-module-projection-v1",
+        "packTitle": "Grey Crow Base",
+        "title": "地图",
+        "description": "读取已知路线。",
+        "triggers": [],
+        "playerGuide": null,
+        "hasModule": false,
+        "moduleRef": null,
+        "visibility": null,
+        "activated": false,
+        "stateVersion": null,
+        "revision": null,
+        "summary": [],
+        "fields": [
+          {
+            "id": "fake_state",
+            "label": "Fake",
+            "type": "text",
+            "widget": "text",
+            "value": "not allowed",
+            "derivedSummary": null
+          }
+        ],
+        "pagination": null
+      }
+    },
+    {
+      "name": "skill-module-projection-boundary-stateless",
+      "contractId": "skill-module-projection-v1",
+      "variant": "boundary",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-skill-module-projection-v1",
+        "packTitle": "Grey Crow Base",
+        "title": "地图",
+        "description": "读取已知路线。",
+        "triggers": [],
+        "playerGuide": null,
+        "hasModule": false,
+        "moduleRef": null,
+        "visibility": null,
+        "activated": false,
+        "stateVersion": null,
+        "revision": null,
+        "summary": [],
+        "fields": [],
+        "pagination": null
+      }
+    },
+    {
+      "name": "new-game-preset-valid-optional-skills",
+      "contractId": "new-game-preset-v2",
+      "variant": "valid",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-new-game-preset-v2",
+        "id": "default-preset",
+        "language": "zh-CN",
+        "host": { "packId": "grey-crow-default", "itemId": "grey-crow-host" },
+        "world": { "packId": "grey-crow-default", "itemId": "shanghai-day10" },
+        "newGameSkill": { "packId": "grey-crow-default", "itemId": "new-game-default" },
+        "skills": [
+          { "packId": "grey-crow-default", "itemId": "story-finale" }
+        ],
+        "optionalSkills": [
+          { "packId": "grey-crow-default", "itemId": "memory-fragment", "defaultEnabled": true }
+        ]
+      }
+    },
+    {
+      "name": "new-game-preset-invalid-required-optional-overlap",
+      "contractId": "new-game-preset-v2",
+      "variant": "invalid",
+      "expectValid": false,
+      "value": {
+        "schemaVersion": "grey-crow-new-game-preset-v2",
+        "id": "default-preset",
+        "language": "zh-CN",
+        "host": { "packId": "grey-crow-default", "itemId": "grey-crow-host" },
+        "world": { "packId": "grey-crow-default", "itemId": "shanghai-day10" },
+        "newGameSkill": { "packId": "grey-crow-default", "itemId": "new-game-default" },
+        "skills": [
+          { "packId": "grey-crow-default", "itemId": "memory-fragment" }
+        ],
+        "optionalSkills": [
+          { "packId": "grey-crow-default", "itemId": "memory-fragment", "defaultEnabled": true }
+        ]
+      }
+    },
+    {
+      "name": "new-game-preset-boundary-legacy-shape",
+      "contractId": "new-game-preset-v2",
+      "variant": "boundary",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-new-game-preset-v2",
+        "id": "legacy-preset",
+        "language": "en-US",
+        "host": { "packId": "legacy-pack", "itemId": "legacy-host" },
+        "world": { "packId": "legacy-pack", "itemId": "legacy-world" },
+        "newGameSkill": { "packId": "legacy-pack", "itemId": "legacy-new-game" },
+        "skills": []
+      }
+    },
+    {
+      "name": "story-finale-candidate-valid",
+      "contractId": "story-finale-candidate-v1",
+      "variant": "valid",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-story-finale-candidate-v1",
+        "candidateId": "finale_candidate_001",
+        "proposedTurn": 42,
+        "proposedAt": "2026-07-16T10:00:00.000Z",
+        "fingerprint": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "closureReason": "主要矛盾已经解决，玩家的核心选择形成了明确的情感落点。",
+        "closedThreads": ["找到失踪的同伴", "决定是否接受这座城市"],
+        "intentionalOpenThreads": ["北方城市仍在下雪"],
+        "finaleTone": "克制、安静，并保留一点尚未熄灭的希望"
+      }
+    },
+    {
+      "name": "story-finale-candidate-invalid-thread-overlap",
+      "contractId": "story-finale-candidate-v1",
+      "variant": "invalid",
+      "expectValid": false,
+      "value": {
+        "schemaVersion": "grey-crow-story-finale-candidate-v1",
+        "candidateId": "finale_candidate_002",
+        "proposedTurn": 42,
+        "proposedAt": "2026-07-16T10:00:00.000Z",
+        "fingerprint": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "closureReason": "当前故事似乎已经形成闭合。",
+        "closedThreads": ["未寄出的信"],
+        "intentionalOpenThreads": [" 未寄出的信 "],
+        "finaleTone": "安静"
+      }
+    },
+    {
+      "name": "story-finale-candidate-boundary-minimum",
+      "contractId": "story-finale-candidate-v1",
+      "variant": "boundary",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-story-finale-candidate-v1",
+        "candidateId": "fc1",
+        "proposedTurn": 1,
+        "proposedAt": "2026-07-16T10:00:00Z",
+        "fingerprint": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "closureReason": "终",
+        "closedThreads": ["线"],
+        "intentionalOpenThreads": [],
+        "finaleTone": "静"
+      }
+    },
+    {
+      "name": "story-finale-decision-valid-finish",
+      "contractId": "story-finale-decision-v1",
+      "variant": "valid",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-story-finale-decision-v1",
+        "decisionId": "finale_decision_001",
+        "candidateId": "finale_candidate_001",
+        "kind": "finish",
+        "playerTurn": 43,
+        "decidedAt": "2026-07-16T10:01:00.000Z",
+        "playerTextExcerpt": "就让故事停在这里吧。",
+        "playerTextSha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "interpretationReason": "玩家明确要求让当前故事在这里完结。"
+      }
+    },
+    {
+      "name": "story-finale-decision-invalid-unclear-kind",
+      "contractId": "story-finale-decision-v1",
+      "variant": "invalid",
+      "expectValid": false,
+      "value": {
+        "schemaVersion": "grey-crow-story-finale-decision-v1",
+        "decisionId": "finale_decision_002",
+        "candidateId": "finale_candidate_001",
+        "kind": "unclear",
+        "playerTurn": 43,
+        "decidedAt": "2026-07-16T10:01:00.000Z",
+        "playerTextExcerpt": "也许吧。",
+        "playerTextSha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "interpretationReason": "玩家没有明确决定。"
+      }
+    },
+    {
+      "name": "story-finale-decision-boundary-continue",
+      "contractId": "story-finale-decision-v1",
+      "variant": "boundary",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-story-finale-decision-v1",
+        "decisionId": "fd1",
+        "candidateId": "fc1",
+        "kind": "continue",
+        "playerTurn": 2,
+        "decidedAt": "2026-07-16T10:01:00Z",
+        "playerTextExcerpt": "走",
+        "playerTextSha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+        "interpretationReason": "续"
+      }
+    },
+    {
+      "name": "story-finale-ledger-valid-pending",
+      "contractId": "story-finale-ledger-v1",
+      "variant": "valid",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-story-finale-ledger-v1",
+        "revision": 1,
+        "phase": "candidate_pending",
+        "candidate": {
+          "schemaVersion": "grey-crow-story-finale-candidate-v1",
+          "candidateId": "finale_candidate_001",
+          "proposedTurn": 42,
+          "proposedAt": "2026-07-16T10:00:00.000Z",
+          "fingerprint": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "closureReason": "主要矛盾已经解决。",
+          "closedThreads": ["找到失踪的同伴"],
+          "intentionalOpenThreads": [],
+          "finaleTone": "安静"
+        },
+        "lastDecision": null,
+        "activeTransactionId": null,
+        "declinedFingerprints": [],
+        "closedFinale": null,
+        "createdAt": "2026-07-16T09:00:00.000Z",
+        "updatedAt": "2026-07-16T10:00:00.000Z"
+      }
+    },
+    {
+      "name": "story-finale-ledger-invalid-finalizing-without-decision",
+      "contractId": "story-finale-ledger-v1",
+      "variant": "invalid",
+      "expectValid": false,
+      "value": {
+        "schemaVersion": "grey-crow-story-finale-ledger-v1",
+        "revision": 2,
+        "phase": "finalizing",
+        "candidate": {
+          "schemaVersion": "grey-crow-story-finale-candidate-v1",
+          "candidateId": "finale_candidate_001",
+          "proposedTurn": 42,
+          "proposedAt": "2026-07-16T10:00:00.000Z",
+          "fingerprint": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "closureReason": "主要矛盾已经解决。",
+          "closedThreads": ["找到失踪的同伴"],
+          "intentionalOpenThreads": [],
+          "finaleTone": "安静"
+        },
+        "lastDecision": null,
+        "activeTransactionId": null,
+        "declinedFingerprints": [],
+        "closedFinale": null,
+        "createdAt": "2026-07-16T09:00:00.000Z",
+        "updatedAt": "2026-07-16T10:02:00.000Z"
+      }
+    },
+    {
+      "name": "story-finale-ledger-boundary-idle-after-continue",
+      "contractId": "story-finale-ledger-v1",
+      "variant": "boundary",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-story-finale-ledger-v1",
+        "revision": 2,
+        "phase": "idle",
+        "candidate": null,
+        "lastDecision": {
+          "schemaVersion": "grey-crow-story-finale-decision-v1",
+          "decisionId": "fd1",
+          "candidateId": "fc1",
+          "kind": "continue",
+          "playerTurn": 2,
+          "decidedAt": "2026-07-16T10:01:00Z",
+          "playerTextExcerpt": "走",
+          "playerTextSha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+          "interpretationReason": "续"
+        },
+        "activeTransactionId": null,
+        "declinedFingerprints": ["cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"],
+        "closedFinale": null,
+        "createdAt": "2026-07-16T09:00:00Z",
+        "updatedAt": "2026-07-16T10:01:00Z"
+      }
+    },
+    {
+      "name": "story-finale-projection-valid-pending",
+      "contractId": "story-finale-projection-v1",
+      "variant": "valid",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-story-finale-projection-v1",
+        "revision": 1,
+        "phase": "candidate_pending",
+        "mode": "pending",
+        "inputAllowed": true,
+        "candidate": {
+          "candidateId": "finale_candidate_001",
+          "proposedTurn": 42,
+          "proposedAt": "2026-07-16T10:00:00.000Z",
+          "closureReason": "主要矛盾已经解决。",
+          "finaleTone": "安静"
+        },
+        "closedFinale": null,
+        "engineNotice": null,
+        "actions": { "exportStory": false, "continueAsChild": false }
+      }
+    },
+    {
+      "name": "story-finale-projection-invalid-closed-without-archive",
+      "contractId": "story-finale-projection-v1",
+      "variant": "invalid",
+      "expectValid": false,
+      "value": {
+        "schemaVersion": "grey-crow-story-finale-projection-v1",
+        "revision": 4,
+        "phase": "closed",
+        "mode": "active",
+        "inputAllowed": true,
+        "candidate": null,
+        "closedFinale": null,
+        "engineNotice": null,
+        "actions": { "exportStory": true, "continueAsChild": true }
+      }
+    },
+    {
+      "name": "story-finale-projection-boundary-idle",
+      "contractId": "story-finale-projection-v1",
+      "variant": "boundary",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-story-finale-projection-v1",
+        "revision": 0,
+        "phase": "idle",
+        "mode": "active",
+        "inputAllowed": true,
+        "candidate": null,
+        "closedFinale": null,
+        "engineNotice": null,
+        "actions": { "exportStory": false, "continueAsChild": false }
+      }
+    },
+    {
+      "name": "story-finale-transaction-valid-ledger-committed",
+      "contractId": "story-finale-transaction-v1",
+      "variant": "valid",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-story-finale-transaction-v1",
+        "operationId": "finale_operation_001",
+        "candidateId": "finale_candidate_001",
+        "decisionId": "finale_decision_001",
+        "phase": "ledger_committed",
+        "expectedAdventureState": "active",
+        "sourcePlayerTurn": 43,
+        "artifacts": {
+          "transcriptTurnId": "turn_000000044",
+          "chapterId": "chapter-000012",
+          "finaleId": "finale_001"
+        },
+        "errorCode": null,
+        "startedAt": "2026-07-16T10:02:00.000Z",
+        "updatedAt": "2026-07-16T10:03:00.000Z"
+      }
+    },
+    {
+      "name": "story-finale-transaction-invalid-staged-artifact",
+      "contractId": "story-finale-transaction-v1",
+      "variant": "invalid",
+      "expectValid": false,
+      "value": {
+        "schemaVersion": "grey-crow-story-finale-transaction-v1",
+        "operationId": "finale_operation_002",
+        "candidateId": "finale_candidate_001",
+        "decisionId": "finale_decision_001",
+        "phase": "staged",
+        "expectedAdventureState": "active",
+        "sourcePlayerTurn": 43,
+        "artifacts": {
+          "transcriptTurnId": "turn_000000044",
+          "chapterId": null,
+          "finaleId": null
+        },
+        "errorCode": null,
+        "startedAt": "2026-07-16T10:02:00.000Z",
+        "updatedAt": "2026-07-16T10:02:00.000Z"
+      }
+    },
+    {
+      "name": "story-finale-transaction-boundary-recovery",
+      "contractId": "story-finale-transaction-v1",
+      "variant": "boundary",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-story-finale-transaction-v1",
+        "operationId": "fo1",
+        "candidateId": "fc1",
+        "decisionId": "fd1",
+        "phase": "recovery_required",
+        "expectedAdventureState": "active",
+        "sourcePlayerTurn": 2,
+        "artifacts": {
+          "transcriptTurnId": null,
+          "chapterId": null,
+          "finaleId": null
+        },
+        "errorCode": "IO_FAILURE",
+        "startedAt": "2026-07-16T10:02:00Z",
+        "updatedAt": "2026-07-16T10:02:00Z"
+      }
+    },
+    {
+      "name": "story-finale-transaction-boundary-easter",
+      "contractId": "story-finale-transaction-v1",
+      "variant": "boundary",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-story-finale-transaction-v1",
+        "operationId": "finale_operation_easter_001",
+        "candidateId": "finale_candidate_easter_001",
+        "decisionId": "finale_decision_easter_001",
+        "phase": "staged",
+        "expectedAdventureState": "active",
+        "sourcePlayerTurn": 4,
+        "finaleSource": "easter",
+        "sourceOperationId": "easter_finale_operation_001",
+        "continuationPolicy": "forbidden",
+        "artifacts": {
+          "transcriptTurnId": null,
+          "chapterId": null,
+          "finaleId": null
+        },
+        "errorCode": null,
+        "startedAt": "2026-07-17T10:00:00Z",
+        "updatedAt": "2026-07-17T10:00:00Z"
+      }
+    },
+    {
+      "name": "adventure-lineage-valid-continuation",
+      "contractId": "adventure-lineage-v1",
+      "variant": "valid",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-adventure-lineage-v1",
+        "lineageId": "lineage_001",
+        "mode": "post_finale_continuation",
+        "copyMode": "independent_canonical_copy",
+        "parentAdventureId": "adventure_parent_001",
+        "childAdventureId": "adventure_child_001",
+        "sourceFinaleId": "finale_001",
+        "forkTurn": 44,
+        "parentContentHash": "1111111111111111111111111111111111111111111111111111111111111111",
+        "createdAt": "2026-07-16T11:00:00.000Z"
+      }
+    },
+    {
+      "name": "adventure-lineage-invalid-self-parent",
+      "contractId": "adventure-lineage-v1",
+      "variant": "invalid",
+      "expectValid": false,
+      "value": {
+        "schemaVersion": "grey-crow-adventure-lineage-v1",
+        "lineageId": "lineage_002",
+        "mode": "post_finale_continuation",
+        "copyMode": "independent_canonical_copy",
+        "parentAdventureId": "adventure_same_001",
+        "childAdventureId": "adventure_same_001",
+        "sourceFinaleId": "finale_002",
+        "forkTurn": 44,
+        "parentContentHash": "2222222222222222222222222222222222222222222222222222222222222222",
+        "createdAt": "2026-07-16T11:00:00.000Z"
+      }
+    },
+    {
+      "name": "adventure-lineage-boundary-first-turn",
+      "contractId": "adventure-lineage-v1",
+      "variant": "boundary",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-adventure-lineage-v1",
+        "lineageId": "ln1",
+        "mode": "post_finale_continuation",
+        "copyMode": "independent_canonical_copy",
+        "parentAdventureId": "parent_001",
+        "childAdventureId": "child_001",
+        "sourceFinaleId": "fn1",
+        "forkTurn": 1,
+        "parentContentHash": "3333333333333333333333333333333333333333333333333333333333333333",
+        "createdAt": "2026-07-16T11:00:00Z"
+      }
+    },
+    {
+      "name": "extreme-ending-easter-candidate-valid-fictional",
+      "contractId": "extreme-ending-easter-candidate-v1",
+      "variant": "valid",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-extreme-ending-easter-candidate-v1",
+        "candidateId": "easter_candidate_001",
+        "proposedTurn": 50,
+        "proposedAt": "2026-07-17T10:00:00.000Z",
+        "fingerprint": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "fictionBoundary": "explicit_in_game_character",
+        "intentSummary": "玩家明确限定为当前游戏角色的不可逆极端选择。",
+        "sceneAnchor": "废弃车站月台",
+        "skillIdentityHash": "361cde4f06c31e7ec71ecf41cf59fe127f1ef7623df289aef0a31317051510c7"
+      }
+    },
+    {
+      "name": "extreme-ending-easter-candidate-invalid-reality-boundary",
+      "contractId": "extreme-ending-easter-candidate-v1",
+      "variant": "invalid",
+      "expectValid": false,
+      "value": {
+        "schemaVersion": "grey-crow-extreme-ending-easter-candidate-v1",
+        "candidateId": "easter_candidate_002",
+        "proposedTurn": 50,
+        "proposedAt": "2026-07-17T10:00:00.000Z",
+        "fingerprint": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "fictionBoundary": "ambiguous_reality",
+        "intentSummary": "边界不清楚。",
+        "sceneAnchor": "未知",
+        "skillIdentityHash": "361cde4f06c31e7ec71ecf41cf59fe127f1ef7623df289aef0a31317051510c7"
+      }
+    },
+    {
+      "name": "extreme-ending-easter-candidate-boundary-first-turn",
+      "contractId": "extreme-ending-easter-candidate-v1",
+      "variant": "boundary",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-extreme-ending-easter-candidate-v1",
+        "candidateId": "ec1",
+        "proposedTurn": 1,
+        "proposedAt": "2026-07-17T10:00:00Z",
+        "fingerprint": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "fictionBoundary": "explicit_in_game_character",
+        "intentSummary": "角色选择。",
+        "sceneAnchor": "雨夜",
+        "skillIdentityHash": "361cde4f06c31e7ec71ecf41cf59fe127f1ef7623df289aef0a31317051510c7"
+      }
+    },
+    {
+      "name": "extreme-ending-easter-confirmation-valid-second",
+      "contractId": "extreme-ending-easter-confirmation-v1",
+      "variant": "valid",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-extreme-ending-easter-confirmation-v1",
+        "confirmationId": "easter_confirmation_002",
+        "candidateId": "easter_candidate_001",
+        "stage": 2,
+        "playerTurn": 52,
+        "confirmedAt": "2026-07-17T10:02:00.000Z",
+        "playerTextExcerpt": "这是游戏里的角色选择，我确认继续。",
+        "playerTextSha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "interpretationReason": "玩家明确确认当前虚构角色继续。"
+      }
+    },
+    {
+      "name": "extreme-ending-easter-confirmation-invalid-fourth-stage",
+      "contractId": "extreme-ending-easter-confirmation-v1",
+      "variant": "invalid",
+      "expectValid": false,
+      "value": {
+        "schemaVersion": "grey-crow-extreme-ending-easter-confirmation-v1",
+        "confirmationId": "easter_confirmation_004",
+        "candidateId": "easter_candidate_001",
+        "stage": 4,
+        "playerTurn": 54,
+        "confirmedAt": "2026-07-17T10:04:00.000Z",
+        "playerTextExcerpt": "继续。",
+        "playerTextSha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "interpretationReason": "非法第四次确认。"
+      }
+    },
+    {
+      "name": "extreme-ending-easter-confirmation-boundary-short-text",
+      "contractId": "extreme-ending-easter-confirmation-v1",
+      "variant": "boundary",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-extreme-ending-easter-confirmation-v1",
+        "confirmationId": "xcf1",
+        "candidateId": "exc1",
+        "stage": 1,
+        "playerTurn": 2,
+        "confirmedAt": "2026-07-17T10:01:00Z",
+        "playerTextExcerpt": "是",
+        "playerTextSha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+        "interpretationReason": "明"
+      }
+    },
+    {
+      "name": "extreme-ending-easter-receipt-valid-grey-crow",
+      "contractId": "extreme-ending-easter-receipt-v1",
+      "variant": "valid",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-extreme-ending-easter-receipt-v1",
+        "receiptId": "easter_receipt_001",
+        "operationId": "easter_operation_001",
+        "candidateId": "easter_candidate_001",
+        "policyVersion": "grey-crow-easter-outcome-policy-v1",
+        "policyHash": "31cc3ceadf67d763f85e36e0d842ed3dd54d0a2d44a231879457395096807449",
+        "chanceBasisPoints": 4440,
+        "drawBasisPoints": 4439,
+        "outcome": "grey_crow_view",
+        "decidedAt": "2026-07-17T10:03:00.000Z"
+      }
+    },
+    {
+      "name": "extreme-ending-easter-receipt-invalid-mismatched-outcome",
+      "contractId": "extreme-ending-easter-receipt-v1",
+      "variant": "invalid",
+      "expectValid": false,
+      "value": {
+        "schemaVersion": "grey-crow-extreme-ending-easter-receipt-v1",
+        "receiptId": "easter_receipt_002",
+        "operationId": "easter_operation_002",
+        "candidateId": "easter_candidate_002",
+        "policyVersion": "grey-crow-easter-outcome-policy-v1",
+        "policyHash": "31cc3ceadf67d763f85e36e0d842ed3dd54d0a2d44a231879457395096807449",
+        "chanceBasisPoints": 4440,
+        "drawBasisPoints": 9000,
+        "outcome": "grey_crow_view",
+        "decidedAt": "2026-07-17T10:03:00.000Z"
+      }
+    },
+    {
+      "name": "extreme-ending-easter-receipt-boundary-first-miss",
+      "contractId": "extreme-ending-easter-receipt-v1",
+      "variant": "boundary",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-extreme-ending-easter-receipt-v1",
+        "receiptId": "er1",
+        "operationId": "eo1",
+        "candidateId": "ec1",
+        "policyVersion": "grey-crow-easter-outcome-policy-v1",
+        "policyHash": "31cc3ceadf67d763f85e36e0d842ed3dd54d0a2d44a231879457395096807449",
+        "chanceBasisPoints": 4440,
+        "drawBasisPoints": 4440,
+        "outcome": "standard_extreme_ending",
+        "decidedAt": "2026-07-17T10:03:00Z"
+      }
+    },
+    {
+      "name": "extreme-ending-easter-ledger-valid-first-confirmation-pending",
+      "contractId": "extreme-ending-easter-ledger-v1",
+      "variant": "valid",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-extreme-ending-easter-ledger-v1",
+        "adventureId": "easter_adventure_001",
+        "revision": 1,
+        "phase": "confirmation_1_pending",
+        "skillIdentity": {
+          "schemaVersion": "grey-crow-easter-skill-identity-v1",
+          "ownership": "built_in",
+          "packId": "grey-crow-default",
+          "itemId": "extreme-ending-easter",
+          "moduleRef": "module_extreme_ending_easter_001",
+          "contentHash": "1111111111111111111111111111111111111111111111111111111111111111"
+        },
+        "candidate": {
+          "schemaVersion": "grey-crow-extreme-ending-easter-candidate-v1",
+          "candidateId": "easter_candidate_001",
+          "proposedTurn": 50,
+          "proposedAt": "2026-07-17T10:00:00.000Z",
+          "fingerprint": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "fictionBoundary": "explicit_in_game_character",
+          "intentSummary": "玩家明确限定为当前游戏角色的不可逆极端选择。",
+          "sceneAnchor": "废弃车站月台",
+          "skillIdentityHash": "361cde4f06c31e7ec71ecf41cf59fe127f1ef7623df289aef0a31317051510c7"
+        },
+        "confirmations": [],
+        "terminalOperationId": null,
+        "outcomeReceipt": null,
+        "finaleOperationId": null,
+        "closedFinale": null,
+        "continuationPolicy": "forbidden",
+        "createdAt": "2026-07-17T09:00:00.000Z",
+        "updatedAt": "2026-07-17T10:00:00.000Z"
+      }
+    },
+    {
+      "name": "extreme-ending-easter-ledger-invalid-terminal-without-receipt",
+      "contractId": "extreme-ending-easter-ledger-v1",
+      "variant": "invalid",
+      "expectValid": false,
+      "value": {
+        "schemaVersion": "grey-crow-extreme-ending-easter-ledger-v1",
+        "adventureId": "easter_adventure_002",
+        "revision": 4,
+        "phase": "terminal_committed",
+        "skillIdentity": {
+          "schemaVersion": "grey-crow-easter-skill-identity-v1",
+          "ownership": "built_in",
+          "packId": "grey-crow-default",
+          "itemId": "extreme-ending-easter",
+          "moduleRef": "module_extreme_ending_easter_001",
+          "contentHash": "1111111111111111111111111111111111111111111111111111111111111111"
+        },
+        "candidate": null,
+        "confirmations": [],
+        "terminalOperationId": "easter_operation_001",
+        "outcomeReceipt": null,
+        "finaleOperationId": null,
+        "closedFinale": null,
+        "continuationPolicy": "forbidden",
+        "createdAt": "2026-07-17T09:00:00.000Z",
+        "updatedAt": "2026-07-17T10:03:00.000Z"
+      }
+    },
+    {
+      "name": "extreme-ending-easter-ledger-boundary-idle",
+      "contractId": "extreme-ending-easter-ledger-v1",
+      "variant": "boundary",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-extreme-ending-easter-ledger-v1",
+        "adventureId": "ea1",
+        "revision": 0,
+        "phase": "idle",
+        "skillIdentity": {
+          "schemaVersion": "grey-crow-easter-skill-identity-v1",
+          "ownership": "built_in",
+          "packId": "grey-crow-default",
+          "itemId": "extreme-ending-easter",
+          "moduleRef": "mod1",
+          "contentHash": "1111111111111111111111111111111111111111111111111111111111111111"
+        },
+        "candidate": null,
+        "confirmations": [],
+        "terminalOperationId": null,
+        "outcomeReceipt": null,
+        "finaleOperationId": null,
+        "closedFinale": null,
+        "continuationPolicy": "forbidden",
+        "createdAt": "2026-07-17T09:00:00Z",
+        "updatedAt": "2026-07-17T09:00:00Z"
+      }
+    },
+    {
+      "name": "extreme-ending-easter-projection-valid-confirming",
+      "contractId": "extreme-ending-easter-projection-v1",
+      "variant": "valid",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-extreme-ending-easter-projection-v1",
+        "revision": 2,
+        "phase": "confirming",
+        "mode": "confirming",
+        "inputAllowed": true,
+        "awaitingPlayerResponse": true,
+        "easterDiscovered": false,
+        "engineNotice": null,
+        "actions": { "exportStory": false, "continueAsChild": false }
+      }
+    },
+    {
+      "name": "extreme-ending-easter-projection-invalid-terminal-input",
+      "contractId": "extreme-ending-easter-projection-v1",
+      "variant": "invalid",
+      "expectValid": false,
+      "value": {
+        "schemaVersion": "grey-crow-extreme-ending-easter-projection-v1",
+        "revision": 4,
+        "phase": "terminal_committed",
+        "mode": "terminalizing",
+        "inputAllowed": true,
+        "awaitingPlayerResponse": false,
+        "easterDiscovered": true,
+        "engineNotice": "特殊结局正在生成并安全保存。",
+        "actions": { "exportStory": false, "continueAsChild": false }
+      }
+    },
+    {
+      "name": "extreme-ending-easter-projection-boundary-idle",
+      "contractId": "extreme-ending-easter-projection-v1",
+      "variant": "boundary",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-extreme-ending-easter-projection-v1",
+        "revision": 0,
+        "phase": "idle",
+        "mode": "active",
+        "inputAllowed": true,
+        "awaitingPlayerResponse": false,
+        "easterDiscovered": false,
+        "engineNotice": null,
+        "actions": { "exportStory": false, "continueAsChild": false }
+      }
+    },
+    {
+      "name": "skill-localization-bundle-valid-english",
+      "contractId": "skill-localization-bundle-v1",
+      "variant": "valid",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-skill-localization-bundle-v1",
+        "itemId": "memory-fragments",
+        "sourceLocale": "zh-CN",
+        "locales": [
+          {
+            "locale": "en-US",
+            "title": "Memory Fragments",
+            "description": "Collect and reconstruct fragments when memories surface.",
+            "triggers": ["recall", "touch a familiar object"],
+            "playerGuide": "Recovered fragments remain visible in the Skill panel.",
+            "skillPath": "skills/memory-fragments/locales/en-US/SKILL.md",
+            "templates": [],
+            "modulePresentationPath": "skills/memory-fragments/locales/en-US/module-presentation.json"
+          }
+        ]
+      }
+    },
+    {
+      "name": "skill-localization-bundle-invalid-source-duplicate",
+      "contractId": "skill-localization-bundle-v1",
+      "variant": "invalid",
+      "expectValid": false,
+      "value": {
+        "schemaVersion": "grey-crow-skill-localization-bundle-v1",
+        "itemId": "memory-fragments",
+        "sourceLocale": "zh-CN",
+        "locales": [
+          {
+            "locale": "zh-CN",
+            "title": "记忆碎片",
+            "description": "在记忆浮现时收集并重构散落的记忆碎片。",
+            "triggers": ["回忆"],
+            "playerGuide": null,
+            "skillPath": "skills/memory-fragments/locales/zh-CN/SKILL.md",
+            "templates": [],
+            "modulePresentationPath": null
+          }
+        ]
+      }
+    },
+    {
+      "name": "skill-localization-bundle-boundary-one-template",
+      "contractId": "skill-localization-bundle-v1",
+      "variant": "boundary",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-skill-localization-bundle-v1",
+        "itemId": "weather-sense",
+        "sourceLocale": "en-US",
+        "locales": [
+          {
+            "locale": "zh-CN",
+            "title": "天气感知",
+            "description": "在环境变化时记录天气，并向玩家呈现天气状态。",
+            "triggers": [],
+            "playerGuide": null,
+            "skillPath": "skills/weather-sense/locales/zh-CN/SKILL.md",
+            "templates": [
+              {
+                "templateId": "template:weather-summary",
+                "path": "skills/weather-sense/locales/zh-CN/templates/weather-summary.md"
+              }
+            ],
+            "modulePresentationPath": null
+          }
+        ]
+      }
+    },
+    {
+      "name": "skill-module-presentation-overlay-valid-field",
+      "contractId": "skill-module-presentation-overlay-v1",
+      "variant": "valid",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-skill-module-presentation-overlay-v1",
+        "itemId": "memory-fragments",
+        "locale": "en-US",
+        "fields": [
+          {
+            "fieldId": "progress",
+            "label": "Recovery progress",
+            "options": [],
+            "itemFields": [],
+            "milestones": [
+              { "minimum": 30, "label": "Memory keeper" }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "skill-module-presentation-overlay-invalid-duplicate-field",
+      "contractId": "skill-module-presentation-overlay-v1",
+      "variant": "invalid",
+      "expectValid": false,
+      "value": {
+        "schemaVersion": "grey-crow-skill-module-presentation-overlay-v1",
+        "itemId": "memory-fragments",
+        "locale": "en-US",
+        "fields": [
+          { "fieldId": "progress", "label": "Progress", "options": [], "itemFields": [], "milestones": [] },
+          { "fieldId": "progress", "label": "Recovery", "options": [], "itemFields": [], "milestones": [] }
+        ]
+      }
+    },
+    {
+      "name": "skill-module-presentation-overlay-boundary-hidden",
+      "contractId": "skill-module-presentation-overlay-v1",
+      "variant": "boundary",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-skill-module-presentation-overlay-v1",
+        "itemId": "hidden-finale",
+        "locale": "zh-CN",
+        "fields": []
+      }
+    },
+    {
+      "name": "skill-localization-lock-valid-two-locales",
+      "contractId": "skill-localization-lock-v1",
+      "variant": "valid",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-skill-localization-lock-v1",
+        "skills": [
+          {
+            "packId": "grey-crow-default",
+            "packVersion": "2.2.0",
+            "itemId": "memory-fragments",
+            "ownership": "built_in",
+            "skillClass": "ordinary",
+            "danger": "low",
+            "sourceLocale": "zh-CN",
+            "locales": [
+              {
+                "locale": "zh-CN",
+                "title": "记忆碎片",
+                "description": "在记忆浮现时收集并重构散落的记忆碎片。",
+                "triggers": ["回忆"],
+                "playerGuide": null,
+                "body": { "relativePath": "skills/memory-fragments/SKILL.md", "sha256": "1111111111111111111111111111111111111111111111111111111111111111" },
+                "templates": [],
+                "modulePresentation": null
+              },
+              {
+                "locale": "en-US",
+                "title": "Memory Fragments",
+                "description": "Collect and reconstruct fragments when memories surface.",
+                "triggers": ["recall"],
+                "playerGuide": null,
+                "body": { "relativePath": "skills/memory-fragments/locales/en-US/SKILL.md", "sha256": "2222222222222222222222222222222222222222222222222222222222222222" },
+                "templates": [],
+                "modulePresentation": null
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "skill-localization-lock-invalid-source-missing",
+      "contractId": "skill-localization-lock-v1",
+      "variant": "invalid",
+      "expectValid": false,
+      "value": {
+        "schemaVersion": "grey-crow-skill-localization-lock-v1",
+        "skills": [
+          {
+            "packId": "grey-crow-default",
+            "packVersion": "2.2.0",
+            "itemId": "memory-fragments",
+            "ownership": "built_in",
+            "skillClass": "ordinary",
+            "danger": "low",
+            "sourceLocale": "zh-CN",
+            "locales": [
+              {
+                "locale": "en-US",
+                "title": "Memory Fragments",
+                "description": "Collect and reconstruct fragments when memories surface.",
+                "triggers": [],
+                "playerGuide": null,
+                "body": { "relativePath": "skills/memory-fragments/locales/en-US/SKILL.md", "sha256": "2222222222222222222222222222222222222222222222222222222222222222" },
+                "templates": [],
+                "modulePresentation": null
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "skill-localization-lock-boundary-source-only",
+      "contractId": "skill-localization-lock-v1",
+      "variant": "boundary",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-skill-localization-lock-v1",
+        "skills": [
+          {
+            "packId": "grey-crow-default",
+            "packVersion": "1.0.0",
+            "itemId": "new-game-default",
+            "ownership": "imported_readonly",
+            "skillClass": "new_game",
+            "danger": "low",
+            "sourceLocale": "zh-CN",
+            "locales": [
+              {
+                "locale": "zh-CN",
+                "title": "新游戏",
+                "description": "创建新故事并初始化玩家所选择的开局内容。",
+                "triggers": ["ui_start_new_game"],
+                "playerGuide": null,
+                "body": { "relativePath": "new-game-skill/SKILL.md", "sha256": "3333333333333333333333333333333333333333333333333333333333333333" },
+                "templates": [],
+                "modulePresentation": null
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "skill-locale-coverage-valid-ready",
+      "contractId": "skill-locale-coverage-v1",
+      "variant": "valid",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-skill-locale-coverage-v1",
+        "requestedLocale": "en-US",
+        "localeRevision": "locale_revision_1",
+        "status": "ready",
+        "readySkillIds": ["memory-fragments"],
+        "blockers": []
+      }
+    },
+    {
+      "name": "skill-locale-coverage-invalid-ready-with-blocker",
+      "contractId": "skill-locale-coverage-v1",
+      "variant": "invalid",
+      "expectValid": false,
+      "value": {
+        "schemaVersion": "grey-crow-skill-locale-coverage-v1",
+        "requestedLocale": "en-US",
+        "localeRevision": "locale_revision_2",
+        "status": "ready",
+        "readySkillIds": [],
+        "blockers": [
+          {
+            "packId": "grey-crow-default",
+            "itemId": "memory-fragments",
+            "ownership": "built_in",
+            "reason": "missing_locale",
+            "sourceLocale": "zh-CN",
+            "availableLocales": ["zh-CN"]
+          }
+        ]
+      }
+    },
+    {
+      "name": "skill-locale-coverage-boundary-source-only",
+      "contractId": "skill-locale-coverage-v1",
+      "variant": "boundary",
+      "expectValid": true,
+      "value": {
+        "schemaVersion": "grey-crow-skill-locale-coverage-v1",
+        "requestedLocale": "en-US",
+        "localeRevision": "locale_revision_3",
+        "status": "blocked",
+        "readySkillIds": [],
+        "blockers": [
+          {
+            "packId": "legacy-pack",
+            "itemId": "legacy-skill",
+            "ownership": "imported_readonly",
+            "reason": "source_only_snapshot",
+            "sourceLocale": "zh-CN",
+            "availableLocales": ["zh-CN"]
+          }
+        ]
+      }
+    }
+  ]
+}

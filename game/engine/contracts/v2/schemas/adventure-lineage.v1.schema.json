@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://greycrow.local/schemas/p2-25/adventure-lineage.v1.schema.json",
+  "title": "Grey Crow independent continuation lineage v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "lineageId",
+    "mode",
+    "copyMode",
+    "parentAdventureId",
+    "childAdventureId",
+    "sourceFinaleId",
+    "forkTurn",
+    "parentContentHash",
+    "createdAt"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "grey-crow-adventure-lineage-v1" },
+    "lineageId": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/stableRef"
+    },
+    "mode": { "const": "post_finale_continuation" },
+    "copyMode": { "const": "independent_canonical_copy" },
+    "parentAdventureId": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/stableRef"
+    },
+    "childAdventureId": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/stableRef"
+    },
+    "sourceFinaleId": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/stableRef"
+    },
+    "forkTurn": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "parentContentHash": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/sha256"
+    },
+    "createdAt": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/timestamp"
+    }
+  }
+}

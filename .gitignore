@@ -1,0 +1,80 @@
+.env
+.env.*
+!.env.example
+
+# Local secrets and machine-only test credentials
+game/测试用key.rtf
+*测试用key*
+
+# OS and editor metadata
+.DS_Store
+**/.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Runtime logs and temporary files
+*.log
+*.tmp
+*.temp
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Installed dependencies and generated desktop packages
+node_modules/
+game/apps/desktop/electron/node_modules/
+game/apps/desktop/electron/dist/
+game/apps/desktop/electron/out/
+game/apps/desktop/electron/release/
+game/apps/desktop/electron/backups/
+playtest-builds/
+test-builds/
+game/vendor/tts/kokoro-v1.1-zh-int8/
+*.app/
+*.dmg
+*.exe
+*.msi
+*.asar
+*-unpacked/
+
+# Test coverage and caches
+coverage/
+.cache/
+game/apps/desktop/electron/speech-input/.runtime/
+game/apps/desktop/electron/speech-input/.runtime-build/
+game/apps/desktop/electron/speech-input/.model/
+
+# Local-only visual, marketing, and pet experiments
+# Preserved outside this repository; do not restore wholesale into mainline.
+/art-lab/
+/steam-store-page/
+/b0648ce4-b3a9-4dc7-a831-be80b0e73527.png
+game/apps/desktop/electron/build-identity.json
+
+# Workstation-only labs, research, personal tooling, and local evidence.
+/experiments/
+/tts-lab/
+/.codex/
+/game/art-candidates/
+/output/
+/game/apps/desktop/electron/speech-input/native/evidence/
+
+# Generated speech resources and Python caches; production scripts stay tracked.
+/game/vendor/tts/.runtime/
+/game/vendor/tts/models/
+/game/vendor/tts/outputs/
+/game/vendor/tts/results/
+__pycache__/
+*.pyc
+
+# Unused production-era artwork is kept locally, outside source and packages.
+/game/apps/desktop/electron/renderer/assets/start_page_bg.jpg
+/game/apps/desktop/electron/renderer/assets/the_grey_crow_logo.png
+/game/apps/desktop/electron/renderer/assets/branding/grey-crow-ai-logo.png
+/game/apps/desktop/electron/renderer/assets/ui/input-bar-bg-aged-paper-square-02.png
+/game/apps/desktop/electron/renderer/assets/ui/icons/icon-backpack-01.png
+/game/apps/desktop/electron/renderer/assets/ui/icons/icon-location-index-01.png
+/game/apps/desktop/electron/renderer/assets/ui/icons/icon-observe-eye-01.png
+/game/apps/desktop/electron/renderer/assets/ui/icons/icon-settings-gear-01.png

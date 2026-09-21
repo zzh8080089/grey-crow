@@ -1,0 +1,117 @@
+name: Windows TTS playtest build
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-windows-tts-playtest:
+    runs-on: windows-latest
+    timeout-minutes: 120
+    env:
+      DESKTOP_ROOT: game/apps/desktop/electron
+      PLAYTEST_DIR: playtest-builds
+      PLAYTEST_ZIP: Grey-Crow-Windows-x64-TTS-playtest.zip
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v5
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22.22.1
+          cache: npm
+          cache-dependency-path: game/apps/desktop/electron/package-lock.json
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          architecture: x64
+
+      - name: Configure Windows staging path
+        shell: pwsh
+        run: '"TTS_STAGE_ROOT=$env:RUNNER_TEMP\grey-crow-kokoro-windows-x64" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8'
+
+      - name: Install desktop dependencies
+        working-directory: game/apps/desktop/electron
+        run: npm ci
+
+      - name: Run desktop source gates
+        working-directory: game/apps/desktop/electron
+        run: npm run check
+
+      - name: Build and offline-smoke Windows Kokoro runtime
+        shell: pwsh
+        run: >-
+          & .\game\vendor\tts\scripts\stage-kokoro-original-windows.ps1
+          -StageRoot "$env:TTS_STAGE_ROOT"
+
+      - name: Run real Windows provider smoke
+        working-directory: game/apps/desktop/electron
+        env:
+          GREY_CROW_KOKORO_ORIGINAL_RUNTIME_ROOT: ${{ env.TTS_STAGE_ROOT }}
+        run: npm run smoke:tts-original-runtime
+
+      - name: Build Windows x64 game directory
+        working-directory: game/apps/desktop/electron
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: "false"
+        run: npx electron-builder --dir --win --x64 --config.win.target=dir
+
+      - name: Attach Windows TTS runtime and playtest notes
+        shell: pwsh
+        run: |
+          $PackageRoot = Join-Path $env:DESKTOP_ROOT "dist\win-unpacked"
+          $Destination = Join-Path $PackageRoot "resources\tts\kokoro-original-zh"
+          New-Item -ItemType Directory -Force -Path $Destination | Out-Null
+          Copy-Item (Join-Path $env:TTS_STAGE_ROOT "*") $Destination -Recurse -Force
+          $Notes = @'
+          Grey Crow / 灰鸦 AI - Windows x64 TTS 内部试玩包
+
+          1. 解压整个目录，不要只复制 Grey Crow.exe。
+          2. 双击 Grey Crow.exe；未签名版本可能触发 SmartScreen。
+          3. 在设置中启用 Kokoro 本地中文语音并选择音色。
+          4. 首次朗读需要加载约 1 GB 本地运行时，可能等待数秒。
+          5. API Key 不包含在包内，只能在游戏设置中由测试者填写。
+
+          这是内部测试包，不是签名安装器或 Steam Release Candidate。
+          '@
+          $Notes | Set-Content -Path (Join-Path $PackageRoot "PLAYTEST-NOTES.txt") -Encoding utf8
+
+      - name: Verify packaged Windows TTS boundary
+        working-directory: game/apps/desktop/electron
+        run: npm run check:packaged:win:tts
+
+      - name: Smoke packaged Windows executable
+        working-directory: game/apps/desktop/electron
+        run: npm run smoke:packaged:win
+
+      - name: Archive playtest build
+        shell: pwsh
+        run: |
+          $PackageRoot = Join-Path $env:DESKTOP_ROOT "dist\win-unpacked"
+          $Files = @(Get-ChildItem -Path $PackageRoot -Recurse -File)
+          $Bytes = ($Files | Measure-Object -Property Length -Sum).Sum
+          Write-Output (@{ packageFiles = $Files.Count; unpackedBytes = $Bytes } | ConvertTo-Json -Compress)
+          New-Item -ItemType Directory -Force -Path $env:PLAYTEST_DIR | Out-Null
+          $ZipPath = Join-Path $env:PLAYTEST_DIR $env:PLAYTEST_ZIP
+          Compress-Archive -Path $PackageRoot -DestinationPath $ZipPath -CompressionLevel Optimal
+          $Hash = (Get-FileHash -Algorithm SHA256 $ZipPath).Hash.ToLowerInvariant()
+          "$Hash  $env:PLAYTEST_ZIP" | Set-Content -Path "$ZipPath.sha256" -Encoding ascii
+          Get-Item $ZipPath | Select-Object Name, Length
+          Get-Content "$ZipPath.sha256"
+
+      - name: Upload Windows TTS playtest artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: grey-crow-windows-x64-tts-playtest
+          path: |
+            playtest-builds/${{ env.PLAYTEST_ZIP }}
+            playtest-builds/${{ env.PLAYTEST_ZIP }}.sha256
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 7

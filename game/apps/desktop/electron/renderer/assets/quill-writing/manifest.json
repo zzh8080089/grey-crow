@@ -1,0 +1,2093 @@
+{
+  "schemaVersion": 1,
+  "scope": "Local experimental waiting ornament; no actual story/provider activity inferred",
+  "columns": 8,
+  "rows": 6,
+  "frames": 48,
+  "fps": 20,
+  "durationSeconds": 2.4,
+  "frameSize": [
+    288,
+    300
+  ],
+  "logicalSize": [
+    96,
+    100
+  ],
+  "atlasSize": [
+    2304,
+    1800
+  ],
+  "staticFrame": 1,
+  "themes": {
+    "light": {
+      "atlas": "assets/quill-writing/writing-light.png",
+      "still": "assets/quill-writing/still-light.png",
+      "atlasSha256": "10537038b93cbd489457e9f032d5797e50fff7daf24565d3b66265d3386a16b3",
+      "stillSha256": "e2bfebc8297e513fcf7dfeea2d45dce3aabc8524738b0b7ed9483c981d992ffb",
+      "bytes": 1751517,
+      "samples": 128,
+      "devices": [
+        "Apple M4 (GPU - 10 cores)"
+      ],
+      "frames": [
+        {
+          "frame": 1,
+          "timeSeconds": 0.0,
+          "nibPixel": [
+            91.8431,
+            251.6198
+          ],
+          "nibLogical": [
+            30.6144,
+            83.8733
+          ],
+          "nibWorld": [
+            0.002548797521740198,
+            0.03071342594921589,
+            0.0029999997932463884
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 1.54,
+          "sha256": "ba316c422b2ba9dbbf6bb36e9c56f19464458e26f19e4598c57b3a24e3cd1c0b"
+        },
+        {
+          "frame": 2,
+          "timeSeconds": 0.05,
+          "nibPixel": [
+            95.2806,
+            251.3537
+          ],
+          "nibLogical": [
+            31.7602,
+            83.7846
+          ],
+          "nibWorld": [
+            0.07817374169826508,
+            0.037763938307762146,
+            0.003000000026077032
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 1.145,
+          "sha256": "043c676229a5d1fe6b33caa4afb50bd65193e79751224925ff396a9cb64b5e88"
+        },
+        {
+          "frame": 3,
+          "timeSeconds": 0.1,
+          "nibPixel": [
+            98.3068,
+            251.2544
+          ],
+          "nibLogical": [
+            32.7689,
+            83.7515
+          ],
+          "nibWorld": [
+            0.1447502076625824,
+            0.04039369523525238,
+            0.003000000026077032
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 1.133,
+          "sha256": "53f24992ba3c91215b9ec6af633042ef9624b0d3b208e83460bb89eb996a2774"
+        },
+        {
+          "frame": 4,
+          "timeSeconds": 0.15,
+          "nibPixel": [
+            100.5712,
+            251.3102
+          ],
+          "nibLogical": [
+            33.5237,
+            83.7701
+          ],
+          "nibWorld": [
+            0.19456547498703003,
+            0.03891562670469284,
+            0.003000000026077032
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 1.149,
+          "sha256": "80a9a361fa95278c2d507969f6ccf0df871fa771ab11b3e921d7d1b2958a65f7"
+        },
+        {
+          "frame": 5,
+          "timeSeconds": 0.2,
+          "nibPixel": [
+            101.8352,
+            251.4894
+          ],
+          "nibLogical": [
+            33.9451,
+            83.8298
+          ],
+          "nibWorld": [
+            0.22237499058246613,
+            0.0341675765812397,
+            0.003000000026077032
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 1.144,
+          "sha256": "efc4e1743ce850b8326f3fca62c7370ab9c17cc8ff739b9983fd8a667ace1b58"
+        },
+        {
+          "frame": 6,
+          "timeSeconds": 0.25,
+          "nibPixel": [
+            102.0073,
+            251.747
+          ],
+          "nibLogical": [
+            34.0024,
+            83.9157
+          ],
+          "nibWorld": [
+            0.2261614352464676,
+            0.0273425355553627,
+            0.003000000026077032
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 1.127,
+          "sha256": "43c13f6bc39a08eedca736d08870b1ae7625399bf479a859a748585fba45db94"
+        },
+        {
+          "frame": 7,
+          "timeSeconds": 0.3,
+          "nibPixel": [
+            101.1547,
+            252.0326
+          ],
+          "nibLogical": [
+            33.7182,
+            84.0109
+          ],
+          "nibWorld": [
+            0.20740415155887604,
+            0.019774815067648888,
+            0.003000000026077032
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 1.147,
+          "sha256": "10d09f4dbff5b9c20c185b7a40c1aae7a58936ab380b9be4af7b6ded6285e2e0"
+        },
+        {
+          "frame": 8,
+          "timeSeconds": 0.35,
+          "nibPixel": [
+            99.4918,
+            252.299
+          ],
+          "nibLogical": [
+            33.1639,
+            84.0997
+          ],
+          "nibWorld": [
+            0.17081867158412933,
+            0.012716920115053654,
+            0.0029999997932463884
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 1.149,
+          "sha256": "be9ad9f03045c45265935db0cafec866ce345776c46adbcbf95b3da9fe0d008a"
+        },
+        {
+          "frame": 9,
+          "timeSeconds": 0.4,
+          "nibPixel": [
+            97.3458,
+            252.5094
+          ],
+          "nibLogical": [
+            32.4486,
+            84.1698
+          ],
+          "nibWorld": [
+            0.12360682338476181,
+            0.007142453454434872,
+            0.0030000004917383194
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 1.139,
+          "sha256": "74ba28009a5c0729f9bbe026a91e6bb336cc4a738cd27c2a3406124a8c410d96"
+        },
+        {
+          "frame": 10,
+          "timeSeconds": 0.45,
+          "nibPixel": [
+            95.106,
+            252.6429
+          ],
+          "nibLogical": [
+            31.702,
+            84.2143
+          ],
+          "nibWorld": [
+            0.07433175295591354,
+            0.003605217905715108,
+            0.0030000072438269854
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 1.14,
+          "sha256": "f9a584095b1075a6d20a0c7aa69eaa38cbaa7dabff46464340f1efb40d02798f"
+        },
+        {
+          "frame": 11,
+          "timeSeconds": 0.5,
+          "nibPixel": [
+            93.1632,
+            252.6969
+          ],
+          "nibLogical": [
+            31.0544,
+            84.2323
+          ],
+          "nibWorld": [
+            0.031590573489665985,
+            0.0021752570755779743,
+            0.0030000966507941484
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 1.142,
+          "sha256": "61e022fd481b316f61e1786ccac7ce7348cff6c14b295e5ecfbf95df82ff1664"
+        },
+        {
+          "frame": 12,
+          "timeSeconds": 0.55,
+          "nibPixel": [
+            91.8494,
+            252.6861
+          ],
+          "nibLogical": [
+            30.6165,
+            84.2287
+          ],
+          "nibWorld": [
+            0.0026868938002735376,
+            0.0024600601755082607,
+            0.0030009038746356964
+          ],
+          "liftWorld": 1e-06,
+          "contact": true,
+          "seconds": 1.036,
+          "sha256": "0a61ad414bf6d68a0ff7db51b4bd6ac0e324567c5be1c89fc6e5b9049f38f26b"
+        },
+        {
+          "frame": 13,
+          "timeSeconds": 0.6,
+          "nibPixel": [
+            91.3866,
+            252.6389
+          ],
+          "nibLogical": [
+            30.4622,
+            84.213
+          ],
+          "nibWorld": [
+            -0.007494484540075064,
+            0.0037055695429444313,
+            0.003006408456712961
+          ],
+          "liftWorld": 6e-06,
+          "contact": true,
+          "seconds": 1.028,
+          "sha256": "ab3890f70d0b56e47e798850a8c67680ab26b8c797982830f81146706df10e1a"
+        },
+        {
+          "frame": 14,
+          "timeSeconds": 0.65,
+          "nibPixel": [
+            91.8528,
+            252.5909
+          ],
+          "nibLogical": [
+            30.6176,
+            84.197
+          ],
+          "nibWorld": [
+            0.002760795410722494,
+            0.0049590058624744415,
+            0.003035701811313629
+          ],
+          "liftWorld": 3.6e-05,
+          "contact": true,
+          "seconds": 1.032,
+          "sha256": "21d1b284f42f3f013a216715fd0f0e24b3a67572a53f59cbaeb6cd8857cb7ecc"
+        },
+        {
+          "frame": 15,
+          "timeSeconds": 0.7,
+          "nibPixel": [
+            93.1697,
+            252.5761
+          ],
+          "nibLogical": [
+            31.0566,
+            84.192
+          ],
+          "nibWorld": [
+            0.03173285350203514,
+            0.005265688523650169,
+            0.003160789143294096
+          ],
+          "liftWorld": 0.000161,
+          "contact": true,
+          "seconds": 1.032,
+          "sha256": "313b15db22a13a837e93a111269df7deed02f4aa8bff22af75c13b4ef665af37"
+        },
+        {
+          "frame": 16,
+          "timeSeconds": 0.75,
+          "nibPixel": [
+            95.1151,
+            252.6179
+          ],
+          "nibLogical": [
+            31.705,
+            84.206
+          ],
+          "nibWorld": [
+            0.07453182339668274,
+            0.0038664997555315495,
+            0.003598257200792432
+          ],
+          "liftWorld": 0.000598,
+          "contact": true,
+          "seconds": 1.043,
+          "sha256": "8e786d0403e15c9415f95bb490c60d8a767ae87de5031add1b1d7b58d5fd88e0"
+        },
+        {
+          "frame": 17,
+          "timeSeconds": 0.8,
+          "nibPixel": [
+            97.3568,
+            252.7179
+          ],
+          "nibLogical": [
+            32.4523,
+            84.2393
+          ],
+          "nibWorld": [
+            0.12384992837905884,
+            0.00036235403968021274,
+            0.004870884586125612
+          ],
+          "liftWorld": 0.001871,
+          "contact": true,
+          "seconds": 1.036,
+          "sha256": "9830ddc1ed68d552b10410f95832b5cb27ef9bc307c50758153ee2ce3913d613"
+        },
+        {
+          "frame": 18,
+          "timeSeconds": 0.85,
+          "nibPixel": [
+            99.504,
+            252.8483
+          ],
+          "nibLogical": [
+            33.168,
+            84.2828
+          ],
+          "nibWorld": [
+            0.1710871011018753,
+            -0.00518291350454092,
+            0.007984854280948639
+          ],
+          "liftWorld": 0.004985,
+          "contact": true,
+          "seconds": 1.027,
+          "sha256": "073de95331c7ea79e653ccdb64bbdb172b929bf637f60a113bc7ed0caa8de933"
+        },
+        {
+          "frame": 19,
+          "timeSeconds": 0.9,
+          "nibPixel": [
+            101.1672,
+            252.9504
+          ],
+          "nibLogical": [
+            33.7224,
+            84.3168
+          ],
+          "nibWorld": [
+            0.20767860114574432,
+            -0.012220028787851334,
+            0.01443981472402811
+          ],
+          "liftWorld": 0.01144,
+          "contact": true,
+          "seconds": 1.049,
+          "sha256": "fc07de9f7ecc612187b5bacf8c8fce03d19da9e7eb1f4555f6c61fcf88ea4dbe"
+        },
+        {
+          "frame": 20,
+          "timeSeconds": 0.95,
+          "nibPixel": [
+            102.0192,
+            252.9476
+          ],
+          "nibLogical": [
+            34.0064,
+            84.3159
+          ],
+          "nibWorld": [
+            0.2264224737882614,
+            -0.019777923822402954,
+            0.025808226317167282
+          ],
+          "liftWorld": 0.022808,
+          "contact": false,
+          "seconds": 1.04,
+          "sha256": "777a6a7bb05cca7f57c0cf5f3daff02dddaea1b7829e260e2c7e667903804618"
+        },
+        {
+          "frame": 21,
+          "timeSeconds": 1.0,
+          "nibPixel": [
+            101.8456,
+            252.7755
+          ],
+          "nibLogical": [
+            33.9485,
+            84.2585
+          ],
+          "nibWorld": [
+            0.22260428965091705,
+            -0.02660517580807209,
+            0.04277544841170311
+          ],
+          "liftWorld": 0.039775,
+          "contact": false,
+          "seconds": 1.044,
+          "sha256": "ad483722229c5662bd2a3719148ebf324f13eb810652e1fbc0df72e093890db7"
+        },
+        {
+          "frame": 22,
+          "timeSeconds": 1.05,
+          "nibPixel": [
+            100.5794,
+            252.4179
+          ],
+          "nibLogical": [
+            33.5265,
+            84.1393
+          ],
+          "nibWorld": [
+            0.19474712014198303,
+            -0.03136785700917244,
+            0.06399013102054596
+          ],
+          "liftWorld": 0.06099,
+          "contact": false,
+          "seconds": 1.042,
+          "sha256": "db6065344fa17d328d4189e428c5373bcd16bde3d60bc52e45e18d4e0403a456"
+        },
+        {
+          "frame": 23,
+          "timeSeconds": 1.1,
+          "nibPixel": [
+            98.3124,
+            251.9286
+          ],
+          "nibLogical": [
+            32.7708,
+            83.9762
+          ],
+          "nibWorld": [
+            0.14487195014953613,
+            -0.03287295997142792,
+            0.08554849028587341
+          ],
+          "liftWorld": 0.082548,
+          "contact": false,
+          "seconds": 1.004,
+          "sha256": "06295dd5c1ceee16ac415489596c4f68b7e75cd675e28ceda9df99cd3a14f884"
+        },
+        {
+          "frame": 24,
+          "timeSeconds": 1.15,
+          "nibPixel": [
+            95.2831,
+            251.417
+          ],
+          "nibLogical": [
+            31.761,
+            83.8057
+          ],
+          "nibWorld": [
+            0.07822798192501068,
+            -0.03028177097439766,
+            0.10188385099172592
+          ],
+          "liftWorld": 0.098884,
+          "contact": false,
+          "seconds": 1.051,
+          "sha256": "d00bf931e9e3027dc98fa6845ef33a2118746aff4f3e0860ca14e03d344b7b9f"
+        },
+        {
+          "frame": 25,
+          "timeSeconds": 1.2,
+          "nibPixel": [
+            91.8424,
+            250.9978
+          ],
+          "nibLogical": [
+            30.6141,
+            83.6659
+          ],
+          "nibWorld": [
+            0.002533360617235303,
+            -0.02327870950102806,
+            0.1080000028014183
+          ],
+          "liftWorld": 0.105,
+          "contact": false,
+          "seconds": 1.03,
+          "sha256": "648228dc19f87f253a8e11aaf5c518d2537c87f2034937ce663e4ba771418ce2"
+        },
+        {
+          "frame": 26,
+          "timeSeconds": 1.25,
+          "nibPixel": [
+            88.4019,
+            250.7333
+          ],
+          "nibLogical": [
+            29.4673,
+            83.5778
+          ],
+          "nibWorld": [
+            -0.07315865159034729,
+            -0.012167363427579403,
+            0.10188385099172592
+          ],
+          "liftWorld": 0.098884,
+          "contact": false,
+          "seconds": 1.015,
+          "sha256": "2d5f80bbd89fc55785a49b7586de0e3ca060c226e7455e06c1c8ae773c77a473"
+        },
+        {
+          "frame": 27,
+          "timeSeconds": 1.3,
+          "nibPixel": [
+            85.3729,
+            250.6077
+          ],
+          "nibLogical": [
+            28.4576,
+            83.5359
+          ],
+          "nibWorld": [
+            -0.13979579508304596,
+            0.0021239127963781357,
+            0.08554849773645401
+          ],
+          "liftWorld": 0.082548,
+          "contact": false,
+          "seconds": 1.009,
+          "sha256": "4019645d1a873d560987cd201a5595ebdfdc9f832e85b28b85ae10d9e0051665"
+        },
+        {
+          "frame": 28,
+          "timeSeconds": 1.35,
+          "nibPixel": [
+            83.1063,
+            250.5497
+          ],
+          "nibLogical": [
+            27.7021,
+            83.5166
+          ],
+          "nibWorld": [
+            -0.18966250121593475,
+            0.018131103366613388,
+            0.06399013102054596
+          ],
+          "liftWorld": 0.06099,
+          "contact": false,
+          "seconds": 1.039,
+          "sha256": "4ebf09425282916c3f3474353b27415345812720b00bb6069ce76ebcc3f45752"
+        },
+        {
+          "frame": 29,
+          "timeSeconds": 1.4,
+          "nibPixel": [
+            81.8404,
+            250.4871
+          ],
+          "nibLogical": [
+            27.2801,
+            83.4957
+          ],
+          "nibWorld": [
+            -0.2175123393535614,
+            0.034028470516204834,
+            0.04277544841170311
+          ],
+          "liftWorld": 0.039775,
+          "contact": false,
+          "seconds": 1.032,
+          "sha256": "105851207dbb47bc2b5de1b5e50e1e4f1408ac61aaf20012e4d415fa4e029d7a"
+        },
+        {
+          "frame": 30,
+          "timeSeconds": 1.45,
+          "nibPixel": [
+            81.667,
+            250.3947
+          ],
+          "nibLogical": [
+            27.2223,
+            83.4649
+          ],
+          "nibWorld": [
+            -0.22132611274719238,
+            0.047864414751529694,
+            0.025808224454522133
+          ],
+          "liftWorld": 0.022808,
+          "contact": false,
+          "seconds": 1.027,
+          "sha256": "4db970e71a280009dfbeb50e165bcebf05e16b4cf7710826757c97a2ea9e1d56"
+        },
+        {
+          "frame": 31,
+          "timeSeconds": 1.5,
+          "nibPixel": [
+            82.5191,
+            250.3067
+          ],
+          "nibLogical": [
+            27.5064,
+            83.4356
+          ],
+          "nibWorld": [
+            -0.20258083939552307,
+            0.05782642960548401,
+            0.01443981472402811
+          ],
+          "liftWorld": 0.01144,
+          "contact": true,
+          "seconds": 1.038,
+          "sha256": "3beefdd0044030c31686dfa8c946c79d9b18d08cef61c8543e36785f0654170f"
+        },
+        {
+          "frame": 32,
+          "timeSeconds": 1.55,
+          "nibPixel": [
+            84.1823,
+            250.2939
+          ],
+          "nibLogical": [
+            28.0608,
+            83.4313
+          ],
+          "nibWorld": [
+            -0.16598965227603912,
+            0.06249713525176048,
+            0.007984853349626064
+          ],
+          "liftWorld": 0.004985,
+          "contact": true,
+          "seconds": 1.015,
+          "sha256": "d1dd8acf0e504c225978208ccb2eb719b4ef56601b82d39b008cf718955f060f"
+        },
+        {
+          "frame": 33,
+          "timeSeconds": 1.6,
+          "nibPixel": [
+            86.3294,
+            250.4269
+          ],
+          "nibLogical": [
+            28.7765,
+            83.4756
+          ],
+          "nibWorld": [
+            -0.11875295639038086,
+            0.06106359511613846,
+            0.004870884120464325
+          ],
+          "liftWorld": 0.001871,
+          "contact": true,
+          "seconds": 1.021,
+          "sha256": "f6203e2b9fa90175f14cf9d2007669ae32d3401a821611afb802eaf260ce17e1"
+        },
+        {
+          "frame": 34,
+          "timeSeconds": 1.65,
+          "nibPixel": [
+            88.5712,
+            250.7466
+          ],
+          "nibLogical": [
+            29.5237,
+            83.5822
+          ],
+          "nibWorld": [
+            -0.06943466514348984,
+            0.05344841629266739,
+            0.003598257666453719
+          ],
+          "liftWorld": 0.000598,
+          "contact": true,
+          "seconds": 1.028,
+          "sha256": "f0a1ee05ec2eda8df0e6940d642ffd37d54e2d74aecdfdb930117460eb69fdaf"
+        },
+        {
+          "frame": 35,
+          "timeSeconds": 1.7,
+          "nibPixel": [
+            90.5166,
+            251.2523
+          ],
+          "nibLogical": [
+            30.1722,
+            83.7508
+          ],
+          "nibWorld": [
+            -0.02663544937968254,
+            0.04034187272191048,
+            0.0031607889104634523
+          ],
+          "liftWorld": 0.000161,
+          "contact": true,
+          "seconds": 1.036,
+          "sha256": "2c2cc70b946ad12dd41d92dd58c00065e574a744fc1f42c79d016a7b122284d9"
+        },
+        {
+          "frame": 36,
+          "timeSeconds": 1.75,
+          "nibPixel": [
+            91.8334,
+            251.9051
+          ],
+          "nibLogical": [
+            30.6111,
+            83.9684
+          ],
+          "nibWorld": [
+            0.002335368422791362,
+            0.023128632456064224,
+            0.0030357022769749165
+          ],
+          "liftWorld": 3.6e-05,
+          "contact": true,
+          "seconds": 1.04,
+          "sha256": "f9fc4dac6227df760aa5305e5be107f95ea00ecdc8e76240f5367cff681a1698"
+        },
+        {
+          "frame": 37,
+          "timeSeconds": 1.8,
+          "nibPixel": [
+            92.2994,
+            252.6385
+          ],
+          "nibLogical": [
+            30.7665,
+            84.2128
+          ],
+          "nibWorld": [
+            0.012586429715156555,
+            0.003718201071023941,
+            0.0030064089223742485
+          ],
+          "liftWorld": 6e-06,
+          "contact": true,
+          "seconds": 1.052,
+          "sha256": "210327ef890c043c83868ffe8a4dc2dc44011264c5242baf0e01809c53c23f2f"
+        },
+        {
+          "frame": 38,
+          "timeSeconds": 1.85,
+          "nibPixel": [
+            91.8363,
+            253.3714
+          ],
+          "nibLogical": [
+            30.6121,
+            84.4571
+          ],
+          "nibWorld": [
+            0.0023975656367838383,
+            -0.01569775678217411,
+            0.0030009043402969837
+          ],
+          "liftWorld": 1e-06,
+          "contact": true,
+          "seconds": 1.04,
+          "sha256": "f3020335ab4e293bbb3cca6eea6c8b9279bb34b190c816a5ca675b1b04e29af9"
+        },
+        {
+          "frame": 39,
+          "timeSeconds": 1.9,
+          "nibPixel": [
+            90.522,
+            254.0217
+          ],
+          "nibLogical": [
+            30.174,
+            84.6739
+          ],
+          "nibWorld": [
+            -0.02651546336710453,
+            -0.03292729705572128,
+            0.0030000966507941484
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 1.053,
+          "sha256": "4500393023f699da3496666cd0290ccede63ffe19fdface1f31aa5ce64d5045d"
+        },
+        {
+          "frame": 40,
+          "timeSeconds": 1.95,
+          "nibPixel": [
+            88.5789,
+            254.5173
+          ],
+          "nibLogical": [
+            29.5263,
+            84.8391
+          ],
+          "nibWorld": [
+            -0.06926517933607101,
+            -0.046059705317020416,
+            0.0030000072438269854
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 1.029,
+          "sha256": "d1c13a8f2ce1204f414e39786a45736e0d15c3902c5734265d0da768b8eb0000"
+        },
+        {
+          "frame": 41,
+          "timeSeconds": 2.0,
+          "nibPixel": [
+            86.3388,
+            254.806
+          ],
+          "nibLogical": [
+            28.7796,
+            84.9353
+          ],
+          "nibWorld": [
+            -0.11854524165391922,
+            -0.05370742082595825,
+            0.0030000004917383194
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 1.041,
+          "sha256": "692fa329aec3ef446f712cedf4612d482b6771e7969fdcf1eec86128aa19d953"
+        },
+        {
+          "frame": 42,
+          "timeSeconds": 2.05,
+          "nibPixel": [
+            84.1929,
+            254.8614
+          ],
+          "nibLogical": [
+            28.0643,
+            84.9538
+          ],
+          "nibWorld": [
+            -0.1657569259405136,
+            -0.05517509952187538,
+            0.0029999997932463884
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 1.043,
+          "sha256": "e0e42258eaf0660903a176683e6571c90f2bb427c5f545a1437386e5c314164f"
+        },
+        {
+          "frame": 43,
+          "timeSeconds": 2.1,
+          "nibPixel": [
+            82.5301,
+            254.6862
+          ],
+          "nibLogical": [
+            27.51,
+            84.8954
+          ],
+          "nibWorld": [
+            -0.2023373544216156,
+            -0.05053330585360527,
+            0.003000000026077032
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 1.037,
+          "sha256": "e4a2433a5486768503f4e85c971d1725df0064cbfc8c36d117bb0006b05bc42d"
+        },
+        {
+          "frame": 44,
+          "timeSeconds": 2.15,
+          "nibPixel": [
+            81.6779,
+            254.3108
+          ],
+          "nibLogical": [
+            27.226,
+            84.7703
+          ],
+          "nibWorld": [
+            -0.22108662128448486,
+            -0.040587861090898514,
+            0.0029999997932463884
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 1.059,
+          "sha256": "4ce59a5f01f403d66178ccfe274a1aef33113de61c2f15b49acc0707f7b2efb1"
+        },
+        {
+          "frame": 45,
+          "timeSeconds": 2.2,
+          "nibPixel": [
+            81.8504,
+            253.7886
+          ],
+          "nibLogical": [
+            27.2835,
+            84.5962
+          ],
+          "nibWorld": [
+            -0.2172916829586029,
+            -0.026750851422548294,
+            0.003000000026077032
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 1.045,
+          "sha256": "8104c2870c9235e68cc01593a70d2bd8d49bc25a7f641b166062ad13806382cc"
+        },
+        {
+          "frame": 46,
+          "timeSeconds": 2.25,
+          "nibPixel": [
+            83.1148,
+            253.1878
+          ],
+          "nibLogical": [
+            27.7049,
+            84.3959
+          ],
+          "nibWorld": [
+            -0.18947523832321167,
+            -0.010833054780960083,
+            0.0030000002589076757
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 1.053,
+          "sha256": "12af446cdab829c59df9607c6b467ed0c4ab2de539d2e11ee4b981e97f1b992b"
+        },
+        {
+          "frame": 47,
+          "timeSeconds": 2.3,
+          "nibPixel": [
+            85.3793,
+            252.5823
+          ],
+          "nibLogical": [
+            28.4598,
+            84.1941
+          ],
+          "nibWorld": [
+            -0.13965550065040588,
+            0.0052114021964371204,
+            0.0029999997932463884
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 1.032,
+          "sha256": "d7f58e36c318a056bbb80b870614faba94ffeebfa0beb98feda78ca25a0f13c1"
+        },
+        {
+          "frame": 48,
+          "timeSeconds": 2.35,
+          "nibPixel": [
+            88.4056,
+            252.0411
+          ],
+          "nibLogical": [
+            29.4685,
+            84.0137
+          ],
+          "nibWorld": [
+            -0.07307678461074829,
+            0.01955077052116394,
+            0.003000000026077032
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 1.028,
+          "sha256": "35697bbd340af54041b68d34bfedd3c4da8f1eea14b497b6e3583f7e906d885c"
+        }
+      ],
+      "outerAlphaMaximum": 0
+    },
+    "dark": {
+      "atlas": "assets/quill-writing/writing-dark.png",
+      "still": "assets/quill-writing/still-dark.png",
+      "atlasSha256": "d09280f89c846dc3f4740a71aabb003478185c714b7a3defa44c09e2bea8d979",
+      "stillSha256": "adaf88ddebe5b0e798b2dbd959b7573e8b97014e5f5a107dc6e5c275b8755949",
+      "bytes": 1757962,
+      "samples": 128,
+      "devices": [
+        "Apple M4 (GPU - 10 cores)"
+      ],
+      "frames": [
+        {
+          "frame": 1,
+          "timeSeconds": 0.0,
+          "nibPixel": [
+            91.8431,
+            251.6198
+          ],
+          "nibLogical": [
+            30.6144,
+            83.8733
+          ],
+          "nibWorld": [
+            0.002548797521740198,
+            0.03071342594921589,
+            0.0029999997932463884
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 1.451,
+          "sha256": "49b81a0f8109db6e17f79f97b0b666db7ef8853a147fd728199d80538dabd97e"
+        },
+        {
+          "frame": 2,
+          "timeSeconds": 0.05,
+          "nibPixel": [
+            95.2806,
+            251.3537
+          ],
+          "nibLogical": [
+            31.7602,
+            83.7846
+          ],
+          "nibWorld": [
+            0.07817374169826508,
+            0.037763938307762146,
+            0.003000000026077032
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 1.031,
+          "sha256": "a2156e51cbd5a9dc59b9a43108af3328dff6c7a072ed5fb5e76e24415fe25321"
+        },
+        {
+          "frame": 3,
+          "timeSeconds": 0.1,
+          "nibPixel": [
+            98.3068,
+            251.2544
+          ],
+          "nibLogical": [
+            32.7689,
+            83.7515
+          ],
+          "nibWorld": [
+            0.1447502076625824,
+            0.04039369523525238,
+            0.003000000026077032
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 1.036,
+          "sha256": "4ce180e3d1c3ea8ad8ffa8454e4165032a11e723047364f4b7b9ebb057c8cafb"
+        },
+        {
+          "frame": 4,
+          "timeSeconds": 0.15,
+          "nibPixel": [
+            100.5712,
+            251.3102
+          ],
+          "nibLogical": [
+            33.5237,
+            83.7701
+          ],
+          "nibWorld": [
+            0.19456547498703003,
+            0.03891562670469284,
+            0.003000000026077032
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 1.053,
+          "sha256": "aad3b4e546077e1cc3f41ef8dbef23e217c4920945d3dce50b5612ab5d0f9464"
+        },
+        {
+          "frame": 5,
+          "timeSeconds": 0.2,
+          "nibPixel": [
+            101.8352,
+            251.4894
+          ],
+          "nibLogical": [
+            33.9451,
+            83.8298
+          ],
+          "nibWorld": [
+            0.22237499058246613,
+            0.0341675765812397,
+            0.003000000026077032
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 1.054,
+          "sha256": "b90e5dd842f63239e2b57a269693e7fe30e26d121377b228fe4f92158dc06c15"
+        },
+        {
+          "frame": 6,
+          "timeSeconds": 0.25,
+          "nibPixel": [
+            102.0073,
+            251.747
+          ],
+          "nibLogical": [
+            34.0024,
+            83.9157
+          ],
+          "nibWorld": [
+            0.2261614352464676,
+            0.0273425355553627,
+            0.003000000026077032
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 1.047,
+          "sha256": "a2034c5f01bb928e880ca14598b5ca179a5589866cc05ad9a7c61b2237493e51"
+        },
+        {
+          "frame": 7,
+          "timeSeconds": 0.3,
+          "nibPixel": [
+            101.1547,
+            252.0326
+          ],
+          "nibLogical": [
+            33.7182,
+            84.0109
+          ],
+          "nibWorld": [
+            0.20740415155887604,
+            0.019774815067648888,
+            0.003000000026077032
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 1.013,
+          "sha256": "fe9d300efbaf5642ec962676cbef781c8fbc4952db396a2d2dc4d232293556cd"
+        },
+        {
+          "frame": 8,
+          "timeSeconds": 0.35,
+          "nibPixel": [
+            99.4918,
+            252.299
+          ],
+          "nibLogical": [
+            33.1639,
+            84.0997
+          ],
+          "nibWorld": [
+            0.17081867158412933,
+            0.012716920115053654,
+            0.0029999997932463884
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 0.998,
+          "sha256": "87f805f8afba13c6ee9be2baec0170840d1346a298987b6ceb853e2ea3b55673"
+        },
+        {
+          "frame": 9,
+          "timeSeconds": 0.4,
+          "nibPixel": [
+            97.3458,
+            252.5094
+          ],
+          "nibLogical": [
+            32.4486,
+            84.1698
+          ],
+          "nibWorld": [
+            0.12360682338476181,
+            0.007142453454434872,
+            0.0030000004917383194
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 1.04,
+          "sha256": "78f048ab08c6600b28fb64b16bff335a5c9664a128f12639a0297e963a338f79"
+        },
+        {
+          "frame": 10,
+          "timeSeconds": 0.45,
+          "nibPixel": [
+            95.106,
+            252.6429
+          ],
+          "nibLogical": [
+            31.702,
+            84.2143
+          ],
+          "nibWorld": [
+            0.07433175295591354,
+            0.003605217905715108,
+            0.0030000072438269854
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 1.009,
+          "sha256": "2f9b2befdfa7b9b205ac8d3e971169800765cf9ce4282d2462e4f1a0899b4ae6"
+        },
+        {
+          "frame": 11,
+          "timeSeconds": 0.5,
+          "nibPixel": [
+            93.1632,
+            252.6969
+          ],
+          "nibLogical": [
+            31.0544,
+            84.2323
+          ],
+          "nibWorld": [
+            0.031590573489665985,
+            0.0021752570755779743,
+            0.0030000966507941484
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 1.038,
+          "sha256": "668c3af1cf5736059c0551345b27a56ffbe8c1ed5eda9e60de6003cbd2eceb14"
+        },
+        {
+          "frame": 12,
+          "timeSeconds": 0.55,
+          "nibPixel": [
+            91.8494,
+            252.6861
+          ],
+          "nibLogical": [
+            30.6165,
+            84.2287
+          ],
+          "nibWorld": [
+            0.0026868938002735376,
+            0.0024600601755082607,
+            0.0030009038746356964
+          ],
+          "liftWorld": 1e-06,
+          "contact": true,
+          "seconds": 1.038,
+          "sha256": "60ed4d8b476fe436961daa04cae594a7ffc1368d11a4bb36f15be77cbd47620d"
+        },
+        {
+          "frame": 13,
+          "timeSeconds": 0.6,
+          "nibPixel": [
+            91.3866,
+            252.6389
+          ],
+          "nibLogical": [
+            30.4622,
+            84.213
+          ],
+          "nibWorld": [
+            -0.007494484540075064,
+            0.0037055695429444313,
+            0.003006408456712961
+          ],
+          "liftWorld": 6e-06,
+          "contact": true,
+          "seconds": 1.03,
+          "sha256": "05395edae614fef17c3a134a2494a68ad02b9970da43c3573f3ec83395cfd2f1"
+        },
+        {
+          "frame": 14,
+          "timeSeconds": 0.65,
+          "nibPixel": [
+            91.8528,
+            252.5909
+          ],
+          "nibLogical": [
+            30.6176,
+            84.197
+          ],
+          "nibWorld": [
+            0.002760795410722494,
+            0.0049590058624744415,
+            0.003035701811313629
+          ],
+          "liftWorld": 3.6e-05,
+          "contact": true,
+          "seconds": 1.038,
+          "sha256": "fffa75cad26d9f4cf9d31f3b8739da3849044bc4451922a05c8066f21b2ff2e9"
+        },
+        {
+          "frame": 15,
+          "timeSeconds": 0.7,
+          "nibPixel": [
+            93.1697,
+            252.5761
+          ],
+          "nibLogical": [
+            31.0566,
+            84.192
+          ],
+          "nibWorld": [
+            0.03173285350203514,
+            0.005265688523650169,
+            0.003160789143294096
+          ],
+          "liftWorld": 0.000161,
+          "contact": true,
+          "seconds": 1.034,
+          "sha256": "0f8b5eb529258fc869de54baaa96443e372d4978c9caf655b00a2480bbeeee84"
+        },
+        {
+          "frame": 16,
+          "timeSeconds": 0.75,
+          "nibPixel": [
+            95.1151,
+            252.6179
+          ],
+          "nibLogical": [
+            31.705,
+            84.206
+          ],
+          "nibWorld": [
+            0.07453182339668274,
+            0.0038664997555315495,
+            0.003598257200792432
+          ],
+          "liftWorld": 0.000598,
+          "contact": true,
+          "seconds": 1.053,
+          "sha256": "1b7b4da87e001dc848456a6784ee118233bea6ba2343942ea1950ea7e87acb76"
+        },
+        {
+          "frame": 17,
+          "timeSeconds": 0.8,
+          "nibPixel": [
+            97.3568,
+            252.7179
+          ],
+          "nibLogical": [
+            32.4523,
+            84.2393
+          ],
+          "nibWorld": [
+            0.12384992837905884,
+            0.00036235403968021274,
+            0.004870884586125612
+          ],
+          "liftWorld": 0.001871,
+          "contact": true,
+          "seconds": 1.053,
+          "sha256": "7e80a36e006ab4c2533ad24afbf3f73ebccc6c61421f02c52bc810d4f5e08c3b"
+        },
+        {
+          "frame": 18,
+          "timeSeconds": 0.85,
+          "nibPixel": [
+            99.504,
+            252.8483
+          ],
+          "nibLogical": [
+            33.168,
+            84.2828
+          ],
+          "nibWorld": [
+            0.1710871011018753,
+            -0.00518291350454092,
+            0.007984854280948639
+          ],
+          "liftWorld": 0.004985,
+          "contact": true,
+          "seconds": 1.041,
+          "sha256": "cb7710ae2a64b9a30e0da00453a4e73556f9ad1d15cf5e8424003c0644ee77b2"
+        },
+        {
+          "frame": 19,
+          "timeSeconds": 0.9,
+          "nibPixel": [
+            101.1672,
+            252.9504
+          ],
+          "nibLogical": [
+            33.7224,
+            84.3168
+          ],
+          "nibWorld": [
+            0.20767860114574432,
+            -0.012220028787851334,
+            0.01443981472402811
+          ],
+          "liftWorld": 0.01144,
+          "contact": true,
+          "seconds": 1.056,
+          "sha256": "25d25725596eb4b22847a995873863687d70de5e3f7abc767ff1ac3393583628"
+        },
+        {
+          "frame": 20,
+          "timeSeconds": 0.95,
+          "nibPixel": [
+            102.0192,
+            252.9476
+          ],
+          "nibLogical": [
+            34.0064,
+            84.3159
+          ],
+          "nibWorld": [
+            0.2264224737882614,
+            -0.019777923822402954,
+            0.025808226317167282
+          ],
+          "liftWorld": 0.022808,
+          "contact": false,
+          "seconds": 1.053,
+          "sha256": "e390c440ebd88353e1301e0d683b4221cf2a67dbb21f0b8e87b6b9bdcef4def9"
+        },
+        {
+          "frame": 21,
+          "timeSeconds": 1.0,
+          "nibPixel": [
+            101.8456,
+            252.7755
+          ],
+          "nibLogical": [
+            33.9485,
+            84.2585
+          ],
+          "nibWorld": [
+            0.22260428965091705,
+            -0.02660517580807209,
+            0.04277544841170311
+          ],
+          "liftWorld": 0.039775,
+          "contact": false,
+          "seconds": 1.045,
+          "sha256": "d36c05b711e00d5406b9350186cea4a8eba7a27f54e2236edb0ffe1372b90ad7"
+        },
+        {
+          "frame": 22,
+          "timeSeconds": 1.05,
+          "nibPixel": [
+            100.5794,
+            252.4179
+          ],
+          "nibLogical": [
+            33.5265,
+            84.1393
+          ],
+          "nibWorld": [
+            0.19474712014198303,
+            -0.03136785700917244,
+            0.06399013102054596
+          ],
+          "liftWorld": 0.06099,
+          "contact": false,
+          "seconds": 1.062,
+          "sha256": "ffa1e9c46dd37e94f3e7f569b50c77042c13c152df26f14fed5e39745cc9aa5b"
+        },
+        {
+          "frame": 23,
+          "timeSeconds": 1.1,
+          "nibPixel": [
+            98.3124,
+            251.9286
+          ],
+          "nibLogical": [
+            32.7708,
+            83.9762
+          ],
+          "nibWorld": [
+            0.14487195014953613,
+            -0.03287295997142792,
+            0.08554849028587341
+          ],
+          "liftWorld": 0.082548,
+          "contact": false,
+          "seconds": 1.051,
+          "sha256": "beeafa4dc415a3853edeebafbc24abf2d0cf6704ad23be2841c632528dc58d67"
+        },
+        {
+          "frame": 24,
+          "timeSeconds": 1.15,
+          "nibPixel": [
+            95.2831,
+            251.417
+          ],
+          "nibLogical": [
+            31.761,
+            83.8057
+          ],
+          "nibWorld": [
+            0.07822798192501068,
+            -0.03028177097439766,
+            0.10188385099172592
+          ],
+          "liftWorld": 0.098884,
+          "contact": false,
+          "seconds": 1.048,
+          "sha256": "9effec5114844f0b026c820c6b4cb4d604dc05a8c198bb9209dbdae011c49254"
+        },
+        {
+          "frame": 25,
+          "timeSeconds": 1.2,
+          "nibPixel": [
+            91.8424,
+            250.9978
+          ],
+          "nibLogical": [
+            30.6141,
+            83.6659
+          ],
+          "nibWorld": [
+            0.002533360617235303,
+            -0.02327870950102806,
+            0.1080000028014183
+          ],
+          "liftWorld": 0.105,
+          "contact": false,
+          "seconds": 1.019,
+          "sha256": "ace6cd7054705a1b7f1dbea259de1e15c2fae8e7dd9aa1c1dea53251fc4864b4"
+        },
+        {
+          "frame": 26,
+          "timeSeconds": 1.25,
+          "nibPixel": [
+            88.4019,
+            250.7333
+          ],
+          "nibLogical": [
+            29.4673,
+            83.5778
+          ],
+          "nibWorld": [
+            -0.07315865159034729,
+            -0.012167363427579403,
+            0.10188385099172592
+          ],
+          "liftWorld": 0.098884,
+          "contact": false,
+          "seconds": 1.012,
+          "sha256": "9b5c8b1b7387ec65d24ad8467ba073a5265da980603981789c67a99728dc04c9"
+        },
+        {
+          "frame": 27,
+          "timeSeconds": 1.3,
+          "nibPixel": [
+            85.3729,
+            250.6077
+          ],
+          "nibLogical": [
+            28.4576,
+            83.5359
+          ],
+          "nibWorld": [
+            -0.13979579508304596,
+            0.0021239127963781357,
+            0.08554849773645401
+          ],
+          "liftWorld": 0.082548,
+          "contact": false,
+          "seconds": 1.01,
+          "sha256": "e37c57b9db1854c101b192fcc377331dc2f33c6928fe15bcaecfd17749ded9cb"
+        },
+        {
+          "frame": 28,
+          "timeSeconds": 1.35,
+          "nibPixel": [
+            83.1063,
+            250.5497
+          ],
+          "nibLogical": [
+            27.7021,
+            83.5166
+          ],
+          "nibWorld": [
+            -0.18966250121593475,
+            0.018131103366613388,
+            0.06399013102054596
+          ],
+          "liftWorld": 0.06099,
+          "contact": false,
+          "seconds": 1.029,
+          "sha256": "714386a33641f0562cfbb860d768c0ce979f37683979805973386e7efff634f3"
+        },
+        {
+          "frame": 29,
+          "timeSeconds": 1.4,
+          "nibPixel": [
+            81.8404,
+            250.4871
+          ],
+          "nibLogical": [
+            27.2801,
+            83.4957
+          ],
+          "nibWorld": [
+            -0.2175123393535614,
+            0.034028470516204834,
+            0.04277544841170311
+          ],
+          "liftWorld": 0.039775,
+          "contact": false,
+          "seconds": 0.985,
+          "sha256": "778eca4994d59a05e3b3186020672fd593f96b2da2b8287ef18f146197e73559"
+        },
+        {
+          "frame": 30,
+          "timeSeconds": 1.45,
+          "nibPixel": [
+            81.667,
+            250.3947
+          ],
+          "nibLogical": [
+            27.2223,
+            83.4649
+          ],
+          "nibWorld": [
+            -0.22132611274719238,
+            0.047864414751529694,
+            0.025808224454522133
+          ],
+          "liftWorld": 0.022808,
+          "contact": false,
+          "seconds": 1.068,
+          "sha256": "aee65f34bb7168f2b03bd1cf02603bbbb58441a28dfd52581b6098371db28946"
+        },
+        {
+          "frame": 31,
+          "timeSeconds": 1.5,
+          "nibPixel": [
+            82.5191,
+            250.3067
+          ],
+          "nibLogical": [
+            27.5064,
+            83.4356
+          ],
+          "nibWorld": [
+            -0.20258083939552307,
+            0.05782642960548401,
+            0.01443981472402811
+          ],
+          "liftWorld": 0.01144,
+          "contact": true,
+          "seconds": 1.026,
+          "sha256": "8b5a731644bd42c6ae4f6b29eb5b58203401124701a461c0b8e04d2b0528e4ca"
+        },
+        {
+          "frame": 32,
+          "timeSeconds": 1.55,
+          "nibPixel": [
+            84.1823,
+            250.2939
+          ],
+          "nibLogical": [
+            28.0608,
+            83.4313
+          ],
+          "nibWorld": [
+            -0.16598965227603912,
+            0.06249713525176048,
+            0.007984853349626064
+          ],
+          "liftWorld": 0.004985,
+          "contact": true,
+          "seconds": 0.982,
+          "sha256": "73f13d8aaf35f17d20124819a85f9fabe28664358613421a73a62c4b11bb39b5"
+        },
+        {
+          "frame": 33,
+          "timeSeconds": 1.6,
+          "nibPixel": [
+            86.3294,
+            250.4269
+          ],
+          "nibLogical": [
+            28.7765,
+            83.4756
+          ],
+          "nibWorld": [
+            -0.11875295639038086,
+            0.06106359511613846,
+            0.004870884120464325
+          ],
+          "liftWorld": 0.001871,
+          "contact": true,
+          "seconds": 0.966,
+          "sha256": "303df6e6bfabdec058120f1c793c746619bd7c1ec572fb73259c9f94f0f19a5c"
+        },
+        {
+          "frame": 34,
+          "timeSeconds": 1.65,
+          "nibPixel": [
+            88.5712,
+            250.7466
+          ],
+          "nibLogical": [
+            29.5237,
+            83.5822
+          ],
+          "nibWorld": [
+            -0.06943466514348984,
+            0.05344841629266739,
+            0.003598257666453719
+          ],
+          "liftWorld": 0.000598,
+          "contact": true,
+          "seconds": 0.974,
+          "sha256": "bf937a2e25b18fd6b39af7482107f61d6c3a7f00d87dcc80d2222fb6e1146844"
+        },
+        {
+          "frame": 35,
+          "timeSeconds": 1.7,
+          "nibPixel": [
+            90.5166,
+            251.2523
+          ],
+          "nibLogical": [
+            30.1722,
+            83.7508
+          ],
+          "nibWorld": [
+            -0.02663544937968254,
+            0.04034187272191048,
+            0.0031607889104634523
+          ],
+          "liftWorld": 0.000161,
+          "contact": true,
+          "seconds": 1.013,
+          "sha256": "c5c13860751f7679dbb0bd5484e63321faf641c1571d968134a526c69abca9f4"
+        },
+        {
+          "frame": 36,
+          "timeSeconds": 1.75,
+          "nibPixel": [
+            91.8334,
+            251.9051
+          ],
+          "nibLogical": [
+            30.6111,
+            83.9684
+          ],
+          "nibWorld": [
+            0.002335368422791362,
+            0.023128632456064224,
+            0.0030357022769749165
+          ],
+          "liftWorld": 3.6e-05,
+          "contact": true,
+          "seconds": 0.982,
+          "sha256": "31aae61fb9524807efc89a66fbf94342c6fbabc54d47850653af7c125c9a419c"
+        },
+        {
+          "frame": 37,
+          "timeSeconds": 1.8,
+          "nibPixel": [
+            92.2994,
+            252.6385
+          ],
+          "nibLogical": [
+            30.7665,
+            84.2128
+          ],
+          "nibWorld": [
+            0.012586429715156555,
+            0.003718201071023941,
+            0.0030064089223742485
+          ],
+          "liftWorld": 6e-06,
+          "contact": true,
+          "seconds": 0.985,
+          "sha256": "ecd2488304080fc33abc83d14245177f70f8f6849ca1c8d39bdb10e5e936df11"
+        },
+        {
+          "frame": 38,
+          "timeSeconds": 1.85,
+          "nibPixel": [
+            91.8363,
+            253.3714
+          ],
+          "nibLogical": [
+            30.6121,
+            84.4571
+          ],
+          "nibWorld": [
+            0.0023975656367838383,
+            -0.01569775678217411,
+            0.0030009043402969837
+          ],
+          "liftWorld": 1e-06,
+          "contact": true,
+          "seconds": 0.978,
+          "sha256": "bfdc4452e077052e51408c791a18c04286d1bf9c53f8d3b9e55f8d14a4ec10f7"
+        },
+        {
+          "frame": 39,
+          "timeSeconds": 1.9,
+          "nibPixel": [
+            90.522,
+            254.0217
+          ],
+          "nibLogical": [
+            30.174,
+            84.6739
+          ],
+          "nibWorld": [
+            -0.02651546336710453,
+            -0.03292729705572128,
+            0.0030000966507941484
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 1.018,
+          "sha256": "42b51f1346f5f86074a72f4d885cda9e23f1dc768208a4707eebab25e6af64dd"
+        },
+        {
+          "frame": 40,
+          "timeSeconds": 1.95,
+          "nibPixel": [
+            88.5789,
+            254.5173
+          ],
+          "nibLogical": [
+            29.5263,
+            84.8391
+          ],
+          "nibWorld": [
+            -0.06926517933607101,
+            -0.046059705317020416,
+            0.0030000072438269854
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 0.984,
+          "sha256": "928e94e82ce161623d3fc3910a0cbe12b2b1e6e915acd6c268fd6eb84b72042a"
+        },
+        {
+          "frame": 41,
+          "timeSeconds": 2.0,
+          "nibPixel": [
+            86.3388,
+            254.806
+          ],
+          "nibLogical": [
+            28.7796,
+            84.9353
+          ],
+          "nibWorld": [
+            -0.11854524165391922,
+            -0.05370742082595825,
+            0.0030000004917383194
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 1.025,
+          "sha256": "617effde8dab684845af789a875ab28391bad1c8d2f475e44fdf6c81d397f153"
+        },
+        {
+          "frame": 42,
+          "timeSeconds": 2.05,
+          "nibPixel": [
+            84.1929,
+            254.8614
+          ],
+          "nibLogical": [
+            28.0643,
+            84.9538
+          ],
+          "nibWorld": [
+            -0.1657569259405136,
+            -0.05517509952187538,
+            0.0029999997932463884
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 0.982,
+          "sha256": "7f71f9540d3cbf76162663dd50883734e3f6b6faccd56c098301284309da85f1"
+        },
+        {
+          "frame": 43,
+          "timeSeconds": 2.1,
+          "nibPixel": [
+            82.5301,
+            254.6862
+          ],
+          "nibLogical": [
+            27.51,
+            84.8954
+          ],
+          "nibWorld": [
+            -0.2023373544216156,
+            -0.05053330585360527,
+            0.003000000026077032
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 0.97,
+          "sha256": "441aba28e55a4b6d9e5b6bd8c6a11c6849a73297a46392e5f5642330898794d9"
+        },
+        {
+          "frame": 44,
+          "timeSeconds": 2.15,
+          "nibPixel": [
+            81.6779,
+            254.3108
+          ],
+          "nibLogical": [
+            27.226,
+            84.7703
+          ],
+          "nibWorld": [
+            -0.22108662128448486,
+            -0.040587861090898514,
+            0.0029999997932463884
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 0.985,
+          "sha256": "78125c91d83dba3d9c78827928658deec388f148493df076b50c7130247a1ed2"
+        },
+        {
+          "frame": 45,
+          "timeSeconds": 2.2,
+          "nibPixel": [
+            81.8504,
+            253.7886
+          ],
+          "nibLogical": [
+            27.2835,
+            84.5962
+          ],
+          "nibWorld": [
+            -0.2172916829586029,
+            -0.026750851422548294,
+            0.003000000026077032
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 1.042,
+          "sha256": "7e14dc007b4f4bacb0431a6f6c6df91ff15acb379ab75e0661af8ec00a93af83"
+        },
+        {
+          "frame": 46,
+          "timeSeconds": 2.25,
+          "nibPixel": [
+            83.1148,
+            253.1878
+          ],
+          "nibLogical": [
+            27.7049,
+            84.3959
+          ],
+          "nibWorld": [
+            -0.18947523832321167,
+            -0.010833054780960083,
+            0.0030000002589076757
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 0.978,
+          "sha256": "112889d7d124485d6dc549a6a8e3f221a6cf3fd08757909d4de29a259923f8f3"
+        },
+        {
+          "frame": 47,
+          "timeSeconds": 2.3,
+          "nibPixel": [
+            85.3793,
+            252.5823
+          ],
+          "nibLogical": [
+            28.4598,
+            84.1941
+          ],
+          "nibWorld": [
+            -0.13965550065040588,
+            0.0052114021964371204,
+            0.0029999997932463884
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 0.969,
+          "sha256": "e41ab2141c054ac50cb5b75eda8a9ea0ba606af5127acf66986b110e12f42139"
+        },
+        {
+          "frame": 48,
+          "timeSeconds": 2.35,
+          "nibPixel": [
+            88.4056,
+            252.0411
+          ],
+          "nibLogical": [
+            29.4685,
+            84.0137
+          ],
+          "nibWorld": [
+            -0.07307678461074829,
+            0.01955077052116394,
+            0.003000000026077032
+          ],
+          "liftWorld": 0.0,
+          "contact": true,
+          "seconds": 0.976,
+          "sha256": "7eda6c039988765adddb7c0c5e54621de9bad2d8bf0e1e1a2cacb266d4eb50ad"
+        }
+      ],
+      "outerAlphaMaximum": 0
+    }
+  },
+  "nibLogicalAnchor": [
+    30.6,
+    84.2
+  ],
+  "paperPlane": {
+    "worldZ": 0,
+    "contactEpsilonWorld": 0.003,
+    "note": "Align logical nib anchor to the HUD paper. The transparent soft shadow is already rendered; do not add CSS drop-shadow."
+  },
+  "qualityBoundary": "Native 3D hollow quill shaft, curved original-photo vane, independent tail flex, Cycles lighting/shadow catcher. Barbs are photographic detail, not individually modelled fibres.",
+  "export": {
+    "alpha": "straight RGBA",
+    "padding": "12 actual pixels of smooth fade only at the otherwise empty export perimeter",
+    "motionBlur": false,
+    "interpolation": "frame-stepped 20fps; endpoint49 equals frame1 and is excluded from atlas"
+  },
+  "license": "CC-BY-SA-4.0; see ATTRIBUTION.md",
+  "sourcePhotoSha256": "bcab6847141fe0b818fe27c94780a3b383ca634e7de08bf4cedd27c97044941c",
+  "sourceBookSceneSha256": "381d5182eeb3849f4a5a60f1ca561a78f25d54d942e186c020444deb397ddc7b",
+  "editableScene": "model-src/quill-writing/grey-crow-writing-quill.blend",
+  "editableSceneSha256": "0b223e680e9294342c669e10013eb0517578f767b7712b54e8100d19cccd0cb7",
+  "sourceHashes": {
+    "writing_scene.py": "007b343aa8a1d820920c6579dc8cca138dfcc76583a05a94a1446978975e0df0",
+    "assemble_atlas.py": "1b45eac6d2211869f6a92f0f0d8851f7347f905793782f0c6953633f0cfcc723"
+  }
+}

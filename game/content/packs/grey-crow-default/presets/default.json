@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "grey-crow-new-game-preset-v2",
+  "id": "grey-crow-default",
+  "language": "zh-CN",
+  "locales": [
+    "zh-CN",
+    "en-US",
+    "ja-JP"
+  ],
+  "localizedMetadata": [
+    {
+      "locale": "en-US",
+      "title": "Grey Crow · Shanghai Outbreak",
+      "description": "Shanghai, ten days after the outbreak. Power and supplies are running short, yet people still wait at home for rescue. Choose who you are, the one thing you kept and where you begin. Explore lanes and neighborhoods, talk to survivors and search for supplies as trust and survival come into conflict. A restrained, tense story with infection, injury and loss. Describe your actions in your own words and discover their consequences."
+    },
+    {
+      "locale": "ja-JP",
+      "title": "灰鴉・上海終末",
+      "description": "感染拡大から十日目の上海。電力も物資も不足し始める一方、家で救援を待つ人々もいる。自分の素性、唯一手元に残したもの、出発地点を決め、路地や街区を探索し、生存者と話し、物資を探そう。信頼と生存の間で何を選ぶか。感染、負傷、喪失を含む、静かな緊張感のある物語。行動を自分の言葉で伝え、その結果を見届ける。"
+    }
+  ],
+  "host": {
+    "packId": "grey-crow-default",
+    "itemId": "grey-crow-host"
+  },
+  "world": {
+    "packId": "grey-crow-default",
+    "itemId": "shanghai-day10"
+  },
+  "newGameSkill": {
+    "packId": "grey-crow-default",
+    "itemId": "new-game-default"
+  },
+  "skills": [
+    {
+      "packId": "grey-crow-default",
+      "itemId": "game-state"
+    },
+    {
+      "packId": "grey-crow-default",
+      "itemId": "map"
+    },
+    {
+      "packId": "grey-crow-default",
+      "itemId": "entity-memory"
+    },
+    {
+      "packId": "grey-crow-default",
+      "itemId": "story-finale"
+    },
+    {
+      "packId": "grey-crow-default",
+      "itemId": "extreme-ending-easter"
+    }
+  ],
+  "optionalSkills": [
+    {
+      "packId": "grey-crow-default",
+      "itemId": "memory-fragment",
+      "defaultEnabled": true
+    }
+  ]
+}

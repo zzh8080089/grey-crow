@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://greycrow.local/schemas/p2-27/skill-io-companion.v1.schema.json",
+  "title": "Grey Crow Skill I/O companion v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "namespace", "defaultView", "readViews", "actions"],
+  "properties": {
+    "schemaVersion": { "const": "grey-crow-skill-io-companion-v1" },
+    "namespace": { "$ref": "#/$defs/id" },
+    "defaultView": { "enum": ["guide", "overview", "recent", "lookup"] },
+    "readViews": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 4,
+      "items": { "$ref": "#/$defs/readView" }
+    },
+    "actions": {
+      "type": "array",
+      "maxItems": 8,
+      "items": { "$ref": "#/$defs/action" }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[a-z][a-z0-9_]*$"
+    },
+    "label": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "readView": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "projection", "targetFieldIds", "query", "limit"],
+      "properties": {
+        "id": { "enum": ["guide", "overview", "recent", "lookup"] },
+        "projection": { "enum": ["guide", "summary", "recent_records", "record_lookup"] },
+        "targetFieldIds": {
+          "type": "array",
+          "maxItems": 12,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/id" }
+        },
+        "query": { "type": "boolean" },
+        "limit": { "type": "integer", "minimum": 1, "maximum": 12 }
+      }
+    },
+    "inputValue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "type", "description"],
+      "properties": {
+        "name": { "$ref": "#/$defs/id" },
+        "type": { "enum": ["integer", "number", "string", "boolean"] },
+        "description": { "$ref": "#/$defs/label" },
+        "minimum": { "type": "number", "minimum": -1000000000, "maximum": 1000000000 },
+        "maximum": { "type": "number", "minimum": -1000000000, "maximum": 1000000000 },
+        "maxLength": { "type": "integer", "minimum": 1, "maximum": 2000 },
+        "enum": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 32,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/label" }
+        }
+      }
+    },
+    "modelInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fields", "required"],
+      "properties": {
+        "fields": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 6,
+          "items": { "$ref": "#/$defs/inputValue" }
+        },
+        "required": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 6,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/id" }
+        }
+      }
+    },
+    "valueMapEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["input", "value"],
+      "properties": {
+        "input": { "$ref": "#/$defs/label" },
+        "value": { "$ref": "#/$defs/id" }
+      }
+    },
+    "binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["argument", "mode"],
+      "properties": {
+        "argument": { "$ref": "#/$defs/id" },
+        "mode": { "enum": ["opaque_value", "numeric_delta", "list_change", "exact_enum_label"] },
+        "itemFieldId": { "$ref": "#/$defs/id" },
+        "valueMap": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 32,
+          "items": { "$ref": "#/$defs/valueMapEntry" }
+        }
+      }
+    },
+    "runtimeMapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["targetFieldId", "operation", "bindings", "policy"],
+      "properties": {
+        "targetFieldId": { "$ref": "#/$defs/id" },
+        "operation": { "enum": ["set", "append"] },
+        "bindings": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 6,
+          "items": { "$ref": "#/$defs/binding" }
+        },
+        "policy": { "const": "none" }
+      }
+    },
+    "action": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "toolName", "label", "archetype", "modelInput", "runtimeMapping"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "toolName": { "$ref": "#/$defs/id" },
+        "label": { "$ref": "#/$defs/label" },
+        "archetype": {
+          "enum": ["set_value", "adjust_number", "append_record", "change_list_item", "choose_enum"]
+        },
+        "modelInput": { "$ref": "#/$defs/modelInput" },
+        "runtimeMapping": { "$ref": "#/$defs/runtimeMapping" }
+      }
+    }
+  }
+}

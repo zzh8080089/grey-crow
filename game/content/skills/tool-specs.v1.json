@@ -1,0 +1,537 @@
+{
+  "schemaVersion": "grey-crow-tool-spec-pack-v1",
+  "status": "historical-draft",
+  "directionGuardrail": "Historical prototype. References to hard state mean narrow app/UI state only; this file must not be used to turn Grey Crow into a CRPG state machine.",
+  "source": {
+    "migrationDoc": "dev-docs/migration/openclaw-capability-extraction.md",
+    "runtimeRegistry": "engine/runtime/tool-registry.js",
+    "runtimePolicy": "content/runtime/grey-crow-runtime-policy.md",
+    "runtimeSkillRewrite": "content/skills/runtime-skill-rewrites.v1.json",
+    "desktopBridge": "engine/bridge/desktop-bridge.js",
+    "stateStore": "engine/runtime/state-store.js",
+    "worldMapStore": "engine/runtime/world-map-store.js"
+  },
+  "modelVisibleDefault": [
+    "read_state",
+    "read_fact",
+    "read_map",
+    "search_memory",
+    "propose_event"
+  ],
+  "runtimeOnlyDefault": [
+    "append_memory",
+    "compact_context",
+    "new_game_init",
+    "save_lifecycle"
+  ],
+  "commitPolicy": "Historical draft. Current direction keeps most Grey Crow material in saveRoot records; only narrow app/UI state is guarded before commit_event, which is not a callable Tool Spec.",
+  "tools": [
+    {
+      "name": "read_state",
+      "status": "implemented",
+      "permission": "read",
+      "mode": "read",
+      "sourceSkill": "game-state",
+      "authority": "state_store",
+      "modelVisible": true,
+      "writesState": false,
+      "description": "Read the confirmed player, inventory, scene, time, and active event projection.",
+      "input": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "outputBoundary": [
+        "confirmed state projection only",
+        "no local paths",
+        "no prompt text",
+        "no provider raw data"
+      ]
+    },
+    {
+      "name": "read_fact",
+      "status": "implemented",
+      "permission": "read",
+      "mode": "read",
+      "sourceSkill": "entity-memory",
+      "authority": "state_store_and_fact_store",
+      "modelVisible": true,
+      "writesState": false,
+      "description": "Read confirmed facts matching a query. Demo currently projects facts from State Store; future versions may add indexed world and character stores.",
+      "input": {
+        "type": "object",
+        "required": [
+          "query"
+        ],
+        "properties": {
+          "query": {
+            "type": "string",
+            "maxChars": 1000
+          }
+        },
+        "additionalProperties": false
+      },
+      "outputBoundary": [
+        "matches must be marked confirmed or not_fact",
+        "freeform summaries cannot become facts",
+        "NPC motive or relationship claims require Hard Commit Validator before becoming hard state"
+      ]
+    },
+    {
+      "name": "read_map",
+      "status": "implemented",
+      "permission": "read",
+      "mode": "read",
+      "sourceSkill": "map",
+      "authority": "world_fact_store_with_state_anchor",
+      "modelVisible": true,
+      "writesState": false,
+      "description": "Read confirmed locations, exits, nearby points of interest, and route constraints. If no world map file exists, Runtime returns a safe State Store location fallback instead of inventing routes.",
+      "input": {
+        "type": "object",
+        "properties": {
+          "location": {
+            "type": "string",
+            "maxChars": 160
+          },
+          "query": {
+            "type": "string",
+            "maxChars": 1000
+          },
+          "scope": {
+            "type": "string",
+            "enum": [
+              "current_location",
+              "nearby",
+              "route",
+              "known_world"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "outputBoundary": [
+        "source is world_map_store or state_projection_fallback",
+        "output includes state_anchor",
+        "map reads do not move the player",
+        "unknown routes remain uncertain",
+        "new POI claims require Hard Commit Validator before becoming hard world state",
+        "no local paths or map filenames"
+      ]
+    },
+    {
+      "name": "search_memory",
+      "status": "implemented",
+      "permission": "read",
+      "mode": "read",
+      "sourceSkill": "memory-fragment",
+      "authority": "memory_context_only",
+      "modelVisible": true,
+      "writesState": false,
+      "description": "Search recent memory and audit projections as non-authoritative context.",
+      "input": {
+        "type": "object",
+        "required": [
+          "query"
+        ],
+        "properties": {
+          "query": {
+            "type": "string",
+            "maxChars": 1000
+          },
+          "limit": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 50
+          }
+        },
+        "additionalProperties": false
+      },
+      "outputBoundary": [
+        "records must be marked not_fact",
+        "memory note text is not authority",
+        "requires Hard Commit Validator before influencing hard state"
+      ]
+    },
+    {
+      "name": "propose_event",
+      "status": "implemented",
+      "permission": "candidate",
+      "mode": "candidate",
+      "sourceSkill": "runtime-policy",
+      "authority": "candidate_only",
+      "modelVisible": true,
+      "writesState": false,
+      "description": "Turn player action into candidate events for Hard Commit Validator review when hard state is proposed. This never commits state.",
+      "input": {
+        "type": "object",
+        "required": [
+          "type",
+          "summary"
+        ],
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string",
+            "maxChars": 1000
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 32
+          },
+          "risk": {
+            "type": "string",
+            "enum": [
+              "low",
+              "medium",
+              "high"
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "outputBoundary": [
+        "candidate is not fact",
+        "narration is not state",
+        "Hard Commit Validator decides hard state commits"
+      ]
+    },
+    {
+      "name": "append_memory",
+      "status": "implemented",
+      "permission": "write_memory",
+      "mode": "write",
+      "sourceSkill": "game-save",
+      "authority": "memory_store",
+      "modelVisible": false,
+      "writesState": false,
+      "description": "Append an audit-safe memory note after Runtime has handled the turn. This does not commit world state.",
+      "input": {
+        "type": "object",
+        "required": [
+          "note"
+        ],
+        "properties": {
+          "note": {
+            "type": "string",
+            "maxChars": 1000
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 32
+          }
+        },
+        "additionalProperties": false
+      },
+      "outputBoundary": [
+        "memory is not authority",
+        "no API keys",
+        "no local paths",
+        "no raw provider body"
+      ]
+    },
+    {
+      "name": "upsert_character_fact",
+      "status": "implemented_soft_write",
+      "permission": "write_domain",
+      "mode": "write",
+      "sourceSkill": "entity-memory",
+      "authority": "domain_write_store",
+      "modelVisible": true,
+      "writesState": false,
+      "writesSoftRecord": true,
+      "description": "Create or update a character/NPC soft record inside the current saveRoot. This is not a hard state commit.",
+      "input": {
+        "type": "object",
+        "required": [
+          "character"
+        ],
+        "properties": {
+          "character": {
+            "type": "object",
+            "semanticRequirements": [
+              "id or name"
+            ],
+            "properties": {
+              "id": { "type": "string", "maxChars": 64 },
+              "name": { "type": "string", "maxChars": 160 },
+              "aliases": { "type": "array", "items": { "type": "string", "maxChars": 120 }, "maxItems": 16 },
+              "visible_description": {
+                "type": "object",
+                "properties": {
+                  "appearance": { "type": "string", "maxChars": 300 },
+                  "behavior": { "type": "string", "maxChars": 300 },
+                  "voice": { "type": "string", "maxChars": 300 },
+                  "atmosphere": { "type": "string", "maxChars": 300 },
+                  "first_seen": { "type": "string", "maxChars": 300 }
+                },
+                "additionalProperties": false
+              },
+              "role": { "type": "string", "maxChars": 160 },
+              "faction": { "type": "string", "maxChars": 160 },
+              "relationship_to_player": { "type": "string", "maxChars": 160 },
+              "known_facts": { "type": "array", "items": { "type": "string", "maxChars": 500 }, "maxItems": 24 },
+              "player_claims": { "type": "array", "items": { "type": "string", "maxChars": 500 }, "maxItems": 24 },
+              "rumors": { "type": "array", "items": { "type": "string", "maxChars": 500 }, "maxItems": 24 },
+              "status": { "type": "string", "maxChars": 80 },
+              "authority": { "type": "string", "enum": ["soft", "player_claim", "rumor", "attempt", "narrative_event"] }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      },
+      "outputBoundary": [
+        "returns not_hard_state true",
+        "no local paths",
+        "no raw file write",
+        "hard state still requires Hard Commit Validator"
+      ]
+    },
+    {
+      "name": "upsert_location_fact",
+      "status": "implemented_soft_write",
+      "permission": "write_domain",
+      "mode": "write",
+      "sourceSkill": "map",
+      "authority": "domain_write_store",
+      "modelVisible": true,
+      "writesState": false,
+      "writesSoftRecord": true,
+      "description": "Create or update a location soft record inside the current saveRoot. This does not move the player.",
+      "input": {
+        "type": "object",
+        "required": [
+          "location"
+        ],
+        "properties": {
+          "location": {
+            "type": "object",
+            "semanticRequirements": [
+              "id or name"
+            ],
+            "properties": {
+              "id": { "type": "string", "maxChars": 64 },
+              "name": { "type": "string", "maxChars": 160 },
+              "aliases": { "type": "array", "items": { "type": "string", "maxChars": 120 }, "maxItems": 16 },
+              "summary": { "type": "string", "maxChars": 800 },
+              "visible_description": {
+                "type": "object",
+                "properties": {
+                  "appearance": { "type": "string", "maxChars": 300 },
+                  "behavior": { "type": "string", "maxChars": 300 },
+                  "voice": { "type": "string", "maxChars": 300 },
+                  "atmosphere": { "type": "string", "maxChars": 300 },
+                  "first_seen": { "type": "string", "maxChars": 300 }
+                },
+                "additionalProperties": false
+              },
+              "status": { "type": "string", "maxChars": 80 },
+              "exits": { "type": "array", "items": { "type": "string", "maxChars": 240 }, "maxItems": 16 },
+              "nearby_points": { "type": "array", "items": { "type": "string", "maxChars": 240 }, "maxItems": 16 },
+              "route_constraints": { "type": "array", "items": { "type": "string", "maxChars": 240 }, "maxItems": 16 },
+              "known_facts": { "type": "array", "items": { "type": "string", "maxChars": 500 }, "maxItems": 24 },
+              "player_claims": { "type": "array", "items": { "type": "string", "maxChars": 500 }, "maxItems": 24 },
+              "authority": { "type": "string", "enum": ["soft", "player_claim", "rumor", "attempt", "narrative_event"] }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      },
+      "outputBoundary": [
+        "returns not_hard_state true",
+        "no local paths",
+        "no raw file write",
+        "hard state still requires Hard Commit Validator"
+      ]
+    },
+    {
+      "name": "append_timeline_event",
+      "status": "implemented_soft_write",
+      "permission": "write_domain",
+      "mode": "write",
+      "sourceSkill": "game-save",
+      "authority": "domain_write_store",
+      "modelVisible": true,
+      "writesState": false,
+      "writesSoftRecord": true,
+      "description": "Append a narrative timeline event inside the current saveRoot. This does not bypass hard state validation.",
+      "input": {
+        "type": "object",
+        "required": [
+          "event"
+        ],
+        "properties": {
+          "event": {
+            "type": "object",
+            "required": [
+              "summary"
+            ],
+            "properties": {
+              "id": { "type": "string", "maxChars": 64 },
+              "type": { "type": "string", "maxChars": 80 },
+              "summary": { "type": "string", "maxChars": 1000 },
+              "participants": { "type": "array", "items": { "type": "string", "maxChars": 120 }, "maxItems": 16 },
+              "location_id": { "type": "string", "maxChars": 120 },
+              "authority": { "type": "string", "enum": ["soft", "player_claim", "rumor", "attempt", "narrative_event"] }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      },
+      "outputBoundary": [
+        "returns not_hard_state true",
+        "no local paths",
+        "no raw file write",
+        "hard state still requires Hard Commit Validator"
+      ]
+    },
+    {
+      "name": "compact_context",
+      "status": "implemented",
+      "permission": "write_memory",
+      "mode": "maintenance",
+      "sourceSkill": "summarize",
+      "authority": "memory_store",
+      "modelVisible": false,
+      "writesState": false,
+      "description": "Create an audit-safe compact summary over confirmed memory records. The current State Store remains authoritative.",
+      "input": {
+        "type": "object",
+        "properties": {
+          "limit": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 50
+          }
+        },
+        "additionalProperties": false
+      },
+      "outputBoundary": [
+        "summary must include source range",
+        "summary must include state anchor",
+        "summary cannot overwrite confirmed facts"
+      ]
+    },
+    {
+      "name": "new_game_init",
+      "status": "implemented_minimal",
+      "permission": "runtime_lifecycle",
+      "mode": "lifecycle",
+      "sourceSkill": "new-game",
+      "authority": "save_lifecycle",
+      "modelVisible": false,
+      "writesState": true,
+      "description": "Initialize a new save slot with default confirmed state. Desktop main process owns save slot creation, then calls the Desktop Bridge runtime lifecycle method before the first player turn.",
+      "input": {
+        "type": "object",
+        "properties": {
+          "saveId": {
+            "type": "string"
+          },
+          "preset": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "outputBoundary": [
+        "only Runtime creates initial confirmed state",
+        "no player-provided facts without validation",
+        "no old OpenClaw session dependency",
+        "no provider secret, local path, or raw state returned to renderer"
+      ]
+    },
+    {
+      "name": "save_lifecycle",
+      "status": "implemented_minimal",
+      "permission": "runtime_lifecycle",
+      "mode": "lifecycle",
+      "sourceSkill": "game-save",
+      "authority": "save_store",
+      "modelVisible": false,
+      "writesState": true,
+      "description": "Own save summaries, rename, snapshot markers, repair/delete confirmation policy, and future restore planning. Current Demo does not expose automatic backup or Restore; overwrite remains behind a confirmation contract until a replacement source exists.",
+      "input": {
+        "type": "object",
+        "properties": {
+          "operation": {
+            "type": "string",
+            "enum": [
+              "list",
+              "create",
+              "rename",
+              "snapshot",
+              "overwrite",
+              "delete"
+            ]
+          },
+          "saveId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "confirmationToken": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "outputBoundary": [
+        "delete requires runtime-issued confirmation token",
+        "overwrite is token-gated but reserved until replacement source exists",
+        "save summary is a projection, not full state",
+        "snapshot writes sanitized summary only",
+        "no local path exposure to renderer",
+        "no API key or provider config"
+      ]
+    }
+  ],
+  "deferred": [
+    {
+      "sourceSkill": "camp",
+      "reason": "Requires domain rewrite for shelter, resources, and long-term state before becoming a safe tool."
+    },
+    {
+      "sourceSkill": "memory-fragment",
+      "reason": "Can enrich narration later, but must not become authority over State Store."
+    },
+    {
+      "sourceSkill": "soul-switcher",
+      "reason": "Host Profile switching is useful later; Demo keeps one default host."
+    },
+    {
+      "sourceSkill": "delete-save",
+      "reason": "Needs full desktop save management UI and multi-confirmation policy."
+    }
+  ],
+  "excluded": [
+    {
+      "sourceSkill": "scene-visualizer",
+      "reason": "Image capability is explicitly excluded from migration."
+    },
+    {
+      "sourceSkill": "skill-creator-pro",
+      "reason": "Development helper only; not packaged into the game."
+    },
+    {
+      "sourceSkill": "OpenClaw Gateway",
+      "reason": "Not a game runtime dependency."
+    },
+    {
+      "sourceSkill": "external channels",
+      "reason": "Feishu, Slack, Discord, Teams, and similar channels are not part of local Demo."
+    }
+  ]
+}

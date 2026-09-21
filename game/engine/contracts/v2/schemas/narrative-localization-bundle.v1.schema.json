@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://greycrow.local/schemas/p2-27/narrative-localization-bundle.v1.schema.json",
+  "title": "Grey Crow narrative content localization bundle v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "itemId", "itemType", "sourceLocale", "locales"],
+  "properties": {
+    "schemaVersion": { "const": "grey-crow-narrative-localization-bundle-v1" },
+    "itemId": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/identifier"
+    },
+    "itemType": { "enum": ["host", "world"] },
+    "sourceLocale": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/language"
+    },
+    "locales": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 15,
+      "items": { "$ref": "#/$defs/localeResource" }
+    }
+  },
+  "$defs": {
+    "localeResource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["locale", "title", "description", "contentPath"],
+      "properties": {
+        "locale": {
+          "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/language"
+        },
+        "title": {
+          "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/shortText"
+        },
+        "description": {
+          "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/description"
+        },
+        "contentPath": {
+          "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/relativePath"
+        }
+      }
+    }
+  }
+}

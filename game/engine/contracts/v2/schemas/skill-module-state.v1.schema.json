@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://greycrow.local/schemas/p2-25/skill-module-state.v1.schema.json",
+  "title": "Grey Crow Skill Module state v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "moduleRef",
+    "lockedItem",
+    "definitionHash",
+    "stateVersion",
+    "revision",
+    "activated",
+    "values",
+    "createdTurn",
+    "updatedTurn",
+    "createdAt",
+    "updatedAt"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "grey-crow-skill-module-state-v1" },
+    "moduleRef": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/stableRef"
+    },
+    "lockedItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["packId", "itemId"],
+      "properties": {
+        "packId": {
+          "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/identifier"
+        },
+        "itemId": {
+          "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/identifier"
+        }
+      }
+    },
+    "definitionHash": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/sha256"
+    },
+    "stateVersion": { "const": 1 },
+    "revision": { "type": "integer", "minimum": 0, "maximum": 2147483647 },
+    "activated": { "type": "boolean" },
+    "values": {
+      "type": "object",
+      "maxProperties": 32,
+      "patternProperties": {
+        "^[a-z][a-z0-9_]{0,63}$": { "$ref": "#/$defs/stateValue" }
+      },
+      "additionalProperties": false
+    },
+    "createdTurn": { "type": "integer", "minimum": 0, "maximum": 2147483647 },
+    "updatedTurn": { "type": "integer", "minimum": 0, "maximum": 2147483647 },
+    "createdAt": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/timestamp"
+    },
+    "updatedAt": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/timestamp"
+    }
+  },
+  "$defs": {
+    "scalarValue": {
+      "anyOf": [
+        { "type": "number", "minimum": -1000000000, "maximum": 1000000000 },
+        { "type": "string", "maxLength": 2000 },
+        { "type": "boolean" }
+      ]
+    },
+    "recordItem": {
+      "type": "object",
+      "minProperties": 1,
+      "maxProperties": 16,
+      "patternProperties": {
+        "^[a-z][a-z0-9_]{0,63}$": { "$ref": "#/$defs/scalarValue" }
+      },
+      "additionalProperties": false
+    },
+    "stateValue": {
+      "anyOf": [
+        { "$ref": "#/$defs/scalarValue" },
+        {
+          "type": "array",
+          "maxItems": 64,
+          "items": { "type": "string", "maxLength": 240 }
+        },
+        {
+          "type": "array",
+          "maxItems": 100,
+          "items": { "$ref": "#/$defs/recordItem" }
+        }
+      ]
+    }
+  }
+}

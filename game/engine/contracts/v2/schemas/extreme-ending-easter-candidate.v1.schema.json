@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://greycrow.local/schemas/p2-25/extreme-ending-easter-candidate.v1.schema.json",
+  "title": "Grey Crow extreme ending Easter candidate v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "candidateId",
+    "proposedTurn",
+    "proposedAt",
+    "fingerprint",
+    "fictionBoundary",
+    "intentSummary",
+    "sceneAnchor",
+    "skillIdentityHash"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "grey-crow-extreme-ending-easter-candidate-v1" },
+    "candidateId": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/stableRef"
+    },
+    "proposedTurn": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "proposedAt": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/timestamp"
+    },
+    "fingerprint": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/sha256"
+    },
+    "fictionBoundary": { "const": "explicit_in_game_character" },
+    "intentSummary": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 600
+    },
+    "sceneAnchor": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/shortText"
+    },
+    "skillIdentityHash": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/sha256"
+    }
+  }
+}

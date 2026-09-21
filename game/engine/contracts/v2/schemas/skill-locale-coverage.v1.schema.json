@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://greycrow.local/schemas/p2-26/skill-locale-coverage.v1.schema.json",
+  "title": "Grey Crow Skill locale preflight coverage v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "requestedLocale",
+    "localeRevision",
+    "status",
+    "readySkillIds",
+    "blockers"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "grey-crow-skill-locale-coverage-v1" },
+    "requestedLocale": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/language"
+    },
+    "localeRevision": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/stableRef"
+    },
+    "status": { "enum": ["ready", "blocked"] },
+    "readySkillIds": {
+      "type": "array",
+      "maxItems": 65,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/identifier"
+      }
+    },
+    "blockers": {
+      "type": "array",
+      "maxItems": 65,
+      "items": { "$ref": "#/$defs/blocker" }
+    }
+  },
+  "$defs": {
+    "blocker": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "packId",
+        "itemId",
+        "ownership",
+        "reason",
+        "sourceLocale",
+        "availableLocales"
+      ],
+      "properties": {
+        "packId": {
+          "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/identifier"
+        },
+        "itemId": {
+          "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/identifier"
+        },
+        "ownership": { "enum": ["built_in", "player_owned", "imported_readonly"] },
+        "reason": { "enum": ["missing_locale", "source_only_snapshot", "invalid_resource"] },
+        "sourceLocale": {
+          "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/language"
+        },
+        "availableLocales": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 16,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/language"
+          }
+        }
+      }
+    }
+  }
+}

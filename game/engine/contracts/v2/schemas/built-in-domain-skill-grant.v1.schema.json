@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://greycrow.local/schemas/p2-27/built-in-domain-skill-grant.v1.schema.json",
+  "title": "Grey Crow built-in domain Skill grant v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "skillId",
+    "namespace",
+    "companionHash",
+    "capability",
+    "readViewIds",
+    "actions",
+    "writePolicy"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "grey-crow-built-in-domain-skill-grant-v1" },
+    "skillId": { "$ref": "#/$defs/id" },
+    "namespace": { "$ref": "#/$defs/id" },
+    "companionHash": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/sha256"
+    },
+    "capability": { "const": "character_records" },
+    "readViewIds": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "uniqueItems": true,
+      "items": { "enum": ["guide", "overview", "recent", "lookup"] }
+    },
+    "actions": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": { "$ref": "#/$defs/actionGrant" }
+    },
+    "writePolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["canonicalOwner", "expectedRevision", "idempotency", "automaticMerge"],
+      "properties": {
+        "canonicalOwner": { "const": "runtime" },
+        "expectedRevision": { "const": "runtime_supplied_for_existing_record" },
+        "idempotency": { "const": "action_identity" },
+        "automaticMerge": { "const": "forbidden" }
+      }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[a-z][a-z0-9_]*$"
+    },
+    "actionGrant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "toolName", "operation", "inputNames"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "toolName": { "$ref": "#/$defs/id" },
+        "operation": {
+          "enum": [
+            "create_character",
+            "append_encounter",
+            "record_identity",
+            "append_fact",
+            "set_relationship"
+          ]
+        },
+        "inputNames": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/id" }
+        }
+      }
+    }
+  }
+}

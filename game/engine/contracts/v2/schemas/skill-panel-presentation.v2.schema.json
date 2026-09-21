@@ -1,0 +1,224 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://greycrow.local/schemas/p2-29/skill-panel-presentation.v2.schema.json",
+  "title": "Grey Crow locked Skill panel presentation v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "panels"],
+  "properties": {
+    "schemaVersion": { "const": "grey-crow-skill-panel-presentation-v2" },
+    "panels": {
+      "type": "array",
+      "maxItems": 64,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/panel" }
+    }
+  },
+  "$defs": {
+    "fieldId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[a-z][a-z0-9_]*$"
+    },
+    "nullableGuide": {
+      "anyOf": [
+        { "type": "null" },
+        { "type": "string", "minLength": 1, "maxLength": 2000 }
+      ]
+    },
+    "nullableVisibility": {
+      "anyOf": [
+        { "type": "null" },
+        { "enum": ["visible", "hidden_until_active"] }
+      ]
+    },
+    "nullableModuleRef": {
+      "anyOf": [
+        { "type": "null" },
+        {
+          "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/stableRef"
+        }
+      ]
+    },
+    "ordinarySource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["packId", "itemId", "hasModule", "moduleRef", "visibility"],
+      "properties": {
+        "packId": {
+          "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/identifier"
+        },
+        "itemId": {
+          "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/identifier"
+        },
+        "hasModule": { "type": "boolean" },
+        "moduleRef": { "$ref": "#/$defs/nullableModuleRef" },
+        "visibility": { "$ref": "#/$defs/nullableVisibility" }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "hasModule": { "const": true } },
+            "required": ["hasModule"]
+          },
+          "then": {
+            "properties": {
+              "moduleRef": {
+                "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/stableRef"
+              },
+              "visibility": { "enum": ["visible", "hidden_until_active"] }
+            }
+          },
+          "else": {
+            "properties": {
+              "moduleRef": { "type": "null" },
+              "visibility": { "type": "null" }
+            }
+          }
+        }
+      ]
+    },
+    "domainSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["skillId", "capability", "defaultView"],
+      "properties": {
+        "skillId": { "$ref": "#/$defs/fieldId" },
+        "capability": { "$ref": "#/$defs/fieldId" },
+        "defaultView": { "enum": ["guide", "overview", "recent", "lookup"] }
+      }
+    },
+    "panel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "panelRef",
+        "sourceKind",
+        "ownership",
+        "group",
+        "sortOrder",
+        "title",
+        "language",
+        "description",
+        "triggers",
+        "playerGuide",
+        "surface",
+        "ordinarySource",
+        "domainSource"
+      ],
+      "properties": {
+        "panelRef": {
+          "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/stableRef"
+        },
+        "sourceKind": { "enum": ["ordinary_skill", "built_in_domain"] },
+        "ownership": { "enum": ["built_in", "player_owned", "imported_readonly"] },
+        "group": { "enum": ["story_records", "adventure_gameplay", "player_extensions"] },
+        "sortOrder": { "type": "integer", "minimum": 0, "maximum": 100000 },
+        "title": {
+          "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/shortText"
+        },
+        "language": {
+          "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/language"
+        },
+        "description": {
+          "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/description"
+        },
+        "triggers": {
+          "type": "array",
+          "maxItems": 32,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1, "maxLength": 120 }
+        },
+        "playerGuide": { "$ref": "#/$defs/nullableGuide" },
+        "surface": { "enum": ["guide", "fields", "progress", "list_detail", "timeline"] },
+        "ordinarySource": {
+          "anyOf": [
+            { "type": "null" },
+            { "$ref": "#/$defs/ordinarySource" }
+          ]
+        },
+        "domainSource": {
+          "anyOf": [
+            { "type": "null" },
+            { "$ref": "#/$defs/domainSource" }
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "sourceKind": { "const": "built_in_domain" } },
+            "required": ["sourceKind"]
+          },
+          "then": {
+            "properties": {
+              "ownership": { "const": "built_in" },
+              "group": { "const": "story_records" },
+              "ordinarySource": { "type": "null" },
+              "domainSource": { "$ref": "#/$defs/domainSource" }
+            }
+          },
+          "else": {
+            "properties": {
+              "ordinarySource": { "$ref": "#/$defs/ordinarySource" },
+              "domainSource": { "type": "null" }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "sourceKind": { "const": "ordinary_skill" },
+              "ownership": { "const": "player_owned" }
+            },
+            "required": ["sourceKind", "ownership"]
+          },
+          "then": {
+            "properties": { "group": { "const": "player_extensions" } }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "sourceKind": { "const": "ordinary_skill" },
+              "ownership": { "const": "imported_readonly" }
+            },
+            "required": ["sourceKind", "ownership"]
+          },
+          "then": {
+            "properties": { "group": { "const": "player_extensions" } }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "sourceKind": { "const": "ordinary_skill" },
+              "ownership": { "const": "built_in" }
+            },
+            "required": ["sourceKind", "ownership"]
+          },
+          "then": {
+            "properties": { "group": { "const": "adventure_gameplay" } }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "sourceKind": { "const": "ordinary_skill" },
+              "ordinarySource": {
+                "type": "object",
+                "properties": { "hasModule": { "const": false } },
+                "required": ["hasModule"]
+              }
+            },
+            "required": ["sourceKind", "ordinarySource"]
+          },
+          "then": {
+            "properties": { "surface": { "const": "guide" } }
+          }
+        }
+      ]
+    }
+  }
+}

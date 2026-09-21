@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "grey-crow-narrative-localization-bundle-v1",
+  "itemId": "grey-crow-host",
+  "itemType": "host",
+  "sourceLocale": "zh-CN",
+  "locales": [
+    {
+      "locale": "en-US",
+      "title": "Grey Crow Host",
+      "description": "A calm, restrained, concrete Grey Crow hosting style with no fixed world setting.",
+      "contentPath": "host/locales/en-US/HOST.md"
+    },
+    {
+      "locale": "ja-JP",
+      "title": "灰鴉ホスト",
+      "description": "特定の世界設定に依存せず、冷静で抑制された具体的な語りを行う灰鴉のホストスタイル。",
+      "contentPath": "host/locales/ja-JP/HOST.md"
+    }
+  ]
+}

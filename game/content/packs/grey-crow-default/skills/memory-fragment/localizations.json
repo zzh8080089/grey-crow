@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "grey-crow-skill-localization-bundle-v1",
+  "itemId": "memory-fragment",
+  "sourceLocale": "zh-CN",
+  "locales": [
+    {
+      "locale": "en-US",
+      "title": "Memory Fragments",
+      "description": "Collects unverified sensory fragments during deliberate recall or strongly associated scenes, then lets the player decide how to face the reconstructed past.",
+      "triggers": [
+        "deliberately recall",
+        "memory",
+        "familiar smell",
+        "déjà vu",
+        "old object",
+        "identity clue"
+      ],
+      "playerGuide": "During deliberate recall or strongly associated scenes, the host may preserve up to 30 hazy sensory fragments. They are not confirmed history; after the track fills, you may accept the past, choose a new self, or leave the decision open.",
+      "skillPath": "skills/memory-fragment/locales/en-US/SKILL.md",
+      "templates": [],
+      "modulePresentationPath": "skills/memory-fragment/locales/en-US/module-presentation.json"
+    },
+    {
+      "locale": "ja-JP",
+      "title": "記憶の欠片",
+      "description": "意識的な想起や強い連想場面で未確認の感覚的な欠片を集め、再構成した過去とどう向き合うかをプレイヤーが選ぶ。",
+      "triggers": ["思い出そうとする", "記憶", "懐かしい匂い", "既視感", "古い物", "身元の手掛かり"],
+      "playerGuide": "意識的に思い出そうとしたときや、強い連想が生まれる場面で、ホストは最大30個の曖昧な感覚の欠片を残すことがあります。欠片は確認済みの過去ではありません。すべて集まった後は、過去を受け入れる、新しい自分を選ぶ、決定を保留する、のいずれかを選べます。",
+      "skillPath": "skills/memory-fragment/locales/ja-JP/SKILL.md",
+      "templates": [],
+      "modulePresentationPath": "skills/memory-fragment/locales/ja-JP/module-presentation.json"
+    }
+  ]
+}

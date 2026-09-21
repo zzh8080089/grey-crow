@@ -1,0 +1,186 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://greycrow.local/schemas/p2-27/built-in-domain-skill-io.v1.schema.json",
+  "title": "Grey Crow built-in domain Skill I/O v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "skillId",
+    "namespace",
+    "target",
+    "identityPolicy",
+    "defaultView",
+    "readViews",
+    "actions",
+    "transactionPolicy",
+    "tracePolicy"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "grey-crow-built-in-domain-skill-io-v1" },
+    "skillId": { "$ref": "#/$defs/id" },
+    "namespace": { "$ref": "#/$defs/id" },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "capability", "canonicalOwner"],
+      "properties": {
+        "kind": { "const": "built_in_domain" },
+        "capability": { "const": "character_records" },
+        "canonicalOwner": { "const": "runtime" }
+      }
+    },
+    "identityPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stableRefOwner", "candidateDecisionOwner", "automaticMerge"],
+      "properties": {
+        "stableRefOwner": { "const": "runtime" },
+        "candidateDecisionOwner": { "const": "model" },
+        "automaticMerge": { "const": "forbidden" }
+      }
+    },
+    "defaultView": { "enum": ["guide", "overview", "recent", "lookup"] },
+    "readViews": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": { "$ref": "#/$defs/readView" }
+    },
+    "actions": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": { "$ref": "#/$defs/action" }
+    },
+    "transactionPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["commit", "idempotency", "expectedRevision"],
+      "properties": {
+        "commit": { "const": "revisioned_atomic" },
+        "idempotency": { "const": "action_identity" },
+        "expectedRevision": { "const": "runtime_supplied_for_existing_record" }
+      }
+    },
+    "tracePolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["argumentValues", "argumentShape", "stages", "receipt"],
+      "properties": {
+        "argumentValues": { "const": "redacted" },
+        "argumentShape": { "const": "retained" },
+        "stages": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "prefixItems": [
+            { "const": "state_precondition" },
+            { "const": "canonical_commit" }
+          ],
+          "items": false
+        },
+        "receipt": { "const": "bounded" }
+      }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[a-z][a-z0-9_]*$"
+    },
+    "descriptionKey": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 160,
+      "pattern": "^[a-z][a-z0-9_.]*$"
+    },
+    "readView": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "operation", "query", "limit"],
+      "properties": {
+        "id": { "enum": ["guide", "overview", "recent", "lookup"] },
+        "operation": {
+          "enum": [
+            "read_character_guide",
+            "read_character_overview",
+            "read_recent_characters",
+            "lookup_characters"
+          ]
+        },
+        "query": { "type": "boolean" },
+        "limit": { "type": "integer", "minimum": 1, "maximum": 12 }
+      }
+    },
+    "inputField": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "type", "descriptionKey"],
+      "properties": {
+        "name": { "$ref": "#/$defs/id" },
+        "type": { "const": "string" },
+        "descriptionKey": { "$ref": "#/$defs/descriptionKey" },
+        "maxLength": { "type": "integer", "minimum": 1, "maximum": 2000 },
+        "enum": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 16,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/id" }
+        }
+      }
+    },
+    "modelInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fields", "required"],
+      "properties": {
+        "fields": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 3,
+          "items": { "$ref": "#/$defs/inputField" }
+        },
+        "required": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/id" }
+        }
+      }
+    },
+    "runtimeMapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["capability", "operation"],
+      "properties": {
+        "capability": { "const": "character_records" },
+        "operation": {
+          "enum": [
+            "create_character",
+            "append_encounter",
+            "record_identity",
+            "append_fact",
+            "set_relationship"
+          ]
+        }
+      }
+    },
+    "action": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "toolName", "descriptionKey", "modelInput", "runtimeMapping"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "toolName": { "$ref": "#/$defs/id" },
+        "descriptionKey": { "$ref": "#/$defs/descriptionKey" },
+        "modelInput": { "$ref": "#/$defs/modelInput" },
+        "runtimeMapping": { "$ref": "#/$defs/runtimeMapping" }
+      }
+    }
+  }
+}

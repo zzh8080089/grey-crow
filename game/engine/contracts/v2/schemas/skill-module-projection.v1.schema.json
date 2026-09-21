@@ -1,0 +1,281 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://greycrow.local/schemas/p2-25/skill-module-projection.v1.schema.json",
+  "title": "Grey Crow Skill Module Renderer projection v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "packTitle",
+    "title",
+    "description",
+    "triggers",
+    "playerGuide",
+    "hasModule",
+    "moduleRef",
+    "visibility",
+    "activated",
+    "stateVersion",
+    "revision",
+    "summary",
+    "fields",
+    "pagination"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "grey-crow-skill-module-projection-v1" },
+    "packTitle": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/shortText"
+    },
+    "title": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/shortText"
+    },
+    "description": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/description"
+    },
+    "triggers": {
+      "type": "array",
+      "maxItems": 32,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1, "maxLength": 120 }
+    },
+    "playerGuide": {
+      "anyOf": [
+        { "type": "null" },
+        { "type": "string", "minLength": 1, "maxLength": 2000 }
+      ]
+    },
+    "hasModule": { "type": "boolean" },
+    "moduleRef": {
+      "anyOf": [
+        { "type": "null" },
+        {
+          "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/stableRef"
+        }
+      ]
+    },
+    "visibility": {
+      "anyOf": [
+        { "type": "null" },
+        { "enum": ["visible", "hidden_until_active"] }
+      ]
+    },
+    "activated": { "type": "boolean" },
+    "stateVersion": {
+      "anyOf": [{ "type": "null" }, { "const": 1 }]
+    },
+    "revision": {
+      "anyOf": [
+        { "type": "null" },
+        { "type": "integer", "minimum": 0, "maximum": 2147483647 }
+      ]
+    },
+    "summary": {
+      "type": "array",
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["fieldId", "text"],
+        "properties": {
+          "fieldId": { "$ref": "#/$defs/fieldId" },
+          "text": { "type": "string", "minLength": 1, "maxLength": 160 }
+        }
+      }
+    },
+    "fields": {
+      "type": "array",
+      "maxItems": 32,
+      "items": { "$ref": "#/$defs/projectedField" }
+    },
+    "pagination": {
+      "anyOf": [
+        { "type": "null" },
+        { "$ref": "#/$defs/pagination" }
+      ]
+    }
+  },
+  "$defs": {
+    "fieldId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[a-z][a-z0-9_]*$"
+    },
+    "scalarValue": {
+      "anyOf": [
+        { "type": "number", "minimum": -1000000000, "maximum": 1000000000 },
+        { "type": "string", "maxLength": 2000 },
+        { "type": "boolean" }
+      ]
+    },
+    "recordItem": {
+      "type": "object",
+      "minProperties": 1,
+      "maxProperties": 16,
+      "patternProperties": {
+        "^[a-z][a-z0-9_]{0,63}$": { "$ref": "#/$defs/scalarValue" }
+      },
+      "additionalProperties": false
+    },
+    "fieldValue": {
+      "anyOf": [
+        { "type": "null" },
+        { "$ref": "#/$defs/scalarValue" },
+        {
+          "type": "array",
+          "maxItems": 64,
+          "items": { "type": "string", "maxLength": 240 }
+        },
+        {
+          "type": "array",
+          "maxItems": 100,
+          "items": { "$ref": "#/$defs/recordItem" }
+        }
+      ]
+    },
+    "groupCount": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["value", "label", "count"],
+      "properties": {
+        "value": { "$ref": "#/$defs/fieldId" },
+        "label": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "count": { "type": "integer", "minimum": 0, "maximum": 100 }
+      }
+    },
+    "derivedSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["count", "target", "milestoneLabel", "groupCounts"],
+      "properties": {
+        "count": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "target": {
+          "anyOf": [
+            { "type": "null" },
+            { "type": "integer", "minimum": 1, "maximum": 100 }
+          ]
+        },
+        "milestoneLabel": {
+          "anyOf": [
+            { "type": "null" },
+            { "type": "string", "minLength": 1, "maxLength": 120 }
+          ]
+        },
+        "groupCounts": {
+          "type": "array",
+          "maxItems": 32,
+          "items": { "$ref": "#/$defs/groupCount" }
+        }
+      }
+    },
+    "projectedField": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "type",
+        "widget",
+        "value",
+        "derivedSummary",
+        "minimum",
+        "maximum",
+        "options",
+        "itemFields"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/fieldId" },
+        "label": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "type": { "enum": ["integer", "number", "text", "boolean", "enum", "string_list", "record_list"] },
+        "widget": {
+          "enum": [
+            "number",
+            "progress",
+            "meter",
+            "text",
+            "multiline",
+            "indicator",
+            "badge",
+            "chips",
+            "list",
+            "cards",
+            "timeline",
+            "table"
+          ]
+        },
+        "value": { "$ref": "#/$defs/fieldValue" },
+        "derivedSummary": {
+          "anyOf": [
+            { "type": "null" },
+            { "$ref": "#/$defs/derivedSummary" }
+          ]
+        },
+        "minimum": {
+          "anyOf": [
+            { "type": "null" },
+            { "type": "number", "minimum": -1000000000, "maximum": 1000000000 }
+          ]
+        },
+        "maximum": {
+          "anyOf": [
+            { "type": "null" },
+            { "type": "number", "minimum": -1000000000, "maximum": 1000000000 }
+          ]
+        },
+        "options": {
+          "type": "array",
+          "maxItems": 32,
+          "items": { "$ref": "#/$defs/displayOption" }
+        },
+        "itemFields": {
+          "type": "array",
+          "maxItems": 12,
+          "items": { "$ref": "#/$defs/displayItemField" }
+        }
+      }
+    },
+    "displayOption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["value", "label"],
+      "properties": {
+        "value": { "$ref": "#/$defs/fieldId" },
+        "label": { "type": "string", "minLength": 1, "maxLength": 120 }
+      }
+    },
+    "displayItemField": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label", "type", "options"],
+      "properties": {
+        "id": { "$ref": "#/$defs/fieldId" },
+        "label": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "type": { "enum": ["integer", "number", "text", "boolean", "enum"] },
+        "options": {
+          "type": "array",
+          "maxItems": 32,
+          "items": { "$ref": "#/$defs/displayOption" }
+        }
+      }
+    },
+    "pagination": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fieldId", "nextCursor", "hasMore", "returnedItems", "totalItems"],
+      "properties": {
+        "fieldId": { "$ref": "#/$defs/fieldId" },
+        "nextCursor": {
+          "anyOf": [
+            { "type": "null" },
+            {
+              "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/stableRef"
+            }
+          ]
+        },
+        "hasMore": { "type": "boolean" },
+        "returnedItems": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "totalItems": { "type": "integer", "minimum": 0, "maximum": 100 }
+      }
+    }
+  }
+}

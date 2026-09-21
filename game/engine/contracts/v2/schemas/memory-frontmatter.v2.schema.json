@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://greycrow.local/schemas/p2-23/memory-frontmatter.v2.schema.json",
+  "title": "Grey Crow v2 semantic memory frontmatter",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "memoryId",
+    "kind",
+    "title",
+    "aliases",
+    "status",
+    "authority",
+    "sourceRange",
+    "updatedAt"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "grey-crow-memory-frontmatter-v2" },
+    "memoryId": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/stableRef"
+    },
+    "kind": { "enum": ["character", "location", "event", "thread"] },
+    "title": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/shortText"
+    },
+    "aliases": {
+      "type": "array",
+      "maxItems": 24,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 120
+      }
+    },
+    "status": { "enum": ["confirmed", "uncertain", "player_claim", "superseded"] },
+    "authority": { "enum": ["runtime_reference", "model_summary", "player_claim"] },
+    "sourceRange": {
+      "$ref": "https://greycrow.local/schemas/p2-23/source-range.v2.schema.json"
+    },
+    "updatedAt": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/timestamp"
+    },
+    "supersededBy": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/stableRef"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "status": { "const": "superseded" } },
+        "required": ["status"]
+      },
+      "then": {
+        "required": ["supersededBy"],
+        "properties": { "supersededBy": true }
+      }
+    }
+  ]
+}

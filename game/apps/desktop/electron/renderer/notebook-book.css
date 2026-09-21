@@ -1,0 +1,47 @@
+/* Required geometry: host and live #gameView remain the existing 1600 x 900
+   stage. The 24/18/1416/864 variables describe only the filmed paper and
+   projection reference rectangle; they must never resize #gameView. */
+body[data-book-presentation="active"] {
+  --gc-book-page-x: 24px; --gc-book-page-y: 18px;
+  --gc-book-page-width: 1416px; --gc-book-page-height: 864px;
+}
+body[data-book-presentation="active"][data-paper-theme="light"] {
+  --gc-book-ink: #352e28; --gc-book-muted: #70645a; --gc-book-line: #65544633;
+}
+body[data-book-presentation="active"][data-paper-theme="dark"] {
+  --gc-book-ink: #ece5d8; --gc-book-muted: #c2b8aa; --gc-book-line: #d3c1a42b;
+}
+.gc-notebook-book { position: absolute; inset: 0; z-index: 40; pointer-events: none; overflow: hidden; background: #292829; }
+.gc-notebook-book[hidden] { display: none; }
+.gc-notebook-book :is(.gc-notebook-book-still,.gc-notebook-book-video) { position: absolute; inset: 0; width: 1600px; height: 900px; object-fit: fill; user-select: none; }
+.gc-notebook-book-still { z-index: 0; }
+.gc-notebook-book-video { z-index: 1; opacity: 0; visibility: hidden; }
+.gc-notebook-book[data-video-visible="true"] .gc-notebook-book-video { opacity: 1; visibility: visible; }
+.gc-notebook-book-skip { position: absolute; z-index: 4; right: 28px; bottom: 26px; min-height: 38px; padding: 8px 14px; color: #f4ead9; background: #27221ddb; border: 1px solid #d0bb9488; border-radius: 3px; font: 600 16px/1.2 var(--font-ui, sans-serif); pointer-events: auto; }
+.gc-notebook-book-skip:focus-visible { outline: 2px solid #fff5dc; outline-offset: 3px; }
+.gc-notebook-book-label { position: absolute; z-index: 4; left: 28px; bottom: 30px; color: #f4ead9; font: 500 17px/1.4 var(--font-ui, sans-serif); text-shadow: 0 2px 8px #000; }
+#bookReadingSurface { position: absolute; z-index: 3; left: var(--gc-book-page-x); top: var(--gc-book-page-y); width: var(--gc-book-page-width); height: var(--gc-book-page-height); pointer-events: none; }
+#bookStage[data-still-error="true"][data-still-role="reading"] #bookReadingSurface { background: linear-gradient(100deg,#a59d89,#ddd4bd 9%,#efe7d1 70%,#bdb5a1); box-shadow: 0 8px 28px #0008, inset 12px 0 18px #4b443555; }
+body[data-paper-theme="dark"] #bookStage[data-still-error="true"][data-still-role="reading"] #bookReadingSurface { background: linear-gradient(100deg,#292a2d,#454648 9%,#565655 70%,#353638); box-shadow: 0 8px 28px #0008, inset 12px 0 18px #0e0e10aa; }
+.gc-book-ink-projection { display: contents; }
+body[data-book-projection="true"] .gc-book-ink-projection { display: block; position: absolute; inset: 0; z-index: 41; width: 1600px; height: 900px; pointer-events: none; mask-mode: luminance; mask-repeat: no-repeat; mask-position: 0 0; mask-size: 1600px 900px; }
+body[data-book-projection="true"] .gc-book-ink-projection > #gameView { transform: var(--gc-book-page-projection); transform-origin: 0 0; opacity: var(--gc-book-page-opacity, 1); visibility: visible; pointer-events: none; transition: none; will-change: transform; }
+body[data-book-projection="true"] .gc-book-ink-projection > #gameView * { caret-color: transparent; }
+/* While prepared/opening, hide every old UI layer even if it carries a higher
+   local z-index. The projected and settled-handoff exceptions expose the same
+   game DOM only when the film geometry can support it. */
+body[data-book-presentation="active"]:is([data-book-phase="prepared"],[data-book-phase="opening"]) #gameView { opacity: 0; visibility: hidden; pointer-events: none; }
+body[data-book-presentation="active"][data-book-projection="true"] .gc-book-ink-projection > #gameView,
+body[data-book-presentation="active"][data-book-handoff="true"] #gameView { opacity: 1; visibility: visible; pointer-events: none; }
+/* The movie remains running after frame 132, but sits behind the settled live
+   reading plane until its natural end releases the media element. */
+body[data-book-presentation="active"][data-book-handoff="true"] #bookStage { z-index: 0; }
+body[data-book-presentation="active"][data-book-phase="reading"] #bookStage { z-index: 0; }
+/* Formal selectors intentionally use the app-owned layout flag, never the lab variant. */
+body[data-game-ui-layout="story-notebook-v1"].book-reading-ready #gameView { color: var(--gc-book-ink); }
+@media (prefers-reduced-motion: reduce) { .gc-notebook-book-video { transition: none !important; } }
+
+.gc-book-reveal-defs mask { mask-type: luminance; }
+
+/* SVG definitions must not create an inline line box above the live page. */
+.gc-book-reveal-defs { position: absolute; width: 0; height: 0; overflow: hidden; pointer-events: none; }

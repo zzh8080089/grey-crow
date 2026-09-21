@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://greycrow.local/schemas/p2-23/source-range.v2.schema.json",
+  "title": "Grey Crow v2 transcript source range",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "startTurn", "endTurn"],
+  "properties": {
+    "schemaVersion": { "const": "grey-crow-source-range-v2" },
+    "startTurn": { "type": "integer", "minimum": 1, "maximum": 2147483647 },
+    "endTurn": { "type": "integer", "minimum": 1, "maximum": 2147483647 },
+    "transcriptHash": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/sha256"
+    }
+  }
+}

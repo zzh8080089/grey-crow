@@ -1,0 +1,207 @@
+{
+  "schemaVersion": "grey-crow-skill-module-definition-v1",
+  "stateVersion": 1,
+  "visibility": "visible",
+  "summaryFields": [
+    "fragments",
+    "revelation_status"
+  ],
+  "actions": [
+    {
+      "id": "record_fragment",
+      "toolName": "record_memory_fragment",
+      "description": "在主动回忆或强关联自然触发时，记录一条未经证实的记忆碎片。只填写浮现方式、维度、触发物和感官内容；Runtime 负责校验并保存。",
+      "archetype": "append_record",
+      "targetField": "fragments",
+      "modelFields": [
+        "discovery_mode",
+        "dimension",
+        "trigger",
+        "content"
+      ],
+      "runtimeFields": [
+        {
+          "fieldId": "game_day",
+          "source": "current_game_day",
+          "fallback": "unavailable"
+        }
+      ],
+      "constantFields": [
+        {
+          "fieldId": "certainty",
+          "value": "uncertain"
+        }
+      ],
+      "allowedValues": [],
+      "namedPolicy": "memory_fragment_record_v1",
+      "namedTransition": "unlock_at_record_limit"
+    },
+    {
+      "id": "resolve_fragment",
+      "toolName": "resolve_memory_fragment",
+      "description": "仅在三十条碎片已经允许拼合、且玩家明确选择后，记录接受过去、不接受过去或暂缓决定。只填写 choice。",
+      "archetype": "choose_enum",
+      "targetField": "revelation_status",
+      "modelFields": [
+        "choice"
+      ],
+      "runtimeFields": [],
+      "constantFields": [],
+      "allowedValues": [
+        "deferred",
+        "sealed",
+        "accepted"
+      ],
+      "namedPolicy": "memory_fragment_resolution_v1",
+      "namedTransition": "none"
+    }
+  ],
+  "fields": [
+    {
+      "id": "fragments",
+      "label": "记忆碎片",
+      "type": "record_list",
+      "default": [],
+      "maxItems": 30,
+      "modelWritable": true,
+      "allowedOperations": [
+        "append"
+      ],
+      "itemFields": [
+        {
+          "id": "game_day",
+          "label": "游戏日",
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 1000000
+        },
+        {
+          "id": "discovery_mode",
+          "label": "浮现方式",
+          "type": "enum",
+          "options": [
+            {
+              "value": "active_recall",
+              "label": "主动回忆"
+            },
+            {
+              "value": "passive_association",
+              "label": "被动浮现"
+            }
+          ]
+        },
+        {
+          "id": "dimension",
+          "label": "维度",
+          "type": "enum",
+          "options": [
+            {
+              "value": "body",
+              "label": "身体"
+            },
+            {
+              "value": "emotion",
+              "label": "情感"
+            },
+            {
+              "value": "skill",
+              "label": "技能"
+            },
+            {
+              "value": "identity",
+              "label": "身份"
+            }
+          ]
+        },
+        {
+          "id": "trigger",
+          "label": "触发物",
+          "type": "text",
+          "maxLength": 160
+        },
+        {
+          "id": "content",
+          "label": "感官片段",
+          "type": "text",
+          "maxLength": 500
+        },
+        {
+          "id": "certainty",
+          "label": "真实性",
+          "type": "enum",
+          "options": [
+            {
+              "value": "uncertain",
+              "label": "未经证实"
+            }
+          ]
+        }
+      ],
+      "display": {
+        "widget": "timeline",
+        "groupCountBy": "dimension",
+        "summary": {
+          "mode": "count_progress",
+          "target": 30,
+          "milestones": [
+            {
+              "minimum": 0,
+              "label": "空白"
+            },
+            {
+              "minimum": 6,
+              "label": "萌芽"
+            },
+            {
+              "minimum": 13,
+              "label": "浮现"
+            },
+            {
+              "minimum": 25,
+              "label": "逼近"
+            },
+            {
+              "minimum": 30,
+              "label": "揭示"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "revelation_status",
+      "label": "拼合选择",
+      "type": "enum",
+      "default": "collecting",
+      "modelWritable": true,
+      "allowedOperations": [
+        "set"
+      ],
+      "options": [
+        {
+          "value": "collecting",
+          "label": "收集中"
+        },
+        {
+          "value": "available",
+          "label": "可以拼合"
+        },
+        {
+          "value": "deferred",
+          "label": "暂缓决定"
+        },
+        {
+          "value": "sealed",
+          "label": "不接受过去 · 选择新的自己"
+        },
+        {
+          "value": "accepted",
+          "label": "接受过去 · 恢复记忆者"
+        }
+      ],
+      "display": {
+        "widget": "badge"
+      }
+    }
+  ]
+}

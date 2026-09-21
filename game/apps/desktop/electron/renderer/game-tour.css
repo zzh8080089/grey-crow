@@ -1,0 +1,71 @@
+/* The ID and body scope deliberately outrank the notebook's generic dialog rules. */
+body[data-game-ui-layout] dialog#gameTourDialog,
+dialog#gameTourDialog {
+  box-sizing: border-box;
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  max-width: none;
+  height: 100vh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 0;
+  color: #f5f1e9 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  font-family: var(--font-ui, system-ui, sans-serif);
+}
+
+dialog#gameTourDialog::backdrop { background: transparent; backdrop-filter: none; }
+
+dialog#gameTourDialog .game-tour-highlight {
+  position: fixed;
+  z-index: 0;
+  box-sizing: border-box;
+  border: 2px solid #f2d8a2;
+  border-radius: 8px;
+  pointer-events: auto;
+  box-shadow: 0 0 0 100vmax rgba(38, 40, 43, .72), 0 0 0 4px rgba(26, 28, 30, .36), 0 0 18px rgba(250, 225, 173, .48);
+}
+
+dialog#gameTourDialog .game-tour-card {
+  position: fixed;
+  z-index: 1;
+  box-sizing: border-box;
+  padding: 16px 17px 14px;
+  border: 1px solid rgba(240, 218, 175, .78);
+  border-radius: 10px;
+  color: #f5f1e9 !important;
+  background: #242527 !important;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, .5);
+}
+
+body[data-story-notebook-theme="dark"] dialog#gameTourDialog .game-tour-card { background: #191a1c !important; border-color: rgba(223, 202, 158, .66); }
+dialog#gameTourDialog .game-tour-progress { margin: 0 0 6px; color: #d8c7a7 !important; font-size: 12px; letter-spacing: .04em; }
+dialog#gameTourDialog .game-tour-title { margin: 0; color: #fffaf0 !important; font-size: 18px !important; line-height: 1.25; }
+dialog#gameTourDialog .game-tour-copy { margin: 9px 0 15px; color: #e7e1d5 !important; font-size: 14px !important; line-height: 1.55; }
+dialog#gameTourDialog .game-tour-actions { display: flex; align-items: center; gap: 8px; }
+dialog#gameTourDialog .game-tour-spacer { flex: 1; }
+dialog#gameTourDialog button {
+  min-height: 34px;
+  padding: 6px 10px;
+  border: 1px solid rgba(239, 219, 181, .58);
+  border-radius: 6px;
+  color: #fffaf0 !important;
+  background: #3b3d40 !important;
+  font: inherit;
+  cursor: pointer;
+}
+dialog#gameTourDialog button:hover { background: #515356 !important; }
+dialog#gameTourDialog button:focus-visible { outline: 3px solid #ffe09a; outline-offset: 2px; }
+dialog#gameTourDialog button:disabled { cursor: default; opacity: .45; }
+dialog#gameTourDialog .game-tour-next { border-color: #f0d199; color: #28231c !important; background: #f0d199 !important; }
+dialog#gameTourDialog .game-tour-next:hover { background: #ffe0a8 !important; }
+dialog#gameTourDialog .game-tour-skip { color: #ded7ca !important; background: transparent !important; }
+
+@media (max-width: 760px) {
+  dialog#gameTourDialog .game-tour-card { padding: 14px; }
+}

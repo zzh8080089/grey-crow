@@ -1,0 +1,4 @@
+# Generated runtime inputs are byte-compared during cross-platform release gates.
+game/engine/content-v2/generated/** text eol=lf
+game/engine/contracts/v2/generated/** text eol=lf
+game/content/packs/** text eol=lf

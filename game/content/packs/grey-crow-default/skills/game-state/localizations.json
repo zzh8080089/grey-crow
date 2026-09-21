@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "grey-crow-skill-localization-bundle-v1",
+  "itemId": "game-state",
+  "sourceLocale": "zh-CN",
+  "locales": [
+    {
+      "locale": "en-US",
+      "title": "Game State",
+      "description": "Reads or updates the player's body, inventory summary, or primary scene anchor when the player asks about them or the current turn confirms a change.",
+      "triggers": [
+        "current status",
+        "inventory",
+        "injury",
+        "current location",
+        "where am I",
+        "update status"
+      ],
+      "playerGuide": null,
+      "skillPath": "skills/game-state/locales/en-US/SKILL.md",
+      "templates": [
+        {
+          "templateId": "template:inventory-item",
+          "path": "skills/game-state/locales/en-US/templates/inventory-item.md"
+        },
+        {
+          "templateId": "template:player-status",
+          "path": "skills/game-state/locales/en-US/templates/player-status.md"
+        },
+        {
+          "templateId": "template:scene-state",
+          "path": "skills/game-state/locales/en-US/templates/scene-state.md"
+        }
+      ],
+      "modulePresentationPath": null
+    },
+    {
+      "locale": "ja-JP",
+      "title": "ゲーム状態",
+      "description": "プレイヤーが尋ねたとき、または現在のターンで変化が確定したとき、身体、持ち物の要約、現在の主要場面を読み書きする。",
+      "triggers": ["現在の状態", "持ち物", "負傷", "現在地", "ここはどこ", "状態を更新"],
+      "playerGuide": null,
+      "skillPath": "skills/game-state/locales/ja-JP/SKILL.md",
+      "templates": [
+        { "templateId": "template:inventory-item", "path": "skills/game-state/locales/ja-JP/templates/inventory-item.md" },
+        { "templateId": "template:player-status", "path": "skills/game-state/locales/ja-JP/templates/player-status.md" },
+        { "templateId": "template:scene-state", "path": "skills/game-state/locales/ja-JP/templates/scene-state.md" }
+      ],
+      "modulePresentationPath": null
+    }
+  ]
+}

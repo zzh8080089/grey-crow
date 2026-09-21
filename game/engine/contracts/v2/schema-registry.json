@@ -1,0 +1,227 @@
+{
+  "schemaVersion": "grey-crow-contract-registry-v1",
+  "contracts": [
+    {
+      "contractId": "adventure-save-v2",
+      "schemaVersion": "grey-crow-adventure-v2",
+      "file": "adventure-save.v2.schema.json",
+      "exportName": "validateAdventureSaveV2"
+    },
+    {
+      "contractId": "extension-pack-v2",
+      "schemaVersion": "grey-crow-extension-pack-v2",
+      "file": "extension-pack.v2.schema.json",
+      "exportName": "validateExtensionPackV2"
+    },
+    {
+      "contractId": "content-profile-v2",
+      "schemaVersion": "grey-crow-content-profile-v2",
+      "file": "content-profile.v2.schema.json",
+      "exportName": "validateContentProfileV2"
+    },
+    {
+      "contractId": "snapshot-lock-v2",
+      "schemaVersion": "grey-crow-snapshot-lock-v2",
+      "file": "snapshot-lock.v2.schema.json",
+      "exportName": "validateSnapshotLockV2"
+    },
+    {
+      "contractId": "transcript-turn-v2",
+      "schemaVersion": "grey-crow-transcript-turn-v2",
+      "file": "transcript-turn.v2.schema.json",
+      "exportName": "validateTranscriptTurnV2"
+    },
+    {
+      "contractId": "memory-frontmatter-v2",
+      "schemaVersion": "grey-crow-memory-frontmatter-v2",
+      "file": "memory-frontmatter.v2.schema.json",
+      "exportName": "validateMemoryFrontmatterV2"
+    },
+    {
+      "contractId": "source-range-v2",
+      "schemaVersion": "grey-crow-source-range-v2",
+      "file": "source-range.v2.schema.json",
+      "exportName": "validateSourceRangeV2"
+    },
+    {
+      "contractId": "player-profile-v2",
+      "schemaVersion": "grey-crow-player-profile-v2",
+      "file": "player-profile.v2.schema.json",
+      "exportName": "validatePlayerProfileV2"
+    },
+    {
+      "contractId": "skill-module-definition-v1",
+      "schemaVersion": "grey-crow-skill-module-definition-v1",
+      "file": "skill-module-definition.v1.schema.json",
+      "exportName": "validateSkillModuleDefinitionV1"
+    },
+    {
+      "contractId": "skill-module-state-v1",
+      "schemaVersion": "grey-crow-skill-module-state-v1",
+      "file": "skill-module-state.v1.schema.json",
+      "exportName": "validateSkillModuleStateV1"
+    },
+    {
+      "contractId": "skill-module-grant-v1",
+      "schemaVersion": "grey-crow-skill-module-grant-v1",
+      "file": "skill-module-grant.v1.schema.json",
+      "exportName": "validateSkillModuleGrantV1"
+    },
+    {
+      "contractId": "skill-module-capability-review-v1",
+      "schemaVersion": "grey-crow-skill-module-capability-review-v1",
+      "file": "skill-module-capability-review.v1.schema.json",
+      "exportName": "validateSkillModuleCapabilityReviewV1"
+    },
+    {
+      "contractId": "skill-io-companion-v1",
+      "schemaVersion": "grey-crow-skill-io-companion-v1",
+      "file": "skill-io-companion.v1.schema.json",
+      "exportName": "validateSkillIOCompanionV1"
+    },
+    {
+      "contractId": "built-in-domain-skill-io-v1",
+      "schemaVersion": "grey-crow-built-in-domain-skill-io-v1",
+      "file": "built-in-domain-skill-io.v1.schema.json",
+      "exportName": "validateBuiltInDomainSkillIOV1"
+    },
+    {
+      "contractId": "built-in-domain-skill-grant-v1",
+      "schemaVersion": "grey-crow-built-in-domain-skill-grant-v1",
+      "file": "built-in-domain-skill-grant.v1.schema.json",
+      "exportName": "validateBuiltInDomainSkillGrantV1"
+    },
+    {
+      "contractId": "built-in-domain-skill-lock-v1",
+      "schemaVersion": "grey-crow-built-in-domain-skill-lock-v1",
+      "file": "built-in-domain-skill-lock.v1.schema.json",
+      "exportName": "validateBuiltInDomainSkillLockV1"
+    },
+    {
+      "contractId": "skill-panel-presentation-v1",
+      "schemaVersion": "grey-crow-skill-panel-presentation-v1",
+      "file": "skill-panel-presentation.v1.schema.json",
+      "exportName": "validateSkillPanelPresentationV1"
+    },
+    {
+      "contractId": "skill-panel-presentation-v2",
+      "schemaVersion": "grey-crow-skill-panel-presentation-v2",
+      "file": "skill-panel-presentation.v2.schema.json",
+      "exportName": "validateSkillPanelPresentationV2"
+    },
+    {
+      "contractId": "skill-module-projection-v1",
+      "schemaVersion": "grey-crow-skill-module-projection-v1",
+      "file": "skill-module-projection.v1.schema.json",
+      "exportName": "validateSkillModuleProjectionV1"
+    },
+    {
+      "contractId": "skill-panel-view-projection-v1",
+      "schemaVersion": "grey-crow-skill-panel-view-projection-v1",
+      "file": "skill-panel-view-projection.v1.schema.json",
+      "exportName": "validateSkillPanelViewProjectionV1"
+    },
+    {
+      "contractId": "skill-localization-bundle-v1",
+      "schemaVersion": "grey-crow-skill-localization-bundle-v1",
+      "file": "skill-localization-bundle.v1.schema.json",
+      "exportName": "validateSkillLocalizationBundleV1"
+    },
+    {
+      "contractId": "narrative-localization-bundle-v1",
+      "schemaVersion": "grey-crow-narrative-localization-bundle-v1",
+      "file": "narrative-localization-bundle.v1.schema.json",
+      "exportName": "validateNarrativeLocalizationBundleV1"
+    },
+    {
+      "contractId": "skill-module-presentation-overlay-v1",
+      "schemaVersion": "grey-crow-skill-module-presentation-overlay-v1",
+      "file": "skill-module-presentation-overlay.v1.schema.json",
+      "exportName": "validateSkillModulePresentationOverlayV1"
+    },
+    {
+      "contractId": "skill-localization-lock-v1",
+      "schemaVersion": "grey-crow-skill-localization-lock-v1",
+      "file": "skill-localization-lock.v1.schema.json",
+      "exportName": "validateSkillLocalizationLockV1"
+    },
+    {
+      "contractId": "skill-locale-coverage-v1",
+      "schemaVersion": "grey-crow-skill-locale-coverage-v1",
+      "file": "skill-locale-coverage.v1.schema.json",
+      "exportName": "validateSkillLocaleCoverageV1"
+    },
+    {
+      "contractId": "new-game-preset-v2",
+      "schemaVersion": "grey-crow-new-game-preset-v2",
+      "file": "new-game-preset.v2.schema.json",
+      "exportName": "validateNewGamePresetV2"
+    },
+    {
+      "contractId": "story-finale-candidate-v1",
+      "schemaVersion": "grey-crow-story-finale-candidate-v1",
+      "file": "story-finale-candidate.v1.schema.json",
+      "exportName": "validateStoryFinaleCandidateV1"
+    },
+    {
+      "contractId": "story-finale-decision-v1",
+      "schemaVersion": "grey-crow-story-finale-decision-v1",
+      "file": "story-finale-decision.v1.schema.json",
+      "exportName": "validateStoryFinaleDecisionV1"
+    },
+    {
+      "contractId": "story-finale-ledger-v1",
+      "schemaVersion": "grey-crow-story-finale-ledger-v1",
+      "file": "story-finale-ledger.v1.schema.json",
+      "exportName": "validateStoryFinaleLedgerV1"
+    },
+    {
+      "contractId": "story-finale-projection-v1",
+      "schemaVersion": "grey-crow-story-finale-projection-v1",
+      "file": "story-finale-projection.v1.schema.json",
+      "exportName": "validateStoryFinaleProjectionV1"
+    },
+    {
+      "contractId": "story-finale-transaction-v1",
+      "schemaVersion": "grey-crow-story-finale-transaction-v1",
+      "file": "story-finale-transaction.v1.schema.json",
+      "exportName": "validateStoryFinaleTransactionV1"
+    },
+    {
+      "contractId": "extreme-ending-easter-candidate-v1",
+      "schemaVersion": "grey-crow-extreme-ending-easter-candidate-v1",
+      "file": "extreme-ending-easter-candidate.v1.schema.json",
+      "exportName": "validateExtremeEndingEasterCandidateV1"
+    },
+    {
+      "contractId": "extreme-ending-easter-confirmation-v1",
+      "schemaVersion": "grey-crow-extreme-ending-easter-confirmation-v1",
+      "file": "extreme-ending-easter-confirmation.v1.schema.json",
+      "exportName": "validateExtremeEndingEasterConfirmationV1"
+    },
+    {
+      "contractId": "extreme-ending-easter-receipt-v1",
+      "schemaVersion": "grey-crow-extreme-ending-easter-receipt-v1",
+      "file": "extreme-ending-easter-receipt.v1.schema.json",
+      "exportName": "validateExtremeEndingEasterReceiptV1"
+    },
+    {
+      "contractId": "extreme-ending-easter-ledger-v1",
+      "schemaVersion": "grey-crow-extreme-ending-easter-ledger-v1",
+      "file": "extreme-ending-easter-ledger.v1.schema.json",
+      "exportName": "validateExtremeEndingEasterLedgerV1"
+    },
+    {
+      "contractId": "extreme-ending-easter-projection-v1",
+      "schemaVersion": "grey-crow-extreme-ending-easter-projection-v1",
+      "file": "extreme-ending-easter-projection.v1.schema.json",
+      "exportName": "validateExtremeEndingEasterProjectionV1"
+    },
+    {
+      "contractId": "adventure-lineage-v1",
+      "schemaVersion": "grey-crow-adventure-lineage-v1",
+      "file": "adventure-lineage.v1.schema.json",
+      "exportName": "validateAdventureLineageV1"
+    }
+  ]
+}

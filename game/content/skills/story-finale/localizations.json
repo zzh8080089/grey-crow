@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "grey-crow-skill-localization-bundle-v1",
+  "itemId": "story-finale",
+  "sourceLocale": "zh-CN",
+  "locales": [
+    {
+      "locale": "en-US",
+      "title": "Story Finale",
+      "description": "When the whole story reaches a genuine, natural conclusion, the host gently asks through ordinary narration whether the player wants to continue, finish, or leave the decision open.",
+      "triggers": [
+        "story ending",
+        "end of the journey",
+        "let the story end",
+        "continue this story",
+        "natural closure"
+      ],
+      "playerGuide": "Only when the whole story reaches natural closure will the host ask, through ordinary story dialogue, whether you want to finish it. You may continue, finish, or leave the decision open; there is no forced results screen.",
+      "skillPath": "skills/story-finale/locales/en-US/SKILL.md",
+      "templates": [],
+      "modulePresentationPath": null
+    },
+    {
+      "locale": "ja-JP",
+      "title": "物語の終章",
+      "description": "物語全体が本当に自然に閉じたとき、通常の物語会話で、続ける、終わる、保留する意思を穏やかに尋ねる。",
+      "triggers": ["物語の結末", "旅の終わり", "物語を終える", "この物語を続ける", "自然な収束"],
+      "playerGuide": "物語全体が自然に閉じたときだけ、ホストは物語の流れを保ったまま、ここで終わりにするかを尋ねます。続ける、終わる、決定を保留する、のいずれも選べます。強制的な結果画面はありません。",
+      "skillPath": "skills/story-finale/locales/ja-JP/SKILL.md",
+      "templates": [],
+      "modulePresentationPath": null
+    }
+  ]
+}

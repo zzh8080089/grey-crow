@@ -1,0 +1,58 @@
+/* The final still has the exact composition of the video's last frame. Both
+   share the authored 1600×900 stage and the independent HTML reading plane. */
+body[data-book-renderer="cinematic"] #bookStage::before { display:none; }
+body[data-book-renderer="cinematic"] #bookStage { background:#152025; }
+#bookCinematicCover,#bookCinematicReading,#bookCinematicVideo { position:absolute; inset:0; display:block; width:1600px; height:900px; object-fit:fill; border:0; user-select:none; -webkit-user-drag:none; }
+#bookCinematicReading { z-index:0; opacity:0; pointer-events:none; }
+#bookCinematicVideo { z-index:1; opacity:0; pointer-events:none; }
+#bookCinematicCover { z-index:2; opacity:1; cursor:pointer; transition:opacity 320ms ease; }
+#bookStage[data-cinematic-view="video"] #bookCinematicVideo { opacity:1; }
+#bookStage:is([data-cinematic-view="video"],[data-cinematic-view="reading"]) #bookCinematicCover { opacity:0; pointer-events:none; }
+#bookStage:is([data-cinematic-view="video"],[data-cinematic-view="reading"]) #bookCinematicReading { opacity:1; }
+body[data-book-renderer="cinematic"] .book-foyer-copy :is(h1,.book-foyer-note) { white-space:pre-line; }
+body[data-book-renderer="cinematic"] #bookReadingSurface { z-index:3; }
+body[data-book-renderer="cinematic"][data-book-phase="reading"] #gameView { transition:opacity 260ms ease-out; }
+body.cinematic-recovery #gameView { opacity:1!important; visibility:visible!important; pointer-events:auto!important; }
+body.cinematic-recovery #bookReadingSurface { background:#d6cdb4; }
+
+/* The rendered book already supplies the five paper tabs. These buttons add
+   ink and hit targets only; keyboard focus uses an underline on that paper. */
+body[data-book-renderer="cinematic"][data-game-ui-layout="story-notebook-v1"].book-reading-ready #gameView {
+  & .story-notebook-rail-navigation { top:186.7px; right:72px; width:108px; }
+  & .story-notebook-rail-button {
+    width:108px; height:78px; min-height:78px; color:#263b33;
+    background:none; border:0; border-image:none; border-radius:0;
+    box-shadow:none; filter:none; transform:none;
+    transition:color 140ms ease;
+  }
+  & .story-notebook-rail-button::before { content:none; display:none; }
+  & .story-notebook-rail-button::after {
+    content:""; position:absolute; z-index:-1; inset:6px 8px 6px 25px;
+    width:auto; height:auto; pointer-events:none; border:0;
+    border-radius:0; background:transparent; box-shadow:none; opacity:1;
+    transform:none; transition:background 140ms ease,border-color 140ms ease;
+  }
+  & .story-notebook-rail-button:is(:hover,:focus-visible):not(:disabled) { color:#173c2e; background:none; box-shadow:none; filter:none; }
+  & .story-notebook-rail-button:is(:hover,:focus-visible):not(:disabled)::after { background:transparent; border:0; transform:none; }
+  & .story-notebook-rail-button.is-active { color:#183d2e; background:none; box-shadow:none; }
+  & .story-notebook-rail-button.is-active::after { background:transparent; border:0; transform:none; }
+  & .story-notebook-rail-button:focus-visible { outline:none; }
+  & .story-notebook-rail-button:focus-visible:not(:disabled)::after { border:0; background:linear-gradient(currentColor,currentColor) 50% calc(100% - 4px) / 30px 2px no-repeat; }
+  & .story-notebook-rail-button .notebook-tab-label { text-shadow:none; }
+  & .story-notebook-rail-count { top:3px; right:6px; background:#344a3e; border-color:#eee5c6; color:#fff5df; box-shadow:0 1px 2px #18251d33; }
+  & #narrationPanel:focus { outline:none; }
+}
+
+/* The lighter filmed tabletop needs a local veil behind the welcome copy.
+   It fades away when opening starts and never covers the reading page. */
+body[data-book-renderer="cinematic"] #bookFoyer::before {
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:linear-gradient(90deg,#071215c7 0%,#0b181b99 26%,#12202200 53%);
+  opacity:0; transition:opacity 340ms ease;
+}
+body[data-book-renderer="cinematic"][data-book-phase="closed"] #bookFoyer::before { opacity:1; }
+body[data-book-renderer="cinematic"] .book-foyer-copy { text-shadow:0 2px 8px #07131566; }
+body[data-book-renderer="cinematic"] .book-foyer-copy h1 { color:#f1e7d0; }
+body[data-book-renderer="cinematic"] .book-foyer-copy .book-foyer-note { color:#d1d3c2; }
+body[data-book-renderer="cinematic"] .book-foyer-eyebrow { color:#d1c3a4; }
+body[data-book-renderer="cinematic"] .book-foyer-footer { color:#c6c8b4; }

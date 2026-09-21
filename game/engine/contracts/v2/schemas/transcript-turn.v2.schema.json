@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://greycrow.local/schemas/p2-23/transcript-turn.v2.schema.json",
+  "title": "Grey Crow v2 player-visible transcript turn",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "turnId", "sequence", "occurredAt", "user", "assistant"],
+  "properties": {
+    "schemaVersion": { "const": "grey-crow-transcript-turn-v2" },
+    "turnId": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/stableRef"
+    },
+    "sequence": { "type": "integer", "minimum": 1, "maximum": 2147483647 },
+    "occurredAt": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/timestamp"
+    },
+    "entryKind": { "enum": ["story_finale"] },
+    "user": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text"],
+      "properties": {
+        "text": { "type": "string", "minLength": 1, "maxLength": 65536 }
+      }
+    },
+    "assistant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text"],
+      "properties": {
+        "text": { "type": "string", "minLength": 1, "maxLength": 65536 }
+      }
+    },
+    "chapterId": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/stableRef"
+    },
+    "sourceRange": {
+      "$ref": "https://greycrow.local/schemas/p2-23/source-range.v2.schema.json"
+    }
+  }
+}

@@ -1,0 +1,162 @@
+{
+  "schemaVersion": "grey-crow-renderer-art-manifest-v1",
+  "layoutId": "story-notebook-v1",
+  "defaultLayout": "story-notebook-v1",
+  "persistence": "session-only",
+  "releaseStatus": "candidate-not-final-4k",
+  "assets": [
+    {
+      "id": "scene-rain-night",
+      "role": "scene",
+      "file": "scene-rain-night-v1.png",
+      "width": 3840,
+      "height": 1240,
+      "bytes": 5166002,
+      "sha256": "1bcc70b56bb4640d4515a9c9f0768756d4380f0d60260a58461056989f35aa3b"
+    },
+    {
+      "id": "notebook-page-night",
+      "role": "material",
+      "file": "notebook-page-night-v1.png",
+      "width": 1586,
+      "height": 992,
+      "bytes": 2708337,
+      "sha256": "fcfb4cab57648ec989b313b0588948fd1655d3e9bdef6efcc1dfad4f2183a822"
+    },
+    {
+      "id": "archive-paper-night",
+      "role": "material",
+      "file": "archive-paper-night-v1.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 2460916,
+      "sha256": "41030bcb11044ed67d4fa446422fc8a12bf8e31b6d8fe8b25200e2ae803b3f2a"
+    },
+    {
+      "id": "sticky-tab-system-night",
+      "role": "material",
+      "file": "sticky-tab-system-night-v1.png",
+      "width": 1200,
+      "height": 384,
+      "bytes": 878441,
+      "sha256": "7d56377a3391dba23ea1f3785fc18d5a1c076b1d661ed1763ac358c9babdd0a7"
+    },
+    {
+      "id": "hud-current-story-paper-night",
+      "role": "material",
+      "file": "hud-current-story-paper-night-v1.png",
+      "width": 2048,
+      "height": 693,
+      "bytes": 2443870,
+      "sha256": "4c3f8b3758509834232931a9add21cad368a6fd83b1479f99821de44b397580b"
+    },
+    {
+      "id": "hud-player-sticky-note-night",
+      "role": "material",
+      "file": "hud-player-sticky-note-night-v1.png",
+      "width": 1840,
+      "height": 450,
+      "bytes": 1285240,
+      "sha256": "a941b67047f7a23281ebc6baa3ad0a6c3e8c91a9fcedb8db91db569c7692d623"
+    },
+    {
+      "id": "hud-host-paper-slip-night",
+      "role": "material",
+      "file": "hud-host-paper-slip-night-v2.png",
+      "width": 1940,
+      "height": 700,
+      "bytes": 2318233,
+      "sha256": "92a1f49b64f5dadbb2251fc2dbf1a4a64d7512423c4b11287d5bfbd0ca1590ef"
+    },
+    {
+      "id": "pushpin-blue-steel-night",
+      "role": "material",
+      "file": "pushpin-blue-steel-night-v1.png",
+      "width": 720,
+      "height": 720,
+      "bytes": 656909,
+      "sha256": "6153dee0d484ad220481f96001305aab254a195948de52cab677c51326a865e8"
+    },
+    {
+      "id": "icon-settings-gear-night",
+      "role": "icon",
+      "file": "icon-settings-gear-night-v1.png",
+      "width": 512,
+      "height": 512,
+      "bytes": 197819,
+      "sha256": "397241cb3d8bb27a627018e8ddc6775d74ef69913164f58e13e982f6915b89d7"
+    },
+    {
+      "id": "icon-current-state-night",
+      "role": "icon",
+      "file": "icon-current-state-night-v1.png",
+      "width": 512,
+      "height": 512,
+      "bytes": 116796,
+      "sha256": "cf3bdfcba4fedc8234a8425f65c8e68df93b3f31e4700d52200e41b50ff028e2"
+    },
+    {
+      "id": "icon-module-library-night",
+      "role": "icon",
+      "file": "icon-module-library-night-v1.png",
+      "width": 512,
+      "height": 512,
+      "bytes": 179536,
+      "sha256": "eb4294f8b8e1f54b687f7e26dac50ab4628134d009dc291bc2360331f02011c7"
+    },
+    {
+      "id": "icon-chapter-night",
+      "role": "icon",
+      "file": "icon-chapter-night-v1.png",
+      "width": 512,
+      "height": 512,
+      "bytes": 191273,
+      "sha256": "3d9690a97f42f5435edcb316a677b206efeee7802b74cced98ac98238129c361"
+    },
+    {
+      "id": "icon-host-feather-night",
+      "role": "icon",
+      "file": "icon-host-feather-night-v1.png",
+      "width": 512,
+      "height": 512,
+      "bytes": 109412,
+      "sha256": "a12f6e10836de53617f9554cf8da78b5f67b3e7ddfc71c7bd2407a2e553fe5e4"
+    },
+    {
+      "id": "icon-observe-night",
+      "role": "icon",
+      "file": "icon-observe-night-v1.png",
+      "width": 512,
+      "height": 512,
+      "bytes": 118747,
+      "sha256": "2f498fcf2c983d1030877eaecd9f1630de3c3d5549744022555f3573b196e468"
+    },
+    {
+      "id": "icon-character-records-night",
+      "role": "icon",
+      "file": "icon-character-records-night-v1.png",
+      "width": 512,
+      "height": 512,
+      "bytes": 191165,
+      "sha256": "43be223f014f9267e946ff047dc2cdfbe0b56f37a75ac174481a0355ec665683"
+    },
+    {
+      "id": "icon-location-action-night",
+      "role": "icon",
+      "file": "icon-location-action-night-v1.png",
+      "width": 512,
+      "height": 512,
+      "bytes": 178266,
+      "sha256": "532cb6a3e4ccdf69498e2f8b5faf107a9ee21f97a01875809d944e2e5a063e5b"
+    },
+    {
+      "id": "icon-backpack-night",
+      "role": "icon",
+      "file": "icon-backpack-night-v1.png",
+      "width": 512,
+      "height": 512,
+      "bytes": 262205,
+      "sha256": "104ccd64d5388b8382cf159c0e99782103b90d99a6eff3f7497c2ac7f37fd541"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://greycrow.local/schemas/p2-25/story-finale-decision.v1.schema.json",
+  "title": "Grey Crow Story Finale player decision v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "decisionId",
+    "candidateId",
+    "kind",
+    "playerTurn",
+    "decidedAt",
+    "playerTextExcerpt",
+    "playerTextSha256",
+    "interpretationReason"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "grey-crow-story-finale-decision-v1" },
+    "decisionId": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/stableRef"
+    },
+    "candidateId": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/stableRef"
+    },
+    "kind": { "enum": ["continue", "finish"] },
+    "playerTurn": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "decidedAt": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/timestamp"
+    },
+    "playerTextExcerpt": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1200
+    },
+    "playerTextSha256": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/sha256"
+    },
+    "interpretationReason": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 600
+    }
+  }
+}

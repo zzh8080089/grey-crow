@@ -1,0 +1,282 @@
+{
+  "schemaVersion": "grey-crow-runtime-skill-rewrite-v1",
+  "status": "historical-draft",
+  "directionGuardrail": "Historical prototype. Current direction packages original Grey Crow; most world material is saved as Skill/Memory/World records, while Hard Commit Validator only protects narrow app/UI state.",
+  "source": {
+    "toolSpecPack": "content/skills/tool-specs.v1.json",
+    "hostProfile": "content/host/host-profile.v1.json",
+    "runtimePolicy": "content/runtime/grey-crow-runtime-policy.md",
+    "saveSlots": "apps/desktop/electron/save-slots.js"
+  },
+  "globalRules": [
+    "Skill rewrites describe runtime capability boundaries; they are not OpenClaw Markdown skills.",
+    "Model-visible skills can read context and write controlled saveRoot records through current domain tools.",
+    "Runtime-only lifecycle skills can write narrow app/UI state or save metadata, but the model cannot call them.",
+    "Candidate is not fact; narration is not state; memory is not authority.",
+    "No API key, provider raw body, local filesystem path, prompt text, or raw tool trace can appear in skill output.",
+    "No image generation, scene visualizer, portrait generation, image relay, OpenClaw Gateway, shell, or arbitrary file access."
+  ],
+  "rewriteOrder": [
+    "read_map",
+    "new_game_init",
+    "save_lifecycle",
+    "memory_fragment",
+    "camp"
+  ],
+  "skills": [
+    {
+      "name": "read_map",
+      "status": "implemented_minimal",
+      "runtimeTool": "read_map",
+      "sourceSkill": "map",
+      "authority": "world_fact_store_with_state_anchor",
+      "permission": "read",
+      "mode": "read",
+      "modelVisible": true,
+      "writesState": false,
+      "purpose": "Read confirmed world, location, exit, nearby point, and route-constraint facts without moving the player.",
+      "inputBoundary": {
+        "type": "object",
+        "properties": {
+          "location": "optional string; if omitted, runtime uses State Store scene.location",
+          "query": "optional string for place, route, exit, or point-of-interest lookup",
+          "scope": "optional enum: current_location | nearby | route | known_world"
+        },
+        "forbidden": [
+          "raw filesystem path",
+          "player-provided new location as confirmed fact",
+          "movement intent disguised as a read"
+        ]
+      },
+      "outputBoundary": {
+        "source": "world_fact_store | state_projection_fallback",
+        "fields": [
+          "location",
+          "exits",
+          "nearby_points",
+          "route_constraints",
+          "unknowns",
+          "state_anchor"
+        ],
+        "requirements": [
+          "Every returned place, exit, and route constraint must be confirmed, unknown, or not_found.",
+          "Unknown routes stay unknown instead of being invented.",
+          "Output cannot include local paths, hidden implementation details, or raw store records."
+        ]
+      },
+      "factGateRequirements": [
+        "read_map never changes player location.",
+        "New points of interest from narration become candidate_events only.",
+        "Movement must be proposed through propose_event and validated before State Store changes.",
+        "Contradictions with current State Store or World Fact Store must be returned as unknowns."
+      ],
+      "implementationNotes": [
+        "P2-04A defines the executable contract and registers a minimal read_map executor.",
+        "engine/runtime/world-map-store.js reads confirmed per-save world-map.json data when present.",
+        "If no world map data exists, read_map returns a State Store current-location fallback with unknown routes."
+      ]
+    },
+    {
+      "name": "new_game_init",
+      "status": "implemented_minimal",
+      "runtimeTool": "new_game_init",
+      "sourceSkill": "new-game",
+      "authority": "save_store_and_state_store",
+      "permission": "runtime_lifecycle",
+      "mode": "lifecycle",
+      "modelVisible": false,
+      "writesState": true,
+      "purpose": "Create a desktop save slot and initialize the first confirmed State Store snapshot from a runtime-owned template.",
+      "inputBoundary": {
+        "type": "object",
+        "properties": {
+          "title": "optional player-visible save title",
+          "preset": "optional runtime-approved start preset id",
+          "providerStatus": "runtime-owned readiness flag; never contains the API key",
+          "overwriteSaveId": "optional save id only after explicit UI confirmation"
+        },
+        "forbidden": [
+          "API key or provider secret",
+          "raw player backstory promoted directly into facts",
+          "local dataRoot or save directory path",
+          "model-authored initial state writes"
+        ]
+      },
+      "outputBoundary": {
+        "fields": [
+          "saveId",
+          "title",
+          "createdAt",
+          "state_hint",
+          "warnings"
+        ],
+        "requirements": [
+          "Output is safe for renderer display.",
+          "State hint is a projection, not the full state.",
+          "No local path and no credential metadata."
+        ]
+      },
+      "factGateRequirements": [
+        "Initial state comes from a checked runtime template.",
+        "Player-authored setup text is candidate material until validated.",
+        "Host Profile can influence tone only, not initial facts.",
+        "Session credential readiness can unlock new game flow but never enters State Store."
+      ],
+      "implementationNotes": [
+        "Desktop main process owns save slot creation.",
+        "The renderer can request new game only through the desktop bridge path.",
+        "engine/bridge/desktop-bridge.js exposes initializeNewGame only to Desktop main, not to the renderer or model tools.",
+        "engine/runtime/state-store.js writes the runtime-owned initial state snapshot before the first player turn.",
+        "P2-04C aligned save_lifecycle with rename, delete, overwrite confirmation, and snapshot marker behavior."
+      ]
+    },
+    {
+      "name": "save_lifecycle",
+      "status": "implemented_minimal",
+      "runtimeTool": "save_lifecycle",
+      "sourceSkill": "game-save",
+      "authority": "save_store",
+      "permission": "runtime_lifecycle",
+      "mode": "lifecycle",
+      "modelVisible": false,
+      "writesState": true,
+      "purpose": "Own save listing, creation, rename, overwrite, delete confirmation, restore selection, and renderer-safe summary projection.",
+      "inputBoundary": {
+        "type": "object",
+        "properties": {
+          "operation": "list | create | rename | restore | snapshot | overwrite | delete",
+          "saveId": "safe save id",
+          "title": "optional renderer-provided title for rename/create",
+          "confirmationToken": "runtime-issued token for destructive operations"
+        },
+        "forbidden": [
+          "API key or provider secret",
+          "local filesystem path",
+          "raw full state returned to renderer",
+          "model-triggered delete or overwrite"
+        ]
+      },
+      "outputBoundary": {
+        "fields": [
+          "ok",
+          "saveId",
+          "summaries",
+          "state_hint",
+          "requiresConfirmation",
+          "safeError"
+        ],
+        "requirements": [
+          "List output uses summaries only.",
+          "Delete and overwrite require explicit UI confirmation.",
+          "Current overwrite executor remains disabled until a replacement source exists.",
+          "Errors must be path-free and secret-free.",
+          "Current Demo does not expose Restore; if future Restore is reintroduced, it must return only a selected save identity and state hint, not raw files."
+        ]
+      },
+      "factGateRequirements": [
+        "Save metadata changes are runtime lifecycle changes, not model facts.",
+        "Snapshot writes must happen after Runtime has committed accepted events.",
+        "Deleting a save must not be representable as a model tool call.",
+        "Overwrite cannot reuse player narration as confirmation."
+      ],
+      "implementationNotes": [
+        "P2-01C already created list/create/get save-slot primitives.",
+        "P2-04C adds rename, restore, snapshot marker, delete confirmation, and overwrite confirmation contract in apps/desktop/electron/save-slots.js.",
+        "Delete is executable only after a runtime-issued confirmation token.",
+        "Overwrite is confirmation-gated but intentionally reserved until a concrete replacement source and UI flow exist.",
+        "Future Keychain or credential storage must remain outside save lifecycle data."
+      ]
+    },
+    {
+      "name": "memory_fragment",
+      "status": "rewritten_as_context_only",
+      "runtimeTool": "search_memory",
+      "sourceSkill": "memory-fragment",
+      "authority": "memory_context_only",
+      "permission": "read",
+      "mode": "read",
+      "modelVisible": true,
+      "writesState": false,
+      "purpose": "Retrieve audit-safe memory fragments as narrative context while preserving State Store and Hard Commit Validator authority.",
+      "inputBoundary": {
+        "type": "object",
+        "properties": {
+          "query": "required string",
+          "limit": "optional integer with runtime cap"
+        },
+        "forbidden": [
+          "request to treat memory as confirmed fact",
+          "API key or provider secret",
+          "raw player input replay"
+        ]
+      },
+      "outputBoundary": {
+        "source": "memory_store",
+        "fields": [
+          "matches",
+          "not_fact",
+          "state_anchor",
+          "source_range"
+        ],
+        "requirements": [
+          "Every memory result must be marked not_fact or historical_context.",
+          "Memory note text cannot directly overwrite State Store.",
+          "Accepted event summaries remain summaries, not new facts."
+        ]
+      },
+      "factGateRequirements": [
+        "Memory can motivate a candidate event, but Hard Commit Validator must validate hard state before commit.",
+        "Contradictions between memory and current state resolve in favor of State Store.",
+        "Compacted memory must retain state anchors and source ranges."
+      ],
+      "implementationNotes": [
+        "search_memory stays model-visible.",
+        "append_memory and compact_context stay runtime-only.",
+        "This replaces old memory-fragment prose with explicit authority tags."
+      ]
+    },
+    {
+      "name": "camp",
+      "status": "deferred_until_domain_schema",
+      "runtimeTool": null,
+      "sourceSkill": "camp",
+      "authority": "undefined_until_resource_schema",
+      "permission": "deferred",
+      "mode": "domain",
+      "modelVisible": false,
+      "writesState": false,
+      "purpose": "Potential future rest, shelter, resource, and long-term safety loop. It is not part of the current demo loop.",
+      "requiredBeforeImplementation": [
+        "resource fields",
+        "location safety fields",
+        "storage fields",
+        "rest and time-cost rules",
+        "risk and consequence rules",
+        "renderer affordance design"
+      ],
+      "factGateRequirements": [
+        "Camp cannot create supplies, shelter, safety, or recovery without explicit confirmed inputs.",
+        "Rest or resource changes must have costs and State Store projections.",
+        "Camp should not be introduced as ambient narration before its state fields exist."
+      ],
+      "implementationNotes": [
+        "Do not expose camp as a tool in P2-04A.",
+        "Do not add camp to the context assembler until the domain schema is defined.",
+        "P2-04D adds deferred-skills-boundary smoke coverage so camp stays out of Tool Registry, Tool Router, and runtime context until its domain schema exists.",
+        "This keeps player imagination focused on the core Grey Crow runtime instead of adding a side system too early."
+      ]
+    }
+  ],
+  "excludedCapabilities": [
+    "scene_visualizer",
+    "image_generation",
+    "scene_image",
+    "portrait_generation",
+    "image_relay",
+    "OpenClaw Gateway",
+    "OpenClaw session",
+    "arbitrary_shell",
+    "arbitrary_file_access",
+    "external_chat_channel"
+  ]
+}

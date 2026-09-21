@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "grey-crow-skill-localization-bundle-v1",
+  "itemId": "extreme-ending-easter",
+  "sourceLocale": "zh-CN",
+  "locales": [
+    {
+      "locale": "en-US",
+      "title": "Grey Crow Echo",
+      "description": "Official hidden ending route: handles only an extreme choice explicitly limited to the current in-game character, with three separate confirmations through ordinary narration.",
+      "triggers": [],
+      "playerGuide": "A Grey Crow echo revealed only after its official hidden conditions are met. It never exposes confirmation stages, probability, or internal judgment.",
+      "skillPath": "skills/extreme-ending-easter/locales/en-US/SKILL.md",
+      "templates": [],
+      "modulePresentationPath": "skills/extreme-ending-easter/locales/en-US/module-presentation.json"
+    },
+    {
+      "locale": "ja-JP",
+      "title": "灰鴉の残響",
+      "description": "現在のゲーム内キャラクターに明確に限定された極端な選択だけを、通常の物語による三回の独立した確認を通して扱う公式の隠し終末ルート。",
+      "triggers": [],
+      "playerGuide": "公式の隠し条件を満たした後にだけ現れる、灰鴉の残響です。確認の段階、確率、内部判断は表示されません。",
+      "skillPath": "skills/extreme-ending-easter/locales/ja-JP/SKILL.md",
+      "templates": [],
+      "modulePresentationPath": "skills/extreme-ending-easter/locales/ja-JP/module-presentation.json"
+    }
+  ]
+}

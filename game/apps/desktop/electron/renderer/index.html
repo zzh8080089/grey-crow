@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' file: data:; media-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none';">
+  <title>Grey Crow AI</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="main-menu-ambient.css">
+  <link rel="stylesheet" href="notebook.css">
+  <link rel="stylesheet" href="notebook-reading-theme.css">
+  <link rel="stylesheet" href="notebook-stage-layout.css">
+  <link rel="stylesheet" href="notebook-book-reading.css">
+  <link rel="stylesheet" href="notebook-cinematic-reading.css">
+  <link rel="stylesheet" href="notebook-theme-study.css">
+  <link rel="stylesheet" href="notebook-physical-reading.css">
+  <link rel="stylesheet" href="notebook-object-icons.css">
+  <link rel="stylesheet" href="speech-input.css">
+  <link rel="stylesheet" href="player-guide.css">
+  <link rel="stylesheet" href="game-tour.css">
+  <link rel="stylesheet" href="notebook-book.css">
+</head>
+<body>
+  <div class="bg-layer" aria-hidden="true"></div>
+  <div class="menu-ambient" id="menuAmbient" aria-hidden="true">
+    <div class="menu-ambient-visual" id="menuAmbientVisual">
+      <div class="menu-ambient-crow-relight"></div>
+      <span class="menu-ambient-eye" id="menuAmbientEye"></span>
+    </div>
+    <div class="menu-ambient-sky"></div>
+    <canvas class="menu-ambient-rain menu-ambient-rain-far" id="menuAmbientFarRain"></canvas>
+    <div class="menu-ambient-mist menu-ambient-mist-a"></div>
+    <div class="menu-ambient-mist menu-ambient-mist-b"></div>
+    <div class="menu-ambient-wet"></div>
+    <div class="menu-ambient-flash" id="menuAmbientFlash"></div>
+    <canvas class="menu-ambient-rain menu-ambient-rain-near" id="menuAmbientNearRain"></canvas>
+    <div class="menu-ambient-grain"></div>
+  </div>
+  <div class="locale-transition-curtain" id="localeTransitionCurtain" data-phase="idle" aria-hidden="true"></div>
+  <main class="app-shell">
+    <section class="menu-view menu-intro-active" id="menuView" aria-label="主菜单" data-i18n-aria-label="menu.aria">
+      <div class="menu-language-switcher" id="menuLanguageSwitcher">
+        <button class="menu-language-toggle" id="menuLanguageToggle" type="button" aria-label="游戏语言" data-i18n-aria-label="menu.language.title" aria-haspopup="menu" aria-expanded="false">
+          <svg class="menu-language-flag" viewBox="0 0 30 20" aria-hidden="true" focusable="false">
+            <rect width="30" height="20" rx="1" fill="#de2910"></rect>
+            <path d="M5 3.1 5.7 5.2h2.2L6.1 6.5l.7 2.1L5 7.3 3.2 8.6l.7-2.1-1.8-1.3h2.2z" fill="#ffde00"></path>
+            <circle cx="9.5" cy="3.8" r=".65" fill="#ffde00"></circle>
+            <circle cx="11.3" cy="6.1" r=".65" fill="#ffde00"></circle>
+            <circle cx="10.8" cy="9" r=".65" fill="#ffde00"></circle>
+            <circle cx="8.7" cy="10.8" r=".65" fill="#ffde00"></circle>
+          </svg>
+        </button>
+        <div class="menu-language-options" id="menuLanguageOptions" role="menu" hidden>
+          <button class="menu-language-option" id="mainMenuLocaleZh" type="button" role="menuitemradio" data-menu-locale="zh-CN" data-locale-native-label aria-label="简体中文" aria-checked="false" aria-pressed="false">
+            <svg class="menu-language-flag" viewBox="0 0 30 20" aria-hidden="true" focusable="false">
+              <rect width="30" height="20" rx="1" fill="#de2910"></rect>
+              <path d="M5 3.1 5.7 5.2h2.2L6.1 6.5l.7 2.1L5 7.3 3.2 8.6l.7-2.1-1.8-1.3h2.2z" fill="#ffde00"></path>
+              <circle cx="9.5" cy="3.8" r=".65" fill="#ffde00"></circle>
+              <circle cx="11.3" cy="6.1" r=".65" fill="#ffde00"></circle>
+              <circle cx="10.8" cy="9" r=".65" fill="#ffde00"></circle>
+              <circle cx="8.7" cy="10.8" r=".65" fill="#ffde00"></circle>
+            </svg>
+            <span class="sr-only" data-locale-native-label>简体中文</span>
+          </button>
+          <button class="menu-language-option" id="mainMenuLocaleEn" type="button" role="menuitemradio" data-menu-locale="en-US" data-locale-native-label aria-label="English" aria-checked="false" aria-pressed="false">
+            <svg class="menu-language-flag" viewBox="0 0 30 20" aria-hidden="true" focusable="false">
+              <rect width="30" height="20" rx="1" fill="#fff"></rect>
+              <path d="M0 0h30v2H0zm0 4h30v2H0zm0 4h30v2H0zm0 4h30v2H0zm0 4h30v2H0z" fill="#b22234"></path>
+              <rect width="13" height="10.8" rx=".5" fill="#3c3b6e"></rect>
+              <path d="M2.2 2.1h1.2v1.2H2.2zm3 0h1.2v1.2H5.2zm3 0h1.2v1.2H8.2zm-4.5 2.5h1.2v1.2H3.7zm3 0h1.2v1.2H6.7zm3 0h1.2v1.2H9.7zM2.2 7.1h1.2v1.2H2.2zm3 0h1.2v1.2H5.2zm3 0h1.2v1.2H8.2z" fill="#fff"></path>
+            </svg>
+            <span class="sr-only" data-locale-native-label>English</span>
+          </button>
+          <button class="menu-language-option" id="mainMenuLocaleJa" type="button" role="menuitemradio" data-menu-locale="ja-JP" data-locale-native-label aria-label="日本語" aria-checked="false" aria-pressed="false">
+            <svg class="menu-language-flag" viewBox="0 0 30 20" aria-hidden="true" focusable="false">
+              <rect width="30" height="20" rx="1" fill="#fff"></rect>
+              <circle cx="15" cy="10" r="5.2" fill="#bc002d"></circle>
+            </svg>
+            <span class="sr-only" data-locale-native-label>日本語</span>
+          </button>
+        </div>
+        <p class="menu-language-status" id="menuLanguageStatus" aria-live="polite" data-i18n="menu.language.initial">主菜单与下一段新故事采用所选语言。</p>
+      </div>
+
+      <div class="menu-stage">
+        <div class="brand-lockup">
+          <div class="brand-logo-frame">
+            <img class="brand-logo" id="brandLogo" src="assets/branding/grey-crow-ai-logo-zh-CN.png" alt="灰鸦 AI" data-i18n-alt="brand.alt" data-brand-locale="zh-CN">
+          </div>
+          <p class="runtime-status" id="runtimeStatus">LOCAL RUNTIME</p>
+        </div>
+
+        <div class="menu-actions" aria-label="游戏入口" data-i18n-aria-label="menu.actions.aria">
+          <button class="menu-button primary" id="newGameButton" type="button" data-i18n="menu.newGame">新游戏</button>
+          <button class="menu-button" id="continueGameButton" type="button" data-i18n="menu.continue">继续当前冒险</button>
+          <button class="menu-button" id="contentCreatorButton" type="button" data-i18n="menu.creator">创作工具</button>
+          <button class="menu-button" id="settingsButton" type="button" data-i18n="menu.settings">设置</button>
+          <button class="menu-button exit-game-button" id="exitGameButton" type="button" data-i18n="menu.exit">退出游戏</button>
+        </div>
+
+        <div class="save-list" id="saveList" aria-label="当前冒险" data-i18n-aria-label="menu.currentAdventure.aria"></div>
+
+        <p class="menu-message" id="menuMessage" data-i18n="menu.loading">等待本地桌面壳就绪。</p>
+      </div>
+    </section>
+
+    <div class="game-stage-viewport hidden" id="gameStageViewport">
+    <div class="game-stage-canvas" id="gameStageCanvas">
+    <section class="game-view hidden" id="gameView" data-ui-layout="story-notebook-v1" aria-label="游戏界面" data-i18n-aria-label="game.aria">
+      <div class="story-notebook-scene-layer" data-notebook-layer="scene" aria-hidden="true"></div>
+      <div class="notebook-scene-shade" data-notebook-layer="lighting" aria-hidden="true"></div>
+      <div class="story-notebook-material-layer" data-notebook-layer="paper" aria-hidden="true">
+        <span class="story-notebook-page-shell"></span>
+        <span class="notebook-paper-grain" data-notebook-layer="texture"></span>
+        <span class="notebook-page-frame" data-notebook-layer="edge"></span>
+        <span class="notebook-binding" data-notebook-layer="binding"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+        <span class="story-notebook-rail-shell"></span>
+      </div>
+      <header class="game-header">
+        <div>
+          <p class="game-title" data-i18n="game.title">灰鸦</p>
+          <p class="game-subtitle" id="gameStatus" data-i18n="game.offline">模型未连接</p>
+        </div>
+        <div class="game-header-actions">
+          <span class="game-header-note" data-i18n="game.localOnly">本地单机运行</span>
+        </div>
+      </header>
+
+      <section class="narration-panel" aria-label="叙事输出" data-i18n-aria-label="game.narration.aria">
+        <div class="narration-scroll" id="narrationPanel" aria-live="polite">
+          <p class="narration-line muted" data-i18n="game.narration.initial">本地运行时已经接入。输入行动后，主持人会返回本轮叙事和轻量状态。</p>
+        </div>
+      </section>
+
+      <aside class="state-panel" aria-label="轻量状态" data-i18n-aria-label="game.statePanel.aria">
+        <div class="notebook-status-strip">
+        <section class="story-notebook-world-card" id="storyNotebookWorldCard" aria-label="当前剧本" data-i18n-aria-label="game.notebook.worldAria" hidden>
+          <span class="story-notebook-paper-pin" aria-hidden="true"></span>
+          <small data-i18n="game.notebook.world">当前剧本</small>
+          <strong id="storyNotebookWorldTitle"></strong>
+        </section>
+        <section class="side-section state-card" aria-label="当前状态" data-i18n-aria-label="game.stateCard.aria">
+          <div class="side-title">
+            <span data-i18n="game.currentState">当前状态</span>
+            <span class="side-kicker" data-i18n="game.preview">预览</span>
+          </div>
+          <div class="state-grid" id="stateGrid">
+            <span data-state-key="location" data-state-role="label" data-i18n="game.location">地点</span><strong data-state-key="location" data-state-role="value" data-i18n="game.unknown">未确认</strong>
+            <span data-state-key="player" data-state-role="label" data-i18n="game.state">状态</span><strong data-state-key="player" data-state-role="value" data-i18n="game.unknown">未确认</strong>
+            <span data-state-key="turn" data-state-role="label" data-i18n="game.turn">回合</span><strong data-state-key="turn" data-state-role="value">0</strong>
+            <span data-state-key="model" data-state-role="label" data-i18n="game.model">模型</span><strong id="modelStatusText" data-state-key="model" data-state-role="value">DeepSeek</strong>
+          </div>
+          <div class="side-divider"></div>
+          <div class="side-title">
+            <span data-i18n="game.skills">扩展槽</span>
+            <span class="side-kicker" id="modSlotKicker"></span>
+          </div>
+          <div class="mod-slots empty" id="modSlots" aria-label="本轮 Skill / Mod 状态" data-i18n-aria-label="game.skills.aria">
+            <span class="mod-slot-empty" data-i18n="game.skills.waiting">等待 Skill 列表。</span>
+          </div>
+        </section>
+        <section class="side-section context-side-card" aria-label="上下文窗口状态" data-i18n-aria-label="game.context.aria">
+          <div class="host-status" id="storyNotebookHostStatus" data-host-phase="idle">
+            <span class="writing-quill" aria-hidden="true"></span>
+            <span class="story-notebook-host-pin" aria-hidden="true"></span>
+            <span class="story-notebook-host-mark" aria-hidden="true"><img src="assets/story-notebook-v1/icon-host-feather-night-v1.png" alt=""></span>
+            <div class="meter-label" data-i18n="game.hostStatus">主持人状态</div>
+            <p class="turn-status" id="turnStatus" aria-live="polite"></p>
+            <button type="button" class="turn-failure-details" id="turnFailureDetailsButton" hidden data-i18n="game.turn.failure.viewDetails">查看说明</button>
+          </div>
+          <div class="context-meter unknown" id="contextMeter" tabindex="0" role="status" aria-live="polite" aria-label="上下文窗口占用：等待估算" aria-describedby="contextUsageTooltip" data-i18n-aria-label="game.context.meterAria">
+            <div class="context-meter-drop" aria-hidden="true">
+              <svg class="context-meter-drop-svg" viewBox="0 0 64 64" focusable="false" aria-hidden="true">
+                <defs>
+                  <clipPath id="contextMeterDropClip">
+                    <path d="M32 3 C43 18 53 30 53 42 C53 55 44 62 32 62 C20 62 11 55 11 42 C11 30 21 18 32 3 Z"></path>
+                  </clipPath>
+                  <linearGradient id="contextMeterGlassGradient" x1="13" y1="8" x2="49" y2="61" gradientUnits="userSpaceOnUse">
+                    <stop offset="0" class="context-meter-glass-stop-top"></stop>
+                    <stop offset="0.55" class="context-meter-glass-stop-mid"></stop>
+                    <stop offset="1" class="context-meter-glass-stop-bottom"></stop>
+                  </linearGradient>
+                  <linearGradient id="contextMeterBloodGradient" x1="12" y1="60" x2="49" y2="8" gradientUnits="userSpaceOnUse">
+                    <stop offset="0" class="context-meter-blood-stop-deep"></stop>
+                    <stop offset="0.58" class="context-meter-blood-stop-mid"></stop>
+                    <stop offset="1" class="context-meter-blood-stop-bright"></stop>
+                  </linearGradient>
+                </defs>
+                <path class="context-meter-drop-shadow" d="M32 3 C43 18 53 30 53 42 C53 55 44 62 32 62 C20 62 11 55 11 42 C11 30 21 18 32 3 Z"></path>
+                <path class="context-meter-drop-face" d="M32 3 C43 18 53 30 53 42 C53 55 44 62 32 62 C20 62 11 55 11 42 C11 30 21 18 32 3 Z"></path>
+                <g clip-path="url(#contextMeterDropClip)">
+                  <rect class="context-meter-blood-fill" id="contextMeterBloodFill" x="0" y="64" width="64" height="0"></rect>
+                  <path class="context-meter-blood-reflect" d="M20 19 C25 12 31 8 35 7 C31 15 26 21 21 29 C19 25 18 22 20 19 Z"></path>
+                </g>
+                <path class="context-meter-drop-gloss" d="M21 18 C26 11 31 8 36 7 C31 16 26 24 21 34 C18 28 18 22 21 18 Z"></path>
+                <path class="context-meter-drop-rim" d="M32 3 C43 18 53 30 53 42 C53 55 44 62 32 62 C20 62 11 55 11 42 C11 30 21 18 32 3 Z"></path>
+              </svg>
+              <span class="context-meter-percent" id="contextUsagePercent">--</span>
+            </div>
+            <div class="context-meter-tooltip" id="contextUsageTooltip" role="tooltip">
+              <div class="context-meter-title" data-i18n="game.context.title">上下文信息窗口</div>
+              <div class="context-meter-detail" id="contextUsageDetail"></div>
+              <div class="context-meter-status" id="contextUsageStatus"></div>
+              <div class="context-meter-note" data-i18n="game.context.note">估算当前给模型的上下文窗口占用，不等同于 API 账单 token。</div>
+            </div>
+          </div>
+        </section>
+        </div>
+
+        <button class="settings-gear-button" id="gameSettingsButton" type="button" aria-label="设置" title="设置" data-i18n-aria-label="game.settings" data-i18n-title="game.settings">
+          <span class="notebook-icon-art" aria-hidden="true"><img src="assets/story-notebook-v1/icon-settings-gear-night-v1.png" alt=""></span>
+          <span class="notebook-tab-label" data-i18n="game.settings">设置</span>
+        </button>
+        <nav class="story-notebook-rail-navigation" aria-label="日记本索引栏" data-i18n-aria-label="game.notebook.railAria">
+          <button class="story-notebook-rail-button" id="storyNotebookStateButton" type="button" aria-label="查看当前状态" title="查看当前状态" aria-controls="storyNotebookDrawer" aria-expanded="false" data-notebook-panel="state" data-i18n-aria-label="game.notebook.stateOpen" data-i18n-title="game.notebook.stateOpen">
+            <span class="notebook-icon-art" aria-hidden="true"><img src="assets/story-notebook-v1/icon-current-state-night-v1.png" alt=""></span>
+            <span class="notebook-tab-label" data-i18n="game.notebook.tabState">状态</span>
+          </button>
+          <button class="story-notebook-rail-button" id="storyNotebookCharactersButton" type="button" aria-label="打开角色档案" title="打开角色档案" aria-controls="storyNotebookDrawer" aria-expanded="false" data-notebook-panel="characters" data-i18n-aria-label="game.notebook.charactersOpen" data-i18n-title="game.notebook.charactersOpen" hidden disabled>
+            <span class="notebook-icon-art" aria-hidden="true"><img src="assets/story-notebook-v1/icon-character-records-night-v1.png" alt=""></span>
+            <span class="notebook-tab-label" data-i18n="game.notebook.tabCharacters">人物</span>
+          </button>
+          <button class="story-notebook-rail-button" id="storyNotebookModulesButton" type="button" aria-label="打开模块仓" title="打开模块仓" aria-controls="storyNotebookDrawer" aria-expanded="false" data-notebook-panel="modules" data-i18n-aria-label="game.notebook.modulesOpen" data-i18n-title="game.notebook.modulesOpen">
+            <span class="notebook-icon-art" aria-hidden="true"><img src="assets/story-notebook-v1/icon-module-library-night-v1.png" alt=""></span>
+            <span class="notebook-tab-label" data-i18n="game.notebook.tabRecords">资料</span>
+            <span class="story-notebook-rail-count" id="storyNotebookModuleCount" aria-hidden="true">0</span>
+          </button>
+          <button class="story-notebook-rail-button" id="storyNotebookChaptersButton" type="button" aria-label="打开章节" title="打开章节" aria-controls="storyNotebookDrawer" aria-expanded="false" data-notebook-panel="chapters" data-i18n-aria-label="game.notebook.chaptersOpen" data-i18n-title="game.notebook.chaptersOpen">
+            <span class="notebook-icon-art" aria-hidden="true"><img src="assets/story-notebook-v1/icon-chapter-night-v1.png" alt=""></span>
+            <span class="notebook-tab-label" data-i18n="game.notebook.tabChapters">章节</span>
+          </button>
+          <button class="story-notebook-rail-button" id="storyNotebookDirectoryButton" type="button" aria-label="打开目录" title="打开目录" aria-controls="storyNotebookDrawer" aria-expanded="false" data-notebook-panel="directory" data-i18n-aria-label="game.notebook.directoryOpen" data-i18n-title="game.notebook.directoryOpen">
+            <span class="notebook-icon-art" aria-hidden="true"></span>
+            <span class="notebook-tab-label" data-i18n="game.notebook.tabDirectory">目录</span>
+          </button>
+        </nav>
+
+        <div class="side-spacer" aria-hidden="true"></div>
+
+        <div class="story-notebook-live" id="storyNotebookLive" tabindex="0" role="status" aria-describedby="storyNotebookModelStatusText">
+          <span class="story-notebook-live-dot" aria-hidden="true"></span>
+          <small>LIVE</small>
+          <strong id="storyNotebookModelStatusText"></strong>
+        </div>
+        <section class="side-section side-debug-card" aria-label="状态板" data-i18n-aria-label="game.statusBoard.aria">
+          <div class="side-title">
+            <span data-i18n="game.statusBoard.title">状态板</span>
+            <span class="side-kicker">debug</span>
+          </div>
+          <div class="side-actions">
+            <button class="text-button" id="manualSaveButton" type="button" data-i18n="game.manualSave">保存</button>
+            <button class="text-button" id="chapterLogButton" type="button" data-i18n="game.chapterLog">章节日志</button>
+            <button class="text-button compact-context-button" id="compactContextButton" type="button" data-i18n="game.compact">压缩</button>
+          </div>
+          <div class="operation-status-list" id="operationStatusList" aria-label="最近操作状态" data-i18n-aria-label="game.operations.aria">
+            <span data-i18n="game.operations.output">模型输出</span><strong id="operationOutputStatus" data-i18n="game.operations.standby">待命</strong>
+            <span data-i18n="game.operations.tools">工具写入</span><strong id="operationToolStatus" data-i18n="game.operations.noAction">无动作</strong>
+            <span data-i18n="game.operations.context">上下文</span><strong id="operationContextStatus" data-i18n="game.operations.notMaintained">未维护</strong>
+            <span class="operation-tts-label" data-i18n="game.operations.tts">语音</span>
+            <div class="operation-tts-status">
+              <button class="tts-playback-toggle story-action-key" id="ttsPlaybackToggleButton" type="button" aria-label="暂停朗读" title="暂停朗读" data-i18n-aria-label="game.tts.pause" data-i18n-title="game.tts.pause" disabled>
+                <span class="tts-action-wave" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="tts-action-copy">
+                  <span class="tts-action-label" data-i18n="game.operations.tts">语音</span>
+                  <strong id="operationTtsStatus" data-i18n="game.operations.standby">待命</strong>
+                </span>
+                <span class="tts-playback-icon" id="ttsPlaybackIcon" aria-hidden="true">⏸</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <section class="story-notebook-drawer" id="storyNotebookDrawer" aria-labelledby="storyNotebookDrawerTitle" aria-hidden="true" inert>
+        <div class="notebook-drawer-paper" data-notebook-layer="drawer-paper" aria-hidden="true"></div>
+        <header class="story-notebook-drawer-header">
+          <div class="story-notebook-drawer-heading">
+            <small id="storyNotebookDrawerEyebrow"></small>
+            <h2 id="storyNotebookDrawerTitle" tabindex="-1"></h2>
+            <p id="storyNotebookDrawerStatus" aria-live="polite"></p>
+          </div>
+          <div class="story-notebook-drawer-actions">
+            <button class="story-notebook-drawer-back" id="storyNotebookDrawerBackButton" type="button" aria-label="返回上一层" title="返回上一层" data-i18n-aria-label="game.notebook.drawerBack" data-i18n-title="game.notebook.drawerBack" hidden>←</button>
+            <button class="story-notebook-drawer-refresh" id="storyNotebookDrawerRefreshButton" type="button" aria-label="刷新" title="刷新" data-i18n-aria-label="common.refresh" data-i18n-title="common.refresh">↻</button>
+            <button class="story-notebook-drawer-close" id="storyNotebookDrawerCloseButton" type="button" aria-label="关闭索引页" title="关闭索引页" data-i18n-aria-label="game.notebook.drawerClose" data-i18n-title="game.notebook.drawerClose">×</button>
+          </div>
+        </header>
+        <div class="story-notebook-drawer-body" id="storyNotebookDrawerBody"></div>
+        <footer class="story-notebook-drawer-footnote">
+          <span aria-hidden="true"></span>
+          <p data-i18n="game.notebook.drawerFootnote">这里显示当前故事已经锁定的只读资料；查看不会推进回合或改写存档。</p>
+        </footer>
+        </section>
+      </aside>
+
+      <form class="turn-form" id="turnForm">
+        <div class="command-menu" id="commandMenu" aria-label="快捷命令" data-i18n-aria-label="game.commands.aria">
+          <button class="command-button icon-command" id="observeCommandButton" type="button" aria-label="观察" title="观察" data-i18n-aria-label="game.commands.observe" data-i18n-title="game.commands.observe">
+            <span class="notebook-icon-art" aria-hidden="true"><img src="assets/story-notebook-v1/icon-observe-night-v1.png" alt=""></span>
+            <span data-i18n="game.commands.observe">观察</span>
+          </button>
+          <button class="command-button icon-command" id="mapCommandButton" type="button" aria-label="地点索引" title="地点索引" data-i18n-aria-label="game.commands.map" data-i18n-title="game.commands.map">
+            <span class="notebook-icon-art" aria-hidden="true"><img src="assets/story-notebook-v1/icon-location-action-night-v1.png" alt=""></span>
+            <span data-i18n="game.commands.map">地点索引</span>
+          </button>
+          <button class="command-button icon-command" id="backpackCommandButton" type="button" aria-label="背包" title="背包" data-i18n-aria-label="game.commands.backpack" data-i18n-title="game.commands.backpack">
+            <span class="notebook-icon-art" aria-hidden="true"><img src="assets/story-notebook-v1/icon-backpack-night-v1.png" alt=""></span>
+            <span data-i18n="game.commands.backpack">背包</span>
+          </button>
+          <button class="command-button hidden-command" id="listenCommandButton" type="button" data-i18n="game.commands.listen">聆听</button>
+        </div>
+        <label class="sr-only" for="turnInput" data-i18n="game.input.label">玩家输入</label>
+        <div class="turn-input-scroll">
+          <div class="speech-input-heading">
+            <span class="story-input-kicker" data-i18n="game.notebook.nextAction">你的下一步</span>
+            <button id="cancelTurnButton" class="speech-input-button" type="button" data-i18n="game.turn.cancel" hidden>停止生成</button>
+            <button id="speechInputButton" class="speech-input-button" type="button" aria-pressed="false"></button>
+          </div>
+          <textarea id="turnInput" rows="3" maxlength="4000" placeholder="输入你的行动或回应" data-i18n-placeholder="game.input.placeholder"></textarea>
+          <span class="story-input-hint" id="speechInputKeyboardHint" data-i18n="game.notebook.inputHint">Enter 发送 · Shift + Enter 换行</span>
+          <div class="speech-input-bar" id="speechInputBar" hidden>
+            <span id="speechInputStatus" role="status" aria-live="polite"></span>
+            <button id="speechInputCancel" class="text-button compact" type="button" data-i18n="speech.cancel" hidden>取消</button>
+            <button id="speechInputResultButton" class="text-button compact" type="button" data-i18n="speech.viewResult" hidden>查看文字</button>
+          </div>
+        </div>
+        <button class="send-button story-action-key" id="sendTurnButton" type="submit" aria-label="继续故事" title="继续故事" data-i18n-aria-label="game.notebook.continueStory" data-i18n-title="game.notebook.continueStory">
+          <span class="send-button-label" data-i18n="game.notebook.continueStory">继续故事</span>
+          <img src="assets/ui/icons/icon-send-arrow-01.png" alt="">
+        </button>
+      </form>
+      <section class="story-archive-footer" id="storyArchiveFooter" aria-live="polite" hidden>
+        <div class="story-archive-mark" aria-hidden="true">◆</div>
+        <div class="story-archive-copy">
+          <strong id="storyArchiveTitle"></strong>
+          <p id="storyArchiveNotice"></p>
+        </div>
+        <div class="story-archive-actions">
+          <button class="text-button" id="storyResumeFinaleButton" type="button" data-i18n="archive.resume" hidden>继续整理并封存</button>
+          <button class="primary-button story-continuation-button" id="storyContinueButton" type="button" data-i18n="archive.continue">续写这个故事</button>
+          <button class="text-button" id="storyExportHtmlButton" type="button" data-i18n="archive.exportHtml">导出 HTML</button>
+          <button class="text-button" id="storyExportMarkdownButton" type="button" data-i18n="archive.exportMarkdown">导出 Markdown</button>
+          <button class="text-button" id="storyArchiveBackButton" type="button" data-i18n="common.backToMenu">返回主界面</button>
+        </div>
+      </section>
+    </section>
+    </div>
+    </div>
+  </main>
+
+  <dialog class="settings-dialog" id="settingsDialog">
+    <form method="dialog" class="settings-box" id="settingsForm">
+      <div class="settings-header">
+        <div class="settings-heading">
+          <h2 data-i18n="settings.title">设置</h2>
+          <p id="settingsStatus" aria-live="polite" data-i18n="settings.status.autoSaved">普通设置已自动保存。</p>
+          <p class="settings-persistence-warning" id="settingsPersistenceWarning" hidden></p>
+        </div>
+        <div class="settings-header-actions">
+          <button class="icon-button settings-close-button" id="closeSettingsButton" type="button" aria-label="关闭设置" data-i18n-aria-label="settings.close">X</button>
+        </div>
+      </div>
+      <div class="settings-shell-body">
+        <aside class="settings-sidebar">
+          <div class="settings-tabs" role="tablist" aria-label="设置分类" data-i18n-aria-label="settings.tabs.aria">
+            <button class="settings-tab is-active" id="settingsTabDisplay" type="button" role="tab" data-settings-tab="display" aria-selected="true" aria-controls="settingsPanelDisplay" data-i18n="settings.tab.interface">显示与阅读</button>
+            <button class="settings-tab" id="settingsTabAudio" type="button" role="tab" data-settings-tab="audio" aria-selected="false" aria-controls="settingsPanelAudio" data-i18n="settings.tab.audio">声音与语音</button>
+            <button class="settings-tab" id="settingsTabNarration" type="button" role="tab" data-settings-tab="narration" aria-selected="false" aria-controls="settingsPanelNarration" data-i18n="settings.tab.experience">故事偏好</button>
+            <button class="settings-tab" id="settingsTabAi" type="button" role="tab" data-settings-tab="ai" aria-selected="false" aria-controls="settingsPanelAi" data-i18n="settings.tab.connection">模型连接</button>
+            <button class="settings-tab settings-tab-secondary" id="settingsTabSave" type="button" role="tab" data-settings-tab="save" aria-selected="false" aria-controls="settingsPanelSave" data-i18n="settings.tab.save">存档与内容</button>
+            <button class="settings-tab settings-tab-secondary" id="settingsTabDeveloper" type="button" role="tab" data-settings-tab="developer" aria-selected="false" aria-controls="settingsPanelDeveloper" data-i18n="settings.tab.advanced">高级</button>
+          </div>
+          <div class="settings-navigation-actions">
+            <button class="text-button settings-menu-button" id="backToMenuButton" type="button" data-i18n="common.backToMenu">返回主界面</button>
+          </div>
+        </aside>
+        <div class="settings-content" id="settingsContent">
+          <div class="settings-panel is-active" id="settingsPanelDisplay" data-settings-panel="display" role="tabpanel" aria-labelledby="settingsTabDisplay">
+            <section class="settings-section" aria-label="文字显示" data-i18n-aria-label="settings.section.display">
+              <div class="settings-section-title" data-i18n="settings.section.display">显示与阅读</div>
+              <div class="settings-grid">
+                <label class="field-label" for="gameLanguageSelect" data-i18n="settings.display.language">游戏语言</label>
+                <select id="gameLanguageSelect" class="settings-select">
+                  <option value="zh-CN" data-locale-native-label>简体中文</option>
+                  <option value="en-US">English</option>
+                  <option value="ja-JP" data-locale-native-label>日本語</option>
+                </select>
+                <label class="field-label" for="windowModeSelect" data-i18n="settings.display.windowMode">游戏窗口</label>
+                <select id="windowModeSelect" class="settings-select">
+                  <option value="compact" data-i18n="settings.windowMode.compact">小窗口 · 1280 × 720</option>
+                  <option value="standard" data-i18n="settings.windowMode.standard">标准窗口 · 1600 × 900</option>
+                  <option value="large" data-i18n="settings.windowMode.large">大窗口 · 1920 × 1080</option>
+                  <option value="qhd" data-i18n="settings.windowMode.qhd">特大窗口 · 2560 × 1440</option>
+                  <option value="fullscreen" data-i18n="settings.windowMode.fullscreen">全屏</option>
+                </select>
+                <label class="field-label" for="narrationTextSizeSelect" data-i18n="settings.display.narrationSize">正文字号</label>
+                <select id="narrationTextSizeSelect" class="settings-select">
+                  <option value="small" data-i18n="settings.size.small">小</option>
+                  <option value="medium" data-i18n="settings.size.medium">中</option>
+                  <option value="large" data-i18n="settings.size.large">大</option>
+                </select>
+                <label class="field-label" for="sidePanelTextSizeSelect" data-i18n="settings.display.sideSize">资料字号</label>
+                <select id="sidePanelTextSizeSelect" class="settings-select">
+                  <option value="small" data-i18n="settings.size.small">小</option>
+                  <option value="medium" data-i18n="settings.size.medium">中</option>
+                  <option value="large" data-i18n="settings.size.large">大</option>
+                </select>
+                <label class="field-label" for="storyNotebookThemeSelect" data-i18n="settings.display.notebookTheme">阅读纸面</label>
+                <select id="storyNotebookThemeSelect" class="settings-select">
+                  <option value="light" data-i18n="settings.notebookTheme.light">亮色纸页</option>
+                  <option value="dark" data-i18n="settings.notebookTheme.dark">暗色纸页</option>
+                </select>
+              </div>
+              <p class="risk-note" id="gameLanguageStatus" data-i18n="settings.language.description">游戏语言用于主菜单和之后新建的故事；已有故事不会被改写。</p>
+              <p class="risk-note" id="windowModeStatus" data-i18n="settings.display.windowModeNote">当前屏幕放不下的窗口大小会停用。</p>
+              <p class="risk-note" data-i18n="settings.display.note">正文和资料字号可分别调整；日记本输入文字随正文字号调整。</p>
+            </section>
+          </div>
+          <div class="settings-panel" id="settingsPanelAudio" data-settings-panel="audio" role="tabpanel" aria-labelledby="settingsTabAudio" hidden>
+            <section class="settings-section">
+              <div class="settings-section-title" data-i18n="settings.section.audio">声音</div>
+              <div class="settings-grid">
+                <label class="field-label" for="gameVolumeInput" data-i18n="settings.audio.volume">主音量</label>
+                <div class="range-row">
+                  <input id="gameVolumeInput" class="settings-range" type="range" min="0" max="100" value="80">
+                  <span id="gameVolumeValue" class="range-value">80%</span>
+                </div>
+              </div>
+            </section>
+            <section class="settings-section">
+              <div class="settings-section-title" data-i18n="settings.audio.reading">听故事</div>
+              <div class="settings-grid">
+                <label class="field-label" for="ttsReadingModeSelect" data-i18n="settings.audio.tts">朗读故事</label>
+                <select id="ttsReadingModeSelect" class="settings-select">
+                  <option value="off" data-i18n="settings.audio.mode.off">关闭</option>
+                  <option value="manual" data-i18n="settings.audio.mode.manual">点按朗读</option>
+                  <option value="auto" data-i18n="settings.audio.mode.auto">自动朗读</option>
+                </select>
+              </div>
+              <div class="settings-status" id="ttsStatus"></div>
+              <div id="ttsReadingOptions" hidden>
+                <div class="settings-grid">
+                  <label class="field-label" for="ttsVoiceSelect" data-i18n="settings.audio.voice">音色</label>
+                  <select id="ttsVoiceSelect" class="settings-select">
+                    <option value="zm_010" selected data-i18n="settings.audio.voice.zm010">中文男声 10（默认）</option>
+                    <option value="zm_009" data-i18n="settings.audio.voice.zm009">中文男声 09</option>
+                    <option value="zf_001" data-i18n="settings.audio.voice.zf001">中文女声 01</option>
+                    <option value="zf_006" data-i18n="settings.audio.voice.zf006">中文女声 06</option>
+                  </select>
+                  <label class="field-label" for="ttsRateInput" data-i18n="settings.audio.rate">语速</label>
+                  <select id="ttsRateInput" class="settings-select">
+                    <option value="-25%" data-i18n="settings.audio.rate.slow">慢</option>
+                    <option value="-10%" data-i18n="settings.audio.rate.relaxed">稍慢</option>
+                    <option value="+0%" data-i18n="settings.audio.rate.normal" selected>正常</option>
+                    <option value="+10%" data-i18n="settings.audio.rate.brisk">稍快</option>
+                    <option value="+25%" data-i18n="settings.audio.rate.fast">快</option>
+                    <option id="ttsRateCustomOption" value="" hidden></option>
+                  </select>
+                </div>
+                <div class="settings-actions">
+                  <button class="menu-button" id="ttsTestButton" type="button" disabled data-i18n="settings.audio.test">试听</button>
+                </div>
+              </div>
+            </section>
+            <section class="settings-section">
+              <div class="settings-section-title" data-i18n="speech.settingsTitle">说话输入</div>
+              <div class="settings-grid">
+                <label class="field-label" for="speechInputEnabledSelect" data-i18n="speech.enable">语音输入</label>
+                <select id="speechInputEnabledSelect" class="settings-select">
+                  <option value="false" data-i18n="common.off">关闭</option>
+                  <option value="true" data-i18n="common.on">开启</option>
+                </select>
+              </div>
+              <p class="risk-note" data-i18n="speech.shortDescription">把说的话转成文字，确认后再发送。首次使用需要下载识别资源。</p>
+              <p class="risk-note" data-i18n="speech.memoryBrief">启用后识别约需额外 0.7 GB 内存，识别结束释放；实际用量因设备而异。</p>
+              <div id="speechInputOptions" hidden>
+                <div class="settings-grid">
+                  <label class="field-label" for="speechInputDeviceSelect" data-i18n="speech.device">麦克风</label>
+                  <select id="speechInputDeviceSelect" class="settings-select">
+                    <option value="default" data-i18n="speech.deviceDefault">系统默认</option>
+                  </select>
+                  <label class="field-label" for="speechInputLanguageSelect" data-i18n="speech.language">识别语言</label>
+                  <select id="speechInputLanguageSelect" class="settings-select">
+                    <option value="zh" data-locale-native-label>中文</option>
+                    <option value="en" data-locale-native-label>English</option>
+                    <option value="ja" data-locale-native-label>日本語</option>
+                  </select>
+                </div>
+                <div class="settings-status" id="speechInputResourceStatus" role="status" data-i18n="speech.notInstalled">尚未下载识别模型。</div>
+                <div class="settings-actions">
+                  <button id="speechInputInstallButton" class="menu-button" type="button" data-i18n="speech.install">下载语音输入资源</button>
+                  <button id="speechInputDownloadCancel" class="menu-button" type="button" data-i18n="speech.cancelDownload" hidden>取消下载</button>
+                  <button id="speechInputRemoveButton" class="text-button" type="button" data-i18n="speech.remove" hidden>删除语音输入资源</button>
+                  <button id="speechInputDevicesRefresh" class="text-button" type="button" data-i18n="speech.refreshDevices">刷新麦克风</button>
+                  <button id="speechInputTestButton" class="menu-button" type="button" data-i18n="speech.test">试录</button>
+                </div>
+                <div id="speechInputTestStatus" class="settings-status" role="status"></div>
+                <textarea id="speechInputTestText" class="settings-textarea" rows="3" readonly hidden aria-label="试录文字" data-i18n-aria-label="speech.testText"></textarea>
+                <details class="settings-details" id="speechInputMemoryDetails">
+                  <summary data-i18n="speech.resourceDetails">下载、内存与隐私</summary>
+                  <div class="settings-details-body">
+                    <p class="risk-note" data-i18n="speech.memory">启用前请了解：语音识别需要额外内存。</p>
+                    <p class="risk-note" data-i18n="speech.instructions">识别在本机进行；最长录音 2 分钟，确认文字后手动发送。</p>
+                  </div>
+                </details>
+              </div>
+            </section>
+          </div>
+          <div class="settings-panel" id="settingsPanelNarration" data-settings-panel="narration" role="tabpanel" aria-labelledby="settingsTabNarration" hidden>
+            <section class="settings-section">
+              <div class="settings-section-title" data-i18n="settings.section.narration">故事篇幅</div>
+              <div class="settings-grid">
+                <label class="field-label" for="narrationLengthPresetSelect" data-i18n="settings.narration.length">每次回复的篇幅</label>
+                <select id="narrationLengthPresetSelect" class="settings-select">
+                  <option value="adaptive" data-i18n="settings.narration.adaptive">智能</option>
+                  <option value="short" data-i18n="settings.narration.short">简短</option>
+                  <option value="standard" data-i18n="settings.narration.standard">标准</option>
+                  <option value="detailed" data-i18n="settings.narration.detailed">详细</option>
+                  <option value="custom" data-i18n="common.custom">自定义</option>
+                </select>
+              </div>
+              <p class="risk-note" id="narrationLengthStatus" data-i18n="settings.narration.statusDefault">选择适合自己的阅读节奏。</p>
+              <details class="settings-details" id="narrationCustomDetails">
+                <summary data-i18n="settings.narration.precise">精确篇幅</summary>
+                <div class="settings-details-body">
+                  <div class="settings-grid">
+                    <label class="field-label" for="narrationCustomTargetInput" data-i18n="settings.narration.customChars">自定义字数</label>
+                    <input id="narrationCustomTargetInput" class="settings-input" type="number" min="120" max="800" step="10" value="300" disabled>
+                  </div>
+                </div>
+              </details>
+            </section>
+            <section class="settings-section">
+              <details class="settings-details" id="playerProfileDetails">
+                <summary data-i18n="settings.profile.optional">个人偏好（选填）</summary>
+                <div class="settings-details-body">
+                  <p class="risk-note" id="playerProfileStatus" data-i18n="settings.profile.initial">按需告诉主持人你的称呼、叙事喜好和内容边界。</p>
+                  <div class="settings-grid">
+                    <label class="field-label" for="playerProfileLanguageInput" data-i18n="settings.profile.language">向主持人说明的语言偏好</label>
+                    <input id="playerProfileLanguageInput" class="settings-input" type="text" maxlength="32" autocomplete="off" value="zh-CN">
+                    <label class="field-label" for="playerProfileNameInput" data-i18n="settings.profile.name">称呼</label>
+                    <input id="playerProfileNameInput" class="settings-input" type="text" maxlength="120" autocomplete="off">
+                    <label class="field-label" for="playerProfilePronounsInput" data-i18n="settings.profile.pronouns">代词</label>
+                    <input id="playerProfilePronounsInput" class="settings-input" type="text" maxlength="120" autocomplete="off">
+                    <label class="field-label" for="playerProfileNarrativeInput" data-i18n="settings.profile.narrative">叙事偏好</label>
+                    <textarea id="playerProfileNarrativeInput" class="settings-textarea" rows="3" maxlength="4820" placeholder="每行一项，最多 20 项" data-i18n-placeholder="settings.profile.listPlaceholder"></textarea>
+                    <label class="field-label" for="playerProfileBoundariesInput" data-i18n="settings.profile.boundaries">内容边界</label>
+                    <textarea id="playerProfileBoundariesInput" class="settings-textarea" rows="3" maxlength="4820" placeholder="每行一项，最多 20 项" data-i18n-placeholder="settings.profile.listPlaceholder"></textarea>
+                    <label class="field-label" for="playerProfileNotesInput" data-i18n="settings.profile.notes">备注</label>
+                    <textarea id="playerProfileNotesInput" class="settings-textarea" rows="4" maxlength="2000"></textarea>
+                  </div>
+                  <div class="settings-actions">
+                    <button class="menu-button" id="savePlayerProfileButton" type="button" data-i18n="settings.profile.save">保存玩家档案</button>
+                  </div>
+                  <p class="risk-note" data-i18n="settings.profile.note">这些偏好跨冒险保留；请勿填写密钥或密码。</p>
+                </div>
+              </details>
+            </section>
+          </div>
+          <div class="settings-panel" id="settingsPanelAi" data-settings-panel="ai" role="tabpanel" aria-labelledby="settingsTabAi" hidden>
+            <section class="settings-section">
+              <div class="settings-section-title" data-i18n="settings.connection.currentTitle">当前连接</div>
+              <p class="settings-connection-summary" id="currentConnectionSummary" aria-live="polite" data-i18n="settings.connection.currentNone">尚未设置可用连接。</p>
+              <p class="risk-note" data-i18n="settings.connection.candidateNote">下方改动只在测试成功后启用。</p>
+            </section>
+            <section class="settings-section" aria-label="模型" data-i18n-aria-label="settings.section.model">
+              <div class="settings-section-title" data-i18n="settings.section.model">模型</div>
+              <div class="settings-grid">
+                <label class="field-label" for="providerPresetSelect" data-i18n="settings.model.provider">服务提供商</label>
+                <select id="providerPresetSelect" class="settings-select">
+                  <option value="deepseek">DeepSeek</option>
+                </select>
+                <label class="field-label" for="modelPresetSelect" data-i18n="settings.model.model">模型</label>
+                <select id="modelPresetSelect" class="settings-select">
+                  <option value="deepseek-flash">deepseek-flash</option>
+                </select>
+              </div>
+            </section>
+            <section class="settings-section" id="customConnectionPanel" aria-label="自定义连接" data-i18n-aria-label="settings.section.customConnection" hidden>
+              <div class="settings-section-title" data-i18n="settings.section.customConnection">自定义连接</div>
+              <div class="settings-grid">
+                <label class="field-label" for="customConnectionSelect" data-i18n="settings.connection.saved">已保存连接</label>
+                <select id="customConnectionSelect" class="settings-select">
+                  <option value="" data-i18n="settings.connection.new">新建连接</option>
+                </select>
+                <label class="field-label" for="customConnectionNameInput" data-i18n="settings.connection.name">连接名称</label>
+                <input id="customConnectionNameInput" class="settings-input" type="text" maxlength="40" autocomplete="off" placeholder="例如：我的 OpenRouter" data-i18n-placeholder="settings.connection.namePlaceholder">
+                <label class="field-label" for="customBaseUrlInput" data-i18n="settings.connection.address">接口地址</label>
+                <input id="customBaseUrlInput" class="settings-input" type="url" maxlength="2048" autocomplete="off" spellcheck="false" placeholder="https://api.example.com/v1">
+                <label class="field-label" for="customModelIdInput" data-i18n="settings.connection.modelId">模型标识</label>
+                <input id="customModelIdInput" class="settings-input" type="text" maxlength="256" autocomplete="off" spellcheck="false" placeholder="provider/model-name">
+              </div>
+              <p class="risk-note" id="customConnectionStatus" data-i18n="settings.connection.initial">填写服务商提供的接口地址和模型标识，然后测试并使用。</p>
+              <details class="settings-details" id="modelAdvancedDetails">
+                <summary data-i18n="settings.connection.manage">管理连接</summary>
+                <div class="settings-details-body">
+                  <div class="settings-actions split-actions">
+                    <button class="menu-button" id="saveCustomConnectionButton" type="button" data-i18n="settings.connection.save">保存连接</button>
+                    <button class="menu-button danger" id="deleteCustomConnectionButton" type="button" data-i18n="settings.connection.delete">删除连接</button>
+                  </div>
+                </div>
+              </details>
+            </section>
+            <section class="settings-section">
+              <div class="settings-section-title" data-i18n="settings.section.credentials">访问密钥</div>
+              <label class="field-label" id="apiKeyLabel" for="apiKeyInput">DeepSeek API Key</label>
+              <input id="apiKeyInput" class="key-input" type="password" autocomplete="off" spellcheck="false" placeholder="sk-...">
+              <p class="risk-note" id="credentialStatus" data-i18n="settings.credentials.notSaved">API Key 未保存。</p>
+              <p class="risk-note" id="providerRiskNote" data-i18n="settings.credentials.risk">连接测试会向所选服务商发送少量测试请求，可能产生少量费用。</p>
+              <p class="settings-status" id="connectionStatus" aria-live="polite"></p>
+              <div class="settings-actions">
+                <button class="menu-button primary" id="testKeyButton" type="button" data-i18n="settings.credentials.test">测试并使用</button>
+              </div>
+            </section>
+            <section class="settings-section">
+              <details class="settings-details" id="modelConnectionHelp">
+                <summary id="modelHelpTitle" data-i18n="settings.section.modelHelp">连接帮助</summary>
+                <div class="settings-details-body">
+                  <button class="text-button" id="playerGuideSettingsDeepSeekHelp" type="button"></button>
+                  <p class="risk-note" id="modelHelpBody" data-i18n="settings.modelHelp.body">自定义连接需要服务商提供的接口地址、密钥和模型标识；网页聊天地址不能作为接口地址。</p>
+                  <p class="risk-note" id="modelHelpNotice" data-i18n="settings.modelHelp.notice">通过测试表示目前可以连接，故事质量与后续可用性仍取决于所选服务。</p>
+                  <div class="model-help-links" id="modelHelpLinks" aria-label="官方模型文档" data-i18n-aria-label="settings.modelHelp.aria"></div>
+                </div>
+              </details>
+            </section>
+            <section class="settings-section">
+              <details class="settings-details" id="modelPrivacyDetails">
+                <summary data-i18n="settings.credentials.privacy.title">密钥与隐私</summary>
+                <div class="settings-details-body">
+                  <p class="risk-note" data-i18n="settings.credentials.privacy.send">游玩时，仅向所选模型接口发送推进故事所需的内容。连接测试只发送测试请求。</p>
+                  <p class="risk-note" data-i18n="settings.credentials.privacy.storage">密钥经系统安全机制加密，保存在本机灰鸦的数据目录中。系统安全存储不可用时，仅在本次运行中保留，不以明文保存。</p>
+                  <p class="risk-note" data-i18n="settings.credentials.privacy.remove">移除只清理这台设备上的密钥；如需撤销密钥，请到服务商网站操作。</p>
+                  <div class="settings-actions split-actions">
+                    <button class="menu-button danger" id="clearKeyButton" type="button" data-i18n="settings.credentials.clear">移除当前连接密钥</button>
+                    <button class="menu-button danger" id="clearAllKeysButton" type="button" data-i18n="settings.credentials.clearAll">移除本机全部模型密钥</button>
+                  </div>
+                </div>
+              </details>
+            </section>
+          </div>
+          <div class="settings-panel" id="settingsPanelSave" data-settings-panel="save" role="tabpanel" aria-labelledby="settingsTabSave" hidden>
+            <section class="settings-section">
+              <div class="settings-section-title" data-i18n="settings.section.autoSave">保存与回顾</div>
+              <p class="risk-note" data-i18n="settings.save.durable">每轮剧情完成后都会自动保存。</p>
+              <div class="settings-grid">
+                <label class="field-label" for="autoSaveEnabledSelect" data-i18n="settings.autoSave.enabled">定期生成章节回顾</label>
+                <select id="autoSaveEnabledSelect" class="settings-select">
+                  <option value="true" data-i18n="common.on">开启</option>
+                  <option value="false" data-i18n="common.off">关闭</option>
+                </select>
+                <label class="field-label" for="autoSaveIntervalSelect" data-i18n="settings.autoSave.interval">回顾频率</label>
+                <select id="autoSaveIntervalSelect" class="settings-select">
+                  <option value="40">40</option>
+                  <option value="60">60</option>
+                  <option value="80">80</option>
+                  <option value="100">100</option>
+                  <option value="custom" data-i18n="common.custom">自定义</option>
+                </select>
+              </div>
+              <p class="risk-note" id="autoSaveStatus"></p>
+            </section>
+            <section class="settings-section game-navigation-section" aria-label="存档维护" data-i18n-aria-label="settings.section.currentAdventure">
+              <div class="settings-section-title" data-i18n="settings.section.currentAdventure">当前冒险</div>
+              <div class="settings-actions">
+                <button class="menu-button" id="saveMaintenanceButton" type="button" data-i18n="settings.maintenance.open">管理当前存档</button>
+              </div>
+              <p class="risk-note" data-i18n="settings.maintenance.description">修复或删除当前冒险的本地存档。</p>
+            </section>
+            <section class="settings-section" id="settingsPanelContent">
+              <div class="settings-section-title" data-i18n="settings.content.creation">内容与创作</div>
+              <p class="risk-note" data-i18n="settings.creator.note">在创作工具中编辑自己的世界、主持人和玩法。</p>
+              <div class="settings-actions">
+                <button class="menu-button" id="openContentCreatorButton" type="button" data-i18n="settings.creator.open">打开创作工具</button>
+              </div>
+              <details class="settings-details" id="contentTechnicalDetails">
+                <summary data-i18n="settings.content.manage">管理内容包</summary>
+                <div class="settings-details-body">
+                  <p class="risk-note" id="contentLibraryStatus" data-i18n="settings.content.initial">打开本页后读取本地内容库。</p>
+                  <div class="settings-grid">
+                    <label class="field-label" for="contentPackSelect" data-i18n="settings.content.selected">当前选择</label>
+                    <select id="contentPackSelect" class="settings-select">
+                      <option value="" data-i18n="settings.content.none">暂无内容包</option>
+                    </select>
+                  </div>
+                  <div class="content-pack-details" id="contentPackDetails" aria-live="polite" data-i18n="settings.content.notLoaded">尚未读取内容包。</div>
+                  <div class="settings-actions content-library-actions">
+                    <button class="menu-button" id="refreshContentLibraryButton" type="button" data-i18n="settings.content.revalidate">重新校验</button>
+                  </div>
+                  <p class="risk-note" data-i18n="settings.content.scope">首个公开版本只启用内置内容和玩家自己的本地副本；第三方文件夹、ZIP 和 Workshop 导入尚未开放。</p>
+                  <div class="settings-section-title subsection-title" data-i18n="settings.content.cloneSection">复制为自己的内容包</div>
+                  <div class="settings-grid">
+                    <label class="field-label" for="cloneContentPackIdInput" data-i18n="settings.content.newPackId">内容包标识</label>
+                    <input id="cloneContentPackIdInput" class="settings-input" type="text" maxlength="64" autocomplete="off" spellcheck="false" placeholder="my-grey-crow-pack">
+                    <label class="field-label" for="cloneContentPackTitleInput" data-i18n="settings.content.name">名称</label>
+                    <input id="cloneContentPackTitleInput" class="settings-input" type="text" maxlength="240" autocomplete="off" placeholder="我的灰鸦内容包" data-i18n-placeholder="settings.content.namePlaceholder">
+                    <label class="field-label" for="cloneContentPackAuthorInput" data-i18n="settings.content.author">作者</label>
+                    <input id="cloneContentPackAuthorInput" class="settings-input" type="text" maxlength="240" autocomplete="off" value="Player">
+                  </div>
+                  <div class="settings-actions content-library-actions">
+                    <button class="menu-button" id="cloneContentPackButton" type="button" data-i18n="settings.content.clone">创建副本</button>
+                    <button class="menu-button" id="exportContentPackButton" type="button" data-i18n="common.export">导出</button>
+                    <button class="menu-button danger" id="deleteContentPackButton" type="button" data-i18n="common.delete">删除</button>
+                  </div>
+                  <p class="risk-note" data-i18n="settings.content.legacyNote">内置 Pack 可克隆为玩家本地副本。升级前已存在的第三方 Pack 只作为“历史导入／已隔离”保留，只能导出或删除，不能启用或克隆。已开始的冒险继续使用原锁定快照。</p>
+                </div>
+              </details>
+            </section>
+          </div>
+          <div class="settings-panel" id="settingsPanelDeveloper" data-settings-panel="developer" role="tabpanel" aria-labelledby="settingsTabDeveloper" hidden>
+            <section class="settings-section">
+              <div class="settings-section-title" data-i18n="settings.advanced.introTitle">高级设置</div>
+              <p class="risk-note" data-i18n="settings.advanced.intro">以下选项用于调整资源使用或排查问题，通常保持默认即可。</p>
+              <details class="settings-details">
+                <summary data-i18n="settings.report.privacyTitle">问题报告会包含什么？</summary>
+                <div class="settings-details-body">
+                  <p class="risk-note" data-i18n="settings.report.privacy">包含版本、系统、基础设置和近期错误类别，最多保留14天内的100条记录。不包含密钥、故事、录音或本地路径，不会自动上传。异常退出后的记录只说明上次未正常关闭，不一定是崩溃。</p>
+                </div>
+              </details>
+            </section>
+            <section class="settings-section">
+              <details class="settings-details" id="advancedChapterDetails">
+                <summary data-i18n="settings.advanced.chapters">章节整理细节</summary>
+                <div class="settings-details-body">
+                  <div class="settings-grid">
+                    <label class="field-label" for="autoSaveIntervalCustomInput" data-i18n="settings.autoSave.customTurns">自定义回合</label>
+                    <input id="autoSaveIntervalCustomInput" class="settings-input" type="number" min="20" max="300" step="1" value="60" disabled>
+                    <label class="field-label" for="manualChapterSelect" data-i18n="settings.save.manualChapter">手动保存时整理章节</label>
+                    <select id="manualChapterSelect" class="settings-select">
+                      <option value="true" data-i18n="common.on">开启</option>
+                      <option value="false" data-i18n="common.off">关闭</option>
+                    </select>
+                    <label class="field-label" for="compactionChapterSelect" data-i18n="settings.save.compactionChapter">整理上下文后整理章节</label>
+                    <select id="compactionChapterSelect" class="settings-select">
+                      <option value="true" data-i18n="common.on">开启</option>
+                      <option value="false" data-i18n="common.off">关闭</option>
+                    </select>
+                  </div>
+                </div>
+              </details>
+            </section>
+            <section class="settings-section">
+              <details class="settings-details" id="advancedAudioDetails">
+                <summary data-i18n="settings.advanced.audio">朗读服务与缓存</summary>
+                <div class="settings-details-body">
+                  <div class="settings-grid">
+                    <label class="field-label" for="ttsProviderSelect" data-i18n="settings.audio.provider">语音服务</label>
+                    <select id="ttsProviderSelect" class="settings-select">
+                      <option value="disabled" data-i18n="common.off">关闭</option>
+                      <option value="kokoro-original-local" data-i18n="settings.audio.provider.kokoro">Kokoro 高质量中文（实验）</option>
+                      <option value="minimax" disabled>MiniMax</option>
+                    </select>
+                    <label class="field-label" for="ttsCacheLimitSelect" data-i18n="settings.audio.cache">朗读缓存</label>
+                    <select id="ttsCacheLimitSelect" class="settings-select">
+                      <option value="10" data-i18n="settings.audio.cache.compact">节省空间（10 条）</option>
+                      <option value="20" selected data-i18n="settings.audio.cache.standard">标准（20 条）</option>
+                      <option value="40" data-i18n="settings.audio.cache.large">保留更多（40 条）</option>
+                    </select>
+                  </div>
+                  <div class="settings-grid" id="ttsPitchSettingRow" hidden>
+                    <label class="field-label" for="ttsPitchInput" data-i18n="settings.audio.pitch">音调</label>
+                    <input id="ttsPitchInput" class="settings-input" type="text" value="+0Hz" placeholder="+0Hz">
+                  </div>
+                  <p class="risk-note" id="ttsCacheStatus" data-i18n="settings.audio.cacheInitial">缓存最多保留 20 条完整朗读，且不超过 500 MiB。</p>
+                  <div class="settings-actions">
+                    <button class="menu-button" id="clearTtsCacheButton" type="button" data-i18n="settings.audio.clearCache">清空语音缓存</button>
+                  </div>
+                </div>
+              </details>
+            </section>
+            <section class="settings-section" aria-label="上下文管理" data-i18n-aria-label="settings.section.context">
+              <div class="settings-section-title" data-i18n="settings.section.context">上下文管理</div>
+              <div class="settings-grid">
+                <label class="field-label" for="contextWindowPresetSelect" data-i18n="settings.context.limit">上下文上限</label>
+                <select id="contextWindowPresetSelect" class="settings-select">
+                  <option value="128000">128K</option>
+                  <option value="256000">256K</option>
+                  <option value="512000">512K</option>
+                  <option value="1000000" data-i18n="settings.context.modelLimit">模型上限</option>
+                  <option value="custom" data-i18n="common.custom">自定义</option>
+                </select>
+                <label class="field-label" for="contextWindowCustomInput" data-i18n="settings.context.customLimit">自定义上限</label>
+                <input id="contextWindowCustomInput" class="settings-input" type="number" min="128000" max="1000000" step="1000" value="256000" disabled>
+                <label class="field-label" for="autoCompactRatioSelect" data-i18n="settings.context.threshold">自动整理阈值</label>
+                <select id="autoCompactRatioSelect" class="settings-select">
+                  <option value="0.65">65%</option>
+                  <option value="0.75">75%</option>
+                  <option value="0.85">85%</option>
+                  <option value="custom" data-i18n="common.custom">自定义</option>
+                </select>
+                <label class="field-label" for="autoCompactRatioCustomInput" data-i18n="settings.context.customThreshold">自定义阈值</label>
+                <input id="autoCompactRatioCustomInput" class="settings-input" type="number" min="50" max="85" step="1" value="75" disabled>
+              </div>
+              <p class="risk-note" id="contextPolicyStatus"></p>
+              <div class="settings-actions">
+                <button class="text-button" id="settingsCompactContextButton" type="button" data-i18n="compact.settingsAction">整理上下文</button>
+              </div>
+            </section>
+            <section class="settings-section" aria-label="开发者工具" data-i18n-aria-label="settings.section.developer">
+              <div class="settings-section-title" data-i18n="settings.section.developer">开发者工具</div>
+              <div class="settings-grid">
+                <label class="field-label" for="debugPanelEnabledSelect" data-i18n="settings.section.developer">开发者工具</label>
+                <select id="debugPanelEnabledSelect" class="settings-select">
+                  <option value="false" data-i18n="common.off">关闭</option>
+                  <option value="true" data-i18n="common.on">开启</option>
+                </select>
+              </div>
+              <p class="risk-note" data-i18n="settings.developer.note">只显示本地脱敏摘要，不展示 API Key、raw provider body、完整 prompt 或本机路径。</p>
+              <div class="settings-actions split-actions">
+                <button class="menu-button hidden" id="debugPanelButton" type="button" data-i18n="settings.developer.open">打开调试面板</button>
+              </div>
+              <div class="advanced-metrics-card" id="advancedMetricsPanel" aria-label="高级指标" data-i18n-aria-label="settings.metrics.aria">
+                <div class="advanced-metrics-header">
+                  <div>
+                    <div class="advanced-metrics-title" data-i18n="settings.metrics.title">高级指标</div>
+                    <p class="advanced-metrics-status" id="advancedMetricsStatus" data-i18n="settings.metrics.disabled">开启调试面板后显示。</p>
+                  </div>
+                  <button class="text-button compact" id="refreshAdvancedMetricsButton" type="button" data-i18n="common.refresh">刷新</button>
+                </div>
+                <div class="advanced-metrics-grid" id="advancedMetricsGrid">
+                  <span data-i18n="settings.metrics.window">窗口</span>
+                  <strong data-i18n="settings.metrics.afterTurn">开始回合后显示</strong>
+                  <span data-i18n="settings.metrics.turn">本轮</span>
+                  <strong data-i18n="settings.metrics.waiting">等待 trace</strong>
+                </div>
+              </div>
+            </section>
+            <section class="settings-section">
+              <details class="settings-details" id="advancedSaveDetails">
+                <summary data-i18n="settings.advanced.save">设置保存</summary>
+                <div class="settings-details-body">
+                  <p class="risk-note" data-i18n="settings.advanced.saveNote">普通设置会自动保存。遇到保存失败时，可在这里重试。</p>
+                  <div class="settings-actions">
+                    <button class="menu-button settings-save-button" id="saveSettingsButton" type="button" data-i18n="settings.save" disabled>保存设置</button>
+                  </div>
+                </div>
+              </details>
+            </section>
+          </div>
+        </div>
+      </div>
+      <div class="settings-report-footer">
+        <div class="settings-tutorial-actions">
+          <button class="text-button" id="openPlayerGuideButton" type="button"></button>
+          <button class="text-button" id="openGameTourButton" type="button" disabled></button>
+          <button class="text-button" id="resetPlayerGuideButton" type="button"></button>
+        </div>
+        <p id="playerGuideSettingsStatus" role="status" aria-live="polite"></p>
+        <p id="gameTourSettingsStatus" role="status" aria-live="polite"></p>
+        <button class="text-button" id="exportProblemReportButton" type="button" data-i18n="settings.report.export">导出问题报告</button>
+        <p id="problemReportStatus" role="status" aria-live="polite" data-i18n="settings.report.note">保存到你选择的位置，不会自动上传。</p>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="creator-dialog" id="contentCreatorDialog">
+    <div class="creator-box">
+      <section class="creator-warning" id="contentCreatorWarning" aria-labelledby="contentCreatorWarningTitle">
+        <div class="settings-header">
+          <div>
+            <h2 id="contentCreatorWarningTitle" data-i18n="creator.warning.title">使用创作工具前</h2>
+            <p data-i18n="creator.warning.subtitle">本次进入只编辑玩家自己的内容包。</p>
+          </div>
+          <button class="icon-button" id="closeContentCreatorWarningButton" type="button" aria-label="关闭创作工具" data-i18n-aria-label="creator.close">X</button>
+        </div>
+        <p class="creator-warning-copy" data-i18n="creator.warning.copy">请勿粘贴或导入来源不明的主持人、世界设定或 Skill。恶意提示词可能诱导模型读取或修改你已授权的冒险数据。灰鸦不会允许内容直接访问系统文件，但请只授予必要权限。</p>
+        <p class="risk-note" data-i18n="creator.warning.risk">点击继续不代表内容已经安全。不要在正文中填写 API Key、密码或本机路径。</p>
+        <div class="settings-actions split-actions creator-warning-actions">
+          <button class="menu-button primary" id="acknowledgeContentCreatorButton" type="button" data-i18n="creator.warning.continue">我已了解，继续</button>
+          <button class="menu-button" id="cancelContentCreatorButton" type="button" data-i18n="creator.warning.back">返回</button>
+        </div>
+      </section>
+
+      <section class="creator-workspace hidden" id="contentCreatorWorkspace" aria-label="创作工具工作区" data-i18n-aria-label="creator.workspace.aria">
+        <div class="settings-header creator-header">
+          <div>
+            <h2 data-i18n="creator.title">创作工具</h2>
+            <p id="contentEditorStatus"></p>
+          </div>
+          <button class="icon-button" id="closeContentCreatorButton" type="button" aria-label="关闭创作工具" data-i18n-aria-label="creator.close">X</button>
+        </div>
+
+        <div class="settings-tabs creator-mode-tabs" role="tablist" aria-label="创作类型" data-i18n-aria-label="creator.mode.aria">
+          <button class="settings-tab is-active" id="contentCreatorModeContent" type="button" role="tab" aria-selected="true" data-i18n="creator.mode.content">内容正文</button>
+          <button class="settings-tab" id="contentCreatorModePreset" type="button" role="tab" aria-selected="false" data-i18n="creator.mode.preset">剧本组合</button>
+        </div>
+
+        <div class="creator-library-bar">
+          <label class="field-label" for="contentCreatorPackSelect" data-i18n="creator.library.myPacks">我的内容包</label>
+          <select id="contentCreatorPackSelect" class="settings-select">
+            <option value="" data-i18n="creator.library.nonePlayer">暂无玩家内容包</option>
+          </select>
+          <label class="field-label" id="contentEditorItemLabel" for="contentEditorItemSelect" data-i18n="creator.library.item">内容</label>
+          <select id="contentEditorItemSelect" class="settings-select">
+            <option value="" data-i18n="creator.library.noneEditable">没有可编辑内容</option>
+          </select>
+          <button class="text-button" id="loadContentEditorButton" type="button" disabled data-i18n="creator.library.open">打开</button>
+          <button class="text-button" id="newBlankContentButton" type="button" data-i18n="creator.library.newBlank">新建空白内容</button>
+          <button class="text-button hidden" id="newContentPresetButton" type="button" data-i18n="creator.library.newPreset">新建组合</button>
+          <button class="text-button" id="manageContentPacksButton" type="button" data-i18n="creator.library.manage">管理内容包</button>
+        </div>
+
+        <section class="blank-content-picker hidden" id="blankContentPicker" aria-labelledby="blankContentPickerTitle">
+          <div class="blank-content-picker-header">
+            <div>
+              <div class="settings-section-title" id="blankContentPickerTitle" data-i18n="creator.blank.title">新建空白内容</div>
+              <p data-i18n="creator.blank.body">选择内容类型后直接进入空白编辑器。系统会生成 Pack、ID 和安全默认值。</p>
+            </div>
+            <button class="text-button compact" id="closeBlankContentPickerButton" type="button" data-i18n="creator.blank.cancel">取消</button>
+          </div>
+          <div class="blank-content-kind-grid" role="group" aria-label="空白内容类型" data-i18n-aria-label="creator.blank.aria">
+            <button class="menu-button blank-content-kind-button" type="button" data-blank-content-kind="host">
+              <strong data-i18n="creator.blank.host.title">主持人设定</strong><span data-i18n="creator.blank.host.body">决定主持人如何说话和裁决。</span>
+            </button>
+            <button class="menu-button blank-content-kind-button" type="button" data-blank-content-kind="world">
+              <strong data-i18n="creator.blank.world.title">世界设定</strong><span data-i18n="creator.blank.world.body">描述故事世界与主持人需要知道的资料。</span>
+            </button>
+            <button class="menu-button blank-content-kind-button" type="button" data-blank-content-kind="ordinary_skill">
+              <strong data-i18n="creator.blank.skill.title">玩法规则</strong><span data-i18n="creator.blank.skill.body">写一项按需读取的 Skill。</span>
+            </button>
+            <button class="menu-button blank-content-kind-button" type="button" data-blank-content-kind="new_game_skill">
+              <strong data-i18n="creator.blank.newGame.title">开局流程</strong><span data-i18n="creator.blank.newGame.body">主持自然多轮开局，Engine 边界保持固定。</span>
+            </button>
+          </div>
+        </section>
+
+        <div id="contentEditorForm" class="content-editor-form hidden">
+          <div class="creator-editor-layout">
+            <div class="creator-editor-main">
+              <div class="creator-meta-grid">
+                <label class="field-label" for="contentEditorTitleInput" data-i18n="creator.field.name">名称</label>
+                <input id="contentEditorTitleInput" class="settings-input" type="text" maxlength="240" autocomplete="off" placeholder="给这份内容起一个名字" data-i18n-placeholder="creator.field.namePlaceholder">
+
+                <label class="field-label" for="contentEditorLanguageInput" data-i18n="creator.field.language">语言</label>
+                <input id="contentEditorLanguageInput" class="settings-input" type="text" maxlength="35" autocomplete="off" placeholder="zh-CN">
+              </div>
+
+              <div id="contentSkillEditorFields" class="content-skill-editor hidden">
+                <label class="field-label" for="contentEditorTriggersInput" data-i18n="creator.skill.trigger">触发场景</label>
+                <textarea id="contentEditorTriggersInput" class="settings-textarea creator-trigger-editor" rows="2" maxlength="120" placeholder="用一两句话描述什么时候可能使用这个 Skill。" data-i18n-placeholder="creator.skill.triggerPlaceholder"></textarea>
+
+                <div class="content-module-ordinary-fields" id="contentModuleOrdinaryFields">
+                  <label class="field-label" for="contentEditorPlayerGuideInput" data-i18n="creator.skill.playerGuide">玩家说明</label>
+                  <textarea id="contentEditorPlayerGuideInput" class="settings-textarea creator-trigger-editor" rows="3" maxlength="2000" placeholder="说明玩家会看到什么、这些状态代表什么。" data-i18n-placeholder="creator.skill.playerGuidePlaceholder"></textarea>
+
+                  <section class="content-module-editor" aria-labelledby="contentModuleEditorTitle">
+                    <div class="content-module-editor-header">
+                      <div>
+                        <div class="settings-section-title" id="contentModuleEditorTitle" data-i18n="creator.module.title">状态模块</div>
+                        <p data-i18n="creator.module.body">用结构化字段搭建玩法面板；字段 ID、写入操作和文件由 Engine 生成。</p>
+                      </div>
+                      <label class="content-module-toggle"><input id="contentModuleEnabledInput" type="checkbox"> <span data-i18n="creator.module.enable">启用状态模块</span></label>
+                    </div>
+                    <p class="creator-capability-summary" id="contentModuleSupportStatus"></p>
+                    <div class="content-module-field-list" id="contentModuleFieldList"></div>
+                    <button class="text-button compact" id="addContentModuleFieldButton" type="button" data-i18n="creator.module.addField">添加字段</button>
+                  </section>
+                </div>
+
+                <div class="creator-permission-panel" id="contentEditorPermissionPanel">
+                  <div class="settings-section-title" data-i18n="creator.permissions.title">Skill 权限</div>
+                  <label class="creator-permission-option"><input id="contentPermissionReadAdventure" type="checkbox" disabled> <span data-i18n="creator.permissions.readAdventure">允许读取当前冒险</span> <span data-i18n="creator.permissions.unavailable">尚未开放</span></label>
+                  <label class="creator-permission-option"><input id="contentPermissionPrivateState" type="checkbox" disabled> <span data-i18n="creator.permissions.privateState">允许保存此 Skill 的独立进度</span> <span data-i18n="creator.permissions.unavailable">尚未开放</span></label>
+                  <label class="creator-permission-option"><input id="contentPermissionUpdateAdventure" type="checkbox" disabled> <span data-i18n="creator.permissions.updateAdventure">允许更新当前冒险</span> <span data-i18n="creator.permissions.unavailable">尚未开放</span></label>
+                  <p class="creator-capability-summary" id="contentEditorExistingCapabilitySummary"></p>
+                  <p class="risk-note" data-i18n="creator.permissions.note">在 Pack 声明、玩家授权、Snapshot grant 和 Runtime 每次工具检查完成闭环前，这些选项不可启用。</p>
+                </div>
+
+                <div class="creator-fixed-boundary hidden" id="contentNewGameBoundary">
+                  <div class="settings-section-title" data-i18n="creator.newGameBoundary.title">开局流程的系统边界</div>
+                  <p data-i18n="creator.newGameBoundary.body">由“新游戏”按钮启动；玩家最终确认前不提交；只通过 finalize_new_game 原子落地；失败时保留草稿。</p>
+                </div>
+              </div>
+
+              <label class="field-label creator-markdown-label" for="contentEditorMarkdownInput" data-i18n="creator.field.body">正文</label>
+              <textarea id="contentEditorMarkdownInput" class="settings-textarea content-markdown-editor" rows="20" maxlength="120000" spellcheck="false"></textarea>
+            </div>
+
+            <aside class="creator-preview" aria-label="预览与检查" data-i18n-aria-label="creator.preview.aria">
+              <div class="creator-preview-header">
+                <div class="settings-section-title" data-i18n="creator.preview.title">预览与检查</div>
+                <button class="text-button compact hidden" id="toggleContentAdvancedInfoButton" type="button" aria-expanded="false" aria-controls="contentAdvancedInfoPanel" data-i18n="creator.preview.technical">查看技术信息</button>
+              </div>
+              <p class="risk-note" id="contentEditorTypeSummary" data-i18n="creator.preview.initial">打开内容后显示实际会进入模型的正文。</p>
+              <section class="content-advanced-info hidden" id="contentAdvancedInfoPanel" aria-labelledby="contentAdvancedInfoTitle">
+                <div class="settings-section-title" id="contentAdvancedInfoTitle" data-i18n="creator.advanced.title">只读技术信息</div>
+                <p data-i18n="creator.advanced.body">这些字段由 Engine 生成或校验，仅用于理解内容包；不能在这里修改 manifest、路径或权限。</p>
+                <dl class="content-advanced-info-list" id="contentAdvancedInfoList"></dl>
+                <p class="risk-note" data-i18n="creator.advanced.note">技术信息不进入正文，也不会改变工具列表、当前 Adventure 或已锁定 snapshot。</p>
+              </section>
+              <pre class="creator-preview-body" id="contentEditorPreview" tabindex="0" data-i18n="creator.preview.empty">尚未生成预览。</pre>
+              <section class="content-module-preview hidden" id="contentModulePreview" aria-labelledby="contentModulePreviewTitle">
+                <div class="settings-section-title" id="contentModulePreviewTitle" data-i18n="creator.modulePreview.title">状态模块预览</div>
+                <p class="risk-note" id="contentModulePreviewSummary" data-i18n="creator.modulePreview.body">点击“预览”后，以游戏内相同组件显示示例状态。</p>
+                <div class="skill-module-fields" id="contentModulePreviewFields"></div>
+              </section>
+              <p class="risk-note" data-i18n="creator.preview.safety">预览不调用模型，不读取存档，也不显示内部路径、ID 或 Tool Schema。</p>
+            </aside>
+          </div>
+
+          <div class="settings-actions split-actions creator-save-actions">
+            <button class="menu-button hidden" id="cancelBlankContentButton" type="button" data-i18n="creator.action.cancelBlank">取消新建</button>
+            <button class="menu-button" id="previewContentEditorButton" type="button" data-i18n="creator.action.preview">预览</button>
+            <button class="menu-button primary" id="saveContentEditorButton" type="button" data-i18n="creator.action.validateSave">校验并保存</button>
+          </div>
+          <p class="risk-note" data-i18n="creator.action.saveNote">只修改当前玩家内容包。保存前会在临时副本中校验整个 Pack；已开始的冒险继续使用原锁定快照。</p>
+        </div>
+
+        <div id="contentPresetForm" class="content-editor-form hidden">
+          <div class="creator-editor-layout">
+            <div class="creator-editor-main">
+              <div class="creator-meta-grid">
+                <label class="field-label" for="contentPresetTitleInput" data-i18n="creator.preset.name">组合名称</label>
+                <input id="contentPresetTitleInput" class="settings-input" type="text" maxlength="240" autocomplete="off" placeholder="给这套剧本组合起一个名字" data-i18n-placeholder="creator.preset.namePlaceholder">
+
+                <label class="field-label" for="contentPresetLanguageInput" data-i18n="creator.field.language">语言</label>
+                <input id="contentPresetLanguageInput" class="settings-input" type="text" maxlength="35" autocomplete="off" placeholder="zh-CN">
+              </div>
+
+              <label class="field-label creator-markdown-label" for="contentPresetDescriptionInput" data-i18n="creator.preset.description">组合简介</label>
+              <textarea id="contentPresetDescriptionInput" class="settings-textarea creator-trigger-editor" rows="3" maxlength="1200" placeholder="用一两句话说明这套组合适合什么故事。" data-i18n-placeholder="creator.preset.descriptionPlaceholder"></textarea>
+
+              <div class="content-preset-selection-grid">
+                <label class="field-label" for="contentPresetHostSelect" data-i18n="creator.preset.host">主持人</label>
+                <select id="contentPresetHostSelect" class="settings-select"></select>
+
+                <label class="field-label" for="contentPresetWorldSelect" data-i18n="creator.preset.world">世界</label>
+                <select id="contentPresetWorldSelect" class="settings-select"></select>
+
+                <label class="field-label" for="contentPresetNewGameSkillSelect" data-i18n="creator.preset.newGame">开局流程</label>
+                <select id="contentPresetNewGameSkillSelect" class="settings-select"></select>
+
+                <div class="field-label" data-i18n="creator.preset.rules">玩法规则</div>
+                <div class="new-game-skill-list" id="contentPresetSkillList" role="group" aria-label="组合包含的玩法规则" data-i18n-aria-label="creator.preset.rulesAria"></div>
+              </div>
+            </div>
+
+            <aside class="creator-preview" aria-label="剧本组合预览与检查" data-i18n-aria-label="creator.preset.previewAria">
+              <div class="settings-section-title" data-i18n="creator.preset.previewTitle">组合预览</div>
+              <p class="risk-note" data-i18n="creator.preset.previewNote">只显示将被锁入新冒险的内容名称；保存不会调用模型或改变已有存档。</p>
+              <pre class="creator-preview-body" id="contentPresetPreview" tabindex="0" data-i18n="creator.preview.empty">尚未生成预览。</pre>
+            </aside>
+          </div>
+
+          <div class="settings-actions split-actions creator-save-actions">
+            <button class="menu-button" id="previewContentPresetButton" type="button" data-i18n="creator.preset.preview">预览组合</button>
+            <button class="menu-button primary" id="saveContentPresetButton" type="button" data-i18n="creator.preset.validateSave">校验并保存组合</button>
+          </div>
+          <p class="risk-note" data-i18n="creator.preset.saveNote">组合只能引用当前有效的内置或玩家内容；历史导入、失效内容和额外权限不会进入组合。</p>
+        </div>
+      </section>
+    </div>
+  </dialog>
+
+  <dialog class="maintenance-dialog" id="maintenanceDialog">
+    <form method="dialog" class="maintenance-box" id="maintenanceForm">
+      <div class="settings-header">
+        <div>
+          <h2 data-i18n="maintenance.title">当前冒险维护</h2>
+          <p id="maintenanceStatus"></p>
+        </div>
+        <button class="icon-button" id="closeMaintenanceButton" type="button" aria-label="关闭存档维护" data-i18n-aria-label="maintenance.close">X</button>
+      </div>
+
+      <section class="settings-section" aria-label="存档操作" data-i18n-aria-label="maintenance.actionsAria">
+        <div class="maintenance-actions">
+          <button class="menu-button" id="maintenanceRepairButton" type="button" data-i18n="maintenance.repair">修复当前存档</button>
+          <button class="menu-button danger" id="maintenanceClearButton" type="button" data-i18n="maintenance.delete">删除当前冒险</button>
+        </div>
+      </section>
+
+      <section class="settings-section hidden" id="maintenanceConfirmPanel" aria-label="确认维护操作" data-i18n-aria-label="maintenance.confirmAria">
+        <div class="settings-section-title" id="maintenanceConfirmTitle" data-i18n="maintenance.confirmTitle">确认</div>
+        <p class="risk-note" id="maintenanceConfirmSummary"></p>
+        <label class="field-label hidden" id="maintenanceConfirmInputLabel" for="maintenanceConfirmInput" data-i18n="maintenance.phrase">确认短语</label>
+        <input id="maintenanceConfirmInput" class="settings-input hidden" type="text" autocomplete="off" spellcheck="false">
+        <div class="settings-actions split-actions">
+          <button class="menu-button primary" id="maintenanceConfirmButton" type="button" data-i18n="maintenance.execute">确认执行</button>
+          <button class="menu-button" id="maintenanceCancelButton" type="button" data-i18n="common.cancel">取消</button>
+        </div>
+      </section>
+    </form>
+  </dialog>
+
+  <dialog class="maintenance-dialog" id="newGameConfirmDialog">
+    <form method="dialog" class="maintenance-box" id="newGameConfirmForm">
+      <div class="settings-header">
+        <div>
+          <h2 data-i18n="newGame.confirm.title">开始新游戏</h2>
+          <p id="newGameConfirmStatus" data-i18n="newGame.confirm.status">当前已经有冒险存档。</p>
+        </div>
+        <button class="icon-button" id="closeNewGameConfirmButton" type="button" aria-label="关闭新游戏确认" data-i18n-aria-label="newGame.confirm.close">X</button>
+      </div>
+
+      <section class="settings-section" aria-label="确认开始新游戏" data-i18n-aria-label="newGame.confirm.aria">
+        <div class="settings-section-title" id="newGameConfirmTitle" data-i18n="newGame.confirm.deleteTitle">删除当前冒险</div>
+        <p class="risk-note" id="newGameConfirmSummary" data-i18n="newGame.confirm.summary">开始新游戏会删除当前冒险数据，然后进入新的开局流程。</p>
+        <label class="field-label" id="newGameConfirmInputLabel" for="newGameConfirmInput" data-i18n="newGame.confirm.phrase">输入 DELETE 确认</label>
+        <input id="newGameConfirmInput" class="settings-input" type="text" autocomplete="off" spellcheck="false" placeholder="DELETE">
+        <div class="settings-actions split-actions">
+          <button class="menu-button danger" id="confirmNewGameRestartButton" type="button" data-i18n="newGame.confirm.execute">删除并开始新游戏</button>
+          <button class="menu-button" id="cancelNewGameRestartButton" type="button" data-i18n="common.cancel">取消</button>
+        </div>
+      </section>
+    </form>
+  </dialog>
+
+  <dialog class="maintenance-dialog" id="newGameSetupDialog">
+    <form method="dialog" class="maintenance-box new-game-setup-box" id="newGameSetupForm">
+      <div class="settings-header">
+        <div>
+          <h2 data-i18n="newGame.setup.title">新冒险内容</h2>
+          <p id="newGameSetupStatus" data-i18n="newGame.setup.status">选择一套作者已经校验好的剧本组合。</p>
+        </div>
+        <button class="icon-button" id="closeNewGameSetupButton" type="button" aria-label="关闭新冒险内容选择" data-i18n-aria-label="newGame.setup.close">X</button>
+      </div>
+
+      <section class="settings-section new-game-selection-grid" aria-label="新冒险内容选择" data-i18n-aria-label="newGame.setup.aria">
+        <label class="field-label" for="newGamePresetSelect" data-i18n="newGame.setup.preset">剧本组合</label>
+        <select id="newGamePresetSelect" class="settings-select"></select>
+        <p class="field-help" id="newGamePresetDescription"></p>
+
+        <div class="field-label" data-i18n="newGame.setup.contents">组合内容</div>
+        <div class="new-game-review" id="newGamePresetContents" aria-label="剧本组合包含的内容" data-i18n-aria-label="newGame.setup.contentsAria"></div>
+
+        <div class="new-game-optional-section hidden" id="newGameOptionalSection">
+          <div class="field-label" data-i18n="newGame.setup.optional">可选玩法</div>
+          <p class="field-help" data-i18n="newGame.setup.optionalNote">只可切换作者在这套组合中声明的 Skill。故事开始后不能中途启用。</p>
+          <div class="new-game-skill-list" id="newGameOptionalSkillList" aria-label="可选 Skill" data-i18n-aria-label="newGame.setup.optionalAria"></div>
+        </div>
+      </section>
+
+      <section class="settings-section" aria-label="Engine 必需能力" data-i18n-aria-label="newGame.setup.engineAria">
+        <div class="settings-section-title" data-i18n="newGame.setup.engineTitle">Engine 必需能力</div>
+        <p class="risk-note" data-i18n="newGame.setup.engineNote">这些能力由游戏本体提供，不会因为取消某个 Skill 而关闭。</p>
+        <div class="new-game-capability-list" id="newGameCapabilityList"></div>
+      </section>
+
+      <section class="settings-section hidden" id="newGameReviewPanel" aria-label="新冒险校验结果" data-i18n-aria-label="newGame.setup.reviewAria">
+        <div class="settings-section-title" data-i18n="newGame.setup.lockedTitle">将锁定的内容</div>
+        <div class="new-game-review" id="newGameReview"></div>
+        <p class="risk-note" data-i18n="newGame.setup.lockedNote">创建后，本局始终使用这份快照。后续修改或卸载 Pack 不会改写已开始的冒险。</p>
+        <div class="new-game-module-review hidden" id="newGameModuleReview" aria-label="Skill 模块能力确认" data-i18n-aria-label="newGame.setup.moduleAria">
+          <div class="settings-section-title" data-i18n="newGame.setup.moduleTitle">本局模块记录能力</div>
+          <div class="new-game-module-review-list" id="newGameModuleReviewList"></div>
+          <p class="risk-note" id="newGameModuleLimits"></p>
+          <p class="risk-note" data-i18n="newGame.setup.moduleNote">模块只能记录本局已选 Skill 的受限字段；不能修改核心状态、其他故事或本机文件。再次点击下方按钮即表示确认这些能力。</p>
+        </div>
+      </section>
+
+      <div class="settings-actions split-actions">
+        <button class="menu-button primary" id="prepareNewGameButton" type="button" data-i18n="newGame.setup.prepare">校验内容组合</button>
+        <button class="menu-button" id="cancelNewGameSetupButton" type="button" data-i18n="common.cancel">取消</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="skill-module-dialog" id="skillModuleDialog" aria-labelledby="skillModuleTitle">
+    <form method="dialog" class="skill-module-box" id="skillModuleForm">
+      <div class="settings-header">
+        <div>
+          <h2 id="skillModuleTitle"></h2>
+          <p id="skillModuleStatus" data-i18n="skillPanel.status">直接描述你想做什么，让故事继续。</p>
+        </div>
+        <button class="icon-button" id="closeSkillModuleButton" type="button" aria-label="关闭玩法详情" data-i18n-aria-label="skillPanel.close">X</button>
+      </div>
+
+      <section class="settings-section" aria-label="玩法说明" data-i18n-aria-label="skillPanel.guideAria">
+        <div class="settings-section-title" data-i18n="skillPanel.guideTitle">玩法说明</div>
+        <div class="skill-module-guide" id="skillModuleGuide"></div>
+      </section>
+
+      <section class="settings-section" aria-label="当前记录" data-i18n-aria-label="game.notebook.panelStateTitle">
+        <div class="settings-section-title" data-i18n="game.notebook.panelStateTitle">当前记录</div>
+        <div class="skill-module-fields" id="skillModuleFields"></div>
+      </section>
+
+      <div class="settings-actions">
+        <button class="menu-button primary" id="doneSkillModuleButton" type="button" data-i18n="common.close">关闭</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="debug-dialog" id="debugDialog">
+    <form method="dialog" class="debug-box" id="debugForm">
+      <div class="settings-header">
+        <div>
+          <h2 data-i18n="debug.title">调试面板</h2>
+          <p id="debugStatus" data-i18n="debug.initial">等待读取本地 trace。</p>
+        </div>
+        <button class="icon-button" id="closeDebugButton" type="button" aria-label="关闭调试面板" data-i18n-aria-label="debug.close">X</button>
+      </div>
+
+      <section class="settings-section" aria-label="调试操作" data-i18n-aria-label="debug.actionsAria">
+        <div class="settings-actions split-actions">
+          <button class="menu-button" id="debugRefreshButton" type="button" data-i18n="common.refresh">刷新</button>
+          <button class="menu-button" id="debugExportButton" type="button" data-i18n="debug.exportJson">导出 JSON</button>
+        </div>
+      </section>
+
+      <section class="debug-trace-list" id="debugTraceList" aria-label="最近操作 trace" data-i18n-aria-label="debug.recentAria"></section>
+    </form>
+  </dialog>
+
+  <dialog class="compact-dialog" id="compactDialog">
+    <form method="dialog" class="compact-box" id="compactForm">
+      <div class="settings-header">
+        <div>
+          <h2 data-i18n="compact.title">上下文维护</h2>
+          <p id="compactStatus" aria-live="polite"></p>
+        </div>
+        <button class="icon-button" id="closeCompactButton" type="button" aria-label="关闭上下文维护" data-i18n-aria-label="compact.close">X</button>
+      </div>
+
+      <section class="settings-section" aria-label="确认上下文维护" data-i18n-aria-label="compact.confirmAria">
+        <p class="risk-note" data-i18n="compact.note">此操作只作用于当前冒险，不会修改基础游戏文件。压缩可能调用当前模型生成摘要，确认后再执行。</p>
+        <div class="settings-actions split-actions">
+          <button class="menu-button primary" id="confirmCompactButton" type="button"></button>
+          <button class="menu-button" id="cancelCompactButton" type="button" data-i18n="common.cancel">取消</button>
+        </div>
+      </section>
+    </form>
+  </dialog>
+
+  <dialog class="chapter-dialog" id="chapterDialog">
+    <form method="dialog" class="chapter-box" id="chapterForm">
+      <div class="settings-header">
+        <div>
+          <h2 data-i18n="chapter.title">章节日志</h2>
+          <p id="chapterStatus" data-i18n="chapter.initial">读取当前冒险的玩家可见日志。</p>
+        </div>
+        <button class="icon-button" id="closeChapterButton" type="button" aria-label="关闭章节日志" data-i18n-aria-label="chapter.close">X</button>
+      </div>
+
+      <section class="settings-section" aria-label="章节日志操作" data-i18n-aria-label="chapter.actionsAria">
+        <div class="settings-actions split-actions">
+          <button class="menu-button" id="chapterRefreshButton" type="button" data-i18n="common.refresh">刷新</button>
+        </div>
+      </section>
+
+      <section class="chapter-log-list" id="chapterLogList" aria-label="最近章节日志" data-i18n-aria-label="chapter.recentAria"></section>
+    </form>
+  </dialog>
+
+  <dialog id="speechInputResultDialog" class="speech-input-result-dialog" aria-labelledby="speechInputResultTitle">
+    <div class="speech-input-result-body">
+      <h2 id="speechInputResultTitle" data-i18n="speech.resultTitle">识别文字</h2>
+      <p id="speechInputResultHint" class="risk-note"></p>
+      <textarea id="speechInputResultText" class="settings-textarea" rows="8" aria-label="识别文字" data-i18n-aria-label="speech.resultTitle"></textarea>
+      <div class="settings-actions">
+        <button id="speechInputInsertButton" class="menu-button" type="button" data-i18n="speech.insert">追加到输入框</button>
+        <button id="speechInputDiscardButton" class="text-button" type="button" data-i18n="speech.discard">丢弃结果</button>
+        <button id="speechInputResultClose" class="text-button" type="button" data-i18n="speech.closeResult">稍后处理</button>
+      </div>
+    </div>
+  </dialog>
+  <dialog id="playerGuideDialog" class="player-guide-dialog" aria-labelledby="playerGuideTitle">
+    <section class="player-guide-shell">
+      <header class="player-guide-header"><div><p id="playerGuideEyebrow"></p><h2 id="playerGuideTitle"></h2></div><button id="playerGuideClose" class="icon-button" type="button" aria-label="Close">×</button></header>
+      <nav id="playerGuideSteps" class="player-guide-steps" aria-label="Tutorial steps"></nav>
+      <div id="playerGuideBody" class="player-guide-body"><p id="playerGuideLead"></p><div id="playerGuideDetails"></div><button id="playerGuideDeepSeekHelp" class="text-button" type="button" hidden></button><button id="playerGuideBackToTutorial" class="text-button" type="button" hidden></button><div id="playerGuideHelpLinks" class="player-guide-help-links"></div><button id="playerGuideSettingsLink" class="text-button" type="button" hidden></button><p id="playerGuideStatus" role="status" aria-live="polite"></p></div>
+      <footer class="player-guide-actions"><button id="playerGuideSkip" class="text-button" type="button"></button><span id="playerGuideProgress"></span><button id="playerGuidePrevious" class="text-button" type="button"></button><button id="playerGuideNext" class="menu-button primary" type="button"></button></footer>
+    </section>
+  </dialog>
+  <script src="localization-runtime.js"></script>
+  <script src="locales/zh-CN.js"></script>
+  <script src="locales/en-US.js"></script>
+  <script src="locales/ja-JP.js"></script>
+  <script src="main-menu-ambient.js"></script>
+  <script src="assets/quill-writing/data.js"></script>
+  <script src="notebook-object-icons.js"></script>
+  <script src="speech-input.js"></script>
+  <script src="player-guide-content.js"></script>
+  <script src="player-guide.js"></script>
+  <script src="game-tour.js"></script>
+  <script src="game-tour-lifecycle.js"></script>
+  <script src="assets/page-projection/book-page-projection.js"></script>
+  <script src="assets/page-reveal/masks/book-page-reveal.js"></script>
+  <script src="notebook-book.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

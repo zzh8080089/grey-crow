@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://greycrow.local/schemas/p2-25/extreme-ending-easter-projection.v1.schema.json",
+  "title": "Grey Crow extreme ending Easter safe projection v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "revision",
+    "phase",
+    "mode",
+    "inputAllowed",
+    "awaitingPlayerResponse",
+    "easterDiscovered",
+    "engineNotice",
+    "actions"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "grey-crow-extreme-ending-easter-projection-v1" },
+    "revision": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2147483647
+    },
+    "phase": {
+      "enum": ["idle", "confirming", "terminal_committed", "finalizing", "recovery_required", "closed"]
+    },
+    "mode": { "enum": ["active", "confirming", "terminalizing", "recovery", "archive"] },
+    "inputAllowed": { "type": "boolean" },
+    "awaitingPlayerResponse": { "type": "boolean" },
+    "easterDiscovered": { "type": "boolean" },
+    "engineNotice": {
+      "anyOf": [
+        { "type": "null" },
+        { "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/shortText" }
+      ]
+    },
+    "actions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["exportStory", "continueAsChild"],
+      "properties": {
+        "exportStory": { "type": "boolean" },
+        "continueAsChild": { "const": false }
+      }
+    }
+  }
+}

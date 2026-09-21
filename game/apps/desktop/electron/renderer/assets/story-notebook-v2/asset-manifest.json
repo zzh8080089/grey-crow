@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "grey-crow-renderer-art-manifest-v1",
+  "assetSet": "story-notebook-v2",
+  "generatedOn": "2026-09-12",
+  "generationMethod": "built-in image_gen reference-guided generation/edit",
+  "postGenerationImageModification": "none; selected PNG outputs copied without alteration",
+  "releaseStatus": "paper-grain-selected-for-implementation; human-visual-acceptance-pending",
+  "assets": [
+    {
+      "id": "dark-paper-grain",
+      "file": "dark-paper-grain.png",
+      "role": "repeatable-material",
+      "sourceReferences": [
+        "../story-notebook-v1/notebook-page-night-v1.png"
+      ],
+      "requestedDimensions": {
+        "width": 2048,
+        "height": 2048
+      },
+      "intendedUsage": "Subtle opaque paper grain repeated beneath separately rendered text; do not stretch as a full-page image.",
+      "limitation": "Tool returned 1254x1254. No baked-in borders, binding or text observed. Seamless repetition and text contrast require in-app validation.",
+      "width": 1254,
+      "height": 1254,
+      "hasAlpha": false,
+      "bytes": 3026166,
+      "sha256": "413fd86b0c54cbecd6634009201b85164ad84595c2e62f475fb6100edf6e777d",
+      "usageStatus": "production",
+      "visualAcceptance": "pending-human-review"
+    }
+  ],
+  "inheritedBackground": {
+    "file": "../story-notebook-v1/scene-rain-night-v1.png",
+    "usageStatus": "production-existing",
+    "width": 3840,
+    "height": 1240,
+    "bytes": 5166002,
+    "sha256": "1bcc70b56bb4640d4515a9c9f0768756d4380f0d60260a58461056989f35aa3b",
+    "limitation": "Original 3840x1240 scene remains a separate decorative layer. This is not a claim of a native 3840x2160 background or overall native-4K artwork."
+  }
+}

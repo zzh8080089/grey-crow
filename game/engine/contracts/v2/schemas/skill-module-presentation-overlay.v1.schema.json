@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://greycrow.local/schemas/p2-26/skill-module-presentation-overlay.v1.schema.json",
+  "title": "Grey Crow localized Skill module presentation overlay v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "itemId", "locale", "fields"],
+  "properties": {
+    "schemaVersion": { "const": "grey-crow-skill-module-presentation-overlay-v1" },
+    "itemId": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/identifier"
+    },
+    "locale": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/language"
+    },
+    "fields": {
+      "type": "array",
+      "maxItems": 64,
+      "items": { "$ref": "#/$defs/fieldPresentation" }
+    },
+    "actions": {
+      "type": "array",
+      "maxItems": 8,
+      "items": { "$ref": "#/$defs/actionPresentation" }
+    }
+  },
+  "$defs": {
+    "actionPresentation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["actionId", "description"],
+      "properties": {
+        "actionId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        }
+      }
+    },
+    "optionPresentation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["value", "label"],
+      "properties": {
+        "value": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "label": {
+          "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/shortText"
+        }
+      }
+    },
+    "itemFieldPresentation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fieldId", "label", "options"],
+      "properties": {
+        "fieldId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "label": {
+          "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/shortText"
+        },
+        "options": {
+          "type": "array",
+          "maxItems": 64,
+          "items": { "$ref": "#/$defs/optionPresentation" }
+        }
+      }
+    },
+    "milestonePresentation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["minimum", "label"],
+      "properties": {
+        "minimum": { "type": "integer", "minimum": 0, "maximum": 1000000 },
+        "label": {
+          "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/shortText"
+        }
+      }
+    },
+    "fieldPresentation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fieldId", "label", "options", "itemFields", "milestones"],
+      "properties": {
+        "fieldId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "label": {
+          "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/shortText"
+        },
+        "options": {
+          "type": "array",
+          "maxItems": 64,
+          "items": { "$ref": "#/$defs/optionPresentation" }
+        },
+        "itemFields": {
+          "type": "array",
+          "maxItems": 16,
+          "items": { "$ref": "#/$defs/itemFieldPresentation" }
+        },
+        "milestones": {
+          "type": "array",
+          "maxItems": 16,
+          "items": { "$ref": "#/$defs/milestonePresentation" }
+        }
+      }
+    }
+  }
+}

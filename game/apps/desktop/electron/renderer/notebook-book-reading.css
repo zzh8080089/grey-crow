@@ -1,0 +1,93 @@
+/* Crisp DOM ink over the real 3D reading page. Geometry stays in notebook.css
+   and prototype.css; book-stage.css owns the cover and visibility lifecycle.
+   The runtime puts book-reading-ready on body before revealing the ink. */
+body[data-game-ui-layout="story-notebook-v1"]:is([data-book-phase="reading"],.book-reading-ready) #gameView {
+  --nb-text: #272d27;
+  --nb-muted: #4d5549;
+  --nb-faint: #51594c;
+  --nb-line: #66705a55;
+  --nb-line-strong: #536249;
+  --nb-player: #365646;
+  --text: #272d27;
+  --muted: #4d5549;
+  --dim: #51594c;
+  color: var(--nb-text);
+  background: transparent;
+
+  /* These were the flat cover, paper stack and outdoor effects. The model now
+     owns those surfaces; none of them may cover its light reading page. */
+  & :is(.story-notebook-scene-layer,.notebook-scene-shade,.story-notebook-material-layer,
+    .notebook-paper-grain,.notebook-page-frame,.notebook-binding,.story-notebook-rail-shell,
+    .story-notebook-paper-pin,.story-notebook-host-pin,.story-notebook-host-mark,
+    #labBookEdge,#labBookSewing,#labClasp,.lab-edge-weather,.lab-rim-glint) { display: none; }
+  &::before, &::after { content: none; }
+
+  /* Keep the short three-part status strip, but remove the dark cover scraps. */
+  & :is(.story-notebook-world-card,.state-card,.context-side-card) {
+    background: none; filter: none; color: var(--nb-text); box-shadow: none;
+    border-bottom: 1px solid var(--nb-line);
+  }
+  & :is(.story-notebook-world-card,.state-card,.context-side-card)::before { content: none; }
+  & :is(.story-notebook-world-card,.state-card,.context-side-card)::after { content: none; }
+  & :is(.story-notebook-world-card strong,.state-grid > [data-state-role="value"],.host-status .turn-status) {
+    color: var(--nb-text); text-shadow: none;
+  }
+  & :is(.story-notebook-world-card small,.state-grid > [data-state-role="label"],.host-status .meter-label,.story-notebook-live small) { color: var(--nb-muted); }
+  & .state-grid > [data-state-key] { border-right-color: var(--nb-line); }
+  & .state-grid > [data-state-key="gameDay"] { border-right: 0; }
+  & .host-status { background: none; }
+
+  /* Typography remains browser-rendered, selectable and independent of texture. */
+  & .narration-panel { background: none; }
+  & .narration-scroll { border-left-color: #727c604f; scrollbar-color: #5d6a5266 transparent; }
+  & .narration-line { color: var(--nb-text); text-shadow: none; }
+  & .narration-line.player { color: var(--nb-player); border-left-color: #597557; background: linear-gradient(90deg,#6e875315,transparent 88%); }
+  & .narration-line.muted { color: var(--nb-muted); }
+  & .narration-line.warning { color: #784321; border-left-color: #976a42; }
+  & .tts-line-button { color: #405745; background: #f8f6df45; border-color: #64745170; box-shadow: none; }
+
+  & .turn-form { border-top-color: var(--nb-line); }
+  & .turn-input-scroll { background: #f7f4dc1f; border-color: #69755b75; box-shadow: inset 0 1px 3px #48513f0d; }
+  & .turn-input-scroll:focus-within { background: #fffcec36; border-color: #3c5a42; box-shadow: 0 0 0 2px #44654529; }
+  & #turnInput { color: var(--nb-text); caret-color: #244a32; background: transparent; }
+  & #turnInput::placeholder { color: #4b5b47; opacity: 1; }
+  & :is(.story-input-kicker,.story-input-hint) { color: var(--nb-muted); }
+  & .command-button.icon-command {
+    color: #334934; border-image: none; border: 1px solid #6d795b5c;
+    border-radius: 2px; background: #f3f1d326; box-shadow: 0 2px 2px #35442910;
+  }
+  & .command-button.icon-command:hover { color: #203a28; background: #6c805720; }
+  & .story-action-key { color: #2d4431; background: #c5cbb045; border-color: #6174538c; box-shadow: 0 2px 0 #4b623b24; }
+  & .send-button { color: #f4f1df; background: #3d5543; border-color: #344c39; }
+  & .send-button:hover { background: #2d4934; }
+  & .tts-action-copy strong { color: #485e43; }
+  & .tts-action-wave i { background: #526e4b; }
+
+  /* A local opaque inset keeps its text from colliding with the story beneath.
+     It is a small index sheet, not a second full-screen paper image. */
+  & .story-notebook-drawer {
+    color: var(--nb-text); background: #dedbc9;
+    box-shadow: -13px 8px 27px #23301d40,-1px 0 #a1a68b,2px 2px #f4eed2;
+  }
+  & .notebook-drawer-paper { display: none; }
+  & .story-notebook-drawer::before { border-color: #86906c5c; background: none; }
+  & .story-notebook-drawer-header { background: #b8bf9d16; border-bottom-color: var(--nb-line); }
+  & :is(.story-notebook-drawer-heading h2,.story-notebook-panel-record h3,.story-notebook-panel-record summary,.story-notebook-panel-list button > span) { color: var(--nb-text); text-shadow: none; }
+  & :is(.story-notebook-drawer-heading small,.story-notebook-drawer-heading p,.story-notebook-drawer-footnote,.story-notebook-panel-record small,.story-notebook-panel-list button > small) { color: var(--nb-muted); }
+  & .story-notebook-drawer-footnote { border-top-color: var(--nb-line); }
+  & .story-notebook-drawer-body { scrollbar-color: #5d6a5266 transparent; }
+  & :is(.story-notebook-drawer-back,.story-notebook-drawer-refresh,.story-notebook-drawer-close) { color: #304831; background: #cad0b455; border-color: #6a7b5966; }
+  & :is(.story-notebook-panel-record,.story-notebook-panel-list button) { color: var(--nb-text); background: #f8f5df2b; border-color: #75815e55; }
+  & .story-notebook-panel-list button:hover { background: #b9c49a55; border-color: #627950; }
+  & .story-notebook-panel-list button::after { color: #526743; }
+  & .story-notebook-panel-record summary::marker { color: #526743; }
+  & :is(.story-notebook-panel-record button,.story-notebook-drawer-body .menu-button,.settings-section select) { color: #2d4630; background: #c1ccaa50; border-color: #71865f88; }
+  & .settings-section input { accent-color: #476744; }
+  & .story-notebook-state-list > div { border-bottom-color: var(--nb-line); }
+  & :is(button,[tabindex="0"]):focus-visible { outline-color: #325937; }
+
+  /* Small dark bubbles keep their own contrasting ink, independent of the page. */
+  & :is(.context-meter-tooltip,.story-notebook-live strong) { color: #ecebdd; background: #263d36; border-color: #8c9b7d; }
+  & .context-meter-tooltip :is(div,span) { color: inherit; }
+  & .context-meter-percent { color: #f7f1de; }
+}

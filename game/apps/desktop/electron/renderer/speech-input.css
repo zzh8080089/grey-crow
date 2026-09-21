@@ -1,0 +1,29 @@
+.speech-input-heading { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-width: 0; }
+.speech-input-button { flex: none; min-height: 26px; border: 1px solid #9caca580; border-radius: 4px; padding: 2px 11px; color: inherit; background: #718b7b24; font: inherit; font-size: 13px; cursor: pointer; }
+.speech-input-button:hover { background: #8cae9338; }
+.speech-input-button:focus-visible { outline: 2px solid #c6e5e4; outline-offset: 2px; }
+.speech-input-button[data-phase="recording"] { color: #fff0dd; border-color: #d6a293; background: #8b483c80; }
+.speech-input-button:disabled { opacity: .45; cursor: default; }
+#speechInputButton { --speech-idle-ink: var(--accent-strong); --speech-hover-ink: var(--text); --speech-recording-ink: #f0b19b; display: inline-grid; place-items: center; width: 30px; min-width: 30px; min-height: 30px; padding: 0; color: var(--speech-active-ink,var(--speech-idle-ink)); border: 0; background: none; box-shadow: none; transition: color 160ms ease; }
+#speechInputButton:hover:not(:disabled) { color: var(--speech-active-ink,var(--speech-hover-ink)); background: none; box-shadow: none; }
+#speechInputButton:focus-visible { outline: none; }
+#speechInputButton:focus-visible .speech-input-microphone-icon { stroke-width: 2.4; filter: drop-shadow(0 0 2px currentColor); }
+#speechInputButton[data-phase="recording"] { --speech-active-ink: var(--speech-recording-ink); }
+.speech-input-microphone-icon { width: 17px; height: 17px; overflow: visible; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+#gameView[data-ui-layout="story-notebook-v1"] #speechInputButton { --speech-idle-ink: var(--nb-player); --speech-hover-ink: var(--nb-text); --speech-recording-ink: #9e3c2c; }
+#gameView[data-ui-layout="story-notebook-v1"][data-notebook-theme="dark"] #speechInputButton { --speech-recording-ink: #f0b19b; }
+@media (prefers-reduced-motion: no-preference) { #speechInputButton[data-phase="recording"] .speech-input-microphone-icon { animation: speech-input-pulse 1.2s ease-in-out infinite; } }
+@keyframes speech-input-pulse { 50% { transform: scale(1.12); } }
+.speech-input-bar { display: flex; align-items: center; gap: 8px; min-width: 0; font-size: 12px; line-height: 1.4; }
+.speech-input-bar [role="status"] { min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.speech-input-bar button { flex: none; padding: 0 3px; font-size: inherit; }
+.speech-input-bar[hidden], .speech-input-settings [hidden], .speech-input-bar [hidden], #speechInputKeyboardHint[hidden] { display: none !important; }
+.speech-input-settings textarea { width: 100%; box-sizing: border-box; }
+.speech-input-result-dialog { width: min(640px, calc(100vw - 48px)); max-height: calc(100vh - 48px); color: #d8d5c7; background: #17252d; border: 1px solid #8fa49a; border-radius: 8px; padding: 0; }
+.speech-input-result-dialog::backdrop { background: #081119a8; }
+.speech-input-result-body { padding: 24px; display: grid; gap: 14px; }
+.speech-input-result-body h2, .speech-input-result-body p { margin: 0; }
+.speech-input-result-body textarea { width: 100%; resize: vertical; box-sizing: border-box; }
+.speech-input-result-body .settings-actions { flex-wrap: wrap; }
+#gameView[data-ui-layout="story-notebook-v1"] .speech-input-heading .story-input-kicker { margin: 0; }
+#gameView[data-ui-layout="story-notebook-v1"] .speech-input-button { font-size: 13px; line-height: 18px; }

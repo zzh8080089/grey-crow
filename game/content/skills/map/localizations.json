@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "grey-crow-skill-localization-bundle-v1",
+  "itemId": "map",
+  "sourceLocale": "zh-CN",
+  "locales": [
+    {
+      "locale": "en-US",
+      "title": "Map",
+      "description": "Reads known spatial facts and route constraints when the player asks about their location, nearby places, or how to get somewhere; it never moves the player automatically.",
+      "triggers": [
+        "map",
+        "route",
+        "nearby places",
+        "where am I",
+        "where can I go",
+        "directions"
+      ],
+      "playerGuide": null,
+      "skillPath": "skills/map/locales/en-US/SKILL.md",
+      "templates": [],
+      "modulePresentationPath": null
+    },
+    {
+      "locale": "ja-JP",
+      "title": "マップ",
+      "description": "現在地、周辺の場所、経路を尋ねられたときに既知の空間情報と制約を読み、プレイヤーを自動では移動させない。",
+      "triggers": ["地図", "経路", "周辺の場所", "ここはどこ", "どこへ行ける", "道順"],
+      "playerGuide": null,
+      "skillPath": "skills/map/locales/ja-JP/SKILL.md",
+      "templates": [],
+      "modulePresentationPath": null
+    }
+  ]
+}

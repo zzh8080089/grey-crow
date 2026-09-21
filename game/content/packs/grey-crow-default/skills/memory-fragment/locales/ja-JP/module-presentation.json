@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "grey-crow-skill-module-presentation-overlay-v1",
+  "itemId": "memory-fragment",
+  "locale": "ja-JP",
+  "actions": [
+    {
+      "actionId": "record_fragment",
+      "description": "意識的な想起または強い連想が自然に生じた時、未確認の記憶の欠片を一つ記録する。送るのは浮上のしかた、側面、きっかけ、感覚内容だけで、Runtime が検証して保存する。"
+    },
+    {
+      "actionId": "resolve_fragment",
+      "description": "三十個の欠片で再構成が可能になり、プレイヤーが明確に選んだ時だけ、過去を受け入れる、受け入れない、保留する、のいずれかを記録する。送るのは choice だけ。"
+    }
+  ],
+  "fields": [
+    {
+      "fieldId": "fragments",
+      "label": "記憶の欠片",
+      "options": [],
+      "itemFields": [
+        { "fieldId": "game_day", "label": "ゲーム内の日", "options": [] },
+        {
+          "fieldId": "discovery_mode",
+          "label": "浮上のしかた",
+          "options": [
+            { "value": "active_recall", "label": "意識的な想起" },
+            { "value": "passive_association", "label": "自然な連想" }
+          ]
+        },
+        {
+          "fieldId": "dimension",
+          "label": "側面",
+          "options": [
+            { "value": "body", "label": "身体" },
+            { "value": "emotion", "label": "感情" },
+            { "value": "skill", "label": "技能" },
+            { "value": "identity", "label": "身元" }
+          ]
+        },
+        { "fieldId": "trigger", "label": "きっかけ", "options": [] },
+        { "fieldId": "content", "label": "感覚の断片", "options": [] },
+        {
+          "fieldId": "certainty",
+          "label": "確かさ",
+          "options": [
+            { "value": "uncertain", "label": "未確認" }
+          ]
+        }
+      ],
+      "milestones": [
+        { "minimum": 0, "label": "空白" },
+        { "minimum": 6, "label": "芽生え" },
+        { "minimum": 13, "label": "浮上" },
+        { "minimum": 25, "label": "収束" },
+        { "minimum": 30, "label": "再構成" }
+      ]
+    },
+    {
+      "fieldId": "revelation_status",
+      "label": "再構成の選択",
+      "options": [
+        { "value": "collecting", "label": "収集中" },
+        { "value": "available", "label": "再構成できる" },
+        { "value": "deferred", "label": "決定を保留" },
+        { "value": "sealed", "label": "過去を受け入れない・新しい自分を選ぶ" },
+        { "value": "accepted", "label": "過去を受け入れる・記憶を取り戻した者" }
+      ],
+      "itemFields": [],
+      "milestones": []
+    }
+  ]
+}

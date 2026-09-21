@@ -1,0 +1,56 @@
+{
+  "schemaVersion": "grey-crow-skill-localization-bundle-v1",
+  "itemId": "entity-memory",
+  "sourceLocale": "zh-CN",
+  "locales": [
+    {
+      "locale": "en-US",
+      "title": "Entity and World Memory",
+      "description": "Reads or updates semantic records for persistent characters, locations, factions, and items when they matter to the current turn.",
+      "triggers": [
+        "character",
+        "location",
+        "faction",
+        "named item",
+        "earlier event",
+        "remember this"
+      ],
+      "playerGuide": null,
+      "skillPath": "skills/entity-memory/locales/en-US/SKILL.md",
+      "templates": [
+        {
+          "templateId": "template:faction-profile",
+          "path": "skills/entity-memory/locales/en-US/templates/faction-profile.md"
+        },
+        {
+          "templateId": "template:item-profile",
+          "path": "skills/entity-memory/locales/en-US/templates/item-profile.md"
+        },
+        {
+          "templateId": "template:location-profile",
+          "path": "skills/entity-memory/locales/en-US/templates/location-profile.md"
+        },
+        {
+          "templateId": "template:npc-profile",
+          "path": "skills/entity-memory/locales/en-US/templates/npc-profile.md"
+        }
+      ],
+      "modulePresentationPath": null
+    },
+    {
+      "locale": "ja-JP",
+      "title": "人物と世界の記憶",
+      "description": "継続して登場する人物、場所、勢力、物品が現在のターンに関係するとき、必要な意味記録を読み書きする。",
+      "triggers": ["人物", "場所", "勢力", "名前のある物品", "以前の出来事", "覚えておく"],
+      "playerGuide": null,
+      "skillPath": "skills/entity-memory/locales/ja-JP/SKILL.md",
+      "templates": [
+        { "templateId": "template:faction-profile", "path": "skills/entity-memory/locales/ja-JP/templates/faction-profile.md" },
+        { "templateId": "template:item-profile", "path": "skills/entity-memory/locales/ja-JP/templates/item-profile.md" },
+        { "templateId": "template:location-profile", "path": "skills/entity-memory/locales/ja-JP/templates/location-profile.md" },
+        { "templateId": "template:npc-profile", "path": "skills/entity-memory/locales/ja-JP/templates/npc-profile.md" }
+      ],
+      "modulePresentationPath": null
+    }
+  ]
+}

@@ -1,0 +1,358 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://greycrow.local/schemas/p2-29/skill-panel-view-projection.v1.schema.json",
+  "title": "Grey Crow safe Skill panel view projection v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "panelRef",
+    "sourceKind",
+    "ownership",
+    "group",
+    "surface",
+    "view",
+    "title",
+    "status",
+    "summary",
+    "fields",
+    "items",
+    "detail",
+    "pagination"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "grey-crow-skill-panel-view-projection-v1" },
+    "panelRef": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/stableRef"
+    },
+    "sourceKind": { "enum": ["ordinary_skill", "built_in_domain"] },
+    "ownership": { "enum": ["built_in", "player_owned", "imported_readonly"] },
+    "group": { "enum": ["story_records", "adventure_gameplay", "player_extensions"] },
+    "surface": { "enum": ["guide", "fields", "progress", "list_detail", "timeline"] },
+    "view": { "enum": ["overview", "list", "detail"] },
+    "title": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/shortText"
+    },
+    "status": { "enum": ["ready", "empty", "degraded"] },
+    "summary": {
+      "type": "array",
+      "maxItems": 3,
+      "items": { "$ref": "#/$defs/summary" }
+    },
+    "fields": {
+      "type": "array",
+      "maxItems": 32,
+      "items": { "$ref": "#/$defs/displayField" }
+    },
+    "items": {
+      "type": "array",
+      "maxItems": 24,
+      "items": { "$ref": "#/$defs/listItem" }
+    },
+    "detail": {
+      "anyOf": [
+        { "type": "null" },
+        { "$ref": "#/$defs/detail" }
+      ]
+    },
+    "pagination": {
+      "anyOf": [
+        { "type": "null" },
+        { "$ref": "#/$defs/pagination" }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "sourceKind": { "const": "built_in_domain" },
+          "panelRef": { "enum": ["session_characters", "session_inventory"] },
+          "view": { "const": "detail" }
+        },
+        "required": ["sourceKind", "panelRef", "view"]
+      },
+      "else": {
+        "properties": {
+          "pagination": {
+            "anyOf": [
+              { "type": "null" },
+              { "type": "object", "properties": { "totalItems": { "type": "integer", "maximum": 10000 } } }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "sourceKind": { "const": "built_in_domain" } },
+        "required": ["sourceKind"]
+      },
+      "then": {
+        "properties": {
+          "ownership": { "const": "built_in" },
+          "group": { "const": "story_records" }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "sourceKind": { "const": "ordinary_skill" },
+          "ownership": { "const": "player_owned" }
+        },
+        "required": ["sourceKind", "ownership"]
+      },
+      "then": {
+        "properties": { "group": { "const": "player_extensions" } }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "sourceKind": { "const": "ordinary_skill" },
+          "ownership": { "const": "imported_readonly" }
+        },
+        "required": ["sourceKind", "ownership"]
+      },
+      "then": {
+        "properties": { "group": { "const": "player_extensions" } }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "sourceKind": { "const": "ordinary_skill" },
+          "ownership": { "const": "built_in" }
+        },
+        "required": ["sourceKind", "ownership"]
+      },
+      "then": {
+        "properties": { "group": { "const": "adventure_gameplay" } }
+      }
+    },
+    {
+      "if": {
+        "properties": { "view": { "const": "overview" } },
+        "required": ["view"]
+      },
+      "then": {
+        "properties": {
+          "items": { "type": "array", "maxItems": 0 },
+          "detail": { "type": "null" },
+          "pagination": { "type": "null" }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "view": { "const": "list" } },
+        "required": ["view"]
+      },
+      "then": {
+        "properties": {
+          "surface": { "enum": ["list_detail", "timeline"] },
+          "detail": { "type": "null" }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "view": { "const": "detail" } },
+        "required": ["view"]
+      },
+      "then": {
+        "properties": {
+          "surface": { "enum": ["list_detail", "timeline"] },
+          "items": { "type": "array", "maxItems": 0 },
+          "detail": { "$ref": "#/$defs/detail" }
+        },
+        "if": {
+          "properties": {
+            "sourceKind": { "const": "built_in_domain" },
+            "panelRef": { "enum": ["session_characters", "session_inventory"] }
+          },
+          "required": ["sourceKind", "panelRef"]
+        },
+        "else": {
+          "properties": {
+            "pagination": { "type": "null" },
+            "detail": {
+              "type": "object",
+              "properties": {
+                "sections": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "records": {
+                        "type": "array",
+                        "items": { "type": "object", "properties": { "text": { "type": "string", "maxLength": 2000 }, "heading": false } }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "fieldId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[a-z][a-z0-9_]*$"
+    },
+    "nullableShortText": {
+      "anyOf": [
+        { "type": "null" },
+        {
+          "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/shortText"
+        }
+      ]
+    },
+    "nullableTurn": {
+      "anyOf": [
+        { "type": "null" },
+        { "type": "integer", "minimum": 0, "maximum": 2147483647 }
+      ]
+    },
+    "nullableNumber": {
+      "anyOf": [
+        { "type": "null" },
+        { "type": "number", "minimum": -1000000000, "maximum": 1000000000 }
+      ]
+    },
+    "displayValue": {
+      "anyOf": [
+        { "type": "null" },
+        { "type": "string", "maxLength": 2000 },
+        { "type": "number", "minimum": -1000000000, "maximum": 1000000000 },
+        { "type": "boolean" },
+        {
+          "type": "array",
+          "maxItems": 64,
+          "items": { "type": "string", "maxLength": 240 }
+        }
+      ]
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label", "text"],
+      "properties": {
+        "id": { "$ref": "#/$defs/fieldId" },
+        "label": {
+          "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/shortText"
+        },
+        "text": { "type": "string", "minLength": 1, "maxLength": 160 }
+      }
+    },
+    "displayField": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label", "kind", "value", "minimum", "maximum"],
+      "properties": {
+        "id": { "$ref": "#/$defs/fieldId" },
+        "label": {
+          "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/shortText"
+        },
+        "kind": { "enum": ["text", "number", "boolean", "badge", "chips", "progress"] },
+        "value": { "$ref": "#/$defs/displayValue" },
+        "minimum": { "$ref": "#/$defs/nullableNumber" },
+        "maximum": { "$ref": "#/$defs/nullableNumber" }
+      }
+    },
+    "listItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ref", "title", "subtitle", "statusLabel", "updatedTurn"],
+      "properties": {
+        "ref": {
+          "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/stableRef"
+        },
+        "title": {
+          "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/shortText"
+        },
+        "subtitle": { "$ref": "#/$defs/nullableShortText" },
+        "statusLabel": { "$ref": "#/$defs/nullableShortText" },
+        "updatedTurn": { "$ref": "#/$defs/nullableTurn" }
+      }
+    },
+    "detailRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label", "text", "turn"],
+      "properties": {
+        "id": {
+          "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/stableRef"
+        },
+        "label": { "$ref": "#/$defs/nullableShortText" },
+        "heading": { "type": "string", "minLength": 1, "maxLength": 2000 },
+        "text": { "type": "string", "minLength": 1, "maxLength": 6000 },
+        "turn": { "$ref": "#/$defs/nullableTurn" }
+      }
+    },
+    "detailSection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "fields", "records"],
+      "properties": {
+        "id": { "$ref": "#/$defs/fieldId" },
+        "title": {
+          "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/shortText"
+        },
+        "fields": {
+          "type": "array",
+          "maxItems": 16,
+          "items": { "$ref": "#/$defs/displayField" }
+        },
+        "records": {
+          "type": "array",
+          "maxItems": 24,
+          "items": { "$ref": "#/$defs/detailRecord" }
+        }
+      }
+    },
+    "detail": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ref", "title", "subtitle", "sections"],
+      "properties": {
+        "ref": {
+          "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/stableRef"
+        },
+        "title": {
+          "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/shortText"
+        },
+        "subtitle": { "$ref": "#/$defs/nullableShortText" },
+        "sections": {
+          "type": "array",
+          "maxItems": 12,
+          "items": { "$ref": "#/$defs/detailSection" }
+        }
+      }
+    },
+    "pagination": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nextCursor", "hasMore", "returnedItems", "totalItems"],
+      "properties": {
+        "nextCursor": {
+          "anyOf": [
+            { "type": "null" },
+            {
+              "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/stableRef"
+            }
+          ]
+        },
+        "hasMore": { "type": "boolean" },
+        "returnedItems": { "type": "integer", "minimum": 0, "maximum": 24 },
+        "totalItems": { "type": "integer", "minimum": 0, "maximum": 250000 }
+      }
+    }
+  }
+}

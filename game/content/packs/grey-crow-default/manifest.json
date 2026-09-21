@@ -1,0 +1,283 @@
+{
+  "schemaVersion": "grey-crow-extension-pack-v2",
+  "id": "grey-crow-default",
+  "title": "Grey Crow Default Content",
+  "version": "2.2.0",
+  "author": "Grey Crow",
+  "engineCompatibility": ">=2.2 <3",
+  "languages": [
+    "zh-CN",
+    "en-US",
+    "ja-JP"
+  ],
+  "provides": [
+    {
+      "type": "host",
+      "id": "grey-crow-host",
+      "title": "灰鸦主持人",
+      "path": "host/HOST.md",
+      "language": "zh-CN",
+      "description": "冷静、克制、具体的灰鸦主持风格，不携带固定世界背景。",
+      "danger": "low",
+      "localization": {
+        "schemaVersion": "grey-crow-narrative-localization-ref-v1",
+        "path": "host/localizations.json"
+      }
+    },
+    {
+      "type": "world",
+      "id": "shanghai-day10",
+      "title": "上海·爆发后第十天",
+      "path": "world/WORLD.md",
+      "language": "zh-CN",
+      "description": "N7 狂犬病变种爆发后第十天的上海：城市正在失效，但还没有彻底死去。",
+      "danger": "medium",
+      "localization": {
+        "schemaVersion": "grey-crow-narrative-localization-ref-v1",
+        "path": "world/localizations.json"
+      }
+    },
+    {
+      "type": "skill",
+      "skillClass": "new_game",
+      "id": "new-game-default",
+      "title": "灰鸦：上海末日开局",
+      "path": "skills/new-game-default/SKILL.md",
+      "language": "zh-CN",
+      "description": "从主菜单开始灰鸦上海末日新冒险时，通过多轮对话确认身份、唯一之物和四类上海出生区域。",
+      "danger": "medium",
+      "triggers": [
+        "ui_start_new_game"
+      ],
+      "templates": [
+        "skills/new-game-default/templates/opening-anchor-write.md"
+      ],
+      "readScopes": [
+        "state",
+        "world",
+        "memory"
+      ],
+      "writeScopes": [
+        "state",
+        "memory",
+        "world_records",
+        "character_records",
+        "timeline"
+      ],
+      "localization": {
+        "schemaVersion": "grey-crow-skill-localization-ref-v1",
+        "path": "skills/new-game-default/localizations.json"
+      }
+    },
+    {
+      "type": "skill",
+      "skillClass": "ordinary",
+      "id": "game-state",
+      "title": "游戏状态",
+      "path": "skills/game-state/SKILL.md",
+      "language": "zh-CN",
+      "description": "当玩家询问或确认身体、背包摘要、主要场景锚点变化时，提供受控的当前状态读写指南。",
+      "danger": "medium",
+      "triggers": [
+        "状态",
+        "背包",
+        "受伤",
+        "地点",
+        "inventory",
+        "status"
+      ],
+      "templates": [
+        "skills/game-state/templates/inventory-item.md",
+        "skills/game-state/templates/player-status.md",
+        "skills/game-state/templates/scene-state.md"
+      ],
+      "readScopes": [
+        "state",
+        "world"
+      ],
+      "writeScopes": [
+        "state"
+      ],
+      "localization": {
+        "schemaVersion": "grey-crow-skill-localization-ref-v1",
+        "path": "skills/game-state/localizations.json"
+      }
+    },
+    {
+      "type": "skill",
+      "skillClass": "ordinary",
+      "id": "map",
+      "title": "地图",
+      "path": "skills/map/SKILL.md",
+      "language": "zh-CN",
+      "description": "当玩家询问当前位置、附近地点或路线时，读取已知空间资料；不会自动移动玩家。",
+      "danger": "low",
+      "triggers": [
+        "地图",
+        "路线",
+        "附近",
+        "去哪",
+        "map",
+        "route"
+      ],
+      "templates": [],
+      "readScopes": [
+        "state",
+        "world"
+      ],
+      "writeScopes": [],
+      "localization": {
+        "schemaVersion": "grey-crow-skill-localization-ref-v1",
+        "path": "skills/map/localizations.json"
+      }
+    },
+    {
+      "type": "skill",
+      "skillClass": "ordinary",
+      "id": "entity-memory",
+      "title": "实体与世界记忆",
+      "path": "skills/entity-memory/SKILL.md",
+      "language": "zh-CN",
+      "description": "当当前回合涉及持续人物、地点、阵营或物品时，按需读取或更新当前冒险的语义记录。",
+      "danger": "medium",
+      "triggers": [
+        "人物",
+        "地点",
+        "阵营",
+        "物品",
+        "之前",
+        "remember"
+      ],
+      "templates": [
+        "skills/entity-memory/templates/faction-profile.md",
+        "skills/entity-memory/templates/item-profile.md",
+        "skills/entity-memory/templates/location-profile.md",
+        "skills/entity-memory/templates/npc-profile.md"
+      ],
+      "readScopes": [
+        "memory",
+        "transcript",
+        "world"
+      ],
+      "writeScopes": [
+        "memory",
+        "world_records",
+        "character_records",
+        "item_records",
+        "timeline"
+      ],
+      "localization": {
+        "schemaVersion": "grey-crow-skill-localization-ref-v1",
+        "path": "skills/entity-memory/localizations.json"
+      }
+    },
+    {
+      "type": "skill",
+      "skillClass": "ordinary",
+      "id": "story-finale",
+      "title": "故事终局",
+      "path": "skills/story-finale/SKILL.md",
+      "language": "zh-CN",
+      "description": "当整个故事真正自然闭合时，由主持人在普通叙事中温和询问玩家继续、完结或暂不决定。",
+      "danger": "high",
+      "triggers": [
+        "故事结局",
+        "旅程终点",
+        "让故事结束",
+        "继续这个故事",
+        "story finale"
+      ],
+      "templates": [],
+      "readScopes": [
+        "state",
+        "memory",
+        "transcript",
+        "skill"
+      ],
+      "writeScopes": [],
+      "playerGuide": "主持人只会在整个故事自然闭合时，通过普通故事对话询问你是否愿意完结。你可以继续、完结或暂不决定；不会出现强制结算弹窗。",
+      "localization": {
+        "schemaVersion": "grey-crow-skill-localization-ref-v1",
+        "path": "skills/story-finale/localizations.json"
+      }
+    },
+    {
+      "type": "skill",
+      "skillClass": "ordinary",
+      "id": "extreme-ending-easter",
+      "title": "灰鸦余响",
+      "path": "skills/extreme-ending-easter/SKILL.md",
+      "language": "zh-CN",
+      "description": "官方隐藏终末路线：仅处理明确限定于当前游戏角色的极端选择，并通过普通叙事进行三次独立确认。",
+      "danger": "high",
+      "triggers": [],
+      "templates": [],
+      "readScopes": [
+        "state",
+        "memory",
+        "transcript",
+        "skill"
+      ],
+      "writeScopes": [],
+      "playerGuide": "一段只在满足官方隐藏条件后才会显现的灰鸦余响。它不会公开确认阶段、概率或内部判定。",
+      "localization": {
+        "schemaVersion": "grey-crow-skill-localization-ref-v1",
+        "path": "skills/extreme-ending-easter/localizations.json"
+      },
+      "module": {
+        "schemaVersion": "grey-crow-skill-module-ref-v1",
+        "path": "skills/extreme-ending-easter/module.json"
+      }
+    },
+    {
+      "type": "skill",
+      "skillClass": "ordinary",
+      "id": "memory-fragment",
+      "title": "记忆碎片",
+      "path": "skills/memory-fragment/SKILL.md",
+      "language": "zh-CN",
+      "description": "当玩家主动回忆或场景形成强关联时，收集未经证实的感官碎片，并由玩家决定如何面对拼合出的过去。",
+      "danger": "medium",
+      "triggers": [
+        "回忆",
+        "记忆",
+        "熟悉的气味",
+        "似曾相识",
+        "旧物",
+        "身份线索"
+      ],
+      "templates": [],
+      "readScopes": [
+        "state",
+        "memory",
+        "transcript",
+        "skill"
+      ],
+      "writeScopes": [],
+      "playerGuide": "主持人会在主动回忆或强关联场景中保存模糊的感官碎片，最多 30 条。这些碎片不是已证实历史；满额后由你决定接受过去、选择新的自己或暂缓决定。",
+      "localization": {
+        "schemaVersion": "grey-crow-skill-localization-ref-v1",
+        "path": "skills/memory-fragment/localizations.json"
+      },
+      "module": {
+        "schemaVersion": "grey-crow-skill-module-ref-v1",
+        "path": "skills/memory-fragment/module.json"
+      }
+    },
+    {
+      "type": "new_game_preset",
+      "id": "grey-crow-default",
+      "title": "灰鸦·上海末日",
+      "path": "presets/default.json",
+      "language": "zh-CN",
+      "description": "上海，疫情爆发后的第十天。电力与物资渐渐短缺，仍有人守着家、等待救援。你将决定自己的身份、唯一留下的东西和起点，在弄堂与街区间探索、交谈、寻找物资，面对信任与生存的选择。氛围克制而紧张，包含感染、伤亡与困境描写；行动通过自然语言表达，结果随故事发展。",
+      "danger": "low"
+    }
+  ],
+  "permissions": [
+    "read_base_content",
+    "write_current_saveRoot_via_tools",
+    "menu_command"
+  ],
+  "conflicts": []
+}

@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://greycrow.local/schemas/p2-25/skill-panel-presentation.v1.schema.json",
+  "title": "Grey Crow locked Skill panel presentation v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "panels"],
+  "properties": {
+    "schemaVersion": { "const": "grey-crow-skill-panel-presentation-v1" },
+    "panels": {
+      "type": "array",
+      "maxItems": 64,
+      "items": { "$ref": "#/$defs/panel" }
+    }
+  },
+  "$defs": {
+    "nullableModuleRef": {
+      "anyOf": [
+        { "type": "null" },
+        {
+          "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/stableRef"
+        }
+      ]
+    },
+    "nullableGuide": {
+      "anyOf": [
+        { "type": "null" },
+        { "type": "string", "minLength": 1, "maxLength": 2000 }
+      ]
+    },
+    "nullableVisibility": {
+      "anyOf": [
+        { "type": "null" },
+        { "enum": ["visible", "hidden_until_active"] }
+      ]
+    },
+    "panel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "packId",
+        "packTitle",
+        "packVersion",
+        "itemId",
+        "title",
+        "language",
+        "description",
+        "triggers",
+        "playerGuide",
+        "hasModule",
+        "moduleRef",
+        "visibility"
+      ],
+      "properties": {
+        "packId": {
+          "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/identifier"
+        },
+        "packTitle": {
+          "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/shortText"
+        },
+        "packVersion": {
+          "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/semver"
+        },
+        "itemId": {
+          "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/identifier"
+        },
+        "title": {
+          "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/shortText"
+        },
+        "language": {
+          "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/language"
+        },
+        "description": {
+          "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/description"
+        },
+        "triggers": {
+          "type": "array",
+          "maxItems": 32,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1, "maxLength": 120 }
+        },
+        "playerGuide": { "$ref": "#/$defs/nullableGuide" },
+        "hasModule": { "type": "boolean" },
+        "moduleRef": { "$ref": "#/$defs/nullableModuleRef" },
+        "visibility": { "$ref": "#/$defs/nullableVisibility" }
+      }
+    }
+  }
+}

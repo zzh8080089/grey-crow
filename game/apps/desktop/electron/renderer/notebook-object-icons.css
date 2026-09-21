@@ -1,0 +1,51 @@
+/* Original layered paper-object family, derived from the accepted index card.
+   Texture, paper thickness, folds, print and metal stay separate SVG elements.
+   Ink is printed onto the object paper; theme values change the material itself,
+   not a blanket raster recolouring filter. The accepted index colours stay put. */
+.lab-object-icon { display:none; }
+body[data-game-ui-layout="story-notebook-v1"] {
+  --object-metal-light:#b1a28a; --object-metal:#85725b; --object-metal-edge:#605342;
+  --object-paper-light:#e8deca; --object-paper:#bcae94; --object-lettering:#695a46;
+  --object-leather-light:#54493b; --object-leather:#302b25; --object-engraving:#b4a183;
+  --object-contact:#352e2852; --object-lift:#352e2842;
+  --object-paper-edge:#8c7a5e; --object-thickness:#76634c;
+  --object-print:#443a2d; --object-print-soft:#806c51;
+  --object-photo-paper:#d0c0a4; --object-fold:#ac9b80; --object-ribbon:#98735a;
+}
+body[data-game-ui-layout="story-notebook-v1"][data-paper-theme="dark"] {
+  --object-metal-light:#c6b091; --object-metal:#a08c73; --object-metal-edge:#776956;
+  --object-paper-light:#cec1a9; --object-paper:#a89b84; --object-lettering:#5a4d3e;
+  --object-leather-light:#57504a; --object-leather:#34302c; --object-engraving:#c6b79e;
+  --object-contact:#08080787; --object-lift:#08080766;
+  --object-paper-edge:#9e8d72; --object-thickness:#655847;
+  --object-print:#40382f; --object-print-soft:#73634f;
+  --object-photo-paper:#b4a58c; --object-fold:#998a72; --object-ribbon:#9b7962;
+}
+body[data-game-ui-layout="story-notebook-v1"][data-book-presentation="active"].book-reading-ready #gameView {
+  & .notebook-icon-art { overflow:visible; }
+  & .notebook-icon-art > .lab-ink-icon { display:none; }
+  & .notebook-icon-art > .lab-object-icon {
+    display:block; position:relative; width:42px; height:42px; overflow:visible;
+    filter:drop-shadow(.4px 1.2px .6px var(--object-contact));
+    transform:translateY(-1px); transform-origin:50% 80%;
+    transition:transform 180ms ease,filter 180ms ease;
+  }
+  & .story-notebook-rail-button .notebook-icon-art { visibility:visible; width:42px; height:40px; min-width:42px; min-height:40px; flex:0 0 40px; }
+  & .story-notebook-rail-button .lab-object-icon { width:38px; height:38px; }
+  & .story-notebook-rail-button[data-notebook-panel="chapters"] .lab-object-icon { width:40px; }
+  & :is(.story-notebook-rail-button,.command-button,.settings-gear-button):is(:hover,:focus-visible) .lab-object-icon {
+    transform:translateY(-2px);
+    filter:drop-shadow(.6px 2px 1px var(--object-lift));
+  }
+  & :is(.story-notebook-rail-button,.command-button,.settings-gear-button):active .lab-object-icon {
+    transform:translateY(0);filter:drop-shadow(.2px .5px .3px var(--object-contact));
+  }
+  & .settings-gear-button .notebook-icon-art { display:flex; justify-content:center; align-items:center; }
+  & .settings-gear-button .lab-object-icon { width:40px; height:40px; }
+  & .tts-line-button { font-size:12px; }
+  & .tts-action-wave i { animation:none; }
+}
+@media(prefers-reduced-motion:reduce) { .lab-object-icon { transition:none!important; } }
+body[data-game-ui-layout="story-notebook-v1"][data-reduced-motion="true"] .lab-object-icon { transition:none!important; }
+
+#gameView[data-ui-layout="story-notebook-v1"] .notebook-icon-art[data-object-icon-installed="true"] > img { display: none; }

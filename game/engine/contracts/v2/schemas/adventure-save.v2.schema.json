@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://greycrow.local/schemas/p2-23/adventure-save.v2.schema.json",
+  "title": "Grey Crow adventure save v2 root contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "dataVersion",
+    "adventureId",
+    "playerProfileId",
+    "creationState",
+    "contentProfileRef",
+    "createdAt",
+    "updatedAt"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "grey-crow-adventure-v2" },
+    "dataVersion": { "const": 2 },
+    "adventureId": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/stableRef"
+    },
+    "playerProfileId": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/stableRef"
+    },
+    "adventureLocale": {
+      "enum": ["zh-CN", "en-US", "ja-JP"]
+    },
+    "creationState": {
+      "enum": ["creating", "ready", "active", "closed"]
+    },
+    "contentProfileRef": {
+      "anyOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["profileId", "snapshotLockId", "overallHash"],
+          "properties": {
+            "profileId": {
+              "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/stableRef"
+            },
+            "snapshotLockId": {
+              "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/stableRef"
+            },
+            "overallHash": {
+              "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/sha256"
+            }
+          }
+        }
+      ]
+    },
+    "createdAt": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/timestamp"
+    },
+    "updatedAt": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/timestamp"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "creationState": { "const": "creating" } },
+        "required": ["creationState"]
+      },
+      "else": {
+        "properties": { "contentProfileRef": { "type": "object" } }
+      }
+    }
+  ]
+}

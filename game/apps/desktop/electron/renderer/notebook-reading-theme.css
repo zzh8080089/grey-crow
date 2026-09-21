@@ -1,0 +1,143 @@
+/* The settled reading-page treatment. It is deliberately scoped to the
+   production notebook layout and modal lifecycles remain intact. */
+#gameView[data-ui-layout="story-notebook-v1"] {
+  --reading-ink: #352e28;
+  --reading-muted: #70645a;
+  --reading-line: #65544633;
+  --reading-accent: #785d3e;
+  --reading-paper: #ede3d0;
+  --reading-note-world: #d8c4a0d6;
+  --reading-note-state: #ded6c4cc;
+  --reading-note-host: #e3dfd3b8;
+  --reading-shadow: #32251e33;
+  --reading-focus: #855a35;
+  --nb-text: var(--reading-ink);
+  --nb-muted: var(--reading-muted);
+  --nb-faint: var(--reading-muted);
+  --nb-line: var(--reading-line);
+  --nb-line-strong: var(--reading-accent);
+  --nb-player: #68513e;
+}
+
+#gameView[data-ui-layout="story-notebook-v1"][data-notebook-theme="dark"] {
+  --reading-ink: #ece5d8;
+  --reading-muted: #c2b8aa;
+  --reading-line: #d3c1a42b;
+  --reading-accent: #c6b091;
+  --reading-paper: #3a3b3e;
+  --reading-note-world: #494038cf;
+  --reading-note-state: #444447c9;
+  --reading-note-host: #454549e8;
+  --reading-shadow: #14111460;
+  --reading-focus: #d8bc92;
+  --nb-player: #f2e8d8;
+}
+
+/* The two source images are blank physical pages. Only the selected CSS rule
+   fetches an image, while all story, status and input content stays live. */
+#gameView[data-ui-layout="story-notebook-v1"] .story-notebook-page-shell {
+  background: var(--reading-paper) url("assets/theme-study/reading-light.png") center / 100% 100% no-repeat;
+  box-shadow: 0 16px 38px var(--reading-shadow);
+}
+
+#gameView[data-ui-layout="story-notebook-v1"][data-notebook-theme="dark"] .story-notebook-page-shell {
+  background-image: url("assets/theme-study/reading-dark.png");
+}
+#gameView[data-ui-layout="story-notebook-v1"] .notebook-paper-grain { opacity: .16; mix-blend-mode: multiply; }
+#gameView[data-ui-layout="story-notebook-v1"][data-notebook-theme="dark"] .notebook-paper-grain { opacity: .28; mix-blend-mode: screen; }
+#gameView[data-ui-layout="story-notebook-v1"] .notebook-page-frame { border-image: none; box-shadow: none; }
+#gameView[data-ui-layout="story-notebook-v1"] .notebook-scene-shade { background: linear-gradient(90deg,#17161455,transparent 45%,#17161455); }
+#gameView[data-ui-layout="story-notebook-v1"][data-notebook-theme="dark"] .notebook-scene-shade { background: linear-gradient(90deg,#08080acc,transparent 45%,#08080acc); }
+
+#gameView[data-ui-layout="story-notebook-v1"] :is(.story-notebook-world-card,.state-card,.context-side-card) {
+  filter: drop-shadow(.8px 2px 1.4px var(--reading-shadow));
+}
+#gameView[data-ui-layout="story-notebook-v1"] :is(.story-notebook-world-card,.state-card,.context-side-card)::before {
+  background-color: var(--reading-note-world);
+  background-blend-mode: luminosity;
+  filter: none;
+}
+#gameView[data-ui-layout="story-notebook-v1"] .state-card::before { background-color: var(--reading-note-state); }
+#gameView[data-ui-layout="story-notebook-v1"] .context-side-card::before { background-color: var(--reading-note-host); }
+#gameView[data-ui-layout="story-notebook-v1"] :is(.story-notebook-world-card small,.state-grid > [data-state-role="label"],.host-status .meter-label) { color: var(--reading-muted); }
+#gameView[data-ui-layout="story-notebook-v1"] .host-status .turn-status { color: var(--reading-ink); }
+#gameView[data-ui-layout="story-notebook-v1"] .state-grid > :is([data-state-key="turn"],[data-state-key="gameDay"])[data-state-role="value"] { color: var(--reading-accent); }
+
+#gameView[data-ui-layout="story-notebook-v1"] .narration-scroll { border-left-color: var(--reading-line); scrollbar-color: var(--reading-muted) transparent; }
+#gameView[data-ui-layout="story-notebook-v1"] .narration-line.player { border-left-color: var(--reading-accent); background: linear-gradient(90deg,#98784e0e,transparent 80%); }
+#gameView[data-ui-layout="story-notebook-v1"] .narration-line.warning { color: var(--reading-ink); border-left-color: #a77363; }
+#gameView[data-ui-layout="story-notebook-v1"] .turn-form { border-top: 0; padding-top: 18px; }
+#gameView[data-ui-layout="story-notebook-v1"] .turn-input-scroll {
+  border: 0; border-radius: 0; background: #f2eadbd9;
+  box-shadow: 0 3px 4px var(--reading-shadow); outline: 1px solid #5b44281c;
+}
+#gameView[data-ui-layout="story-notebook-v1"] .turn-input-scroll { isolation: isolate; overflow: visible; filter: drop-shadow(.8px 2.6px 1.8px var(--reading-shadow)); }
+#gameView[data-ui-layout="story-notebook-v1"] .turn-input-scroll::before { content: ""; position: absolute; z-index: -1; inset: -1px -3px; pointer-events: none; background: linear-gradient(173deg,#fff4db30,transparent 26%,transparent 91%,#5b44281c), linear-gradient(#f2eadbd9,#f2eadbd9), url("assets/story-notebook-v1/hud-current-story-paper-night-v1.png") center / 100% 100% no-repeat; background-blend-mode: normal,normal,luminosity; mask: url("assets/story-notebook-v1/hud-current-story-paper-night-v1.png") center / 100% 100% no-repeat; transform: rotate(-.18deg); }
+#gameView[data-ui-layout="story-notebook-v1"][data-notebook-theme="dark"] .turn-input-scroll::before { background-color: #393a3dd9; }
+#gameView[data-ui-layout="story-notebook-v1"] .turn-input-scroll::after { content: ""; position: absolute; z-index: 1; inset: 12px auto 12px 13px; width: 2px; background: #9d8c7040; pointer-events: none; }
+#gameView[data-ui-layout="story-notebook-v1"] .command-button.icon-command,
+#gameView[data-ui-layout="story-notebook-v1"] :is(.story-action-key,.send-button) { isolation: isolate; background: none; filter: drop-shadow(.7px 2px 1.4px var(--reading-shadow)); }
+#gameView[data-ui-layout="story-notebook-v1"] .command-button.icon-command::before,
+#gameView[data-ui-layout="story-notebook-v1"] :is(.story-action-key,.send-button)::before { content: ""; position: absolute; z-index: -1; inset: -1px -2px; pointer-events: none; background: linear-gradient(var(--reading-note-world),var(--reading-note-world)),url("assets/story-notebook-v1/hud-player-sticky-note-night-v1.png") center / 100% 100% no-repeat; background-blend-mode: normal,luminosity; mask: url("assets/story-notebook-v1/hud-player-sticky-note-night-v1.png") center / 100% 100% no-repeat; }
+#gameView[data-ui-layout="story-notebook-v1"] .command-button.icon-command:nth-child(2)::before { transform: rotate(.6deg); }
+#gameView[data-ui-layout="story-notebook-v1"] .command-button.icon-command:nth-child(3)::before { transform: rotate(-.35deg); }
+#gameView[data-ui-layout="story-notebook-v1"][data-notebook-theme="dark"] .turn-input-scroll { background: #393a3dd9; }
+#gameView[data-ui-layout="story-notebook-v1"] .turn-input-scroll:focus-within { border: 0; background: #f2eadbd9; box-shadow: 0 0 0 2px #855a3533; outline-color: var(--reading-focus); }
+#gameView[data-ui-layout="story-notebook-v1"][data-notebook-theme="dark"] .turn-input-scroll:focus-within { background: #393a3dd9; }
+#gameView[data-ui-layout="story-notebook-v1"] #turnInput { color: var(--reading-ink); caret-color: var(--reading-ink); }
+#gameView[data-ui-layout="story-notebook-v1"] #turnInput::placeholder { color: var(--reading-muted); }
+#gameView[data-ui-layout="story-notebook-v1"] .command-button.icon-command,
+#gameView[data-ui-layout="story-notebook-v1"] :is(.story-action-key,.send-button) {
+  color: var(--reading-ink); box-shadow: 0 3px 4px var(--reading-shadow); border: 0; border-radius: 0;
+}
+#gameView[data-ui-layout="story-notebook-v1"] .command-button.icon-command { background-color: var(--reading-note-world); }
+#gameView[data-ui-layout="story-notebook-v1"] .story-action-key { background: var(--reading-note-state); }
+#gameView[data-ui-layout="story-notebook-v1"] .send-button { background-color: var(--reading-note-world); }
+#gameView[data-ui-layout="story-notebook-v1"] :is(button,[tabindex="0"]):focus-visible { outline: 2px dashed var(--reading-focus); outline-offset: 3px; }
+
+/* The existing tabs remain real buttons and preserve availability semantics. */
+#gameView[data-ui-layout="story-notebook-v1"] .story-notebook-rail-button { filter: drop-shadow(1px 3px 2px var(--reading-shadow)); }
+#gameView[data-ui-layout="story-notebook-v1"] .story-notebook-rail-button:is(:hover,.is-active):not(:disabled) { filter: brightness(1.05) drop-shadow(1px 3px 2px var(--reading-shadow)); }
+#gameView[data-ui-layout="story-notebook-v1"] .settings-gear-button { background: var(--reading-note-host); color: var(--reading-ink); border: 0; box-shadow: 0 3px 4px var(--reading-shadow); }
+#gameView[data-ui-layout="story-notebook-v1"] .settings-gear-button .notebook-tab-label { display: none; }
+#gameView[data-ui-layout="story-notebook-v1"] .notebook-icon-art { overflow: visible; }
+#gameView[data-ui-layout="story-notebook-v1"] .notebook-icon-art > img[hidden] { display: none; }
+#gameView[data-ui-layout="story-notebook-v1"] .lab-object-icon { display: block; width: 42px; height: 42px; color: var(--reading-ink); filter: drop-shadow(.4px 1.2px .6px var(--reading-shadow)); transform: translateY(-1px); transition: transform 180ms ease,filter 180ms ease; }
+#gameView[data-ui-layout="story-notebook-v1"] .story-notebook-rail-button .lab-object-icon { width: 38px; height: 38px; color: #3b332b; }
+#gameView[data-ui-layout="story-notebook-v1"] :is(.story-notebook-rail-button,.command-button,.settings-gear-button):is(:hover,:focus-visible) .lab-object-icon { transform: translateY(-2px); filter: drop-shadow(.6px 2px 1px var(--reading-shadow)); }
+
+/* The host phase is the production waiting authority. The sprite is visual
+   only: it neither owns timers nor affects cancellation, speech or turns. */
+#gameView[data-ui-layout="story-notebook-v1"] .writing-quill { display: none; position: absolute; left: 9px; top: 7px; width: 64px; height: 67px; pointer-events: none; background: url("assets/quill-writing/writing-light.png") 0 0 / 512px 400px no-repeat; }
+#gameView[data-ui-layout="story-notebook-v1"][data-notebook-theme="dark"] .writing-quill { background-image: url("assets/quill-writing/writing-dark.png"); }
+/* The feather belongs to the host title, not the left edge of the slip. It
+   occupies the title row only; the waiting copy keeps the full line below. */
+#gameView[data-ui-layout="story-notebook-v1"] .host-status:is([data-host-phase="busy"],[data-host-phase="finale"]) {
+  grid-template-columns: max-content 52px minmax(0, 1fr);
+  grid-template-rows: 36px minmax(0, 1fr);
+  gap: 0 5px;
+  padding-left: 20px;
+}
+#gameView[data-ui-layout="story-notebook-v1"] .host-status:is([data-host-phase="busy"],[data-host-phase="finale"]) .writing-quill {
+  display: block; position: relative; left: auto; top: -10px;
+  grid-column: 2; grid-row: 1; align-self: start; justify-self: start;
+  /* Preserve atlas sampling; only its painted footprint is about 40 px high. */
+  transform: rotate(calc(25deg + var(--quill-motion-angle, 0deg))) translate(var(--quill-motion-x, 0px), var(--quill-motion-y, 0px)) scale(.8); transform-origin: 32px 34px;
+}
+#gameView[data-ui-layout="story-notebook-v1"] .host-status:is([data-host-phase="busy"],[data-host-phase="finale"]) .meter-label {
+  grid-column: 1; grid-row: 1; align-self: start;
+}
+#gameView[data-ui-layout="story-notebook-v1"] .host-status:is([data-host-phase="busy"],[data-host-phase="finale"]) .turn-status {
+  grid-column: 1 / -1; grid-row: 2; max-height: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  #gameView[data-ui-layout="story-notebook-v1"] .host-status:is([data-host-phase="busy"],[data-host-phase="finale"]) .writing-quill { animation: none; background-image: url("assets/quill-writing/still-light.png"); background-size: 64px 67px; }
+  #gameView[data-ui-layout="story-notebook-v1"][data-notebook-theme="dark"] .host-status:is([data-host-phase="busy"],[data-host-phase="finale"]) .writing-quill { background-image: url("assets/quill-writing/still-dark.png"); }
+}
+
+#gameView[data-ui-layout="story-notebook-v1"] .story-notebook-drawer {
+  background: var(--reading-paper); border-color: var(--reading-line); box-shadow: -16px 0 30px var(--reading-shadow);
+}
+#gameView[data-ui-layout="story-notebook-v1"] .story-notebook-drawer-header { background: color-mix(in srgb, var(--reading-paper) 86%, var(--reading-note-world)); border-bottom-color: var(--reading-line); }
+#gameView[data-ui-layout="story-notebook-v1"] :is(.story-notebook-drawer-heading small,.story-notebook-drawer-heading p,.story-notebook-drawer-footnote,.story-notebook-drawer-body :is(small,.chapter-log-meta,.story-notebook-panel-record-subtitle)) { color: var(--reading-muted); }
+#gameView[data-ui-layout="story-notebook-v1"] :is(.story-notebook-drawer-heading h2,.story-notebook-drawer-body :is(p,dd,li,.chapter-log-summary,.chapter-log-content,.skill-module-content,.story-notebook-detail-record-text)) { color: var(--reading-ink); }

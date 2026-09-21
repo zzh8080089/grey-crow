@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "onnxruntime": {
+    "version": "1.28.2",
+    "sourceCommit": "33ca9628233dc8f002435e868d4c2e9f82766ca1",
+    "embeddedBuildInfo": "ORT Build Info: git-branch=HEAD, git-commit-id=33ca96282, fp8-kv-cache=1, build type=Release",
+    "sourceUrl": "https://github.com/microsoft/onnxruntime/tree/33ca9628233dc8f002435e868d4c2e9f82766ca1",
+    "depsUrl": "https://raw.githubusercontent.com/microsoft/onnxruntime/33ca9628233dc8f002435e868d4c2e9f82766ca1/cmake/deps.txt",
+    "eigenBuildRecipeUrl": "https://raw.githubusercontent.com/microsoft/onnxruntime/33ca9628233dc8f002435e868d4c2e9f82766ca1/cmake/external/eigen.cmake"
+  },
+  "eigen": {
+    "commit": "1d8b82b0740839c0de7f1242a3585e3390ff5f33",
+    "sourceUrl": "https://github.com/eigen-mirror/eigen/archive/1d8b82b0740839c0de7f1242a3585e3390ff5f33/eigen-1d8b82b0740839c0de7f1242a3585e3390ff5f33.zip",
+    "archiveSha1": "05b19b49e6fbb91246be711d801160528c135e34",
+    "archiveSha256": "6a60d76351f97132669daeeb721d6bf14b008101883ad2d687a3201c5c461eb0",
+    "license": "MPL-2.0 and bundled notices",
+    "patches": [
+      {
+        "file": "patches/s390x-build.patch",
+        "sourceUrl": "https://raw.githubusercontent.com/microsoft/onnxruntime/33ca9628233dc8f002435e868d4c2e9f82766ca1/cmake/patches/eigen/s390x-build.patch",
+        "sha256": "6d41f4504f665bc591336c668a1aa16ffc5e0f02fe9c2f9c46c6f5660b54c849"
+      },
+      {
+        "file": "patches/s390x-build-werror.patch",
+        "sourceUrl": "https://raw.githubusercontent.com/microsoft/onnxruntime/33ca9628233dc8f002435e868d4c2e9f82766ca1/cmake/patches/eigen/s390x-build-werror.patch",
+        "sha256": "a1a7b0ca8382cb00542587b6bc725f59abd59ad5bb491825f7876ad6e344ef0b"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "onnxruntime-deps.txt",
+      "sha256": "894bd3f342b9fa570301f1a62830751e50657ec98a22b210d176b7dbb354ccc2"
+    },
+    {
+      "path": "onnxruntime-eigen.cmake",
+      "sha256": "9db439c44f215186d3e8bde7970affd03d8fa911d89cac19adc30ed681ff32a2"
+    },
+    {
+      "path": "patched-files/Eigen/src/Core/RandomImpl.h",
+      "sha256": "4457a9ace6ff2ac291b8d3986fc33f44df0625bd75f515fe7acf21cddf18e537"
+    },
+    {
+      "path": "patched-files/Eigen/src/Core/arch/ZVector/Complex.h",
+      "sha256": "8e9921cf76e23ba38975cf9c88e1396f81270ec063eb58326cb1f6b20204f804"
+    },
+    {
+      "path": "patched-files/Eigen/src/Core/arch/ZVector/MathFunctions.h",
+      "sha256": "4a2f9b0763cbac50962399e9c2293ddb73c7a4090276b72bb3e46010cedd7882"
+    },
+    {
+      "path": "patched-files/Eigen/src/Core/arch/ZVector/PacketMath.h",
+      "sha256": "71d988350401dbff8cf3f7d0d39ed11f793c7279b41696bdf4401f4a26bdad5c"
+    },
+    {
+      "path": "patches/s390x-build-werror.patch",
+      "sha256": "a1a7b0ca8382cb00542587b6bc725f59abd59ad5bb491825f7876ad6e344ef0b"
+    },
+    {
+      "path": "patches/s390x-build.patch",
+      "sha256": "6d41f4504f665bc591336c668a1aa16ffc5e0f02fe9c2f9c46c6f5660b54c849"
+    }
+  ]
+}

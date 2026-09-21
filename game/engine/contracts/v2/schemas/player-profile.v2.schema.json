@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://greycrow.local/schemas/p2-23/player-profile.v2.schema.json",
+  "title": "Grey Crow global player profile v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "playerProfileId",
+    "preferredLanguage",
+    "displayName",
+    "pronouns",
+    "narrativePreferences",
+    "contentBoundaries",
+    "notes",
+    "updatedAt"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "grey-crow-player-profile-v2" },
+    "playerProfileId": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/stableRef"
+    },
+    "preferredLanguage": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/language"
+    },
+    "displayName": { "type": "string", "maxLength": 120 },
+    "pronouns": { "type": "string", "maxLength": 120 },
+    "narrativePreferences": {
+      "type": "array",
+      "maxItems": 20,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1, "maxLength": 240 }
+    },
+    "contentBoundaries": {
+      "type": "array",
+      "maxItems": 20,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1, "maxLength": 240 }
+    },
+    "notes": { "type": "string", "maxLength": 2000 },
+    "updatedAt": {
+      "$ref": "https://greycrow.local/schemas/p2-23/common.v2.schema.json#/$defs/timestamp"
+    }
+  }
+}

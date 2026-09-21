@@ -1,0 +1,19 @@
+/* Layout of the approved filmed page, in the existing 1600 × 900 game canvas.
+   Paper and decoration are in the film/still; these dimensions place live ink. */
+body[data-game-ui-layout="story-notebook-v1"] #gameView {
+  --nb-left: 124px; --nb-right: 240px; --nb-paper-right: 158px;
+  --nb-gap: 24px; --nb-reading: 24px;
+}
+body[data-game-ui-layout="story-notebook-v1"] #gameView .notebook-status-strip { gap: 17px; grid-template-columns: 260px minmax(0,1fr) 340px; }
+body[data-game-ui-layout="story-notebook-v1"] #gameView .state-grid { grid-template-columns: minmax(0,1.4fr) minmax(0,1.2fr) 68px 96px; }
+body[data-game-ui-layout="story-notebook-v1"] #gameView .state-grid > [data-state-role="label"] { white-space: nowrap; }
+body[data-game-ui-layout="story-notebook-v1"] #gameView .narration-scroll { padding-right: 63px; }
+body[data-game-ui-layout="story-notebook-v1"] #gameView .story-notebook-rail-navigation { top: 187px; right: 75px; width: 100px; gap: 12px; }
+body[data-game-ui-layout="story-notebook-v1"] #gameView .story-notebook-rail-button { width: 100px; height: 78px; min-height: 78px; padding: 5px 8px 7px; flex-direction: column; gap: 1px; justify-content: center; align-items: center; }
+body[data-game-ui-layout="story-notebook-v1"] #gameView .story-notebook-rail-button .notebook-tab-label { font-size: 15px; font-weight: 650; letter-spacing: .06em; line-height: 1.4; }
+html[lang="en-US"] body[data-game-ui-layout="story-notebook-v1"] #gameView .story-notebook-rail-button .notebook-tab-label { letter-spacing: 0; }
+body[data-game-ui-layout="story-notebook-v1"] #gameView .story-notebook-rail-button .notebook-icon-art { width: 43px; height: 38px; min-width: 43px; min-height: 38px; flex: 0 0 38px; display: flex; align-items: center; justify-content: center; overflow: visible; }
+body[data-game-ui-layout="story-notebook-v1"] #gameView .settings-gear-button { right: 100px; bottom: 56px; }
+body[data-game-ui-layout="story-notebook-v1"] #gameView .story-notebook-drawer { right: 180px; top: 154px; bottom: 47px; width: 580px; border: 0; border-radius: 2px 0 2px 4px; }
+body[data-game-ui-layout="story-notebook-v1"] #gameView .story-notebook-drawer-header { min-height: 116px; padding: 27px 29px 20px; }
+body[data-game-ui-layout="story-notebook-v1"] #gameView .story-notebook-drawer-body { padding: 24px 30px 30px; }
